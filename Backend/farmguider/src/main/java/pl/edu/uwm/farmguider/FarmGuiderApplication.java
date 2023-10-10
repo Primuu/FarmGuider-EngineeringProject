@@ -1,0 +1,13 @@
+package pl.edu.uwm.farmguider;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FarmGuiderApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FarmGuiderApplication.class, args);
+	}
+
+}
