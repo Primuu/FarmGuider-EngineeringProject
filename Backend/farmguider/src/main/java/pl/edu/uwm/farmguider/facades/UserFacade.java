@@ -2,7 +2,7 @@ package pl.edu.uwm.farmguider.facades;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.edu.uwm.farmguider.exceptions.user.UserAlreadyExistsException;
+import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
 import pl.edu.uwm.farmguider.models.address.Address;
 import pl.edu.uwm.farmguider.models.user.dtos.UserCreateDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
@@ -19,8 +19,9 @@ public class UserFacade {
     private final AddressService addressService;
 
     public UserResponseDTO createUser(UserCreateDTO userCreateDTO) {
-        if (userService.userExistsByEmail(userCreateDTO.email())) {
-            throw new UserAlreadyExistsException("Email", "User with this email already exists.");
+        String email = userCreateDTO.email();
+        if (userService.userExistsByEmail(email)) {
+            throw new EntityAlreadyExistsException("User", "User with email: " + email + " already exists.");
         }
         Address emptyAddress = addressService.createEmptyAddress();
         return mapToUserResponseDTO(userService.createUser(userCreateDTO, emptyAddress));

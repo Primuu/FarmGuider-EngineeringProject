@@ -6,7 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.edu.uwm.farmguider.exceptions.user.UserAlreadyExistsException;
+import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,10 +26,10 @@ public class GlobalExceptionHandler {
         return errors;
     }
 
-    @ExceptionHandler(value = UserAlreadyExistsException.class)
+    @ExceptionHandler(value = EntityAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorMessage userAlreadyExistsException(UserAlreadyExistsException exception) {
-        return new ErrorMessage(exception.getFieldName(), exception.getMessage());
+    public ErrorMessage entityAlreadyExistsException(EntityAlreadyExistsException exception) {
+        return new ErrorMessage(exception.getEntityName(), exception.getMessage());
     }
 
 }
