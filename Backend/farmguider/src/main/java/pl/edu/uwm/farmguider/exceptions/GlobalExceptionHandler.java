@@ -16,20 +16,21 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception) {
+    public ErrorResponse handleValidationExceptions(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return errors;
+        return new ErrorResponse("ValidationError", errors);
     }
 
     @ExceptionHandler(value = EntityAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorMessage entityAlreadyExistsException(EntityAlreadyExistsException exception) {
-        return new ErrorMessage(exception.getEntityName(), exception.getMessage());
+    public ErrorResponse entityAlreadyExistsException(EntityAlreadyExistsException exception) {
+        Map<String, String> errors = Map.of(exception.getEntityName(), exception.getMessage());
+        return new ErrorResponse("EntityAlreadyExists", errors);
     }
 
 }
