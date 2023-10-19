@@ -1,9 +1,7 @@
 package pl.edu.uwm.farmguider.models.user;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.edu.uwm.farmguider.models.address.Address;
 import pl.edu.uwm.farmguider.models.basic.BasicEntity;
@@ -12,6 +10,8 @@ import pl.edu.uwm.farmguider.models.basic.BasicEntity;
 @Table(name = "users")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends BasicEntity {
 
