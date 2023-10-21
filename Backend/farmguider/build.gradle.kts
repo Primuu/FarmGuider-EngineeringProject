@@ -32,6 +32,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation ("org.hibernate.validator:hibernate-validator:7.0.1.Final")
 	implementation ("jakarta.validation:jakarta.validation-api:3.0.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 }
 
 tasks.withType<Test> {
