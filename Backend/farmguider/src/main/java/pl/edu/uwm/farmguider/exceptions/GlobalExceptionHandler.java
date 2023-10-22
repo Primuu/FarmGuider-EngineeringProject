@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
 import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
+import pl.edu.uwm.farmguider.exceptions.global.JWTCookieNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +40,13 @@ public class GlobalExceptionHandler {
     public ErrorResponse entityNotFoundException(EntityNotFoundException exception) {
         Map<String, String> errors = Map.of(exception.getEntityName(), exception.getMessage());
         return new ErrorResponse("EntityNotFoundException", errors);
+    }
+
+    @ExceptionHandler(value = JWTCookieNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse jWTCookieNotFoundException(JWTCookieNotFoundException exception) {
+        Map<String, String> errors = Map.of(exception.getCookieName(), exception.getMessage());
+        return new ErrorResponse("JWTCookieNotFoundException", errors);
     }
 
 }

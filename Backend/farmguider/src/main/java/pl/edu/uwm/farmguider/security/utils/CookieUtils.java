@@ -2,7 +2,6 @@ package pl.edu.uwm.farmguider.security.utils;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
 
 public class CookieUtils {
 
@@ -32,8 +31,7 @@ public class CookieUtils {
                 }
             }
         }
-        throw new EntityNotFoundException("Cookie", "Cookie with name: " + name +" not found.");
-//        TODO: 403 - Cookie not found
+        throw new IllegalArgumentException("Cookie with name: " + name + " not found.");
     }
 
 }
