@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
+import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,13 @@ public class GlobalExceptionHandler {
     public ErrorResponse entityAlreadyExistsException(EntityAlreadyExistsException exception) {
         Map<String, String> errors = Map.of(exception.getEntityName(), exception.getMessage());
         return new ErrorResponse("EntityAlreadyExists", errors);
+    }
+
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse entityNotFoundException(EntityNotFoundException exception) {
+        Map<String, String> errors = Map.of(exception.getEntityName(), exception.getMessage());
+        return new ErrorResponse("EntityNotFoundException", errors);
     }
 
 }
