@@ -30,6 +30,8 @@ import static pl.edu.uwm.farmguider.security.utils.CookieUtils.*;
         description = "Functionalities intended for registration and login.")
 public class AuthenticationController {
 
+    public final static String REGISTER_URL = "/register";
+    public final static String AUTHENTICATE_URL = "/authenticate";
     private final AuthenticationService authenticationService;
     private final UserFacade userFacade;
 
@@ -50,7 +52,7 @@ public class AuthenticationController {
                             schema = @Schema(implementation = ErrorResponse.class)
                     ))
     })
-    @PostMapping("/register")
+    @PostMapping(REGISTER_URL)
     public ResponseEntity<UserResponseDTO> register(@RequestBody @Valid UserCreateDTO userCreateDTO) {
         UserResponseDTO userResponseDTO = userFacade.createUser(userCreateDTO);
         String token = authenticationService.authenticate(userCreateDTO.email(), userCreateDTO.password());
@@ -61,7 +63,7 @@ public class AuthenticationController {
                 .body(userResponseDTO);
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping(AUTHENTICATE_URL)
     public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequestDTO request) {
         String token = authenticationService.authenticate(request.email(), request.password());
         return new ResponseEntity<>(token, HttpStatus.OK);
