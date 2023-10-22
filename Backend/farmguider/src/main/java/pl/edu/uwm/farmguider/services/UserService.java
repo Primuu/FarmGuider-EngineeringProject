@@ -18,7 +18,7 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException("User", "User with email: " + email +" not found."));
+                .orElseThrow(() -> new EntityNotFoundException("User", "User with email: " + email + " not found."));
     }
 
     public User createUser(UserCreateDTO userCreateDTO, Address address) {
