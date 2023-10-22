@@ -13,11 +13,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import pl.edu.uwm.farmguider.exceptions.global.JWTCookieNotFoundException;
+import pl.edu.uwm.farmguider.exceptions.global.UnauthorizedException;
 import pl.edu.uwm.farmguider.security.utils.JWTUtils;
 
 import java.io.IOException;
 
+import static pl.edu.uwm.farmguider.controllers.AuthenticationController.AUTHENTICATE_URL;
+import static pl.edu.uwm.farmguider.controllers.AuthenticationController.REGISTER_URL;
 import static pl.edu.uwm.farmguider.security.utils.CookieUtils.JWT_COOKIE_NAME;
 import static pl.edu.uwm.farmguider.security.utils.CookieUtils.extractCookieFromCookies;
 
@@ -25,104 +27,60 @@ import static pl.edu.uwm.farmguider.security.utils.CookieUtils.extractCookieFrom
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JWTUtils jwtService;
+    private final static String SWAGGER_URL = "/swagger-ui/";
+    private final static String OPEN_API_URL = "/v3/";
+    private final JWTUtils jwtUtils;
     private final UserDetailsService userDetailsService;
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
-        return path.startsWith("/swagger-ui/")
-                || path.startsWith("/v3/")
-                || path.equals("/authenticate")
-                || path.equals("/register");
+        return path.startsWith(SWAGGER_URL)
+                || path.startsWith(OPEN_API_URL)
+                || path.equals(REGISTER_URL)
+                || path.equals(AUTHENTICATE_URL);
     }
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
-//        final String authHeader = request.getHeader("Authorization");
-//        final String jwt;
-//        final String username;
-//
-//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-//            filterChain.doFilter(request, response);
-//            return;
-//        }
-//        jwt = authHeader.substring(7);
-//        username = jwtService.extractUsername(jwt);
-//
-//        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-//            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-//            if (jwtService.isTokenValid(jwt, userDetails)) {
-//                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-//                        userDetails,
-//                        null,
-//                        userDetails.getAuthorities()
-//                );
-//                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//                SecurityContextHolder.getContext().setAuthentication(authToken);
-//            }
-//        }
-//        filterChain.doFilter(request, response);
-
-
         Cookie jwtCookie;
         try {
             jwtCookie = extractCookieFromCookies(request, JWT_COOKIE_NAME);
-        } catch (IllegalArgumentException ex) {
-            throw new JWTCookieNotFoundException(ex.getMessage());
+        } catch (IllegalArgumentException exception) {
+            throw new UnauthorizedException("Cookie", exception.getMessage());
         }
 
-        String jwt = jwtCookie.toString();
-
-        if (jwt == null || jwt.trim().isEmpty()) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-//        TODO: sprawdzenie czy prawidłowym jwt
-
-        String username = jwtService.extractUsername(jwt);
-        if (username == null || SecurityContextHolder.getContext().getAuthentication() != null) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
+        String jwt = jwtCookie.getValue();
+        String username = jwtUtils.extractUsername(jwt);
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-        if (!jwtService.isTokenValid(jwt, userDetails)) {
-            filterChain.doFilter(request, response);
-            return;
+        isTokenExpired(jwt);
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
-        UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
         filterChain.doFilter(request, response);
     }
 
-//    private void verifyToken(HttpServletResponse response, String token, String email) {
-//        if (isTokenExpired(idTokenFromDb)) {
-//            Cookie newPayloadCookie = renewSession(response, email);
-//            token = newPayloadCookie.getValue();
-//            idTokenFromDb = JWT.decode(userRepository.findIdTokenByEmail(email));
+    private void isTokenExpired(String token) {
+//        if (jwtUtils.isTokenExpired(token)) {
+//            renewSession();
 //        }
-//
-//        if (!idTokenFromDb.getPayload().equals(token)) {
-//            authenticationService.revoke(email);
-//            throw new UnauthorizedException("Id Token", "User has been logged out for security reasons. " +
-//                    "Id Token has been tampered with.");
-//        }
-//    }
+        if (jwtUtils.isTokenExpired(token)) {
+            throw new UnauthorizedException("JWT", "Token is expired.");
+        }
+    }
 
 //    private Cookie renewSession(HttpServletResponse response, String email) {
-//        String refreshToken = userRepository.findRefreshTokenByEmail(email);
+//        String refreshToken = ...;
 //
-//        GoogleTokenResponse tokenResponse = authenticationService.renewTokens(refreshToken, email);
+//        String jwt =  authenticationService.renewJWT(refreshToken, email);
 //
-//        Cookie newPayloadCookie = authenticationService.setupSession(email, tokenResponse);
-//        response.addCookie(newPayloadCookie);
-//        return newPayloadCookie;
+//        Cookie newJWTCookie = authenticationService.createCookie(email, jwt);
+//        response.addCookie(newJWTCookie);
+//        return newJWTCookie;
 //    }
 
 }
