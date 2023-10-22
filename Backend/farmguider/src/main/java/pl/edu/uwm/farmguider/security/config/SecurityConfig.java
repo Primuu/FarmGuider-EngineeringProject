@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import pl.edu.uwm.farmguider.security.filters.FilterChainExceptionHandler;
 import pl.edu.uwm.farmguider.security.filters.JWTAuthenticationFilter;
 
 @Configuration
@@ -19,14 +21,15 @@ public class SecurityConfig {
 
     private final JWTAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
+    private final FilterChainExceptionHandler exceptionHandler;
 
 //    TODO: cors and crsf implementation
-//    TODO: add filter to catch exceptions
 //    TODO: update request matchers
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(exceptionHandler, LogoutFilter.class)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         (requests) -> requests
