@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -35,8 +36,9 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserFacade userFacade;
 
-    @Operation(summary = "Register (create) User", description = "Creates a user based on the provided payload " +
-            "and logs him in - a cookie with a JWT token containing the email address is set")
+    @Operation(summary = "Register (create) User",
+            description = "Creates a user based on the provided payload " +
+                    "and logs him in - a cookie with a JWT token containing the email address is set")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
@@ -64,11 +66,12 @@ public class AuthenticationController {
                 .body(userResponseDTO);
     }
 
-    @Operation(summary = "Logs the User in", description = "Logs the user in using the given credentials" +
-            " - a cookie with a JWT token containing the email address is set")
+    @Operation(summary = "Logs the User in",
+            description = "Logs the user in using the given credentials" +
+                    " - a cookie with a JWT token containing the email address is set")
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
+                    responseCode = "200",
                     description = "User logged in successfully",
                     content = @Content(
                             mediaType = "text/plain",
@@ -92,5 +95,34 @@ public class AuthenticationController {
                 .body("Successfully logged in");
     }
 
-//    TODO: revoke?
+    @Operation(summary = "Logs the User out",
+            description = "Logs the user out - jwt from cookie is blacklisted " +
+                    "(this allows logging in on multiple devices)")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "User logged out successfully",
+                    content = @Content(
+                            mediaType = "text/plain",
+                            schema = @Schema(implementation = String.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @PostMapping("/revoke")
+    public ResponseEntity<String> revoke(HttpServletRequest request) {
+        Cookie jwtCookie = extractCookieFromCookies(request, JWT_COOKIE_NAME);
+        authenticationService.revoke(jwtCookie.getValue());
+        Cookie deletedCookie = createCookie(JWT_COOKIE_NAME, null, COOKIE_NULL_AGE, COOKIE_DEFAULT_PATH);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .header(HttpHeaders.SET_COOKIE, formatCookieHeader(deletedCookie))
+                .body("Successfully logged out");
+    }
+
 }
