@@ -19,7 +19,7 @@ import java.util.function.Function;
 @Component
 public class JWTUtils {
 
-    private final static Integer ONE_HOUR = 3600000;
+    public final static Integer ONE_HOUR = 3600000;
     private final static Integer ONE_DAY = 86400000;
     @Value("${application.security.jwt.secret-key}")
     private String SECRET_KEY;
