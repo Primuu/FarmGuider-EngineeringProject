@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import pl.edu.uwm.farmguider.exceptions.global.UnauthorizedException;
+import pl.edu.uwm.farmguider.repositories.BlacklistedTokenRepository;
 import pl.edu.uwm.farmguider.security.utils.JWTUtils;
 
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private final static String OPEN_API_URL = "/v3/";
     private final JWTUtils jwtUtils;
     private final UserDetailsService userDetailsService;
+    private final BlacklistedTokenRepository blacklistedTokenRepository;
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
@@ -53,15 +55,23 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String jwt = jwtCookie.getValue();
+        isTokenBlacklisted(jwt);
+        isTokenExpired(jwt);
+
         String username = jwtUtils.extractUsername(jwt);
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-        isTokenExpired(jwt);
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
+    }
+
+    private void isTokenBlacklisted(String token) {
+        if (blacklistedTokenRepository.findByToken(token).isPresent()) {
+            throw new UnauthorizedException("JWT", "Token is revoked.");
+        }
     }
 
     private void isTokenExpired(String token) {
