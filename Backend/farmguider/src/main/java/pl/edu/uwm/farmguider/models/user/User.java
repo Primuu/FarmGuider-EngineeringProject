@@ -29,6 +29,7 @@ public class User extends BasicEntity implements UserDetails {
     String password;
     String firstName;
     String lastName;
+    String refreshToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
