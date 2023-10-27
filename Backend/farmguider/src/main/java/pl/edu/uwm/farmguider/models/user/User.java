@@ -29,6 +29,7 @@ public class User extends BasicEntity implements UserDetails {
     String password;
     String firstName;
     String lastName;
+    String idToken;
     String refreshToken;
 
     @Override
