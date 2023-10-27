@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class CookieUtils {
 
-    public static final String JWT_COOKIE_NAME = "JWT";
+    public static final String SESSION_COOKIE_NAME = "sessionToken";
     public static final String COOKIE_DEFAULT_PATH = "/";
     public static final Integer COOKIE_MAX_AGE_1_DAY = 24 * 60 * 60;
     public static final Integer COOKIE_NULL_AGE = 0;
