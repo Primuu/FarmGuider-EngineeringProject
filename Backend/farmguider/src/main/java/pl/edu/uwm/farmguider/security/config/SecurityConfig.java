@@ -14,6 +14,8 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 import pl.edu.uwm.farmguider.security.filters.FilterChainExceptionHandler;
 import pl.edu.uwm.farmguider.security.filters.JWTAuthenticationFilter;
 
+import static pl.edu.uwm.farmguider.security.utils.SecurityConstants.*;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -33,7 +35,12 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         (requests) -> requests
-                                .requestMatchers("/v3/**", "/swagger-ui/**", "/authenticate", "/register").permitAll()
+                                .requestMatchers(
+                                        OPEN_API_URL + "**",
+                                        SWAGGER_URL + "**",
+                                        AUTHENTICATE_URL,
+                                        REGISTER_URL
+                                ).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

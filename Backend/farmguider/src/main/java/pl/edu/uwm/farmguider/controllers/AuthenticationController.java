@@ -7,12 +7,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +23,11 @@ import pl.edu.uwm.farmguider.models.user.dtos.UserCreateDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
 import pl.edu.uwm.farmguider.security.AuthenticationRequestDTO;
 import pl.edu.uwm.farmguider.services.AuthenticationService;
+import pl.edu.uwm.farmguider.services.SessionService;
 
 import static pl.edu.uwm.farmguider.security.utils.CookieUtils.*;
+import static pl.edu.uwm.farmguider.security.utils.SecurityConstants.AUTHENTICATE_URL;
+import static pl.edu.uwm.farmguider.security.utils.SecurityConstants.REGISTER_URL;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,14 +35,13 @@ import static pl.edu.uwm.farmguider.security.utils.CookieUtils.*;
         description = "Functionalities intended for registration and login.")
 public class AuthenticationController {
 
-    public final static String REGISTER_URL = "/register";
-    public final static String AUTHENTICATE_URL = "/authenticate";
     private final AuthenticationService authenticationService;
+    private final SessionService sessionService;
     private final UserFacade userFacade;
 
     @Operation(summary = "Register (create) User",
             description = "Creates a user based on the provided payload " +
-                    "and logs him in - a cookie with a JWT token containing the email address is set")
+                    "and logs him in - a cookie with a idToken (jwt) containing the email address is set")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
@@ -58,8 +61,7 @@ public class AuthenticationController {
     @PostMapping(REGISTER_URL)
     public ResponseEntity<UserResponseDTO> register(@RequestBody @Valid UserCreateDTO userCreateDTO) {
         UserResponseDTO userResponseDTO = userFacade.createUser(userCreateDTO);
-        String token = authenticationService.authenticate(userCreateDTO.email(), userCreateDTO.password());
-        Cookie sessionCookie = createCookie(JWT_COOKIE_NAME, token, COOKIE_MAX_AGE_1_DAY, COOKIE_DEFAULT_PATH);
+        Cookie sessionCookie = authenticationService.authenticate(userCreateDTO.email(), userCreateDTO.password());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .header(HttpHeaders.SET_COOKIE, formatCookieHeader(sessionCookie))
@@ -68,7 +70,7 @@ public class AuthenticationController {
 
     @Operation(summary = "Logs the User in",
             description = "Logs the user in using the given credentials" +
-                    " - a cookie with a JWT token containing the email address is set")
+                    " - a cookie with a idToken (jwt) containing the email address is set")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -87,8 +89,7 @@ public class AuthenticationController {
     })
     @PostMapping(AUTHENTICATE_URL)
     public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequestDTO request) {
-        String token = authenticationService.authenticate(request.email(), request.password());
-        Cookie sessionCookie = createCookie(JWT_COOKIE_NAME, token, COOKIE_MAX_AGE_1_DAY, COOKIE_DEFAULT_PATH);
+        Cookie sessionCookie = authenticationService.authenticate(request.email(), request.password());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .header(HttpHeaders.SET_COOKIE, formatCookieHeader(sessionCookie))
@@ -96,32 +97,24 @@ public class AuthenticationController {
     }
 
     @Operation(summary = "Logs the User out",
-            description = "Logs the user out - jwt from cookie is blacklisted " +
-                    "(this allows logging in on multiple devices)")
+            description = "Logs the User out - delete all tokens from database")
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
+                    responseCode = "200",
                     description = "User logged out successfully",
                     content = @Content(
                             mediaType = "text/plain",
                             schema = @Schema(implementation = String.class)
-                    )),
-            @ApiResponse(
-                    responseCode = "401",
-                    description = "Bad Request - returns map of errors",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorResponse.class)
                     ))
     })
-    @PostMapping("/revoke")
-    public ResponseEntity<String> revoke(HttpServletRequest request) {
-        Cookie jwtCookie = extractCookieFromCookies(request, JWT_COOKIE_NAME);
-        authenticationService.revoke(jwtCookie.getValue());
-        Cookie deletedCookie = createCookie(JWT_COOKIE_NAME, null, COOKIE_NULL_AGE, COOKIE_DEFAULT_PATH);
+    @GetMapping("/revoke")
+    public ResponseEntity<String> revoke() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        sessionService.revoke(email);
+        Cookie deletedSessionCookie = createCookie(SESSION_COOKIE_NAME, null, COOKIE_NULL_AGE, COOKIE_DEFAULT_PATH);
         return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .header(HttpHeaders.SET_COOKIE, formatCookieHeader(deletedCookie))
+                .status(HttpStatus.OK)
+                .header(HttpHeaders.SET_COOKIE, formatCookieHeader(deletedSessionCookie))
                 .body("Successfully logged out");
     }
 

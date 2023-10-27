@@ -1,77 +1,88 @@
 package pl.edu.uwm.farmguider.security.utils;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 import pl.edu.uwm.farmguider.exceptions.global.UnauthorizedException;
 
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
-@Component
 public class JWTUtils {
 
-    public final static Integer ONE_HOUR = 3600000;
-    private final static Integer ONE_DAY = 86400000;
-    @Value("${application.security.jwt.secret-key}")
-    private String SECRET_KEY;
+    private final static Integer ONE_HOUR = 3600000;
+    private final static Integer SEVEN_DAYS = 86400000 * 7;
 
-    private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+
+    private static Key getSignInKey(String secretKey) {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    private Claims extractAllClaims(String token) {
+    private static Claims extractAllClaims(String token, String secretKey) {
         try {
-            return Jwts
+            JwtParser parser = Jwts
                     .parserBuilder()
-                    .setSigningKey(getSignInKey())
-                    .build()
+                    .setSigningKey(getSignInKey(secretKey))
+                    .build();
+
+            return parser
                     .parseClaimsJws(token)
                     .getBody();
+        } catch (ExpiredJwtException e) {
+            return e.getClaims();
         } catch (Exception exception) {
             throw new UnauthorizedException("JWT", "Unauthorized - JWT has been tampered with.");
         }
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
+    public static <T> T extractClaim(String token, Function<Claims, T> claimsResolver, String secretKey) {
+        final Claims claims = extractAllClaims(token, secretKey);
         return claimsResolver.apply(claims);
     }
 
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+    public static String extractUsername(String token, String secretKey) {
+        return extractClaim(token, Claims::getSubject, secretKey);
     }
 
-    private Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
+    private static Date extractExpiration(String token, String secretKey) {
+        return extractClaim(token, Claims::getExpiration, secretKey);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public static String generateToken(UserDetails userDetails, String secretKey) {
+        return generateToken(new HashMap<>(), userDetails, secretKey);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public static String generateToken(Map<String, Object> extraClaims, UserDetails userDetails, String secretKey) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + ONE_HOUR))
-                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .signWith(getSignInKey(secretKey), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+    public static String generateRefreshToken(UserDetails userDetails, String secretKey) {
+        String refreshTokenID = UUID.randomUUID().toString();
+        return Jwts
+                .builder()
+                .setId(refreshTokenID)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + SEVEN_DAYS))
+                .signWith(getSignInKey(secretKey), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public static boolean isTokenExpired(String token, String secretKey) {
+        return extractExpiration(token, secretKey).before(new Date());
     }
 
 }
