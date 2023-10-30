@@ -1,6 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
-import {useAuth} from '@/components/AuthContext/AuthContext.tsx';
-import NotLoggedPage from '@/components/NotLoggedPage/NotLoggedPage';
+import {useAuth} from '@/contexts/AuthContext.tsx';
+import NotLoggedPage from '@/components/NotLoggedPage.tsx';
 
 function App() {
     const authContext = useAuth();
