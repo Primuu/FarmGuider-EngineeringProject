@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.UserFacade;
+import pl.edu.uwm.farmguider.models.user.dtos.UserAuthDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserCreateDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
 import pl.edu.uwm.farmguider.security.AuthenticationRequestDTO;
 import pl.edu.uwm.farmguider.services.AuthenticationService;
 import pl.edu.uwm.farmguider.services.SessionService;
+
+import java.util.Collection;
 
 import static pl.edu.uwm.farmguider.security.utils.CookieUtils.*;
 import static pl.edu.uwm.farmguider.security.utils.SecurityConstants.AUTHENTICATE_URL;
@@ -116,6 +121,31 @@ public class AuthenticationController {
                 .status(HttpStatus.OK)
                 .header(HttpHeaders.SET_COOKIE, formatCookieHeader(deletedSessionCookie))
                 .body("Successfully logged out");
+    }
+
+    @Operation(summary = "Get user data", description = "Retrieves basic user data: user id and role")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful retrieve of data",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = UserAuthDTO.class)
+                    ))
+    })
+    @GetMapping("/auth-data")
+    public ResponseEntity<UserAuthDTO> getAuthData() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        Long userId = userFacade.getUserIdByEmail(authentication.getName());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(UserAuthDTO.builder()
+                        .userId(userId)
+                        .userRole(authorities.iterator().next().getAuthority())
+                        .build()
+                );
     }
 
 }

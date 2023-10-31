@@ -27,4 +27,8 @@ public class UserFacade {
         return mapToUserResponseDTO(userService.createUser(userCreateDTO, emptyAddress));
     }
 
+    public Long getUserIdByEmail(String email) {
+        return userService.getUserByEmail(email).getId();
+    }
+
 }
