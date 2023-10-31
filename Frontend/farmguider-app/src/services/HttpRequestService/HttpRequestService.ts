@@ -25,7 +25,7 @@ const constructUrl = (endpointUrl: string, urlParams?: UrlParams) => {
     return url.toString();
 }
 
-const sendHttpRequest = async (requestConfig: RequestConfig) => {
+const sendHttpRequest = async <T>(requestConfig: RequestConfig): Promise<T> => {
     const { endpointUrl, typeOfRequest, urlParams, body } = requestConfig;
 
     const axiosRequestConfig: AxiosRequestConfig = {
@@ -34,13 +34,8 @@ const sendHttpRequest = async (requestConfig: RequestConfig) => {
         url: constructUrl(endpointUrl, urlParams),
         data: body
     };
-
-    try {
         const response = await axios(axiosRequestConfig);
-        return response.data;
-    } catch (error: unknown) {
-        throw error;
-    }
+        return response.data as T;
 }
 
 export default sendHttpRequest;
