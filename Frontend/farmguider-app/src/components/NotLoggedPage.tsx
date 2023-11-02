@@ -1,7 +1,11 @@
+import AuthenticationForms from "@/components/AuthenticationForms.tsx";
+
 const NotLoggedPage = () => {
     return (
-        <>Log in / Register</>
-    );
-};
+        <>
+            <AuthenticationForms/>
+        </>
+    )
+}
 
 export default NotLoggedPage;
