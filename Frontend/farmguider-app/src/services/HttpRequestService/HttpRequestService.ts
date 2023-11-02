@@ -7,7 +7,7 @@ export interface RequestConfig {
     endpointUrl: string;
     typeOfRequest: string;
     urlParams?: UrlParams;
-    body?: Record<string, unknown>;
+    body?: unknown;
 }
 
 const constructUrl = (endpointUrl: string, urlParams?: UrlParams) => {
