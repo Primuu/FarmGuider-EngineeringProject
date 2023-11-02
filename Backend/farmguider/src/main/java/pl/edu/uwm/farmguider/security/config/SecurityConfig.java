@@ -33,8 +33,6 @@ public class SecurityConfig {
     private final FilterChainExceptionHandler exceptionHandler;
     @Value("${application.security.front.app-url}")
     private String FRONTED_APP_URL;
-    
-//    TODO: update request matchers
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
