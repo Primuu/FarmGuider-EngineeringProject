@@ -4,6 +4,7 @@ import '@/components/notLoggedPage.css';
 import {AppBar, Box, Button, Toolbar, Typography} from '@mui/material';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
@@ -143,7 +144,12 @@ const NotLoggedPage = () => {
             </Parallax>
 
             <Box className="footer">
-                <Typography>GitHub Primuu</Typography>
+                <Typography className="footer-text">
+                    <a href="https://github.com/Primuu" className="link" target="_blank" rel="noopener noreferrer">
+                        <GitHubIcon className="icon"/>
+                        Primuu
+                    </a>
+                </Typography>
             </Box>
         </Box>
     );
