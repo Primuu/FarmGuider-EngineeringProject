@@ -29,7 +29,7 @@ function HideOnScroll(props: HideOnScrollProps) {
 }
 
 const NotLoggedPage = () => {
-    const blur = { min: 0, max: 5 };
+    const blur = { min: 1, max: 3 };
     return (
         <Box>
             <CssBaseline />
