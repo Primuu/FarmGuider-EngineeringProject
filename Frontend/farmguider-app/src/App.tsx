@@ -4,7 +4,7 @@ import NotLoggedPage from '@/components/NotLoggedPage/NotLoggedPage.tsx';
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import {createTheme, ThemeProvider} from '@mui/material';
 import CssBaseline from "@mui/material/CssBaseline";
-
+import '@/i18n.ts';
 
 const theme = createTheme({
     palette: {
