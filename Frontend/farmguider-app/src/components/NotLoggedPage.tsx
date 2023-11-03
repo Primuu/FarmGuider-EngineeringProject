@@ -5,6 +5,9 @@ import {AppBar, Box, Button, Toolbar, Typography} from '@mui/material';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import GrassIcon from '@mui/icons-material/Grass';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
@@ -74,6 +77,7 @@ const NotLoggedPage = () => {
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
+                <GrassIcon color="secondary" className="icon"/>
                 <Typography className="text">
                     The part of the application responsible for monitoring crop data,<br/>
                     enables the accumulation of data regarding the fields and crops managed on the farm.<br/>
@@ -101,6 +105,7 @@ const NotLoggedPage = () => {
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
+                <TimelineIcon color="secondary" className="icon"/>
                 <Typography className="text">
                     The part of the application responsible for monitoring breeding data<br/>
                     provides detailed information about the animals on the farm.<br/>
@@ -124,6 +129,7 @@ const NotLoggedPage = () => {
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
+                <SignalCellularAltIcon color="secondary" className="icon"/>
                 <Typography className="text">
                     Thanks to this application, you have the ability to monitor and analyze<br/>
                     key data related to breeding and crops, which enables you to optimize processes in<br/>
