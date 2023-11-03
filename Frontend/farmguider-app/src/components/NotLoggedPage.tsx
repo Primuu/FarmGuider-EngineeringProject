@@ -2,7 +2,6 @@ import React from 'react';
 import {Parallax} from 'react-parallax';
 import '@/components/notLoggedPage.css';
 import {AppBar, Box, Button, Toolbar, Typography} from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 
@@ -37,7 +36,6 @@ const NotLoggedPage = () => {
 
     return (
         <Box>
-            <CssBaseline/>
             <HideOnScroll>
                 <AppBar className="app-bar">
                     <Toolbar className="toolbar">
