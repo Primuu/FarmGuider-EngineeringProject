@@ -8,7 +8,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import GrassIcon from '@mui/icons-material/Grass';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
-import {useTranslation} from 'react-i18next';
+import {Trans, useTranslation} from 'react-i18next';
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher.tsx";
 
 import tractorImage from '@/assets/tractor-image.jpg';
@@ -59,93 +59,71 @@ const NotLoggedPage = () => {
                     {t('mainTextBox.header')}
                 </Typography>
                 <Typography className="text">
-                    This is a farm management application designed for owners and workers agricultural farms<br/>
-                    that deal with land cultivation or cattle breeding - beef or dairy.<br/>
-                    The main goal of the application is to facilitate the work associated with managing a farm by
-                    efficiently<br/>
-                    collecting and monitoring data related to breeding and crops.
+                    <Trans i18nKey='mainTextBox.text' ns='notLoggedPage' components={{ br: <br /> }} />
                 </Typography>
                 <Button variant="outlined" color="primary" className="start-button">
-                    GET STARTED
+                    {t('mainTextBox.button')}
                 </Button>
             </Box>
 
             <Parallax
                 blur={dynamicBlur}
                 bgImage={cropsImage}
-                bgImageAlt="crops image"
+                bgImageAlt={t('crops.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
             >
                 <Typography className="parallax-text">
-                    CROPS
+                    {t('crops.typography')}
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
                 <GrassIcon color="secondary" className="icon"/>
                 <Typography className="text">
-                    The part of the application responsible for monitoring crop data,<br/>
-                    enables the accumulation of data regarding the fields and crops managed on the farm.<br/>
-                    People managing the farm can record data related to seeding, harvesting, fertilizers used<br/>
-                    and plant protection products, or other treatments.<br/>
-                    The application also allows for the generation of reports and charts that aid in evaluating
-                    crop efficiency and identifying areas requiring optimization.<br/>
-                    The application also offers the option of generating sowing calendars
-                    that facilitate planning of seasonal work related to crops.<br/>
-                    Based on the data about crop types and soil conditions, the application will generate optimal sowing
-                    schedules, considering
-                    optimal sowing dates and crop rotation.
+                    <Trans i18nKey='crops.text' ns='notLoggedPage' components={{ br: <br /> }} />
                 </Typography>
             </Box>
 
             <Parallax
                 blur={dynamicBlur}
                 bgImage={cowsImage}
-                bgImageAlt="cows image"
+                bgImageAlt={t('animals.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
             >
                 <Typography className="parallax-text">
-                    ANIMALS
+                    {t('animals.typography')}
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
                 <TimelineIcon color="secondary" className="icon"/>
                 <Typography className="text">
-                    The part of the application responsible for monitoring breeding data<br/>
-                    provides detailed information about the animals on the farm.<br/>
-                    The user of the application can register and track data on dairy and beef cattle,<br/>
-                    such as milk yield or weight gain. The application also allows for the analysis of data and creation
-                    of reports<br/>
-                    related to animal performance, based on which the user will be able to make appropriate decisions
-                    concerning breeding.
+                    <Trans i18nKey='animals.text' ns='notLoggedPage' components={{ br: <br /> }} />
                 </Typography>
             </Box>
 
             <Parallax
                 blur={dynamicBlur}
                 bgImage={tractorImage}
-                bgImageAlt="tractor image"
+                bgImageAlt={t('efficiency.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
             >
                 <Typography className="parallax-text">
-                    EFFICIENCY
+                    {t('efficiency.typography')}
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
                 <SignalCellularAltIcon color="secondary" className="icon"/>
                 <Typography className="text">
-                    Thanks to this application, you have the ability to monitor and analyze<br/>
-                    key data related to breeding and crops, which enables you to optimize processes in<br/>
-                    the agricultural farm, and thereby, increase efficiency.
+                    <Trans i18nKey='efficiency.text' ns='notLoggedPage' components={{ br: <br /> }} />
                 </Typography>
             </Box>
 
             <Parallax
                 blur={blur}
                 bgImage={wheatImage}
-                bgImageAlt="wheat image"
+                bgImageAlt={t('farmGuider.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
             >

@@ -1,7 +1,24 @@
 {
   "mainTextBox": {
     "header": "Welcome to FarmGuider",
-    "text": "This is a farm management application designed for owners and workers agricultural farms\n that deal with land cultivation or cattle breeding - beef or dairy.\n The main goal of the application is to facilitate the work associated with managing a farm by efficiently\n collecting and monitoring data related to breeding and crops.",
+    "text": "This is a farm management application designed for owners and workers agricultural farms<br/> that deal with land cultivation or cattle breeding - beef or dairy.<br/> The main goal of the application is to facilitate the work associated with managing a farm by efficiently<br/> collecting and monitoring data related to breeding and crops.",
     "button": "GET STARTED"
-  }
+  },
+  "crops": {
+    "bgImageAlt": "Crops image",
+    "typography": "CROPS",
+    "text": "The part of the application responsible for monitoring crop data,<br/> enables the accumulation of data regarding the fields and crops managed on the farm.<br/> People managing the farm can record data related to seeding, harvesting, fertilizers used<br/> and plant protection products, or other treatments.<br/> The application also allows for the generation of reports and charts that aid in evaluating crop efficiency and identifying areas requiring optimization.<br/> The application also offers the option of generating sowing calendars that facilitate planning of seasonal work related to crops.<br/> Based on the data about crop types and soil conditions, the application will generate optimal sowing schedules, considering optimal sowing dates and crop rotation."
+  },
+  "animals": {
+    "bgImageAlt": "Cows image",
+    "typography": "ANIMALS",
+    "text": "The part of the application responsible for monitoring breeding data<br/> provides detailed information about the animals on the farm.<br/> The user of the application can register and track data on dairy and beef cattle,<br/> such as milk yield or weight gain. The application also allows for the analysis of data and creation of reports<br/> related to animal performance, based on which the user will be able to make appropriate decisions concerning breeding."
+  },
+  "efficiency": {
+    "bgImageAlt": "Tractor image",
+    "typography": "EFFICIENCY",
+    "text": "Thanks to this application, you have the ability to monitor and analyze<br/> key data related to breeding and crops, which enables you to optimize processes in<br/> the agricultural farm, and thereby, increase efficiency."
+  },
+  "farmGuider": {
+    "bgImageAlt": "Wheat image"}
 }
