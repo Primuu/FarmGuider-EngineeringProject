@@ -8,6 +8,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import GrassIcon from '@mui/icons-material/Grass';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import {useTranslation} from 'react-i18next';
+import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher.tsx";
 
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
@@ -38,12 +40,15 @@ const NotLoggedPage = () => {
     const blur = 5;
     const strength = 500;
 
+    const {t} = useTranslation('notLoggedPage');
+
     return (
         <Box>
             <HideOnScroll>
                 <AppBar className="app-bar">
                     <Toolbar className="toolbar">
                         <img src={logo} alt="farm guider logo" className='logo'/>
+                        <LanguageSwitcher/>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
@@ -51,14 +56,14 @@ const NotLoggedPage = () => {
 
             <Box className="main-text-box">
                 <Typography className="header">
-                    Welcome to FarmGuider
+                    {t('mainTextBox.header')}
                 </Typography>
                 <Typography className="text">
                     This is a farm management application designed for owners and workers agricultural farms<br/>
                     that deal with land cultivation or cattle breeding - beef or dairy.<br/>
                     The main goal of the application is to facilitate the work associated with managing a farm by
                     efficiently<br/>
-                    collecting and monitoring data related to breeding and crops.<br/>
+                    collecting and monitoring data related to breeding and crops.
                 </Typography>
                 <Button variant="outlined" color="primary" className="start-button">
                     GET STARTED
