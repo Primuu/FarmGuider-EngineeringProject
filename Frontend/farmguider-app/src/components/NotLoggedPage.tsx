@@ -1,7 +1,7 @@
 import React from 'react';
 import {Parallax} from 'react-parallax';
 import '@/components/notLoggedPage.css';
-import {AppBar, Toolbar, Typography, Button, Box} from '@mui/material';
+import {AppBar, Box, Button, Toolbar, Typography} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
@@ -9,6 +9,8 @@ import Slide from '@mui/material/Slide';
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
 import cropsImage from '@/assets/crops-image.jpg';
+import wheatImage from '@/assets/wheat-image.jpg';
+import logo from '@/assets/farm-guider.svg'
 
 type HideOnScrollProps = {
     children: React.ReactElement;
@@ -29,23 +31,21 @@ function HideOnScroll(props: HideOnScrollProps) {
 }
 
 const NotLoggedPage = () => {
-    const blur = { min: 1, max: 3 };
+    const dynamicBlur = {min: -1, max: 3};
+    const blur = 5;
+    const strength = 500;
+
     return (
         <Box>
-            <CssBaseline />
+            <CssBaseline/>
             <HideOnScroll>
                 <AppBar className="app-bar">
                     <Toolbar className="toolbar">
-
-                        {/*TODO:CHANGE TO LOGO*/}
-                        <Typography variant="h4" component="div" className="text-section">
-                            LogoPlaceHolder
-                        </Typography>
-
+                        <img src={logo} alt="farm guider logo" className='logo'/>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
-            <Toolbar />
+            <Toolbar/>
 
             <Box className="main-text-box">
                 <Typography className="header">
@@ -54,7 +54,8 @@ const NotLoggedPage = () => {
                 <Typography className="text">
                     This is a farm management application designed for owners and workers agricultural farms<br/>
                     that deal with land cultivation or cattle breeding - beef or dairy.<br/>
-                    The main goal of the application is to facilitate the work associated with managing a farm by efficiently<br/>
+                    The main goal of the application is to facilitate the work associated with managing a farm by
+                    efficiently<br/>
                     collecting and monitoring data related to breeding and crops.<br/>
                 </Typography>
                 <Button variant="outlined" color="primary" className="start-button">
@@ -63,10 +64,10 @@ const NotLoggedPage = () => {
             </Box>
 
             <Parallax
-                blur={blur}
+                blur={dynamicBlur}
                 bgImage={cropsImage}
                 bgImageAlt="crops image"
-                strength={-200}
+                strength={strength}
                 className="parallax-section"
             >
                 <Typography className="parallax-text">
@@ -83,16 +84,17 @@ const NotLoggedPage = () => {
                     crop efficiency and identifying areas requiring optimization.<br/>
                     The application also offers the option of generating sowing calendars
                     that facilitate planning of seasonal work related to crops.<br/>
-                    Based on the data about crop types and soil conditions, the application will generate optimal sowing schedules, considering
+                    Based on the data about crop types and soil conditions, the application will generate optimal sowing
+                    schedules, considering
                     optimal sowing dates and crop rotation.
                 </Typography>
             </Box>
 
             <Parallax
-                blur={blur}
+                blur={dynamicBlur}
                 bgImage={cowsImage}
                 bgImageAlt="cows image"
-                strength={-200}
+                strength={strength}
                 className="parallax-section"
             >
                 <Typography className="parallax-text">
@@ -104,16 +106,18 @@ const NotLoggedPage = () => {
                     The part of the application responsible for monitoring breeding data<br/>
                     provides detailed information about the animals on the farm.<br/>
                     The user of the application can register and track data on dairy and beef cattle,<br/>
-                    such as milk yield or weight gain. The application also allows for the analysis of data and creation of reports<br/>
-                    related to animal performance, based on which the user will be able to make appropriate decisions concerning breeding.
+                    such as milk yield or weight gain. The application also allows for the analysis of data and creation
+                    of reports<br/>
+                    related to animal performance, based on which the user will be able to make appropriate decisions
+                    concerning breeding.
                 </Typography>
             </Box>
 
             <Parallax
-                blur={blur}
+                blur={dynamicBlur}
                 bgImage={tractorImage}
                 bgImageAlt="tractor image"
-                strength={-200}
+                strength={strength}
                 className="parallax-section"
             >
                 <Typography className="parallax-text">
@@ -128,8 +132,20 @@ const NotLoggedPage = () => {
                 </Typography>
             </Box>
 
+            <Parallax
+                blur={blur}
+                bgImage={wheatImage}
+                bgImageAlt="wheat image"
+                strength={strength}
+                className="parallax-section"
+            >
+                <Typography className="parallax-text">
+                    FarmGuider
+                </Typography>
+            </Parallax>
+
             <Box className="footer">
-                <Typography>Footer</Typography>
+                <Typography>GitHub Primuu</Typography>
             </Box>
         </Box>
     );

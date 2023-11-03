@@ -3,13 +3,11 @@
 }
 
 .toolbar {
-    justify-content: center;
+    justify-content: left;
 }
 
-.text-section {
-    /*TODO:TEMPORARY*/
-    text-align: center;
-    color: black;
+.logo {
+    width: 80px;
 }
 
 .main-text-box {
@@ -36,9 +34,8 @@
     }
 }
 
-/*TODO:*/
 .parallax-section {
-    height: 170vh;
+    height: 900px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,7 +48,8 @@
 
 .section-text-box {
     text-align: center;
-    margin-bottom: 25vh;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
     .text {
         font-size: 18px;
         color: #414040;
