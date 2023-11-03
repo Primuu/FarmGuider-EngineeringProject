@@ -1,0 +1,66 @@
+.app-bar {
+    background-color: #f5f5f5 !important;
+}
+
+.toolbar {
+    justify-content: center;
+}
+
+.text-section {
+    /*TODO:TEMPORARY*/
+    text-align: center;
+    color: black;
+}
+
+.main-text-box {
+    text-align: center;
+    margin-top: 12vh;
+    margin-bottom: 10vh;
+    .header {
+        font-size: 72px;
+        font-weight: bold;
+        color: #414040;
+    }
+    .text {
+        font-size: 18px;
+        margin-top: 2vh;
+        margin-bottom: 8vh;
+        color: #484747;
+    }
+    .start-button {
+        width: 250px;
+        height: 50px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border: 2px solid;
+    }
+}
+
+/*TODO:*/
+.parallax-section {
+    height: 120vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .parallax-text {
+        color: whitesmoke;
+        font-size: 100px;
+        font-weight: bold;
+    }
+}
+
+.section-text-box {
+    text-align: center;
+    margin-bottom: 25vh;
+    .text {
+        font-size: 18px;
+        color: #414040;
+    }
+}
+
+.footer {
+    background: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
