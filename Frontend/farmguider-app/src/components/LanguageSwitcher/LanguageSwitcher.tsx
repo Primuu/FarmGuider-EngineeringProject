@@ -13,6 +13,7 @@ type LangType = 'en' | 'pl';
 const LanguageSwitcher = () => {
     const {i18n} = useTranslation();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const {t} = useTranslation('languageSwitcher');
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setAnchorEl(event.currentTarget);
@@ -39,10 +40,10 @@ const LanguageSwitcher = () => {
     };
 
     return (
-        <div>
+        <>
             <Button onClick={handleClick}>
-                <img src={getFlagForLanguage(i18n.language as LangType)} alt="Language flag" className="flag" />
-                     Language
+                <img src={getFlagForLanguage(i18n.language as LangType)} alt={t('altLanguage')} className="flag" />
+                {t('language')}
             </Button>
             <Menu
                 anchorEl={anchorEl}
@@ -50,15 +51,15 @@ const LanguageSwitcher = () => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={() => changeLanguage('en')}>
-                    <img src={gbFlag} alt="English Flag" className="flag" />
+                    <img src={gbFlag} alt={t('altEnglishFlag')} className="flag" />
                     English
                 </MenuItem>
                 <MenuItem onClick={() => changeLanguage('pl')}>
-                    <img src={plFlag} alt="Polish Flag" className="flag" />
+                    <img src={plFlag} alt={t('altPolishFlag')} className="flag" />
                     Polski
                 </MenuItem>
             </Menu>
-        </div>
+        </>
     );
 };
 
