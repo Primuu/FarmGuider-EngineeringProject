@@ -3,7 +3,7 @@
 }
 
 .toolbar {
-    justify-content: left;
+    justify-content: space-between;
 }
 
 .logo {
