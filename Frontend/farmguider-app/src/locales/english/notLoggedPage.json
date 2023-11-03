@@ -1,0 +1,7 @@
+{
+  "mainTextBox": {
+    "header": "Welcome to FarmGuider",
+    "text": "This is a farm management application designed for owners and workers agricultural farms\n that deal with land cultivation or cattle breeding - beef or dairy.\n The main goal of the application is to facilitate the work associated with managing a farm by efficiently\n collecting and monitoring data related to breeding and crops.",
+    "button": "GET STARTED"
+  }
+}
