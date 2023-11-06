@@ -1,6 +1,6 @@
 import LoginForm from "@/pages/NotLoggedPage/LoginForm.tsx";
 import RegisterForm from "@/pages/NotLoggedPage/RegisterForm.tsx";
-import {Box, Modal, Fade, Button} from '@mui/material';
+import { Box, Modal, Fade, Button, Slide } from '@mui/material';
 import React, {useState} from "react";
 import '@/pages/NotLoggedPage/authFormsModal.css';
 
@@ -28,7 +28,26 @@ const AuthFormsModal: React.FC<AuthFormsModalProps> = ({ open, onClose }) => {
         >
             <Fade in={open}>
                 <Box className="modal-box">
-                    {activeForm === AuthFormType.Login ? <LoginForm/> : <RegisterForm/>}
+                    <Slide
+                        direction="right"
+                        in={activeForm === AuthFormType.Login}
+                        mountOnEnter
+                        unmountOnExit
+                    >
+                        <div>
+                            {activeForm === AuthFormType.Login && <LoginForm />}
+                        </div>
+                    </Slide>
+                    <Slide
+                        direction="left"
+                        in={activeForm === AuthFormType.Register}
+                        mountOnEnter
+                        unmountOnExit
+                    >
+                        <div>
+                            {activeForm === AuthFormType.Register && <RegisterForm />}
+                        </div>
+                    </Slide>
 
                     <Box className="modal-footer">
                         <Button
