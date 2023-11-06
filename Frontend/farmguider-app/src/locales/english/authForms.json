@@ -1,0 +1,12 @@
+{
+  "modal": {
+
+  },
+  "login": {
+    "header": "Sign in",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "error": "Invalid credentials",
+    "button": "Sign in"
+  }
+}

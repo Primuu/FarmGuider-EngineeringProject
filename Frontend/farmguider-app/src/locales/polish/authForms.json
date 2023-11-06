@@ -1,0 +1,9 @@
+{
+  "login": {
+    "header": "Zaloguj",
+    "emailLabel": "Adres Email",
+    "passwordLabel": "Hasło",
+    "error": "Nieprawidłowe dane",
+    "button": "Zaloguj"
+  }
+}

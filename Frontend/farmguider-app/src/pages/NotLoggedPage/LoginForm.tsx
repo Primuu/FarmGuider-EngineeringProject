@@ -4,11 +4,14 @@ import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
 import {authenticate} from "@/services/authenticationService.ts";
 import '@/pages/NotLoggedPage/loginForm.css';
 import LockIcon from '@mui/icons-material/Lock';
+import {useTranslation} from "react-i18next";
 
 const LoginForm = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loginError, setLoginError] = useState<boolean>(false);
+
+    const {t} = useTranslation('authForms');
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -39,7 +42,7 @@ const LoginForm = () => {
                     <LockIcon/>
                 </Box>
                 <Typography className="login-header">
-                    Sign in
+                    {t('login.header')}
                 </Typography>
                 <Box
                     component="form"
@@ -51,7 +54,7 @@ const LoginForm = () => {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label={t('login.emailLabel')}
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -64,7 +67,7 @@ const LoginForm = () => {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label={t('login.passwordLabel')}
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -74,7 +77,7 @@ const LoginForm = () => {
                     />
                     {loginError && (
                         <Typography color="error" className="login-error-message">
-                            Invalid credentials
+                            {t('login.error')}
                         </Typography>
                     )}
                     <Button
@@ -83,7 +86,7 @@ const LoginForm = () => {
                         variant="contained"
                         className="login-button"
                     >
-                        Sign in
+                        {t('login.button')}
                     </Button>
                 </Box>
             </Box>
