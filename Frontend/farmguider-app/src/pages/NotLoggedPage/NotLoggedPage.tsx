@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {Parallax} from 'react-parallax';
 import '@/pages/NotLoggedPage/notLoggedPage.css';
 import {Box, Button, Typography} from '@mui/material';
@@ -12,8 +13,14 @@ import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
 import cropsImage from '@/assets/crops-image.jpg';
 import wheatImage from '@/assets/wheat-image.jpg';
+import AuthFormsModal from "@/pages/NotLoggedPage/AuthFormsModal.tsx";
 
 const NotLoggedPage = () => {
+    const [openModal, setOpenModal] = useState(false);
+
+    const handleOpen = () => setOpenModal(true);
+    const handleClose = () => setOpenModal(false);
+
     const dynamicBlur = {min: -1, max: 3};
     const blur = 5;
     const strength = 500;
@@ -30,9 +37,19 @@ const NotLoggedPage = () => {
                 <Typography className="text">
                     <Trans i18nKey='mainTextBox.text' ns='notLoggedPage' components={{br: <br/>}}/>
                 </Typography>
-                <Button variant="outlined" color="primary" className="start-button">
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    className="start-button"
+                    onClick={handleOpen}
+                >
                     {t('mainTextBox.button')}
                 </Button>
+
+                <AuthFormsModal
+                    open={openModal}
+                    onClose={handleClose}
+                />
             </Box>
 
             <Parallax
