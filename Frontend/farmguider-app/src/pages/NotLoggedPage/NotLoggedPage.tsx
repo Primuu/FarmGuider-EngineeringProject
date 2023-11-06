@@ -23,7 +23,6 @@ const NotLoggedPage = () => {
     return (
         <Box>
             <NavbarTop/>
-
             <Box className="main-text-box">
                 <Typography className="header">
                     {t('mainTextBox.header')}
