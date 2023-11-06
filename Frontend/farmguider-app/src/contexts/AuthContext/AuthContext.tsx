@@ -1,7 +1,7 @@
 import {createContext, ReactNode, useContext, useEffect, useState, useCallback} from 'react';
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import {useCookies} from "react-cookie";
-import {SESSION_COOKIE} from "@/constants/COOKIES_NAMES.ts";
+import {SESSION_COOKIE} from "@/constants/CONFIG_CONSTS.ts";
 import {fetchUserAuthData} from "@/services/authenticationService.ts";
 import UserAuthDTO from "@/entities/UserAuthDTO.ts";
 

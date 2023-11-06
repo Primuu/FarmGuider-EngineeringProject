@@ -7,6 +7,7 @@ import '@/components/LanguageSwitcher/languageSwitcher.css';
 
 import gbFlag from "@/assets/gb.svg"
 import plFlag from "@/assets/pl.svg"
+import {LANGUAGE_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 
 type LangType = 'en' | 'pl';
 
@@ -24,6 +25,7 @@ const LanguageSwitcher = () => {
     };
 
     const changeLanguage = (lang: LangType) => {
+        localStorage.setItem(LANGUAGE_ITEM, lang);
         void i18n.changeLanguage(lang);
         handleClose();
     };
