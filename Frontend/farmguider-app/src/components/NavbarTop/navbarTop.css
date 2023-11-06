@@ -1,0 +1,11 @@
+.app-bar {
+    background-color: #f5f5f5 !important;
+}
+
+.toolbar {
+    justify-content: space-between;
+}
+
+.logo {
+    width: 80px;
+}
