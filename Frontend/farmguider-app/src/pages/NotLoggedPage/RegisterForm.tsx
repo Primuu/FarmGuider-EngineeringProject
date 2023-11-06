@@ -8,6 +8,7 @@ import useValidation from "@/hooks/useValidation.ts";
 import {validateRegister} from "@/utils/validateRegister.ts";
 import '@/pages/NotLoggedPage/loginAndRegisterForm.css';
 import LockIcon from '@mui/icons-material/Lock';
+import {useTranslation} from "react-i18next";
 
 type Names = {
     firstName: string;
@@ -27,6 +28,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
 
     const {errors, validate, setErrors} = useValidation(validateRegister);
 
+    const {t} = useTranslation('authForms');
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -44,7 +47,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!validate({names, email, password, confirmPassword})) return;
+        if (!validate({names, email, password, confirmPassword}, t)) return;
 
         const userCreateDTO: UserCreateDTO = {
             email: email,
@@ -58,7 +61,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
         } catch (error) {
             setErrors(prevErrors => ({
                 ...prevErrors,
-                email: 'User with this email already exists.'
+                email: t('register.error')
             }));
         }
     };
@@ -70,7 +73,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                     <LockIcon/>
                 </Box>
                 <Typography className="form-header">
-                    Register
+                    {t('register.header')}
                 </Typography>
                 {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
                 <Box component="form" onSubmit={handleSubmit} className="register-form">
@@ -82,7 +85,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                                 required
                                 fullWidth
                                 id="firstName"
-                                label="First name"
+                                label={t('register.firstNameLabel')}
                                 name="firstName"
                                 value={names.firstName}
                                 onChange={handleNameChange}
@@ -96,7 +99,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                                 required
                                 fullWidth
                                 id="lastName"
-                                label="Last name"
+                                label={t('register.lastNameLabel')}
                                 name="lastName"
                                 value={names.lastName}
                                 onChange={handleNameChange}
@@ -110,7 +113,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                         required
                         fullWidth
                         id="email"
-                        label="Email address"
+                        label={t('register.emailLabel')}
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -122,7 +125,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label={t('register.passwordLabel')}
                         type={showPassword ? "text" : "password"}
                         id="password"
                         value={password}
@@ -146,7 +149,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                         required
                         fullWidth
                         name="confirmPassword"
-                        label="Confirm password"
+                        label={t('register.confirmPasswordLabel')}
                         type={showPassword ? "text" : "password"}
                         id="confirmPassword"
                         value={confirmPassword}
@@ -167,7 +170,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                     />
                     <Box className="button-group">
                         <Button type="submit" fullWidth variant="contained">
-                            Register
+                            {t('register.registerButton')}
                         </Button>
 
                         <Button
@@ -175,11 +178,11 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                             variant="outlined"
                             onClick={cancel}
                         >
-                            Cancel
+                            {t('register.cancelButton')}
                         </Button>
                     </Box>
                     <Typography className="password-text">
-                        Password must contain at least one lowercase letter, one uppercase letter, one special character and one number (minimum 8 characters).
+                        {t('register.passwordRequirements')}
                     </Typography>
                 </Box>
             </Box>

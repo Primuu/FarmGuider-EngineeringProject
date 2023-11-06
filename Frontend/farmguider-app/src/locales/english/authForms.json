@@ -10,5 +10,28 @@
     "error": "Invalid credentials",
     "loginButton": "Sign in",
     "cancelButton": "Cancel"
+  },
+  "register": {
+    "header": "Register",
+    "firstNameLabel": "First Name",
+    "lastNameLabel": "Last Name",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "registerButton": "Register",
+    "cancelButton": "Cancel",
+    "passwordRequirements": "Password must contain at least one lowercase letter, one uppercase letter, one special character and one number (minimum 8 characters).",
+    "error": "User with this email already exists"
+  },
+  "validation": {
+    "firstNameFilled": "First name must be filled in",
+    "firstNameLength": "First name can contain a maximum of 45 characters",
+    "lastNameFilled": "Last name must be filled in",
+    "lastNameLength": "Last name can contain a maximum of 45 characters",
+    "emailFilled": "Email must be filled in",
+    "emailInvalid": "Invalid email format",
+    "passwordLength": "Password must contain at least 8 characters",
+    "passwordRequirements": "Password must meet the complexity requirements",
+    "confirmPasswordMismatch": "Passwords do not match"
   }
 }

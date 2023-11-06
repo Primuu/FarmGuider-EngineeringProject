@@ -10,5 +10,28 @@
     "error": "Nieprawidłowe dane",
     "loginButton": "Zaloguj",
     "cancelButton": "Anuluj"
+  },
+  "register": {
+    "header": "Rejestracja",
+    "firstNameLabel": "Imię",
+    "lastNameLabel": "Nazwisko",
+    "emailLabel": "Adres email",
+    "passwordLabel": "Hasło",
+    "confirmPasswordLabel": "Potwierdź hasło",
+    "registerButton": "Zarejestruj",
+    "cancelButton": "Anuluj",
+    "passwordRequirements": "Hasło musi zawierać przynajmniej jedną małą literę, jedną dużą literę, jeden znak specjalny i jedną cyfrę (minimum 8 znaków).",
+    "error": "Użytkownik z tym adresem email już istnieje"
+  },
+  "validation": {
+    "firstNameFilled": "Imię musi zostać podane",
+    "firstNameLength": "Imię może zawierać maksymalnie 45 znaków",
+    "lastNameFilled": "Nazwisko musi zostać podane",
+    "lastNameLength": "Nazwisko może zawierać maksymalnie 45 znaków",
+    "emailFilled": "Adres email musi zostać podany",
+    "emailInvalid": "Nieprawidłowy format adresu email",
+    "passwordLength": "Hasło musi zawierać przynajmniej 8 znaków",
+    "passwordRequirements": "Hasło musi spełniać wymogi złożoności",
+    "confirmPasswordMismatch": "Hasła nie są zgodne"
   }
 }

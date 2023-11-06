@@ -1,3 +1,5 @@
+import { TFunction } from "i18next";
+
 const emailRegex = /^[A-Za-z0-9+_.-]+@(.+\.)+[A-Za-z]{2,}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+{}[\]<>?~])[A-Za-z\d!@#$%^&*()-_=+{}[\]<>?~]{8,}$/;
 
@@ -19,37 +21,37 @@ export type Errors = {
     confirmPassword?: string;
 };
 
-export const validateRegister = (values: RegisterValues): Errors => {
+export const validateRegister = (values: RegisterValues, t: TFunction): Errors => {
     const {names, email, password, confirmPassword} = values;
     const tempErrors: Errors = {};
 
-    tempErrors.firstName = names.firstName ? '' : 'First name must be filled in.';
+    tempErrors.firstName = names.firstName ? '' : t('validation.firstNameFilled');
     if (names.firstName && names.firstName.length > 45) {
-        tempErrors.firstName = 'First name can contain a maximum of 45 characters.';
+        tempErrors.firstName = t('validation.firstNameLength');
     }
 
-    tempErrors.lastName = names.lastName ? '' : 'Last name must be filled in.';
+    tempErrors.lastName = names.lastName ? '' : t('validation.lastNameFilled');
     if (names.lastName && names.lastName.length > 45) {
-        tempErrors.lastName = 'Last name can contain a maximum of 45 characters.';
+        tempErrors.lastName = t('validation.lastNameLength');
     }
 
     if (!email) {
-        tempErrors.email = 'Email must be filled in.';
+        tempErrors.email = t('validation.emailFilled');
     } else if (!emailRegex.test(email)) {
-        tempErrors.email = 'Invalid email format.';
+        tempErrors.email = t('validation.emailInvalid');
     } else {
         tempErrors.email = '';
     }
 
-    tempErrors.password = password.length >= 8 ? '' : 'Password must contain at least 8 characters.';
+    tempErrors.password = password.length >= 8 ? '' : t('validation.passwordLength');
     if (!passwordRegex.test(password)) {
-        tempErrors.password = 'Password must meet the complexity requirements.';
+        tempErrors.password = t('validation.passwordRequirements');
     }
 
-    tempErrors.confirmPassword = password === confirmPassword ? '' : 'Passwords do not match.';
+    tempErrors.confirmPassword = password === confirmPassword ? '' : t('validation.confirmPasswordMismatch');
 
     if (password !== confirmPassword) {
-        tempErrors.password = tempErrors.password || 'Passwords do not match.';
+        tempErrors.password = tempErrors.password || t('validation.confirmPasswordMismatch');
     }
 
     return tempErrors;
