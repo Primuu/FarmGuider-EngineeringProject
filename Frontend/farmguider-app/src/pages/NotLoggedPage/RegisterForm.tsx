@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {TextField, Button, Container, Typography, Box, Grid} from '@mui/material';
-import { InputAdornment, IconButton } from '@mui/material';
+import {Box, Button, Container, Grid, IconButton, InputAdornment, TextField, Typography} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {register} from "@/services/authenticationService.ts";
@@ -19,8 +18,8 @@ interface RegisterFormProps {
     cancel: () => void;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ cancel }) => {
-    const [names, setNames] = useState<Names>({ firstName: '', lastName: '' });
+const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
+    const [names, setNames] = useState<Names>({firstName: '', lastName: ''});
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -33,7 +32,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ cancel }) => {
     };
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
         const invalidCharsRegex = /[^\p{L}-]/gu;
         const sanitizedValue = value.replace(invalidCharsRegex, '');
 
@@ -45,7 +44,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ cancel }) => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!validate({ names, email, password, confirmPassword })) return;
+        if (!validate({names, email, password, confirmPassword})) return;
 
         const userCreateDTO: UserCreateDTO = {
             email: email,
@@ -56,10 +55,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ cancel }) => {
 
         try {
             await register(userCreateDTO);
-            } catch (error) {
+        } catch (error) {
             setErrors(prevErrors => ({
-                    ...prevErrors,
-                    email: 'User with this email already exists.'
+                ...prevErrors,
+                email: 'User with this email already exists.'
             }));
         }
     };
@@ -136,7 +135,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ cancel }) => {
                                     <IconButton
                                         onClick={togglePasswordVisibility}
                                     >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        {showPassword ? <Visibility/> : <VisibilityOff/>}
                                     </IconButton>
                                 </InputAdornment>
                             ),
@@ -160,7 +159,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ cancel }) => {
                                     <IconButton
                                         onClick={togglePasswordVisibility}
                                     >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        {showPassword ? <Visibility/> : <VisibilityOff/>}
                                     </IconButton>
                                 </InputAdornment>
                             ),
@@ -179,6 +178,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ cancel }) => {
                             Cancel
                         </Button>
                     </Box>
+                    <Typography className="password-text">
+                        Password must contain at least one lowercase letter, one uppercase letter, one special character and one number (minimum 8 characters).
+                    </Typography>
                 </Box>
             </Box>
         </Container>

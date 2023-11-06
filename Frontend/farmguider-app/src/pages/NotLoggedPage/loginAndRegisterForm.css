@@ -47,6 +47,13 @@
                 justify-content: space-between;
                 gap: 16px;
             }
+
+            .password-text {
+                margin-top: 10px;
+                font-size: 12px;
+                color: #5b5b5b;
+                text-align: center;
+            }
         }
     }
 }
