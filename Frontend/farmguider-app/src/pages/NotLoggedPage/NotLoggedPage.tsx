@@ -1,6 +1,6 @@
 import React from 'react';
 import {Parallax} from 'react-parallax';
-import '@/components/NotLoggedPage/notLoggedPage.css';
+import '@/pages/NotLoggedPage/notLoggedPage.css';
 import {AppBar, Box, Button, Toolbar, Typography} from '@mui/material';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';

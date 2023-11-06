@@ -1,6 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
 import {useAuth} from '@/contexts/AuthContext/AuthContext.tsx';
-import NotLoggedPage from '@/components/NotLoggedPage/NotLoggedPage.tsx';
+import NotLoggedPage from '@/pages/NotLoggedPage/NotLoggedPage.tsx';
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import {createTheme, ThemeProvider} from '@mui/material';
 import CssBaseline from "@mui/material/CssBaseline";

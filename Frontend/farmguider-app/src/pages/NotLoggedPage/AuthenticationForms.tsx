@@ -1,5 +1,5 @@
-import LoginForm from "@/components/NotLoggedPage/LoginForm.tsx";
-import RegisterForm from "@/components/NotLoggedPage/RegisterForm.tsx";
+import LoginForm from "@/pages/NotLoggedPage/LoginForm.tsx";
+import RegisterForm from "@/pages/NotLoggedPage/RegisterForm.tsx";
 
 const AuthenticationForms = () => {
     return (
