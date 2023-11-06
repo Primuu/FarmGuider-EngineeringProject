@@ -9,7 +9,10 @@ import gbFlag from "@/assets/gb.svg"
 import plFlag from "@/assets/pl.svg"
 import {LANGUAGE_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 
-type LangType = 'en' | 'pl';
+enum Language {
+    English = 'en',
+    Polish = 'pl',
+}
 
 const LanguageSwitcher = () => {
     const {i18n} = useTranslation();
@@ -24,17 +27,17 @@ const LanguageSwitcher = () => {
         setAnchorEl(null);
     };
 
-    const changeLanguage = (lang: LangType) => {
+    const changeLanguage = (lang: Language) => {
         localStorage.setItem(LANGUAGE_ITEM, lang);
         void i18n.changeLanguage(lang);
         handleClose();
     };
 
-    const getFlagForLanguage = (lang: LangType) => {
+    const getFlagForLanguage = (lang: Language) => {
         switch (lang) {
-            case 'en':
+            case Language.English:
                 return gbFlag;
-            case 'pl':
+            case Language.Polish:
                 return plFlag;
             default:
                 return gbFlag;
@@ -44,7 +47,7 @@ const LanguageSwitcher = () => {
     return (
         <>
             <Button onClick={handleClick}>
-                <img src={getFlagForLanguage(i18n.language as LangType)} alt={t('altLanguage')} className="flag" />
+                <img src={getFlagForLanguage(i18n.language as Language)} alt={t('altLanguage')} className="flag" />
                 {t('language')}
             </Button>
             <Menu
@@ -52,11 +55,11 @@ const LanguageSwitcher = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={() => changeLanguage('en')}>
+                <MenuItem onClick={() => changeLanguage(Language.English)}>
                     <img src={gbFlag} alt={t('altEnglishFlag')} className="flag" />
                     English
                 </MenuItem>
-                <MenuItem onClick={() => changeLanguage('pl')}>
+                <MenuItem onClick={() => changeLanguage(Language.Polish)}>
                     <img src={plFlag} alt={t('altPolishFlag')} className="flag" />
                     Polski
                 </MenuItem>
