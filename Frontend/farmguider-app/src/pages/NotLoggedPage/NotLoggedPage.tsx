@@ -14,6 +14,7 @@ import cowsImage from '@/assets/cows-image.jpg';
 import cropsImage from '@/assets/crops-image.jpg';
 import wheatImage from '@/assets/wheat-image.jpg';
 import AuthFormsModal from "@/pages/NotLoggedPage/AuthFormsModal.tsx";
+import logo from "@/assets/farm-guider.svg";
 
 const NotLoggedPage = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -113,9 +114,7 @@ const NotLoggedPage = () => {
                 strength={strength}
                 className="parallax-section"
             >
-                <Typography className="parallax-text">
-                    FarmGuider
-                </Typography>
+                <img src={logo} alt="Farm guider logo" className='logo'/>
             </Parallax>
 
             <Box className="footer">

@@ -2,17 +2,20 @@
     text-align: center;
     margin-top: 12vh;
     margin-bottom: 10vh;
+
     .header {
         font-size: 72px;
         font-weight: bold;
         color: #414040;
     }
+
     .text {
         font-size: 18px;
         margin-top: 2vh;
         margin-bottom: 8vh;
         color: #484747;
     }
+
     .start-button {
         width: 250px;
         height: 50px;
@@ -27,10 +30,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     .parallax-text {
         color: whitesmoke;
         font-size: 100px;
         font-weight: bold;
+    }
+
+    .logo {
+        width: 500px;
     }
 }
 
@@ -38,10 +46,12 @@
     text-align: center;
     margin-top: 15vh;
     margin-bottom: 15vh;
+
     .text {
         font-size: 18px;
         color: #414040;
     }
+
     .icon {
         font-size: 48px;
     }
@@ -52,13 +62,16 @@
     color: white;
     padding: 10px;
     text-align: center;
+
     .footer-text {
         font-size: 18px;
     }
+
     .link {
         text-decoration: none;
         color: inherit;
     }
+
     .icon {
         font-size: 16px;
         margin-right: 4px;
