@@ -2,23 +2,10 @@ import {Route, Routes} from 'react-router-dom';
 import {useAuth} from '@/contexts/AuthContext/AuthContext.tsx';
 import NotLoggedPage from '@/pages/NotLoggedPage/NotLoggedPage.tsx';
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
-import {createTheme, ThemeProvider} from '@mui/material';
+import {ThemeProvider} from '@mui/material';
 import CssBaseline from "@mui/material/CssBaseline";
 import '@/i18n.ts';
-
-const theme = createTheme({
-    palette: {
-        background: {
-            default: '#FAFAFA'
-        },
-        primary: {
-            main: '#2CB178'
-        },
-        secondary: {
-            main: '#49b483'
-        }
-    }
-});
+import theme from "@/theme.ts";
 
 function App() {
     const authContext = useAuth();
