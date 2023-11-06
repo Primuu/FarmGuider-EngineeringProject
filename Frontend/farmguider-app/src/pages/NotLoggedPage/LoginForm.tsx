@@ -1,16 +1,26 @@
 import React, {useState} from 'react';
-import {TextField, Button, Container, Typography, Box} from '@mui/material';
+import {Box, Button, Container, TextField, Typography} from '@mui/material';
 import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
 import {authenticate} from "@/services/authenticationService.ts";
+import '@/pages/NotLoggedPage/loginForm.css';
+import LockIcon from '@mui/icons-material/Lock';
 
 const LoginForm = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loginError, setLoginError] = useState<boolean>(false);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>)=> {
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const authenticationRequestDTO: AuthenticationRequestDTO = { email, password };
+        const authenticationRequestDTO: AuthenticationRequestDTO = {email, password};
 
         void (async () => {
             try {
@@ -23,19 +33,19 @@ const LoginForm = () => {
     };
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-                <Typography component="h1" variant="h5">
+        <Container className="login-container">
+            <Box className="login-box">
+                <Box className="login-icon">
+                    <LockIcon/>
+                </Box>
+                <Typography className="login-header">
                     Sign in
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit}>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    className="login-form"
+                >
                     <TextField
                         margin="normal"
                         required
@@ -46,7 +56,7 @@ const LoginForm = () => {
                         autoComplete="email"
                         autoFocus
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         error={loginError}
                     />
                     <TextField
@@ -59,11 +69,11 @@ const LoginForm = () => {
                         id="password"
                         autoComplete="current-password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange}
                         error={loginError}
                     />
                     {loginError && (
-                        <Typography color="error" align="center">
+                        <Typography color="error" className="login-error-message">
                             Invalid credentials
                         </Typography>
                     )}
@@ -71,8 +81,9 @@ const LoginForm = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
+                        className="login-button"
                     >
-                        Login
+                        Sign in
                     </Button>
                 </Box>
             </Box>
