@@ -30,6 +30,18 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
 
     const {t} = useTranslation('authForms');
 
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    };
+
+    const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setConfirmPassword(e.target.value);
+    };
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -116,7 +128,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                         label={t('register.emailLabel')}
                         name="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         error={!!errors.email}
                         helperText={errors.email}
                     />
@@ -129,7 +141,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                         type={showPassword ? "text" : "password"}
                         id="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange}
                         error={!!errors.password}
                         helperText={errors.password}
                         InputProps={{
@@ -153,7 +165,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                         type={showPassword ? "text" : "password"}
                         id="confirmPassword"
                         value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        onChange={handleConfirmPasswordChange}
                         error={!!errors.confirmPassword}
                         helperText={errors.confirmPassword}
                         InputProps={{
