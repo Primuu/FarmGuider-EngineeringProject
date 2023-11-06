@@ -38,7 +38,7 @@ const AuthFormsModal: React.FC<AuthFormsModalProps> = ({ open, onClose }) => {
                         unmountOnExit
                     >
                         <div>
-                            {activeForm === AuthFormType.Login && <LoginForm />}
+                            {activeForm === AuthFormType.Login && <LoginForm cancel={onClose} />}
                         </div>
                     </Slide>
                     <Slide

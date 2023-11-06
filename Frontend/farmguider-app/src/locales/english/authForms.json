@@ -8,6 +8,7 @@
     "emailLabel": "Email Address",
     "passwordLabel": "Password",
     "error": "Invalid credentials",
-    "button": "Sign in"
+    "loginButton": "Sign in",
+    "cancelButton": "Cancel"
   }
 }

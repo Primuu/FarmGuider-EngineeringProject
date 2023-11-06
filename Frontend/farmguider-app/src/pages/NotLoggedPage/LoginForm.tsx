@@ -6,7 +6,11 @@ import '@/pages/NotLoggedPage/loginForm.css';
 import LockIcon from '@mui/icons-material/Lock';
 import {useTranslation} from "react-i18next";
 
-const LoginForm = () => {
+interface LoginFormProps {
+    cancel: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loginError, setLoginError] = useState<boolean>(false);
@@ -86,7 +90,15 @@ const LoginForm = () => {
                         variant="contained"
                         className="login-button"
                     >
-                        {t('login.button')}
+                        {t('login.loginButton')}
+                    </Button>
+
+                    <Button
+                        fullWidth
+                        variant="outlined"
+                        onClick={cancel}
+                    >
+                        {t('login.cancelButton')}
                     </Button>
                 </Box>
             </Box>
