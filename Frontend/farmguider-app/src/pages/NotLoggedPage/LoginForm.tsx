@@ -3,7 +3,7 @@ import {Box, Button, Container, TextField, Typography} from '@mui/material';
 import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
 import {authenticate} from "@/services/authenticationService.ts";
 import '@/pages/NotLoggedPage/loginForm.css';
-import LockIcon from '@mui/icons-material/Lock';
+import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from "react-i18next";
 
 interface LoginFormProps {
@@ -43,7 +43,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
         <Container className="login-container">
             <Box className="login-box">
                 <Box className="login-icon">
-                    <LockIcon/>
+                    <LoginIcon/>
                 </Box>
                 <Typography className="login-header">
                     {t('login.header')}
