@@ -5,18 +5,12 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {register} from "@/services/authenticationService.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
+import useValidation from "@/hooks/useValidation.ts";
+import {validateRegister} from "@/utils/validateRegister.ts";
 
 type Names = {
     firstName: string;
     lastName: string;
-};
-
-type Errors = {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
 };
 
 const RegisterForm = () => {
@@ -24,8 +18,9 @@ const RegisterForm = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [errors, setErrors] = useState<Errors>({});
     const [showPassword, setShowPassword] = useState<boolean>(false);
+
+    const {errors, validate, setErrors} = useValidation(validateRegister);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -33,7 +28,7 @@ const RegisterForm = () => {
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        const invalidCharsRegex = /[^\p{L}]/gu;
+        const invalidCharsRegex = /[^\p{L}-]/gu;
         const sanitizedValue = value.replace(invalidCharsRegex, '');
 
         setNames({
@@ -42,68 +37,25 @@ const RegisterForm = () => {
         });
     };
 
-    const validate = () => {
-        const emailRegex = /^[A-Za-z0-9+_.-]+@(.+\.)+[A-Za-z]{2,}$/;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+{}[\]<>?~])[A-Za-z\d!@#$%^&*()-_=+{}[\]<>?~]{8,}$/;
-        const tempErrors: Errors = {};
-
-        tempErrors.firstName = names.firstName ? '' : 'First name must be filled in.';
-        if (names.firstName && names.firstName.length > 45) {
-            tempErrors.firstName = 'First name can contain a maximum of 45 characters.';
-        }
-
-        tempErrors.lastName = names.lastName ? '' : 'Last name must be filled in.';
-        if (names.lastName && names.lastName.length > 45) {
-            tempErrors.lastName = 'Last name can contain a maximum of 45 characters.';
-        }
-
-        if (!email) {
-            tempErrors.email = 'Email must be filled in.';
-        } else if (!emailRegex.test(email)) {
-            tempErrors.email = 'Invalid email format.';
-        } else {
-            tempErrors.email = '';
-        }
-
-        tempErrors.password = password.length >= 8 ? '' : 'Password must contain at least 8 characters.';
-        if (!passwordRegex.test(password)) {
-            tempErrors.password = 'Password must meet the complexity requirements.';
-        }
-
-        tempErrors.confirmPassword = password === confirmPassword ? '' : 'Passwords do not match.';
-
-        if (password !== confirmPassword) {
-            tempErrors.password = tempErrors.password || 'Passwords do not match.';
-        }
-
-        setErrors(tempErrors);
-        return Object.values(tempErrors).every(x => x === "");
-    };
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!validate()) return;
+        if (!validate({ names, email, password, confirmPassword })) return;
 
         const userCreateDTO: UserCreateDTO = {
             email: email,
             password: password,
             firstName: names.firstName,
-            lastName: names.lastName };
+            lastName: names.lastName
+        };
 
-        void (async () => {
-            try {
-                await register(userCreateDTO);
-            //
+        try {
+            await register(userCreateDTO);
             } catch (error) {
-                setErrors({
-                    firstName: '',
-                    lastName: '',
-                    email: 'User with this email already exists.',
-                    password: '',
-                    confirmPassword: ''
-                });
-            }
-        })();
+            setErrors(prevErrors => ({
+                    ...prevErrors,
+                    email: 'User with this email already exists.'
+            }));
+        }
     };
 
     return (
@@ -112,6 +64,7 @@ const RegisterForm = () => {
                 <Typography component="h1" variant="h5">
                     Register
                 </Typography>
+                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
                 <Box component="form" onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
