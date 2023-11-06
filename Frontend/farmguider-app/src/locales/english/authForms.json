@@ -1,6 +1,7 @@
 {
   "modal": {
-
+    "signIn": "Sign in",
+    "register": "Register"
   },
   "login": {
     "header": "Sign in",

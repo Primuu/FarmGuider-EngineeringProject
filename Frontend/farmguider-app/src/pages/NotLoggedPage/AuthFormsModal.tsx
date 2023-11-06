@@ -3,6 +3,7 @@ import RegisterForm from "@/pages/NotLoggedPage/RegisterForm.tsx";
 import { Box, Modal, Fade, Button, Slide } from '@mui/material';
 import React, {useState} from "react";
 import '@/pages/NotLoggedPage/authFormsModal.css';
+import {useTranslation} from "react-i18next";
 
 type AuthFormsModalProps = {
     open: boolean;
@@ -16,6 +17,8 @@ enum AuthFormType {
 
 const AuthFormsModal: React.FC<AuthFormsModalProps> = ({ open, onClose }) => {
     const [activeForm, setActiveForm] = useState<AuthFormType>(AuthFormType.Login);
+
+    const {t} = useTranslation('authForms');
 
     const handleLogin = () => setActiveForm(AuthFormType.Login);
     const handleRegister = () => setActiveForm(AuthFormType.Register);
@@ -55,14 +58,14 @@ const AuthFormsModal: React.FC<AuthFormsModalProps> = ({ open, onClose }) => {
                             fullWidth
                             onClick={handleLogin}
                         >
-                            Sign in
+                            {t('modal.signIn')}
                         </Button>
                         <Button
                             variant={activeForm === AuthFormType.Register ? "contained" : "outlined"}
                             fullWidth
                             onClick={handleRegister}
                         >
-                            Register
+                            {t('modal.register')}
                         </Button>
                     </Box>
                 </Box>

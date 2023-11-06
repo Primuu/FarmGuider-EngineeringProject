@@ -1,4 +1,8 @@
 {
+  "modal": {
+    "signIn": "Zaloguj",
+    "register": "Zarejestruj"
+  },
   "login": {
     "header": "Zaloguj",
     "emailLabel": "Adres Email",
