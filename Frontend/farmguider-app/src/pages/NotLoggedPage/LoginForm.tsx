@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Box, Button, Container, TextField, Typography} from '@mui/material';
 import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
 import {authenticate} from "@/services/authenticationService.ts";
-import '@/pages/NotLoggedPage/loginForm.css';
+import '@/pages/NotLoggedPage/loginAndRegisterForm.css';
 import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from "react-i18next";
 
@@ -40,12 +40,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
     };
 
     return (
-        <Container className="login-container">
-            <Box className="login-box">
-                <Box className="login-icon">
+        <Container className="form-container">
+            <Box className="form-box">
+                <Box className="form-icon">
                     <LoginIcon/>
                 </Box>
-                <Typography className="login-header">
+                <Typography className="form-header">
                     {t('login.header')}
                 </Typography>
                 <Box

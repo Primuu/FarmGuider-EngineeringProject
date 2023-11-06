@@ -7,13 +7,19 @@ import {register} from "@/services/authenticationService.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
 import useValidation from "@/hooks/useValidation.ts";
 import {validateRegister} from "@/utils/validateRegister.ts";
+import '@/pages/NotLoggedPage/loginAndRegisterForm.css';
+import LockIcon from '@mui/icons-material/Lock';
 
 type Names = {
     firstName: string;
     lastName: string;
 };
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+    cancel: () => void;
+}
+
+const RegisterForm: React.FC<RegisterFormProps> = ({ cancel }) => {
     const [names, setNames] = useState<Names>({ firstName: '', lastName: '' });
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -59,21 +65,25 @@ const RegisterForm = () => {
     };
 
     return (
-        <Container>
-            <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography component="h1" variant="h5">
+        <Container className="form-container">
+            <Box className="form-box">
+                <Box className="form-icon">
+                    <LockIcon/>
+                </Box>
+                <Typography className="form-header">
                     Register
                 </Typography>
                 {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-                <Box component="form" onSubmit={handleSubmit}>
+                <Box component="form" onSubmit={handleSubmit} className="register-form">
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 autoFocus
                                 margin="normal"
+                                required
                                 fullWidth
                                 id="firstName"
-                                label="First name *"
+                                label="First name"
                                 name="firstName"
                                 value={names.firstName}
                                 onChange={handleNameChange}
@@ -84,9 +94,10 @@ const RegisterForm = () => {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 margin="normal"
+                                required
                                 fullWidth
                                 id="lastName"
-                                label="Last name *"
+                                label="Last name"
                                 name="lastName"
                                 value={names.lastName}
                                 onChange={handleNameChange}
@@ -97,9 +108,10 @@ const RegisterForm = () => {
                     </Grid>
                     <TextField
                         margin="normal"
+                        required
                         fullWidth
                         id="email"
-                        label="Email address *"
+                        label="Email address"
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -108,9 +120,10 @@ const RegisterForm = () => {
                     />
                     <TextField
                         margin="normal"
+                        required
                         fullWidth
                         name="password"
-                        label="Password *"
+                        label="Password"
                         type={showPassword ? "text" : "password"}
                         id="password"
                         value={password}
@@ -121,7 +134,6 @@ const RegisterForm = () => {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton
-                                        aria-label="toggle password visibility"
                                         onClick={togglePasswordVisibility}
                                     >
                                         {showPassword ? <Visibility /> : <VisibilityOff />}
@@ -132,9 +144,10 @@ const RegisterForm = () => {
                     />
                     <TextField
                         margin="normal"
+                        required
                         fullWidth
                         name="confirmPassword"
-                        label="Confirm password *"
+                        label="Confirm password"
                         type={showPassword ? "text" : "password"}
                         id="confirmPassword"
                         value={confirmPassword}
@@ -145,7 +158,6 @@ const RegisterForm = () => {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton
-                                        aria-label="toggle password visibility"
                                         onClick={togglePasswordVisibility}
                                     >
                                         {showPassword ? <Visibility /> : <VisibilityOff />}
@@ -154,9 +166,19 @@ const RegisterForm = () => {
                             ),
                         }}
                     />
-                    <Button type="submit" fullWidth variant="contained">
-                        Register
-                    </Button>
+                    <Box className="button-group">
+                        <Button type="submit" fullWidth variant="contained">
+                            Register
+                        </Button>
+
+                        <Button
+                            fullWidth
+                            variant="outlined"
+                            onClick={cancel}
+                        >
+                            Cancel
+                        </Button>
+                    </Box>
                 </Box>
             </Box>
         </Container>
