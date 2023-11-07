@@ -15,12 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.UserFacade;
+import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.user.dtos.UserAuthDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserCreateDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
@@ -81,8 +79,8 @@ public class AuthenticationController {
                     responseCode = "200",
                     description = "User logged in successfully",
                     content = @Content(
-                            mediaType = "text/plain",
-                            schema = @Schema(implementation = String.class)
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
                     )),
             @ApiResponse(
                     responseCode = "401",
@@ -93,12 +91,15 @@ public class AuthenticationController {
                     ))
     })
     @PostMapping(AUTHENTICATE_URL)
-    public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequestDTO request) {
+    public ResponseEntity<ResponseMessage> authenticate(@RequestBody AuthenticationRequestDTO request) {
         Cookie sessionCookie = authenticationService.authenticate(request.email(), request.password());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .header(HttpHeaders.SET_COOKIE, formatCookieHeader(sessionCookie))
-                .body("Successfully logged in");
+                .body(ResponseMessage.builder()
+                        .message("Successfully logged in")
+                        .build()
+                );
     }
 
     @Operation(summary = "Logs the User out",
@@ -108,19 +109,22 @@ public class AuthenticationController {
                     responseCode = "200",
                     description = "User logged out successfully",
                     content = @Content(
-                            mediaType = "text/plain",
-                            schema = @Schema(implementation = String.class)
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
                     ))
     })
-    @GetMapping("/revoke")
-    public ResponseEntity<String> revoke() {
+    @DeleteMapping("/revoke")
+    public ResponseEntity<ResponseMessage> revoke() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         sessionService.revoke(email);
         Cookie deletedSessionCookie = createCookie(SESSION_COOKIE_NAME, null, COOKIE_NULL_AGE, COOKIE_DEFAULT_PATH);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .header(HttpHeaders.SET_COOKIE, formatCookieHeader(deletedSessionCookie))
-                .body("Successfully logged out");
+                .body(ResponseMessage.builder()
+                        .message("Successfully logged out")
+                        .build()
+                );
     }
 
     @Operation(summary = "Get user data", description = "Retrieves basic user data: user id and role")
