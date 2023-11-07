@@ -5,6 +5,7 @@ import UserAuthDTO from "@/entities/UserAuthDTO.ts";
 import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
 import UserResponseDTO from "@/entities/UserResponseDTO.ts";
+import ResponseMessage from "@/entities/ResponseMessage.ts";
 
 export const fetchUserAuthData = async (): Promise<UserAuthDTO> => {
     console.log("fetcher")
@@ -14,9 +15,9 @@ export const fetchUserAuthData = async (): Promise<UserAuthDTO> => {
     });
 }
 
-export const authenticate = async (authenticationRequestDTO: AuthenticationRequestDTO): Promise<string> => {
+export const authenticate = async (authenticationRequestDTO: AuthenticationRequestDTO): Promise<ResponseMessage> => {
     console.log("authenticate")
-    return await sendHttpRequest<string>({
+    return await sendHttpRequest<ResponseMessage>({
         endpointUrl: AUTHENTICATE_URL,
         typeOfRequest: RequestTypes.POST,
         body: authenticationRequestDTO
