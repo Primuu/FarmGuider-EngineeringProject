@@ -8,7 +8,6 @@ import UserResponseDTO from "@/entities/UserResponseDTO.ts";
 import ResponseMessage from "@/entities/ResponseMessage.ts";
 
 export const fetchUserAuthData = async (): Promise<UserAuthDTO> => {
-    console.log("fetcher")
     return await sendHttpRequest<UserAuthDTO>({
         endpointUrl: GET_AUTH_DATA_URL,
         typeOfRequest: RequestTypes.GET
@@ -16,7 +15,6 @@ export const fetchUserAuthData = async (): Promise<UserAuthDTO> => {
 }
 
 export const authenticate = async (authenticationRequestDTO: AuthenticationRequestDTO): Promise<ResponseMessage> => {
-    console.log("authenticate")
     return await sendHttpRequest<ResponseMessage>({
         endpointUrl: AUTHENTICATE_URL,
         typeOfRequest: RequestTypes.POST,
@@ -25,7 +23,6 @@ export const authenticate = async (authenticationRequestDTO: AuthenticationReque
 }
 
 export const register = async (userCreateDTO: UserCreateDTO): Promise<UserResponseDTO> => {
-    console.log("register")
     return await sendHttpRequest<UserResponseDTO>({
         endpointUrl: REGISTER_URL,
         typeOfRequest: RequestTypes.POST,

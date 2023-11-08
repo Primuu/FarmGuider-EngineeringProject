@@ -2,13 +2,18 @@ import React, {useState} from 'react';
 import {Box, Button, Container, Grid, IconButton, InputAdornment, TextField, Typography} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {register} from "@/services/authenticationService.ts";
+import {fetchUserAuthData, register} from "@/services/authenticationService.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
 import useValidation from "@/hooks/useValidation.ts";
 import {validateRegister} from "@/utils/validateRegister.ts";
 import '@/pages/NotLoggedPage/loginAndRegisterForm.css';
 import LockIcon from '@mui/icons-material/Lock';
 import {useTranslation} from "react-i18next";
+import {useNavigate} from "react-router-dom";
+import {HOME_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
+import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
+import UserAuthDTO from "@/entities/UserAuthDTO.ts";
+import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 
 type Names = {
     firstName: string;
@@ -25,6 +30,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const { setUserAuthData } = useAuth();
+    const navigate = useNavigate();
 
     const {errors, validate, setErrors} = useValidation(validateRegister);
 
@@ -70,6 +77,11 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
 
         try {
             await register(userCreateDTO);
+
+            const userAuthData: UserAuthDTO = await fetchUserAuthData();
+            setUserAuthData(userAuthData.userId, userAuthData.userRole as UserRoles);
+
+            navigate(HOME_PAGE_URL);
         } catch (error) {
             setErrors(prevErrors => ({
                 ...prevErrors,

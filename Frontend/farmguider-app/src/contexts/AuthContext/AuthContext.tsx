@@ -9,6 +9,7 @@ type AuthContextType = {
     removeSessionCookie: () => void;
     userRole: UserRoles;
     userId: number | undefined;
+    setUserAuthData: (userId: number, role: UserRoles) => void;
 };
 
 type AuthProviderProps = {
@@ -18,13 +19,19 @@ type AuthProviderProps = {
 const AuthContext = createContext<AuthContextType>({
     removeSessionCookie: () => {},
     userRole: UserRoles.NON_LOGGED,
-    userId: undefined
+    userId: undefined,
+    setUserAuthData: () => {}
 });
 
 export const AuthProvider = ({children}: AuthProviderProps) => {
     const [cookies, , removeCookie] = useCookies([SESSION_COOKIE]);
     const [userId, setUserId] = useState<number | undefined>(undefined)
     const [userRole, setUserRole] = useState(UserRoles.NON_LOGGED);
+
+    const setUserAuthData = useCallback((userId: number, role: UserRoles) => {
+        setUserId(userId);
+        setUserRole(role);
+    }, []);
 
     const removeSessionCookie = useCallback(() => {
         removeCookie(SESSION_COOKIE);
@@ -47,9 +54,14 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
         userId,
         userRole,
         removeSessionCookie,
+        setUserAuthData,
     };
 
-    return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={contextValue}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export const useAuth = () => useContext(AuthContext);

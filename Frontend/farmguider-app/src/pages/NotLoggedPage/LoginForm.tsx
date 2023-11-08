@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import {Box, Button, Container, TextField, Typography} from '@mui/material';
 import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
-import {authenticate} from "@/services/authenticationService.ts";
+import {authenticate, fetchUserAuthData} from "@/services/authenticationService.ts";
 import '@/pages/NotLoggedPage/loginAndRegisterForm.css';
 import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from "react-i18next";
+import {HOME_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
+import {useNavigate} from "react-router-dom";
+import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
+import UserAuthDTO from "@/entities/UserAuthDTO.ts";
+import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 
 interface LoginFormProps {
     cancel: () => void;
@@ -14,6 +19,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loginError, setLoginError] = useState<boolean>(false);
+    const { setUserAuthData } = useAuth();
+    const navigate = useNavigate();
 
     const {t} = useTranslation('authForms');
 
@@ -32,7 +39,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
         void (async () => {
             try {
                 await authenticate(authenticationRequestDTO);
+
+                const userAuthData: UserAuthDTO = await fetchUserAuthData();
+                setUserAuthData(userAuthData.userId, userAuthData.userRole as UserRoles);
+
                 setLoginError(false);
+                navigate(HOME_PAGE_URL);
             } catch (error) {
                 setLoginError(true);
             }
