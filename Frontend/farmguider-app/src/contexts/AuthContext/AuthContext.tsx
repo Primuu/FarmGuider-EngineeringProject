@@ -10,6 +10,7 @@ type AuthContextType = {
     userRole: UserRoles;
     userId: number | undefined;
     setUserAuthData: (userId: number, role: UserRoles) => void;
+    loading: boolean;
 };
 
 type AuthProviderProps = {
@@ -20,13 +21,15 @@ const AuthContext = createContext<AuthContextType>({
     removeSessionCookie: () => {},
     userRole: UserRoles.NON_LOGGED,
     userId: undefined,
-    setUserAuthData: () => {}
+    setUserAuthData: () => {},
+    loading: true,
 });
 
 export const AuthProvider = ({children}: AuthProviderProps) => {
     const [cookies, , removeCookie] = useCookies([SESSION_COOKIE]);
     const [userId, setUserId] = useState<number | undefined>(undefined)
     const [userRole, setUserRole] = useState(UserRoles.NON_LOGGED);
+    const [loading, setLoading] = useState(true);
 
     const setUserAuthData = useCallback((userId: number, role: UserRoles) => {
         setUserId(userId);
@@ -40,14 +43,22 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
+
                 const userAuthDTO: UserAuthDTO = await fetchUserAuthData();
                 setUserId(userAuthDTO.userId);
                 setUserRole(userAuthDTO.userRole as UserRoles);
             } catch (error) {
                 setUserRole(UserRoles.NON_LOGGED);
+            } finally {
+                setLoading(false);
             }
         };
-        void fetchData();
+        if (cookies[SESSION_COOKIE]) {
+            void fetchData();
+        } else {
+            setLoading(false);
+        }
     }, [cookies]);
 
     const contextValue = {
@@ -55,6 +66,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
         userRole,
         removeSessionCookie,
         setUserAuthData,
+        loading,
     };
 
     return (

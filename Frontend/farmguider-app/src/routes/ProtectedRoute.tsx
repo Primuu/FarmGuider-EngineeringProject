@@ -3,6 +3,7 @@ import {Navigate, useLocation} from "react-router-dom";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import {HOME_PAGE_URL, NOT_LOGGED_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
+import LoadingScreen from "@/components/LoadingScreen/LoadingScreen.tsx";
 
 type ProtectedRouteProps = {
     accessibleRoles: UserRoles[];
@@ -10,7 +11,7 @@ type ProtectedRouteProps = {
 };
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, accessibleRoles  }) => {
-    const { userRole } = useAuth();
+    const { userRole, loading } = useAuth();
     const location = useLocation();
 
     const getProperRoute = () => {
@@ -21,6 +22,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, accessibleRol
                 return HOME_PAGE_URL;
         }
     };
+
+    if (loading) {
+        return <LoadingScreen />;
+    }
 
     return accessibleRoles.includes(userRole)
         ? children
