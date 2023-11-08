@@ -9,7 +9,8 @@
     "passwordLabel": "Hasło",
     "error": "Nieprawidłowe dane",
     "loginButton": "Zaloguj",
-    "cancelButton": "Anuluj"
+    "cancelButton": "Anuluj",
+    "snackbar": "Zalogowano pomyślnie"
   },
   "register": {
     "header": "Rejestracja",
@@ -21,7 +22,8 @@
     "registerButton": "Zarejestruj",
     "cancelButton": "Anuluj",
     "passwordRequirements": "Hasło musi zawierać przynajmniej jedną małą literę, jedną dużą literę, jeden znak specjalny i jedną cyfrę (minimum 8 znaków).",
-    "error": "Użytkownik z tym adresem email już istnieje"
+    "error": "Użytkownik z tym adresem email już istnieje",
+    "snackbar": "Zarejestrowano pomyślnie"
   },
   "validation": {
     "firstNameFilled": "Imię musi zostać podane",

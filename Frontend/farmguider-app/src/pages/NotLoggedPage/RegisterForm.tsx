@@ -14,6 +14,8 @@ import {HOME_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import UserAuthDTO from "@/entities/UserAuthDTO.ts";
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
+import {useSnackbar} from "notistack";
+import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 
 type Names = {
     firstName: string;
@@ -32,6 +34,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const { setUserAuthData } = useAuth();
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
 
     const {errors, validate, setErrors} = useValidation(validateRegister);
 
@@ -82,6 +85,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
             setUserAuthData(userAuthData.userId, userAuthData.userRole as UserRoles);
 
             navigate(HOME_PAGE_URL);
+            enqueueSnackbar(t('register.snackbar'), SnackbarSuccess);
         } catch (error) {
             setErrors(prevErrors => ({
                 ...prevErrors,

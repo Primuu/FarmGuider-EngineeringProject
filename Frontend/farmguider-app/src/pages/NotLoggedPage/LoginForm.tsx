@@ -10,6 +10,8 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import UserAuthDTO from "@/entities/UserAuthDTO.ts";
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
+import {useSnackbar} from "notistack";
+import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 
 interface LoginFormProps {
     cancel: () => void;
@@ -21,6 +23,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
     const [loginError, setLoginError] = useState<boolean>(false);
     const { setUserAuthData } = useAuth();
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
 
     const {t} = useTranslation('authForms');
 
@@ -45,6 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
 
                 setLoginError(false);
                 navigate(HOME_PAGE_URL);
+                enqueueSnackbar(t('login.snackbar'), SnackbarSuccess);
             } catch (error) {
                 setLoginError(true);
             }

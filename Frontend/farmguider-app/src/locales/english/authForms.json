@@ -9,7 +9,8 @@
     "passwordLabel": "Password",
     "error": "Invalid credentials",
     "loginButton": "Sign in",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "snackbar": "Logged in successfully"
   },
   "register": {
     "header": "Register",
@@ -21,7 +22,8 @@
     "registerButton": "Register",
     "cancelButton": "Cancel",
     "passwordRequirements": "Password must contain at least one lowercase letter, one uppercase letter, one special character and one number (minimum 8 characters).",
-    "error": "User with this email already exists"
+    "error": "User with this email already exists",
+    "snackbar": "Registered successfully"
   },
   "validation": {
     "firstNameFilled": "First name must be filled in",
