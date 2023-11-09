@@ -7,7 +7,7 @@ import GrassIcon from '@mui/icons-material/Grass';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import {Trans, useTranslation} from 'react-i18next';
-import NavbarTop from "@/components/NavbarTop/NavbarTop.tsx";
+import Navbar from "@/components/Navbar/Navbar.tsx";
 
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
@@ -30,7 +30,7 @@ const NotLoggedPage = () => {
 
     return (
         <Box>
-            <NavbarTop/>
+            <Navbar/>
             <Box className="main-text-box">
                 <Typography className="header">
                     {t('mainTextBox.header')}

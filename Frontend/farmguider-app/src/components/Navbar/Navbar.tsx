@@ -2,9 +2,9 @@ import React from 'react';
 import {AppBar, Slide, Toolbar} from '@mui/material';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher";
-import '@/components/NavbarTop/navbarTop.css';
+import '@/components/Navbar/navbar.css';
 
-import logo from '@/assets/farm-guider.svg'
+import logo from '@/assets/farm-guider.svg';
 
 type HideOnScrollProps = {
     children: React.ReactElement;
@@ -24,7 +24,7 @@ function HideOnScroll(props: HideOnScrollProps) {
     );
 }
 
-const NavbarTop = () => {
+const Navbar = () => {
     return (
         <>
             <HideOnScroll>
@@ -40,4 +40,4 @@ const NavbarTop = () => {
     );
 };
 
-export default NavbarTop;
+export default Navbar;
