@@ -10,14 +10,14 @@
     background: #E5F5F2;
     display: flex;
     align-items: center;
+}
 
-    .logo-box {
-        margin-top: 50px;
+.drawer .MuiDrawer-paper .logo-box {
+    margin-top: 50px;
+}
 
-        .logo-text {
-            color: #406064;
-            font-size: 24px;
-            font-weight: bold;
-        }
-    }
+.drawer .MuiDrawer-paper .logo-box .logo-text {
+    color: #406064;
+    font-size: 24px;
+    font-weight: bold;
 }

@@ -2,7 +2,7 @@ import {AuthProvider} from '@/contexts/AuthContext/AuthContext.tsx';
 import {ThemeProvider} from '@mui/material';
 import CssBaseline from "@mui/material/CssBaseline";
 import '@/i18n.ts';
-import theme from "@/theme.ts";
+import theme from "@/styles/theme.ts";
 import AppRouter from "@/routes/AppRouter.tsx";
 import {SnackbarProvider} from "notistack";
 import {StyledMaterialDesignContent} from "@/styles/snackbarStyles.ts";
