@@ -47,7 +47,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 30vh;
+    height: 330px;
     margin: 10vh 30%;
 }
 
@@ -79,6 +79,16 @@
 .footer .icon {
     font-size: 16px;
     margin-right: 4px;
+}
+
+@media (max-width: 1000px) {
+    .main-text-box .text {
+        margin: 2vh 12% 8vh;
+    }
+
+    .section-text-box {
+        margin: 10vh 10%;
+    }
 }
 
 @media (max-width: 599px) {
