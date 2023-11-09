@@ -23,6 +23,7 @@ const NotLoggedPage = () => {
     const handleClose = () => setOpenModal(false);
 
     const dynamicBlur = {min: -1, max: 3};
+    const imageStyle = {height: 'auto', maxWidth: '1920px'}
     const strength = 500;
 
     const {t} = useTranslation('notLoggedPage');
@@ -58,6 +59,7 @@ const NotLoggedPage = () => {
                 bgImageAlt={t('crops.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
+                bgImageStyle={imageStyle}
             >
                 <Typography className="parallax-text">
                     {t('crops.typography')}
@@ -76,6 +78,7 @@ const NotLoggedPage = () => {
                 bgImageAlt={t('animals.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
+                bgImageStyle={imageStyle}
             >
                 <Typography className="parallax-text">
                     {t('animals.typography')}
@@ -94,6 +97,7 @@ const NotLoggedPage = () => {
                 bgImageAlt={t('efficiency.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
+                bgImageStyle={imageStyle}
             >
                 <Typography className="parallax-text">
                     {t('efficiency.typography')}
@@ -112,6 +116,7 @@ const NotLoggedPage = () => {
                 bgImageAlt={t('farmGuider.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
+                bgImageStyle={imageStyle}
             >
                 <img src={logo} alt="Farm guider logo" className='logo'/>
             </Parallax>

@@ -2,59 +2,59 @@
     text-align: center;
     margin-top: 12vh;
     margin-bottom: 10vh;
+}
 
-    .header {
-        font-size: 72px;
-        font-weight: bold;
-        color: #414040;
-    }
+.main-text-box .header {
+    font-size: 72px;
+    font-weight: bold;
+    color: #414040;
+}
 
-    .text {
-        font-size: 18px;
-        margin-top: 2vh;
-        margin-bottom: 8vh;
-        color: #484747;
-    }
+.main-text-box .text {
+    font-size: 18px;
+    margin-top: 2vh;
+    margin-bottom: 8vh;
+    color: #484747;
+}
 
-    .start-button {
-        width: 250px;
-        height: 50px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        border: 2px solid;
-    }
+.main-text-box .start-button {
+    width: 250px;
+    height: 50px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 2px solid;
 }
 
 .parallax-section {
-    height: 900px;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    .parallax-text {
-        color: whitesmoke;
-        font-size: 100px;
-        font-weight: bold;
-    }
+.parallax-section .parallax-text {
+    color: whitesmoke;
+    font-size: 100px;
+    font-weight: bold;
+}
 
-    .logo {
-        width: 500px;
-    }
+.parallax-section .logo {
+    width: 500px;
 }
 
 .section-text-box {
     text-align: center;
     margin-top: 15vh;
     margin-bottom: 15vh;
+}
 
-    .text {
-        font-size: 18px;
-        color: #414040;
-    }
+.section-text-box .text {
+    font-size: 18px;
+    color: #414040;
+}
 
-    .icon {
-        font-size: 48px;
-    }
+.section-text-box .icon {
+    font-size: 48px;
 }
 
 .footer {
@@ -62,18 +62,55 @@
     color: white;
     padding: 10px;
     text-align: center;
+}
 
-    .footer-text {
-        font-size: 18px;
+.footer .footer-text {
+    font-size: 18px;
+}
+
+.footer .link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer .icon {
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+@media (max-width: 599px) {
+    .main-text-box {
+        margin: 8vh 1vh;
     }
 
-    .link {
-        text-decoration: none;
-        color: inherit;
+    .main-text-box .header {
+        font-size: 42px;
     }
 
-    .icon {
-        font-size: 16px;
-        margin-right: 4px;
+    .main-text-box .text {
+        font-size: 14px;
+        margin: 2vh 3vh 6vh;
+    }
+
+    .main-text-box .start-button {
+        width: 160px;
+        height: 40px;
+        letter-spacing: 2px;
+    }
+
+    .parallax-section .parallax-text {
+        font-size: 48px;
+    }
+
+    .parallax-section .logo {
+        width: 250px;
+    }
+
+    .section-text-box .text {
+        font-size: 14px;
+    }
+
+    .section-text-box .icon {
+        font-size: 32px;
     }
 }
