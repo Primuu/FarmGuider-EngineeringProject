@@ -6,7 +6,7 @@ import {fetchUserAuthData, register} from "@/services/authenticationService.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
 import useValidation from "@/hooks/useValidation.ts";
 import {validateRegister} from "@/utils/validateRegister.ts";
-import '@/pages/NotLoggedPage/loginAndRegisterForm.css';
+import '@/pages/NotLoggedPage/forms.css';
 import LockIcon from '@mui/icons-material/Lock';
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
@@ -197,7 +197,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
                         }}
                     />
                     <Box className="button-group">
-                        <Button type="submit" fullWidth variant="contained">
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            className="register-button"
+                        >
                             {t('register.registerButton')}
                         </Button>
 
