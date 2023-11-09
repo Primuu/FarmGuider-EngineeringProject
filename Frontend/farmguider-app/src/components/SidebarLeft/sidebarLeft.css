@@ -1,0 +1,23 @@
+.drawer {
+    width: 300px;
+}
+
+.drawer .MuiDrawer-paper {
+    width: 300px;
+    box-sizing: border-box;
+    border-right: none;
+    box-shadow: none;
+    background: #E5F5F2;
+    display: flex;
+    align-items: center;
+
+    .logo-box {
+        margin-top: 50px;
+
+        .logo-text {
+            color: #406064;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    }
+}
