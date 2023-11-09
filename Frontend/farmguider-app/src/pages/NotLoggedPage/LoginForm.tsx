@@ -113,6 +113,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
                         fullWidth
                         variant="outlined"
                         onClick={cancel}
+                        className="cancel-button"
                     >
                         {t('login.cancelButton')}
                     </Button>
