@@ -6,7 +6,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import GrassIcon from '@mui/icons-material/Grass';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
-import {Trans, useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import Navbar from "@/components/Navbar/Navbar.tsx";
 
 import tractorImage from '@/assets/tractor-image.jpg';
@@ -36,7 +36,7 @@ const NotLoggedPage = () => {
                     {t('mainTextBox.header')}
                 </Typography>
                 <Typography className="text">
-                    <Trans i18nKey='mainTextBox.text' ns='notLoggedPage' components={{br: <br/>}}/>
+                    {t('mainTextBox.text')}
                 </Typography>
                 <Button
                     variant="outlined"
@@ -68,7 +68,7 @@ const NotLoggedPage = () => {
             <Box className="section-text-box">
                 <GrassIcon color="secondary" className="icon"/>
                 <Typography className="text">
-                    <Trans i18nKey='crops.text' ns='notLoggedPage' components={{br: <br/>}}/>
+                    {t('crops.text')}
                 </Typography>
             </Box>
 
@@ -87,7 +87,7 @@ const NotLoggedPage = () => {
             <Box className="section-text-box">
                 <TimelineIcon color="secondary" className="icon"/>
                 <Typography className="text">
-                    <Trans i18nKey='animals.text' ns='notLoggedPage' components={{br: <br/>}}/>
+                    {t('animals.text')}
                 </Typography>
             </Box>
 
@@ -106,7 +106,7 @@ const NotLoggedPage = () => {
             <Box className="section-text-box">
                 <SignalCellularAltIcon color="secondary" className="icon"/>
                 <Typography className="text">
-                    <Trans i18nKey='efficiency.text' ns='notLoggedPage' components={{br: <br/>}}/>
+                    {t('efficiency.text')}
                 </Typography>
             </Box>
 

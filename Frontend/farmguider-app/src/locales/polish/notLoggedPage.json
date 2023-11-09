@@ -1,23 +1,23 @@
 {
   "mainTextBox": {
     "header": "Witaj w FarmGuider",
-    "text": "Jest to aplikacja do zarządzania gospodarstwem rolnym przeznaczona dla właścicieli<br/> i pracowników gospodarstw rolnych, które zajmują się uprawą ziemi czy też hodowlą bydła - mięsnego bądź mlecznego. <br/>Głównym celem aplikacji jest ułatwienie pracy związanej z zarządzaniem gospodarstwem poprzez efektywne<br/> zbieranie i monitorowanie danych związanych z hodowlą i uprawami.",
+    "text": "Jest to aplikacja do zarządzania gospodarstwem rolnym przeznaczona dla właścicieli i pracowników gospodarstw rolnych, które zajmują się uprawą ziemi czy też hodowlą bydła - mięsnego bądź mlecznego. Głównym celem aplikacji jest ułatwienie pracy związanej z zarządzaniem gospodarstwem poprzez efektywne zbieranie i monitorowanie danych związanych z hodowlą i uprawami.",
     "button": "ROZPOCZNIJ"
   },
   "crops": {
     "bgImageAlt": "Zdjęcie upraw",
     "typography": "UPRAWY",
-    "text": "Część aplikacji odpowiadająca za monitorowanie danych o uprawach, umożliwia<br/> gromadzenie danych na temat pól i upraw prowadzonych w gospodarstwie. Osoby zarządzające gospodarstwem moga rejestrować dane dotyczące zasiewów,<br/> zbiorów, stosowanych nawozów i środków ochrony roślin, bądź innych zabiegów. Aplikacja umożliwia również generowanie raportów i wykresów,<br/> które wspomagają ocenę efektywności upraw i identyfikację obszarów wymagających optymalizacji.<br/> Aplikacja oferuje również opcję generowania kalendarzy zasiewów, które ułatwią planowanie sezonowych prac związanych z uprawami.<br/> Na podstawie danych o typach upraw i warunkach glebowych, aplikacja wygeneruje optymalne harmonogramy zasiewów,<br/> uwzględniające optymalne daty siewu oraz rotację upraw."
+    "text": "Część aplikacji odpowiadająca za monitorowanie danych o uprawach, umożliwia gromadzenie danych na temat pól i upraw prowadzonych w gospodarstwie. Osoby zarządzające gospodarstwem moga rejestrować dane dotyczące zasiewów, zbiorów, stosowanych nawozów i środków ochrony roślin, bądź innych zabiegów. Aplikacja umożliwia również generowanie raportów i wykresów, które wspomagają ocenę efektywności upraw i identyfikację obszarów wymagających optymalizacji. Aplikacja oferuje również opcję generowania kalendarzy zasiewów, które ułatwią planowanie sezonowych prac związanych z uprawami. Na podstawie danych o typach upraw i warunkach glebowych, aplikacja wygeneruje optymalne harmonogramy zasiewów, uwzględniające optymalne daty siewu oraz rotację upraw."
   },
   "animals": {
     "bgImageAlt": "Zdjęcie krów",
     "typography": "ZWIERZĘTA",
-    "text": "Część aplikacji odpowiadająca za monitorowanie danych o hodowli,<br/> zapewnia szczegółowe informacje na temat zwierząt w gospodarstwie. Użytkownik aplikacji może rejestrować i śledzić dane o bydle mlecznym<br/> i mięsnym, takie jak wydajność mleczna czy przyrost masy ciała. Aplikacja umożliwia również analizowanie danych i<br/> tworzenie raportów związanych z wydajnością zwierząt, na podstawie których, użytkownik będzie mógł podjąć odpowiednie decyzje dotyczące hodowli."
+    "text": "Część aplikacji odpowiadająca za monitorowanie danych o hodowli, zapewnia szczegółowe informacje na temat zwierząt w gospodarstwie. Użytkownik aplikacji może rejestrować i śledzić dane o bydle mlecznym i mięsnym, takie jak wydajność mleczna czy przyrost masy ciała. Aplikacja umożliwia również analizowanie danych i tworzenie raportów związanych z wydajnością zwierząt, na podstawie których, użytkownik będzie mógł podjąć odpowiednie decyzje dotyczące hodowli."
   },
   "efficiency": {
     "bgImageAlt": "Zdjęcie traktora",
     "typography": "EFEKTYWNOŚĆ",
-    "text": "Dzięki tej aplikacji, masz możliwość monitorowania i analizowania kluczowych danych<br/> związanych z hodowlą i uprawami, co umożliwia Ci optymalizację procesów w gospodarstwie rolnym,<br/> a co za tym idzie, zwiększenie efektywności."
+    "text": "Dzięki tej aplikacji, masz możliwość monitorowania i analizowania kluczowych danych związanych z hodowlą i uprawami, co umożliwia Ci optymalizację procesów w gospodarstwie rolnym, a co za tym idzie, zwiększenie efektywności."
   },
   "farmGuider": {
     "bgImageAlt": "Zdjęcie pszenicy"}

@@ -12,8 +12,7 @@
 
 .main-text-box .text {
     font-size: 18px;
-    margin-top: 2vh;
-    margin-bottom: 8vh;
+    margin: 2vh 30% 8vh;
     color: #484747;
 }
 
@@ -43,9 +42,13 @@
 }
 
 .section-text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    margin-top: 15vh;
-    margin-bottom: 15vh;
+    height: 30vh;
+    margin: 10vh 30%;
 }
 
 .section-text-box .text {
@@ -104,6 +107,10 @@
 
     .parallax-section .logo {
         width: 250px;
+    }
+
+    .section-text-box {
+        margin: 10vh 5%;
     }
 
     .section-text-box .text {
