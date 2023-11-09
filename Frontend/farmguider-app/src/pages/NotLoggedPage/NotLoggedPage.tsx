@@ -12,7 +12,7 @@ import Navbar from "@/components/Navbar/Navbar.tsx";
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
 import cropsImage from '@/assets/crops-image.jpg';
-import wheatImage from '@/assets/wheat-image.jpg';
+import potatoesImage from '@/assets/potatoes-image.jpg';
 import AuthFormsModal from "@/pages/NotLoggedPage/AuthFormsModal.tsx";
 import logo from "@/assets/farm-guider.svg";
 
@@ -23,7 +23,6 @@ const NotLoggedPage = () => {
     const handleClose = () => setOpenModal(false);
 
     const dynamicBlur = {min: -1, max: 3};
-    const blur = 5;
     const strength = 500;
 
     const {t} = useTranslation('notLoggedPage');
@@ -108,8 +107,8 @@ const NotLoggedPage = () => {
             </Box>
 
             <Parallax
-                blur={blur}
-                bgImage={wheatImage}
+                blur={dynamicBlur}
+                bgImage={potatoesImage}
                 bgImageAlt={t('farmGuider.bgImageAlt')}
                 strength={strength}
                 className="parallax-section"
