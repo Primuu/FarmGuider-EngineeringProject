@@ -8,13 +8,14 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import {useTranslation} from 'react-i18next';
 import Navbar from "@/components/Navbar/Navbar.tsx";
+import AuthFormsModal from "@/pages/NotLoggedPage/AuthFormsModal.tsx";
 
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
 import cropsImage from '@/assets/crops-image.jpg';
 import potatoesImage from '@/assets/potatoes-image.jpg';
-import AuthFormsModal from "@/pages/NotLoggedPage/AuthFormsModal.tsx";
-import logo from "@/assets/farm-guider.svg";
+
+import logo from "@/assets/farmguider-logo.svg";
 
 const NotLoggedPage = () => {
     const [openModal, setOpenModal] = useState(false);
