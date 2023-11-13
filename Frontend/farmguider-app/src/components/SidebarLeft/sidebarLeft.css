@@ -14,6 +14,12 @@
 
 .drawer .MuiDrawer-paper .logo-box {
     margin-top: 50px;
+    display: flex;
+}
+
+.drawer .MuiDrawer-paper .logo-box .logo{
+    width: 30px;
+    margin-right: 8px;
 }
 
 .drawer .MuiDrawer-paper .logo-box .logo-text {
