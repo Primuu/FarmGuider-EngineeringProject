@@ -1,6 +1,6 @@
 import sendHttpRequest from "@/services/HttpRequestService/HttpRequestService.ts";
 import RequestTypes from "@/services/HttpRequestService/RequestTypes.ts";
-import {AUTHENTICATE_URL, GET_AUTH_DATA_URL, REGISTER_URL} from "@/constants/API_ENDPOINTS.ts";
+import {AUTHENTICATE_URL, GET_AUTH_DATA_URL, REGISTER_URL, REVOKE_URL} from "@/constants/API_ENDPOINTS.ts";
 import UserAuthDTO from "@/entities/UserAuthDTO.ts";
 import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
@@ -28,4 +28,12 @@ export const register = async (userCreateDTO: UserCreateDTO): Promise<UserRespon
         typeOfRequest: RequestTypes.POST,
         body: userCreateDTO
     });
+}
+
+export const revoke = async (): Promise<ResponseMessage>  => {
+    return await sendHttpRequest<ResponseMessage>({
+        endpointUrl: REVOKE_URL,
+        typeOfRequest: RequestTypes.DELETE
+    });
+
 }
