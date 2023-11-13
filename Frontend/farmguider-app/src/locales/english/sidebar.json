@@ -1,5 +1,8 @@
 {
   "logout": "Log out",
   "logout-failed": "Error occurred while logging out",
-  "profile": "Profile"
+  "profile": "Profile",
+  "farms": "Farms",
+  "animals": "Animals",
+  "crops": "Crops"
 }

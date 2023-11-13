@@ -1,5 +1,8 @@
 {
   "logout": "Wyloguj",
   "logout-failed": "Wystąpił błąd podczas wylogowywania",
-  "profile": "Profil"
+  "profile": "Profil",
+  "farms": "Farmy",
+  "animals": "Zwierzęta",
+  "crops": "Uprawy"
 }

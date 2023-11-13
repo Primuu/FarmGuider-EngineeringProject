@@ -10,6 +10,7 @@ import {revoke} from "@/services/authenticationService.ts";
 import {LOGGED_OUT_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 import {useSnackbar} from "notistack";
 import {SnackbarError} from "@/utils/snackbarVariants.ts";
+import { GiBarn, GiCow, GiHighGrass } from 'react-icons/gi';
 
 import logo from "@/assets/farmguider-logo.svg";
 
@@ -30,29 +31,52 @@ const SidebarLeftDrawer = () => {
     };
 
     return (
-        <div className="container">
-            <List className="list">
+        <div>
+            <List>
                 <Box className="logo-box">
-                    <img src={logo} alt="Farm guider logo" className='logo'/>
-                    <Typography className="logo-text">
-                        FarmGuider
-                    </Typography>
-                </Box>
+                    <Box>
+                        <Typography className="logo-text">
+                            <img src={logo} alt="Farm guider logo" className='logo'/>
+                            FarmGuider
+                        </Typography>
+                    </Box>
 
-                <LanguageSwitcher/>
+                    <LanguageSwitcher/>
+                </Box>
 
                 <Box className="items">
                     <ListItemButton>
-                        <ListItemIcon>
+                        <ListItemIcon className="list-item-icon">
                             <PersonOutlineIcon/>
                         </ListItemIcon>
                         <ListItemText primary={t('profile')}/>
+                    </ListItemButton>
+
+                    <ListItemButton>
+                        <ListItemIcon className="list-item-icon">
+                            <GiBarn />
+                        </ListItemIcon>
+                        <ListItemText primary={t('farms')}/>
+                    </ListItemButton>
+
+                    <ListItemButton>
+                        <ListItemIcon className="list-item-icon">
+                            <GiCow />
+                        </ListItemIcon>
+                        <ListItemText primary={t('animals')}/>
+                    </ListItemButton>
+
+                    <ListItemButton>
+                        <ListItemIcon className="list-item-icon">
+                            <GiHighGrass />
+                        </ListItemIcon>
+                        <ListItemText primary={t('crops')}/>
                     </ListItemButton>
                 </Box>
 
                 <Box className="sidebar-footer">
                     <ListItemButton onClick={() => void handleLogout()}>
-                        <ListItemIcon>
+                        <ListItemIcon className="list-item-icon">
                             <LogoutIcon className="logout-icon"/>
                         </ListItemIcon>
                         <ListItemText primary={t('logout')}/>

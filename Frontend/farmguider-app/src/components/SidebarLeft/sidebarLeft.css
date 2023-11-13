@@ -1,19 +1,12 @@
-.container {
-    height: 100%;
-}
-
 .drawer {
     width: 300px;
+    height: 100vh;
 }
 
 .drawer .MuiDrawer-paper {
-    width: 300px;
-    height: 100vh;
     box-sizing: border-box;
     border-right: none;
     box-shadow: none;
-    display: flex;
-    align-items: center;
     color: #406064;
     background: rgba(229, 245, 242);
     position: relative;
@@ -34,16 +27,6 @@
     background-blend-mode: overlay;
 }
 
-.list {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.list .MuiListItemButton-root {
-    flex-grow: 0;
-}
-
 .items {
     margin-top: 15vh;
 }
@@ -51,6 +34,8 @@
 .logo-box {
     margin-top: 50px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -62,15 +47,17 @@
 .logo-box .logo-text {
     font-size: 24px;
     font-weight: bold;
+    margin-bottom: 40px;
 }
 
 .sidebar-footer {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
     margin-bottom: 5vh;
 }
 
 .logout-icon {
     color: #D85954;
+}
+
+.list-item-icon {
+    margin-left: 30px;
 }
