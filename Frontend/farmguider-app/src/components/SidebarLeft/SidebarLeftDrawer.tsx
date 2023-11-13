@@ -3,12 +3,27 @@ import {Box, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher.tsx";
 import LogoutIcon from '@mui/icons-material/Logout';
+import {useTranslation} from "react-i18next";
+import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
+import {revoke} from "@/services/authenticationService.ts";
+import {LOGGED_OUT_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 
 import logo from "@/assets/farmguider-logo.svg";
-import {useTranslation} from "react-i18next";
 
 const SidebarLeftDrawer = () => {
     const {t} = useTranslation('sidebar');
+    const { removeSessionCookie } = useAuth();
+
+    const handleLogout = async () => {
+        try {
+            await revoke();
+            removeSessionCookie();
+            localStorage.setItem(LOGGED_OUT_ITEM, 'true');
+            window.location.reload();
+        } catch (error) {
+            console.error('Error during logout', error);
+        }
+    };
 
     return (
         <div className="container">
@@ -31,7 +46,7 @@ const SidebarLeftDrawer = () => {
                 {/*</ListItemButton>*/}
 
                 <Box className="sidebar-footer">
-                    <ListItemButton>
+                    <ListItemButton onClick={handleLogout}>
                         <ListItemIcon>
                             <LogoutIcon className="logout-icon"/>
                         </ListItemIcon>

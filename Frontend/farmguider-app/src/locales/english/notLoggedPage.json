@@ -20,5 +20,9 @@
     "text": "Thanks to this application, you have the ability to monitor and analyze key data related to breeding and crops, which enables you to optimize processes in the agricultural farm, and thereby, increase efficiency."
   },
   "farmGuider": {
-    "bgImageAlt": "Wheat image"}
+    "bgImageAlt": "Wheat image"
+  },
+  "logout": {
+    "snackbar": "Logged out successfully"
+  }
 }

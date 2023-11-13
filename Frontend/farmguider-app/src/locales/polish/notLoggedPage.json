@@ -20,5 +20,9 @@
     "text": "Dzięki tej aplikacji, masz możliwość monitorowania i analizowania kluczowych danych związanych z hodowlą i uprawami, co umożliwia Ci optymalizację procesów w gospodarstwie rolnym, a co za tym idzie, zwiększenie efektywności."
   },
   "farmGuider": {
-    "bgImageAlt": "Zdjęcie pszenicy"}
+    "bgImageAlt": "Zdjęcie pszenicy"
+  },
+  "logout": {
+    "snackbar": "Wylogowano pomyślnie"
+  }
 }
