@@ -54,6 +54,14 @@ const LanguageSwitcher = () => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
             >
                 <MenuItem onClick={() => changeLanguage(Language.English)}>
                     <img src={gbFlag} alt={t('altEnglishFlag')} className="flag" />
