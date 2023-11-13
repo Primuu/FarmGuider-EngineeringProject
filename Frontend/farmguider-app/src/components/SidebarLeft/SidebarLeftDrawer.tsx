@@ -7,12 +7,15 @@ import {useTranslation} from "react-i18next";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import {revoke} from "@/services/authenticationService.ts";
 import {LOGGED_OUT_ITEM} from "@/constants/CONFIG_CONSTS.ts";
+import {useSnackbar} from "notistack";
 
 import logo from "@/assets/farmguider-logo.svg";
+import {SnackbarError} from "@/utils/snackbarVariants.ts";
 
 const SidebarLeftDrawer = () => {
     const {t} = useTranslation('sidebar');
     const { removeSessionCookie } = useAuth();
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleLogout = async () => {
         try {
@@ -21,7 +24,7 @@ const SidebarLeftDrawer = () => {
             localStorage.setItem(LOGGED_OUT_ITEM, 'true');
             window.location.reload();
         } catch (error) {
-            console.error('Error during logout', error);
+            enqueueSnackbar(t('logout-failed'), SnackbarError);
         }
     };
 
@@ -46,7 +49,7 @@ const SidebarLeftDrawer = () => {
                 {/*</ListItemButton>*/}
 
                 <Box className="sidebar-footer">
-                    <ListItemButton onClick={handleLogout}>
+                    <ListItemButton onClick={() => void handleLogout()}>
                         <ListItemIcon>
                             <LogoutIcon className="logout-icon"/>
                         </ListItemIcon>

@@ -1,3 +1,4 @@
 {
-  "logout": "Log out"
+  "logout": "Log out",
+  "logout-failed": "Error occurred while logging out"
 }

@@ -1,3 +1,4 @@
 {
-  "logout": "Wyloguj"
+  "logout": "Wyloguj",
+  "logout-failed": "Wystąpił błąd podczas wylogowywania"
 }
