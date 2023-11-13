@@ -2,7 +2,8 @@
   "logout": "Wyloguj",
   "logout-failed": "Wystąpił błąd podczas wylogowywania",
   "profile": "Profil",
-  "farms": "Farmy",
+  "farms": "Gospodarstwa",
   "animals": "Zwierzęta",
-  "crops": "Uprawy"
+  "crops": "Uprawy",
+  "home": "Strona Główna"
 }

@@ -11,6 +11,7 @@ import {LOGGED_OUT_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 import {useSnackbar} from "notistack";
 import {SnackbarError} from "@/utils/snackbarVariants.ts";
 import { GiBarn, GiCow, GiHighGrass } from 'react-icons/gi';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 import logo from "@/assets/farmguider-logo.svg";
 
@@ -45,6 +46,13 @@ const SidebarLeftDrawer = () => {
                 </Box>
 
                 <Box className="items">
+                    <ListItemButton>
+                        <ListItemIcon className="list-item-icon">
+                            <HomeOutlinedIcon className="icon"/>
+                        </ListItemIcon>
+                        <ListItemText primary={t('home')}/>
+                    </ListItemButton>
+
                     <ListItemButton>
                         <ListItemIcon className="list-item-icon">
                             <PersonOutlineIcon className="icon"/>
