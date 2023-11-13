@@ -1,4 +1,5 @@
 {
   "logout": "Wyloguj",
-  "logout-failed": "Wystąpił błąd podczas wylogowywania"
+  "logout-failed": "Wystąpił błąd podczas wylogowywania",
+  "profile": "Profil"
 }

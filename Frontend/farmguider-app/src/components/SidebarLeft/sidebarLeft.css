@@ -40,6 +40,14 @@
     height: 100%;
 }
 
+.list .MuiListItemButton-root {
+    flex-grow: 0;
+}
+
+.items {
+    margin-top: 15vh;
+}
+
 .logo-box {
     margin-top: 50px;
     display: flex;

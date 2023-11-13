@@ -3,19 +3,20 @@ import {Box, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher.tsx";
 import LogoutIcon from '@mui/icons-material/Logout';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import {useTranslation} from "react-i18next";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import {revoke} from "@/services/authenticationService.ts";
 import {LOGGED_OUT_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 import {useSnackbar} from "notistack";
+import {SnackbarError} from "@/utils/snackbarVariants.ts";
 
 import logo from "@/assets/farmguider-logo.svg";
-import {SnackbarError} from "@/utils/snackbarVariants.ts";
 
 const SidebarLeftDrawer = () => {
     const {t} = useTranslation('sidebar');
-    const { removeSessionCookie } = useAuth();
-    const { enqueueSnackbar } = useSnackbar();
+    const {removeSessionCookie} = useAuth();
+    const {enqueueSnackbar} = useSnackbar();
 
     const handleLogout = async () => {
         try {
@@ -40,13 +41,14 @@ const SidebarLeftDrawer = () => {
 
                 <LanguageSwitcher/>
 
-                {/*Example: */}
-                {/*<ListItemButton>*/}
-                {/*    <ListItemIcon>*/}
-                {/*        <HomeIcon/>*/}
-                {/*    </ListItemIcon>*/}
-                {/*    <ListItemText primary="Home"/>*/}
-                {/*</ListItemButton>*/}
+                <Box className="items">
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <PersonOutlineIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={t('profile')}/>
+                    </ListItemButton>
+                </Box>
 
                 <Box className="sidebar-footer">
                     <ListItemButton onClick={() => void handleLogout()}>
