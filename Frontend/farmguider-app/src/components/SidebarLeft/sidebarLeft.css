@@ -1,3 +1,7 @@
+.container {
+    height: 100%;
+}
+
 .drawer {
     width: 300px;
 }
@@ -10,20 +14,38 @@
     background: #E5F5F2;
     display: flex;
     align-items: center;
+    color: #406064;
 }
 
-.drawer .MuiDrawer-paper .logo-box {
+.list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.logo-box {
     margin-top: 50px;
     display: flex;
+    margin-bottom: 20px;
 }
 
-.drawer .MuiDrawer-paper .logo-box .logo{
+.logo{
     width: 30px;
     margin-right: 8px;
 }
 
-.drawer .MuiDrawer-paper .logo-box .logo-text {
-    color: #406064;
+.logo-box .logo-text {
     font-size: 24px;
     font-weight: bold;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5vh;
+}
+
+.logout-icon {
+    color: #D85954;
 }
