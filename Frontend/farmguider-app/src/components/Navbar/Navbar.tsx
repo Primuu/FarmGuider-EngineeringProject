@@ -4,7 +4,7 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher";
 import '@/components/Navbar/navbar.css';
 
-import logo from '@/assets/farm-guider.svg';
+import logo from '@/assets/farmguider-logo.svg';
 
 type HideOnScrollProps = {
     children: React.ReactElement;
