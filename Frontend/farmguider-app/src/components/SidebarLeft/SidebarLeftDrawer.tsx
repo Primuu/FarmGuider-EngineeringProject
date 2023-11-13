@@ -32,7 +32,7 @@ const SidebarLeftDrawer = () => {
 
     return (
         <div>
-            <List>
+            <List className="sidebar-list">
                 <Box className="logo-box">
                     <Box>
                         <Typography className="logo-text">

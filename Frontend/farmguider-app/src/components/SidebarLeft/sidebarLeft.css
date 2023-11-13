@@ -3,6 +3,12 @@
     height: 100vh;
 }
 
+.sidebar-list {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .drawer .MuiDrawer-paper {
     box-sizing: border-box;
     border-right: none;
@@ -51,6 +57,7 @@
 }
 
 .sidebar-footer {
+    margin-top: auto;
     margin-bottom: 5vh;
 }
 
