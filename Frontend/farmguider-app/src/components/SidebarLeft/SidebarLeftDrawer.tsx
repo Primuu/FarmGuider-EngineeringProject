@@ -47,28 +47,28 @@ const SidebarLeftDrawer = () => {
                 <Box className="items">
                     <ListItemButton>
                         <ListItemIcon className="list-item-icon">
-                            <PersonOutlineIcon/>
+                            <PersonOutlineIcon className="icon"/>
                         </ListItemIcon>
                         <ListItemText primary={t('profile')}/>
                     </ListItemButton>
 
                     <ListItemButton>
                         <ListItemIcon className="list-item-icon">
-                            <GiBarn />
+                            <GiBarn className="icon"/>
                         </ListItemIcon>
                         <ListItemText primary={t('farms')}/>
                     </ListItemButton>
 
                     <ListItemButton>
                         <ListItemIcon className="list-item-icon">
-                            <GiCow />
+                            <GiCow className="icon"/>
                         </ListItemIcon>
                         <ListItemText primary={t('animals')}/>
                     </ListItemButton>
 
                     <ListItemButton>
                         <ListItemIcon className="list-item-icon">
-                            <GiHighGrass />
+                            <GiHighGrass className="icon"/>
                         </ListItemIcon>
                         <ListItemText primary={t('crops')}/>
                     </ListItemButton>
