@@ -4,6 +4,7 @@ import React, {ElementType} from "react";
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import routesConfig from "@/routes/routerConfig.ts";
 import MainLayout from "@/layouts/MainLayout/MainLayout.tsx";
+import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage.tsx";
 
 export type RouteConfig = {
     path: string;
@@ -19,18 +20,24 @@ const AppRouter = () => {
                     key={index}
                     path={route.path}
                     element={
-                    <MainLayout>
-                        <ProtectedRoute
-                            accessibleRoles={Array.isArray(route.accessibleRoles)
-                            ? route.accessibleRoles
-                            : [route.accessibleRoles]}
-                        >
-                            {React.createElement(route.page)}
-                        </ProtectedRoute>
-                    </MainLayout>
+                        <MainLayout>
+                            <ProtectedRoute
+                                accessibleRoles={Array.isArray(route.accessibleRoles)
+                                    ? route.accessibleRoles
+                                    : [route.accessibleRoles]}
+                            >
+                                {React.createElement(route.page)}
+                            </ProtectedRoute>
+                        </MainLayout>
                     }
                 />
             ))}
+            <Route
+                path="*"
+                element={
+                    <NotFoundPage/>
+                }
+            />
         </Routes>
     );
 };

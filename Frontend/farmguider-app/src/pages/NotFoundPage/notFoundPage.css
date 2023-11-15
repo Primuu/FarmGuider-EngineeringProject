@@ -1,0 +1,28 @@
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    color: #002839;
+}
+
+.tractor {
+    width: 300px;
+    margin-bottom: 40px;
+}
+
+.not-found-container .not-found-header {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.not-found-container .not-found-text {
+    font-size: 18px;
+}
+
+.not-found-container .back-home-button {
+    margin-top: 30px;
+    font-weight: bold;
+}
