@@ -1,8 +1,10 @@
+import '@/pages/HomePage/homePage.css';
+
 const HomePage = () => {
     return (
-        <>
-            Home
-        </>
+        <div className="home-container">
+            Home Placeholder
+        </div>
     )
 }
 
