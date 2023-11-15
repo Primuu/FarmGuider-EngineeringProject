@@ -4,6 +4,7 @@ import React, {ElementType} from "react";
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import routesConfig from "@/routes/routerConfig.ts";
 import TitleSetter from "@/routes/TitleSetter.tsx";
+import MainLayout from "@/layouts/MainLayout/MainLayout.tsx";
 
 export type RouteConfig = {
     path: string;
@@ -20,7 +21,7 @@ const AppRouter = () => {
                     key={index}
                     path={route.path}
                     element={
-                    <>
+                    <MainLayout>
                         <TitleSetter title={route.title || "FarmGuider"}/>
                         <ProtectedRoute
                             accessibleRoles={Array.isArray(route.accessibleRoles)
@@ -29,7 +30,7 @@ const AppRouter = () => {
                         >
                             {React.createElement(route.page)}
                         </ProtectedRoute>
-                    </>
+                    </MainLayout>
                     }
                 />
             ))}

@@ -1,0 +1,27 @@
+.main-layout {
+    display: flex;
+}
+
+.sidebar-left {
+    position: fixed;
+}
+
+.content {
+    margin-left: 300px;
+    flex-grow: 1;
+}
+
+@media (max-width: 599px) {
+    .main-layout {
+        display: block;
+    }
+
+    .sidebar-left {
+        position: static;
+    }
+
+    .content {
+        margin-left: 0;
+        flex-grow: 0;
+    }
+}
