@@ -14,12 +14,12 @@ import {GiBarn, GiCow, GiHighGrass} from 'react-icons/gi';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import {useNavigate} from 'react-router-dom';
-
-
-import logo from "@/assets/farmguider-logo.svg";
+import {HOME_PAGE_URL, PROFILE_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
-import {HOME_PAGE_URL, PROFILE_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
+import {IconType} from "react-icons/lib";
+
+import logo from "@/assets/farmguider-logo.svg";
 
 type SidebarLeftDrawerProps = {
     onClose: () => void;
@@ -32,10 +32,6 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
 
-    const handleNavigation = (path: string): void => {
-        navigate(path);
-    };
-
     const handleLogout = async () => {
         try {
             await revoke();
@@ -46,6 +42,14 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
             enqueueSnackbar(t('logout-failed'), SnackbarError);
         }
     };
+
+    const navigationItems = [
+        { icon: HomeOutlinedIcon, text: t('home'), onClick: () => navigate(HOME_PAGE_URL) },
+        { icon: PersonOutlineIcon, text: t('profile'), onClick: () => navigate(PROFILE_PAGE_URL) },
+        { icon: GiBarn as IconType, text: t('farms'), onClick: () => navigate("/") },
+        { icon: GiCow as IconType, text: t('animals'), onClick: () => navigate("/") },
+        { icon: GiHighGrass as IconType, text: t('crops'), onClick: () => navigate("/") },
+    ];
 
     return (
         <div>
@@ -68,40 +72,14 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
                 </Box>
 
                 <Box className="items">
-                    <ListItemButton onClick={() => handleNavigation(HOME_PAGE_URL)}>
-                        <ListItemIcon className="list-item-icon">
-                            <HomeOutlinedIcon className="icon"/>
-                        </ListItemIcon>
-                        <ListItemText primary={t('home')}/>
-                    </ListItemButton>
-
-                    <ListItemButton onClick={() => handleNavigation(PROFILE_PAGE_URL)}>
-                        <ListItemIcon className="list-item-icon">
-                            <PersonOutlineIcon className="icon"/>
-                        </ListItemIcon>
-                        <ListItemText primary={t('profile')}/>
-                    </ListItemButton>
-
-                    <ListItemButton>
-                        <ListItemIcon className="list-item-icon">
-                            <GiBarn className="icon"/>
-                        </ListItemIcon>
-                        <ListItemText primary={t('farms')}/>
-                    </ListItemButton>
-
-                    <ListItemButton>
-                        <ListItemIcon className="list-item-icon">
-                            <GiCow className="icon"/>
-                        </ListItemIcon>
-                        <ListItemText primary={t('animals')}/>
-                    </ListItemButton>
-
-                    <ListItemButton>
-                        <ListItemIcon className="list-item-icon">
-                            <GiHighGrass className="icon"/>
-                        </ListItemIcon>
-                        <ListItemText primary={t('crops')}/>
-                    </ListItemButton>
+                    {navigationItems.map((item, index) => (
+                        <ListItemButton key={index} onClick={item.onClick}>
+                            <ListItemIcon className="list-item-icon">
+                                <item.icon className="icon" />
+                            </ListItemIcon>
+                            <ListItemText primary={item.text}/>
+                        </ListItemButton>
+                    ))}
                 </Box>
 
                 <Box className="sidebar-footer">
