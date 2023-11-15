@@ -87,3 +87,31 @@
 .icon {
     font-size: 24px;
 }
+
+@media (max-width: 599px) {
+    .items {
+        margin-top: 3vh;
+    }
+
+    .logo-box {
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+
+    .logo {
+        width: 24px;
+    }
+
+    .logo-box .logo-text {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .list-item-icon {
+        margin-left: 20px;
+    }
+
+    .icon {
+        font-size: 24px;
+    }
+}
