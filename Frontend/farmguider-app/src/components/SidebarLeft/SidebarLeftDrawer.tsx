@@ -13,10 +13,13 @@ import {SnackbarError} from "@/utils/snackbarVariants.ts";
 import {GiBarn, GiCow, GiHighGrass} from 'react-icons/gi';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import {useNavigate} from 'react-router-dom';
+
 
 import logo from "@/assets/farmguider-logo.svg";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
+import {HOME_PAGE_URL, PROFILE_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 
 type SidebarLeftDrawerProps = {
     onClose: () => void;
@@ -27,6 +30,11 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
     const {t} = useTranslation('sidebar');
     const {removeSessionCookie} = useAuth();
     const {enqueueSnackbar} = useSnackbar();
+    const navigate = useNavigate();
+
+    const handleNavigation = (path: string): void => {
+        navigate(path);
+    };
 
     const handleLogout = async () => {
         try {
@@ -60,14 +68,14 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
                 </Box>
 
                 <Box className="items">
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleNavigation(HOME_PAGE_URL)}>
                         <ListItemIcon className="list-item-icon">
                             <HomeOutlinedIcon className="icon"/>
                         </ListItemIcon>
                         <ListItemText primary={t('home')}/>
                     </ListItemButton>
 
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleNavigation(PROFILE_PAGE_URL)}>
                         <ListItemIcon className="list-item-icon">
                             <PersonOutlineIcon className="icon"/>
                         </ListItemIcon>
