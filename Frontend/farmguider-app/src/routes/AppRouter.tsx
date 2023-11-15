@@ -3,14 +3,12 @@ import ProtectedRoute from "@/routes/ProtectedRoute.tsx";
 import React, {ElementType} from "react";
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import routesConfig from "@/routes/routerConfig.ts";
-import TitleSetter from "@/routes/TitleSetter.tsx";
 import MainLayout from "@/layouts/MainLayout/MainLayout.tsx";
 
 export type RouteConfig = {
     path: string;
     page: ElementType;
     accessibleRoles: UserRoles | UserRoles[];
-    title: string;
 }
 
 const AppRouter = () => {
@@ -22,7 +20,6 @@ const AppRouter = () => {
                     path={route.path}
                     element={
                     <MainLayout>
-                        <TitleSetter title={route.title || "FarmGuider"}/>
                         <ProtectedRoute
                             accessibleRoles={Array.isArray(route.accessibleRoles)
                             ? route.accessibleRoles

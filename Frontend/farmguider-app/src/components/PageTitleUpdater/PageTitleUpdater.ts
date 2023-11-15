@@ -8,14 +8,9 @@ const PageTitleUpdater = () => {
 
     useEffect(() => {
         const pathSegments: string[] = location.pathname.substring(1).split('/');
-        const firstSegment: string = pathSegments[0];
+        const pageKey: string = pathSegments[0];
 
-        const titleKeys: {[key: string]: string} = {
-            'profile': 'profile'
-        };
-
-        const pageTitleKey = titleKeys[firstSegment] || 'default';
-        document.title = t(pageTitleKey);
+        document.title = t(`${pageKey}`, { defaultValue: t('default') });
     }, [location, t]);
 
     return null;
