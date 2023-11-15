@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
+import {useState} from 'react';
+import {useTheme} from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -22,20 +22,22 @@ const SidebarLeft = () => {
     return (
         <div>
             {!isDesktop && (
-                <AppBar position="fixed">
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            onClick={handleDrawerToggle}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography noWrap>
-                            {/* TODO: change*/}
-                            Responsive Sidebar
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
+                <>
+                    <AppBar position="fixed">
+                        <Toolbar>
+                            <IconButton
+                                edge="start"
+                                onClick={handleDrawerToggle}
+                            >
+                                <MenuIcon className="menu-icon"/>
+                            </IconButton>
+                            <Typography noWrap className="app-bar-header">
+                                FarmGuider
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <Toolbar/>
+                </>
             )}
             <Drawer
                 variant={isDesktop ? 'permanent' : 'temporary'}
@@ -49,7 +51,7 @@ const SidebarLeft = () => {
                     keepMounted: true,
                 }}
             >
-                <SidebarLeftDrawer />
+                <SidebarLeftDrawer/>
             </Drawer>
         </div>
     );

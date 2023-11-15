@@ -1,3 +1,13 @@
+.menu-icon {
+    color: #FAFAFA;
+    font-size: 24px !important;
+}
+
+.app-bar-header {
+    color: #FAFAFA;
+    font-weight: bold !important;
+}
+
 .drawer {
     width: 300px;
     height: 100vh;
@@ -14,7 +24,7 @@
     border-right: none;
     box-shadow: none;
     color: #406064;
-    background: rgba(229, 245, 242);
+    background: #E5F5F2;
     position: relative;
 }
 
@@ -45,7 +55,7 @@
     margin-bottom: 20px;
 }
 
-.logo{
+.logo {
     width: 30px;
     margin-right: 8px;
 }
