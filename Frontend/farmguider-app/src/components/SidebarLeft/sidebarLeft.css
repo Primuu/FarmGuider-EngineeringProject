@@ -8,6 +8,11 @@
     font-weight: bold !important;
 }
 
+.close-icon {
+    margin-left: 250px;
+    color: #406064;
+}
+
 .drawer {
     width: 300px;
     height: 100vh;
@@ -44,7 +49,7 @@
 }
 
 .items {
-    margin-top: 15vh;
+    margin-top: 10vh;
 }
 
 .logo-box {

@@ -10,12 +10,20 @@ import {revoke} from "@/services/authenticationService.ts";
 import {LOGGED_OUT_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 import {useSnackbar} from "notistack";
 import {SnackbarError} from "@/utils/snackbarVariants.ts";
-import { GiBarn, GiCow, GiHighGrass } from 'react-icons/gi';
+import {GiBarn, GiCow, GiHighGrass} from 'react-icons/gi';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 
 import logo from "@/assets/farmguider-logo.svg";
+import IconButton from "@mui/material/IconButton";
+import React from "react";
 
-const SidebarLeftDrawer = () => {
+type SidebarLeftDrawerProps = {
+    onClose: () => void;
+    isDesktop: boolean;
+}
+
+const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop}) => {
     const {t} = useTranslation('sidebar');
     const {removeSessionCookie} = useAuth();
     const {enqueueSnackbar} = useSnackbar();
@@ -34,6 +42,12 @@ const SidebarLeftDrawer = () => {
     return (
         <div>
             <List className="sidebar-list">
+                {!isDesktop && (
+                    <IconButton onClick={onClose}>
+                        <CloseIcon className="close-icon"/>
+                    </IconButton>
+                )}
+
                 <Box className="logo-box">
                     <Box>
                         <Typography className="logo-text">

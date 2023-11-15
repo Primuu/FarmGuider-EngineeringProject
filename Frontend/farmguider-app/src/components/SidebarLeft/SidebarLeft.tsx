@@ -51,7 +51,7 @@ const SidebarLeft = () => {
                     keepMounted: true,
                 }}
             >
-                <SidebarLeftDrawer/>
+                <SidebarLeftDrawer onClose={handleDrawerToggle} isDesktop={isDesktop}/>
             </Drawer>
         </div>
     );
