@@ -7,11 +7,13 @@ import enNotLoggedPage from '@/locales/english/notLoggedPage.json';
 import enLanguageSwitcher from '@/locales/english/languageSwitcher.json';
 import enAuthForms from '@/locales/english/authForms.json';
 import enSidebar from '@/locales/english/sidebar.json';
+import enTitles from '@/locales/english/titles.json';
 
 import plNotLoggedPage from '@/locales/polish/notLoggedPage.json';
 import plLanguageSwitcher from '@/locales/polish/languageSwitcher.json';
 import plAuthForms from '@/locales/polish/authForms.json';
 import plSidebar from '@/locales/polish/sidebar.json';
+import plTitles from '@/locales/polish/titles.json';
 
 const savedLanguage = localStorage.getItem(LANGUAGE_ITEM) || 'en';
 
@@ -24,12 +26,14 @@ void i18n
                 languageSwitcher: enLanguageSwitcher,
                 authForms: enAuthForms,
                 sidebar: enSidebar,
+                titles: enTitles,
             },
             pl: {
                 notLoggedPage: plNotLoggedPage,
                 languageSwitcher: plLanguageSwitcher,
                 authForms: plAuthForms,
                 sidebar: plSidebar,
+                titles: plTitles,
             },
         },
         lng: savedLanguage,
