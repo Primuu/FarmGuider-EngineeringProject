@@ -6,9 +6,11 @@ import {Button} from "@mui/material";
 import '@/pages/NotFoundPage/notFoundPage.css';
 
 import brokenTractor from "@/assets/broken-tractor.png";
+import {useTranslation} from "react-i18next";
 
 const NotFoundPage = () => {
     const navigate = useNavigate();
+    const {t} = useTranslation('notFoundPage');
 
     const handleBackHome = () => {
         navigate(HOME_PAGE_URL, {replace: true});
@@ -18,15 +20,15 @@ const NotFoundPage = () => {
         <div>
             <Navbar/>
             <div className="not-found-container">
-                <img src={brokenTractor} alt="" className='tractor'/>
+                <img src={brokenTractor} alt={t('imageAlt')} className='tractor'/>
                 <Typography className="not-found-header">
-                    404 Not Found
+                    404 {t('header')}
                 </Typography>
                 <Typography className="not-found-text">
-                    Whoops... Something went wrong, the page you are looking for does not exist.
+                    {t('text')}
                 </Typography>
                 <Button onClick={handleBackHome} variant="contained" className="back-home-button">
-                    Take me away from here
+                    {t('button')}
                 </Button>
             </div>
         </div>
