@@ -4,7 +4,6 @@ import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen.tsx";
 import React, {ReactNode} from "react";
 import '@/layouts/MainLayout/mainLayout.css'
-import {Box} from "@mui/material";
 
 type MainLayoutProps = {
     children: ReactNode;
@@ -22,11 +21,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     return (
         <div className="main-layout">
             {isUserLogged && (
-                <Box className="sidebar-left">
+                <div className="sidebar-left">
                     <SidebarLeft/>
-                </Box>
+                </div>
             )}
-            <div className="content">
+            <div className={isUserLogged ? "content": ""}>
                 {children}
             </div>
         </div>
