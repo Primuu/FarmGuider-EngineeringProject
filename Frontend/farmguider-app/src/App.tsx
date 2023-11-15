@@ -6,6 +6,7 @@ import theme from "@/styles/theme.ts";
 import AppRouter from "@/routes/AppRouter.tsx";
 import {SnackbarProvider} from "notistack";
 import {StyledMaterialDesignContent} from "@/styles/snackbarStyles.ts";
+import PageTitleUpdater from "@/components/PageTitleUpdater/PageTitleUpdater.ts";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
             <AuthProvider>
                 <ThemeProvider theme={theme}>
                     <CssBaseline/>
+                    <PageTitleUpdater />
                     <AppRouter/>
                 </ThemeProvider>
             </AuthProvider>
