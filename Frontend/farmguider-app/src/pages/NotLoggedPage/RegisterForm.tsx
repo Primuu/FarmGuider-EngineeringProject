@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Box, Button, Container, Grid, IconButton, InputAdornment, TextField, Typography} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {fetchUserAuthData, register} from "@/services/authenticationService.ts";
+import {register} from "@/services/authenticationService.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
 import useValidation from "@/hooks/useValidation.ts";
 import {validateRegister} from "@/utils/validateRegister.ts";
@@ -11,9 +11,6 @@ import LockIcon from '@mui/icons-material/Lock';
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {HOME_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
-import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
-import UserAuthDTO from "@/entities/UserAuthDTO.ts";
-import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import {useSnackbar} from "notistack";
 import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 
@@ -32,7 +29,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const { setUserAuthData } = useAuth();
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -80,9 +76,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
 
         try {
             await register(userCreateDTO);
-
-            const userAuthData: UserAuthDTO = await fetchUserAuthData();
-            setUserAuthData(userAuthData.userId, userAuthData.userRole as UserRoles);
 
             navigate(HOME_PAGE_URL);
             enqueueSnackbar(t('register.snackbar'), SnackbarSuccess);
