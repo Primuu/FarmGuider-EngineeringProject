@@ -9,7 +9,6 @@ type AuthContextType = {
     removeSessionCookie: () => void;
     userRole: UserRoles;
     userId: number | undefined;
-    setUserAuthData: (userId: number, role: UserRoles) => void;
     loading: boolean;
 };
 
@@ -21,7 +20,6 @@ const AuthContext = createContext<AuthContextType>({
     removeSessionCookie: () => {},
     userRole: UserRoles.NON_LOGGED,
     userId: undefined,
-    setUserAuthData: () => {},
     loading: true,
 });
 
@@ -30,11 +28,6 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
     const [userId, setUserId] = useState<number | undefined>(undefined)
     const [userRole, setUserRole] = useState(UserRoles.NON_LOGGED);
     const [loading, setLoading] = useState(true);
-
-    const setUserAuthData = useCallback((userId: number, role: UserRoles) => {
-        setUserId(userId);
-        setUserRole(role);
-    }, []);
 
     const removeSessionCookie = useCallback(() => {
         removeCookie(SESSION_COOKIE);
@@ -54,18 +47,13 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
                 setLoading(false);
             }
         };
-        if (cookies[SESSION_COOKIE]) {
             void fetchData();
-        } else {
-            setLoading(false);
-        }
-    }, [cookies]);
+    }, [cookies, removeCookie]);
 
     const contextValue = {
         userId,
         userRole,
         removeSessionCookie,
-        setUserAuthData,
         loading,
     };
 
