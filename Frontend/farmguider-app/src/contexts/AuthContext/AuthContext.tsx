@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useContext, useEffect, useState, useCallback} from 'react';
+import {createContext, ReactNode, useCallback, useContext, useEffect, useState} from 'react';
 import UserRoles from "@/contexts/AuthContext/UserRoles.ts";
 import {useCookies} from "react-cookie";
 import {SESSION_COOKIE} from "@/constants/CONFIG_CONSTS.ts";
@@ -27,7 +27,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
     const [cookies, , removeCookie] = useCookies([SESSION_COOKIE]);
     const [userId, setUserId] = useState<number | undefined>(undefined)
     const [userRole, setUserRole] = useState(UserRoles.NON_LOGGED);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const removeSessionCookie = useCallback(() => {
         removeCookie(SESSION_COOKIE);
@@ -47,7 +47,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
                 setLoading(false);
             }
         };
-            void fetchData();
+        void fetchData();
     }, [cookies, removeCookie]);
 
     const contextValue = {
@@ -64,4 +64,5 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);
