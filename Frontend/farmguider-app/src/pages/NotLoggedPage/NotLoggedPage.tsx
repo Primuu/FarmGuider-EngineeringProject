@@ -40,7 +40,7 @@ const NotLoggedPage = () => {
     }, [enqueueSnackbar, t]);
 
     return (
-        <Box>
+        <Box className="page-container">
             <Navbar/>
             <Box className="main-text-box">
                 <Typography className="header">
@@ -77,7 +77,7 @@ const NotLoggedPage = () => {
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
-                <GrassIcon color="secondary" className="icon"/>
+                <GrassIcon color="primary" className="icon"/>
                 <Typography className="text">
                     {t('crops.text')}
                 </Typography>
@@ -96,7 +96,7 @@ const NotLoggedPage = () => {
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
-                <TimelineIcon color="secondary" className="icon"/>
+                <TimelineIcon color="primary" className="icon"/>
                 <Typography className="text">
                     {t('animals.text')}
                 </Typography>
@@ -115,7 +115,7 @@ const NotLoggedPage = () => {
                 </Typography>
             </Parallax>
             <Box className="section-text-box">
-                <SignalCellularAltIcon color="secondary" className="icon"/>
+                <SignalCellularAltIcon color="primary" className="icon"/>
                 <Typography className="text">
                     {t('efficiency.text')}
                 </Typography>
