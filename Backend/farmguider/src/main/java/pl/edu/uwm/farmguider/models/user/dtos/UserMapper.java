@@ -10,6 +10,10 @@ public class UserMapper {
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .locality(user.getAddress().getLocality())
+                .street(user.getAddress().getStreet())
+                .zipCode(user.getAddress().getZipCode())
+                .propertyNumber(user.getAddress().getPropertyNumber())
                 .build();
     }
 
