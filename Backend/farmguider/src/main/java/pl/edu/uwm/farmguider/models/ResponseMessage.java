@@ -6,4 +6,5 @@ public record ResponseMessage(String message) {
 
     @Builder
     public ResponseMessage {}
+
 }

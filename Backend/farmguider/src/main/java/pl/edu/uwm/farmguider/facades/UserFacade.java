@@ -31,4 +31,8 @@ public class UserFacade {
         return userService.getUserByEmail(email).getId();
     }
 
+    public UserResponseDTO getUserById(Long userId) {
+        return mapToUserResponseDTO(userService.getUserById(userId));
+    }
+
 }
