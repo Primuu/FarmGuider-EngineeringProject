@@ -1,9 +1,21 @@
+.content .profile-header {
+    color: #406064;
+    font-size: 36px;
+    font-weight: bold;
+    width: calc(100% - 10%);
+    margin: 3vh 5%;
+}
+
 .profile-container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-size: 48px;
+    min-height: 83vh;
+    width: calc(100% - 10%);
+    border-radius: 16px;
+    margin: 3vh 5%;
+    background: #FFFFFF;
+}
+
+@media (max-width: 599px) {
+    .profile-header {
+        display: none;
+    }
 }
