@@ -12,6 +12,76 @@
     border-radius: 16px;
     margin: 3vh 5%;
     background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.profile-buttons {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-buttons .profile-button {
+    width: 150px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.profile-button .profile-button-icon {
+    font-size: 18px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.profile-item {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-item .item-header {
+    color: #406064;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.profile-data-container {
+    width: 30%;
+    margin-bottom: 20px;
+}
+
+.profile-data-container .profile-data-input {
+    width: 80%;
+    margin-left: 5px;
+}
+
+.profile-container .profile-text {
+    color: #406064;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.profile-container .profile-data {
+    color: #5b7073;
+    font-size: 18px;
+    margin-left: 32px;
+}
+
+.profile-text .profile-icon {
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 6px;
 }
 
 @media (max-width: 599px) {
