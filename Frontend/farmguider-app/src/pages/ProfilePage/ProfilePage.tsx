@@ -65,13 +65,14 @@ const ProfilePage = () => {
                         isEditing={isEditing}
                     />
                     <AddressDetails
-                        locality={"Źolibosz"}
-                        street={"Sandomierska"}
-                        zipCode={"55-555"}
-                        propertyNumber={"15"}
+                        locality={userResponseDTO.locality}
+                        street={userResponseDTO.street}
+                        zipCode={userResponseDTO.zipCode}
+                        propertyNumber={userResponseDTO.propertyNumber}
                         isEditing={isEditing}
                     />
                 </div>
+
                 <div className="profile-buttons">
                     {isEditing ? (
                         <div>

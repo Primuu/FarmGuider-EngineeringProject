@@ -5,6 +5,7 @@ import SignpostIcon from '@mui/icons-material/Signpost';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import {nameRegex} from "@/utils/validateRegister.ts";
+import {nullReplaceLackOfData} from "@/utils/textUtils.ts";
 
 interface AddressDetailsProps {
     locality: string | null;
@@ -42,7 +43,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCod
                         Locality
                     </Typography>
                     <Typography className="profile-data">
-                        {locality}
+                        {nullReplaceLackOfData(locality, "Data not provided")}
                     </Typography>
                 </div>
             )}
@@ -63,7 +64,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCod
                         Street
                     </Typography>
                     <Typography className="profile-data">
-                        {street}
+                        {nullReplaceLackOfData(locality, "Data not provided")}
                     </Typography>
                 </div>
             )}
@@ -84,7 +85,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCod
                         Zip Code
                     </Typography>
                     <Typography className="profile-data">
-                        {zipCode}
+                        {nullReplaceLackOfData(locality, "Data not provided")}
                     </Typography>
                 </div>
             )}
@@ -105,7 +106,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCod
                         Property Number
                     </Typography>
                     <Typography className="profile-data">
-                        {propertyNumber}
+                        {nullReplaceLackOfData(locality, "Data not provided")}
                     </Typography>
                 </div>
             )}
