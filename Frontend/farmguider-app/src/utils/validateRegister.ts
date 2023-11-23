@@ -1,5 +1,6 @@
 import { TFunction } from "i18next";
 
+export const nameRegex = /[^\p{L}-]/gu;
 const emailRegex = /^[A-Za-z0-9+_.-]+@(.+\.)+[A-Za-z]{2,}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+{}[\]<>?~])[A-Za-z\d!@#$%^&*()-_=+{}[\]<>?~]{8,}$/;
 
