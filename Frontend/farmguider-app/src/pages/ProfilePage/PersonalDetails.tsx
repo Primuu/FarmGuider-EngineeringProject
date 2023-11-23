@@ -4,6 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import {nameRegex} from "@/utils/validateRegister.ts";
+import {useTranslation} from "react-i18next";
 
 interface PersonalDetailsProps {
     email: string;
@@ -15,6 +16,7 @@ interface PersonalDetailsProps {
 const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, lastName, isEditing}) => {
     const [firstNameState, setFirstNameState] = useState(firstName);
     const [lastNameState, setLastNameState] = useState(lastName);
+    const {t} = useTranslation('profilePage');
 
     const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const sanitizedValue = event.target.value.replace(nameRegex, '');
@@ -29,13 +31,13 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, last
     return (
         <div className="profile-item">
             <Typography className="item-header">
-                Personal Details
+                {t('personals.header')}
             </Typography>
 
             <div className="profile-data-container">
                 <Typography className="profile-text">
                     <EmailIcon className="profile-icon" color="primary"/>
-                    Email Address
+                    {t('personals.email')}
                 </Typography>
                 <Typography className="profile-data">
                     {email}
@@ -46,7 +48,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, last
                 <div className="profile-data-container">
                     <PersonIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
-                               label="First Name"
+                               label={t('personals.firstName')}
                                value={firstNameState}
                                onChange={handleFirstNameChange}
                     />
@@ -55,7 +57,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, last
                 <div className="profile-data-container">
                     <Typography className="profile-text">
                         <PersonIcon className="profile-icon" color="primary"/>
-                        First Name
+                        {t('personals.firstName')}
                     </Typography>
                     <Typography className="profile-data">
                         {firstName}
@@ -67,7 +69,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, last
                 <div className="profile-data-container">
                     <Person2OutlinedIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
-                               label="Last Name"
+                               label={t('personals.lastName')}
                                value={lastNameState}
                                onChange={handleLastNameChange}
                     />
@@ -76,7 +78,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, last
                 <div className="profile-data-container">
                     <Typography className="profile-text">
                         <Person2OutlinedIcon className="profile-icon" color="primary"/>
-                        Last Name
+                        {t('personals.lastName')}
                     </Typography>
                     <Typography className="profile-data">
                         {lastName}
@@ -84,7 +86,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, last
                 </div>
             )}
 
-
+            {/* TODO: Add change password button */}
             Change password button placeholder
         </div>
     );

@@ -4,7 +4,10 @@
   "cancelButton": "Cancel",
   "editButton": "Edit Data",
   "personals": {
-
+    "header": "Personal Data",
+    "email": "Email Address",
+    "firstName": "First Name",
+    "lastName": "Last Name"
   },
   "address": {
 
