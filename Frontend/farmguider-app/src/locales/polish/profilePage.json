@@ -10,6 +10,11 @@
     "lastName": "Nazwisko"
   },
   "address": {
-
+    "header": "Dane Adresowe",
+    "locality": "Miejscowość",
+    "street": "Ulica",
+    "zipCode": "Kod Pocztowy",
+    "propertyNumber": "Numer Budynku",
+    "dataNotProvided": "Dane niewprowadzone"
   }
 }

@@ -10,6 +10,11 @@
     "lastName": "Last Name"
   },
   "address": {
-
+    "header": "Address Data",
+    "locality": "Locality",
+    "street": "Street",
+    "zipCode": "Zip Code",
+    "propertyNumber": "Property Number",
+    "dataNotProvided": "Data not provided"
   }
 }
