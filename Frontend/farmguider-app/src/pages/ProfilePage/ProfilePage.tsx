@@ -13,6 +13,7 @@ import {Button} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import {useTranslation} from "react-i18next";
 
 const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
@@ -20,6 +21,7 @@ const ProfilePage = () => {
     const [userResponseDTO, setUserResponseDTO] = useState<UserResponseDTO | null>(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const {t} = useTranslation('profilePage');
 
     useEffect(() => {
         if (userId) {
@@ -54,7 +56,7 @@ const ProfilePage = () => {
     return (
         <div>
             <Typography className="profile-header">
-                Profile
+                {t('header')}
             </Typography>
             <div className="profile-container">
                 <div className="profile-details">
@@ -82,7 +84,7 @@ const ProfilePage = () => {
                                 onClick={handleSave}
                             >
                                 <DoneOutlinedIcon className="profile-button-icon"/>
-                                Save
+                                {t('saveButton')}
                             </Button>
                             <Button
                                 className="profile-button"
@@ -90,7 +92,7 @@ const ProfilePage = () => {
                                 onClick={handleCancel}
                             >
                                 <CloseOutlinedIcon className="profile-button-icon"/>
-                                Cancel
+                                {t('cancelButton')}
                             </Button>
                         </div>
                         ) : (
@@ -101,7 +103,7 @@ const ProfilePage = () => {
                                 onClick={handleEdit}
                             >
                                 <EditIcon className="profile-button-icon"/>
-                                Edit Data
+                                {t('editButton')}
                             </Button>
                         </div>
                         )}
