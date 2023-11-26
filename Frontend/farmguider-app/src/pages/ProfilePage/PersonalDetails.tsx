@@ -1,21 +1,28 @@
-import React, {useState} from "react";
+import React from "react";
 import {TextField, Typography} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import {nameRegex} from "@/utils/validateRegister.ts";
 import {useTranslation} from "react-i18next";
+import {Errors} from "@/utils/validateProfile.ts";
 
-interface PersonalDetailsProps {
+type PersonalDetailsProps  = {
     email: string;
     firstName: string;
+    firstNameState: string;
+    setFirstNameState: (value: string) => void;
     lastName: string;
+    lastNameState: string;
+    setLastNameState: (value: string) => void;
     isEditing: boolean;
+    errors: Errors;
 }
 
-const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, lastName, isEditing}) => {
-    const [firstNameState, setFirstNameState] = useState(firstName);
-    const [lastNameState, setLastNameState] = useState(lastName);
+const PersonalDetails: React.FC<PersonalDetailsProps> = (
+    {email, firstName, firstNameState, setFirstNameState, lastName, lastNameState,
+        setLastNameState, isEditing, errors}
+) => {
     const {t} = useTranslation('profilePage');
 
     const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +58,9 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, last
                                label={t('personals.firstName')}
                                value={firstNameState}
                                onChange={handleFirstNameChange}
+                               required
+                               error={!!errors.firstName}
+                               helperText={errors.firstName}
                     />
                 </div>
             ) : (
@@ -72,6 +82,9 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({email, firstName, last
                                label={t('personals.lastName')}
                                value={lastNameState}
                                onChange={handleLastNameChange}
+                               required
+                               error={!!errors.lastName}
+                               helperText={errors.lastName}
                     />
                 </div>
             ) : (

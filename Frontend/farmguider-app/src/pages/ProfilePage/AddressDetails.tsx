@@ -4,24 +4,48 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import SignpostIcon from '@mui/icons-material/Signpost';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import {nameRegex} from "@/utils/validateRegister.ts";
 import {nullReplaceLackOfData} from "@/utils/textUtils.ts";
 import {useTranslation} from "react-i18next";
+import {Errors} from "@/utils/validateProfile.ts";
 
 interface AddressDetailsProps {
     locality: string | null;
+    localityState: string | null;
+    setLocalityState: (value: string) => void;
     street: string | null;
+    streetState: string | null;
+    setStreetState: (value: string) => void;
     zipCode: string | null;
+    zipCodeState: string | null;
+    setZipCodeState: (value: string) => void;
     propertyNumber: string | null;
+    propertyNumberState: string | null;
+    setPropertyNumberState: (value: string) => void;
     isEditing: boolean;
+    errors: Errors;
 }
 
-const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCode, propertyNumber, isEditing}) => {
+const AddressDetails: React.FC<AddressDetailsProps> = (
+    {locality, localityState, setLocalityState, street, streetState, setStreetState,
+        zipCode, zipCodeState, setZipCodeState, propertyNumber, propertyNumberState,
+        setPropertyNumberState, isEditing, errors}
+) => {
     const {t} = useTranslation('profilePage');
 
-    const handleTODO = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // const sanitizedValue = event.target.value.replace(nameRegex, '');
-        // setFirstNameState(sanitizedValue);
+    const handleLocalityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLocalityState(event.target.value);
+    };
+
+    const handleStreetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setStreetState(event.target.value);
+    };
+
+    const handleZipCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setZipCodeState(event.target.value);
+    };
+
+    const handlePropertyNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPropertyNumberState(event.target.value);
     };
 
     return (
@@ -35,8 +59,10 @@ const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCod
                     <LocationCityIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
                                label={t('address.locality')}
-                               value={locality}
-                               onChange={handleTODO}
+                               value={localityState}
+                               onChange={handleLocalityChange}
+                               error={!!errors.locality}
+                               helperText={errors.locality}
                     />
                 </div>
             ) : (
@@ -56,8 +82,10 @@ const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCod
                     <SignpostIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
                                label={t('address.street')}
-                               value={street}
-                               onChange={handleTODO}
+                               value={streetState}
+                               onChange={handleStreetChange}
+                               error={!!errors.street}
+                               helperText={errors.street}
                     />
                 </div>
             ) : (
@@ -77,8 +105,10 @@ const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCod
                     <MarkunreadMailboxIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
                                label={t('address.zipCode')}
-                               value={zipCode}
-                               onChange={handleTODO}
+                               value={zipCodeState}
+                               onChange={handleZipCodeChange}
+                               error={!!errors.zipCode}
+                               helperText={errors.zipCode}
                     />
                 </div>
             ) : (
@@ -98,8 +128,10 @@ const AddressDetails: React.FC<AddressDetailsProps> = ({locality, street, zipCod
                     <FormatListNumberedIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
                                label={t('address.propertyNumber')}
-                               value={propertyNumber}
-                               onChange={handleTODO}
+                               value={propertyNumberState}
+                               onChange={handlePropertyNumberChange}
+                               error={!!errors.propertyNumber}
+                               helperText={errors.propertyNumber}
                     />
                 </div>
             ) : (
