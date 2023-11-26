@@ -8,3 +8,4 @@ export const GET_AUTH_DATA_URL: string = "/auth-data";
 
 // User
 export const GET_USER_DATA_URL: string = "/user/{userId}";
+export const UPDATE_USER_URL: string = "/user/update/{userId}";
