@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
 import pl.edu.uwm.farmguider.models.address.Address;
+import pl.edu.uwm.farmguider.models.user.User;
 import pl.edu.uwm.farmguider.models.user.dtos.UserCreateDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
+import pl.edu.uwm.farmguider.models.user.dtos.UserUpdateDTO;
 import pl.edu.uwm.farmguider.services.AddressService;
 import pl.edu.uwm.farmguider.services.UserService;
 
@@ -33,6 +35,18 @@ public class UserFacade {
 
     public UserResponseDTO getUserById(Long userId) {
         return mapToUserResponseDTO(userService.getUserById(userId));
+    }
+
+    public UserResponseDTO updateUserById(Long userId, UserUpdateDTO userUpdateDTO) {
+        addressService.updateAddressByUserId(
+                userId,
+                userUpdateDTO.locality(),
+                userUpdateDTO.street(),
+                userUpdateDTO.zipCode(),
+                userUpdateDTO.propertyNumber()
+        );
+        User user = userService.updateUserById(userId, userUpdateDTO.firstName(), userUpdateDTO.lastName());
+        return mapToUserResponseDTO(user);
     }
 
 }

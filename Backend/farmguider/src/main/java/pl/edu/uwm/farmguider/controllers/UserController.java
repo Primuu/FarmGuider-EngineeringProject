@@ -6,16 +6,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.UserFacade;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
+import pl.edu.uwm.farmguider.models.user.dtos.UserUpdateDTO;
 
 @RestController
 @RequiredArgsConstructor
@@ -47,6 +46,37 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(userFacade.getUserById(userId));
+    }
+
+    @Operation(summary = "Update user by id", description = "Updates user's personal and address data")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "User's data updated",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = UserResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - User or user's Address not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json"
+                    ))
+    })
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<UserResponseDTO> updateUserById(@PathVariable Long userId, @RequestBody @Valid UserUpdateDTO userUpdateDTO) {
+        UserResponseDTO updatedUser = userFacade.updateUserById(userId, userUpdateDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(updatedUser);
     }
 
 }
