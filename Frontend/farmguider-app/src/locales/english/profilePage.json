@@ -16,5 +16,19 @@
     "zipCode": "Zip Code",
     "propertyNumber": "Property Number",
     "dataNotProvided": "Data not provided"
+  },
+  "validation": {
+    "firstNameFilled": "First name must be filled in",
+    "firstNameLength": "First name can contain a maximum of 45 characters",
+    "lastNameFilled": "Last name must be filled in",
+    "lastNameLength": "Last name can contain a maximum of 45 characters",
+    "localityLength": "Locality name can contain a maximum of 45 characters",
+    "streetLength": "Street name can contain a maximum of 45 characters",
+    "zipCodeLength": "Zip code can contain a maximum of 10 characters",
+    "propertyNumberLength": "Property number can contain a maximum of 6 characters"
+  },
+  "snackbars": {
+    "updateSuccess": "Profile updated successfully",
+    "updateError": "Profile wasn't updated, something went wrong"
   }
 }

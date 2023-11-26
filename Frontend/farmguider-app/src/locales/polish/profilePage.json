@@ -16,5 +16,19 @@
     "zipCode": "Kod Pocztowy",
     "propertyNumber": "Numer Budynku",
     "dataNotProvided": "Dane niewprowadzone"
+  },
+  "validation": {
+    "firstNameFilled": "Imię musi być podane",
+    "firstNameLength": "Imię może zawierać maksymalnie 45 znaków",
+    "lastNameFilled": "Nazwisko musi być podane",
+    "lastNameLength": "Nazwisko może zawierać maksymalnie 45 znaków",
+    "localityLength": "Nazwa miejscowości może zawierać maksymalnie 45 znaków",
+    "streetLength": "Nazwa ulicy może zawierać maksymalnie 45 znaków",
+    "zipCodeLength": "Kod pocztowy może zawierać maksymalnie 10 znaków",
+    "propertyNumberLength": "Numer budynku może zawierać maksymalnie 10 znaków"
+  },
+  "snackbars": {
+    "updateSuccess": "Pomyślnie zaktualizowano profil",
+    "updateError": "Profil nie został zaktualizowany, coś poszło nie tak"
   }
 }
