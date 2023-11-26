@@ -9,16 +9,13 @@ import {NOT_FOUND_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 import Typography from "@mui/material/Typography";
 import PersonalDetails from "@/pages/ProfilePage/PersonalDetails.tsx";
 import AddressDetails from "@/pages/ProfilePage/AddressDetails.tsx";
-import {Button} from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import {useTranslation} from "react-i18next";
 import useValidation from "@/hooks/useValidation.ts";
 import {ProfileValues, validateProfile} from "@/utils/validateProfile.ts";
 import UserUpdateDTO from "@/entities/UserUpdateDTO.ts";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {useSnackbar} from "notistack";
+import ProfileButtons from "@/pages/ProfilePage/ProfileButtons.tsx";
 
 const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
@@ -153,40 +150,11 @@ const ProfilePage = () => {
                     />
                 </div>
 
-                <div className="profile-buttons">
-                    {isEditing ? (
-                        <div>
-                            <Button
-                                className="profile-button"
-                                variant="contained"
-                                type="submit"
-                            >
-                                <DoneOutlinedIcon className="profile-button-icon"/>
-                                {t('saveButton')}
-                            </Button>
-                            <Button
-                                className="profile-button"
-                                variant="outlined"
-                                onClick={handleCancel}
-                            >
-                                <CloseOutlinedIcon className="profile-button-icon"/>
-                                {t('cancelButton')}
-                            </Button>
-                        </div>
-                    ) : (
-                        <div>
-                            <Button
-                                className="profile-button"
-                                // type="button"
-                                variant="contained"
-                                onClick={handleEdit}
-                            >
-                                <EditIcon className="profile-button-icon"/>
-                                {t('editButton')}
-                            </Button>
-                        </div>
-                    )}
-                </div>
+                <ProfileButtons
+                    isEditing={isEditing}
+                    handleCancel={handleCancel}
+                    handleEdit={handleEdit}
+                />
             </div>
         </form>
     )
