@@ -55,6 +55,13 @@ public class UserService {
         return userRepository.saveAndFlush(user);
     }
 
+    public User updateUserById(Long userId, String firstName, String lastName) {
+        User user = getUserById(userId);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        return userRepository.saveAndFlush(user);
+    }
+
     public void setTokens(String email, String idToken, String refreshToken) {
         User user = getUserByEmail(email);
         user.setIdToken(idToken);
