@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
 import pl.edu.uwm.farmguider.models.address.Address;
 import pl.edu.uwm.farmguider.models.user.User;
+import pl.edu.uwm.farmguider.models.user.dtos.UserChangePasswordDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserCreateDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserUpdateDTO;
@@ -27,6 +28,10 @@ public class UserFacade {
         }
         Address emptyAddress = addressService.createEmptyAddress();
         return mapToUserResponseDTO(userService.createUser(userCreateDTO, emptyAddress));
+    }
+
+    public void changePassword(String email, UserChangePasswordDTO userChangePasswordDTO) {
+        userService.changePassword(email, userChangePasswordDTO.currentPassword(), userChangePasswordDTO.newPassword());
     }
 
     public Long getUserIdByEmail(String email) {

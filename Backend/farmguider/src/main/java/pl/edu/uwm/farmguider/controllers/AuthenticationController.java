@@ -20,6 +20,7 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.UserFacade;
 import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.user.dtos.UserAuthDTO;
+import pl.edu.uwm.farmguider.models.user.dtos.UserChangePasswordDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserCreateDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
 import pl.edu.uwm.farmguider.security.AuthenticationRequestDTO;
@@ -150,6 +151,35 @@ public class AuthenticationController {
                         .userRole(authorities.iterator().next().getAuthority())
                         .build()
                 );
+    }
+
+    @Operation(summary = "Change password",
+            description = "Changes the user's password based on the provided payload")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful changed password",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @PutMapping("/change-passwd")
+    public ResponseEntity<ResponseMessage> changePassword(@RequestBody @Valid UserChangePasswordDTO userChangePasswordDTO) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        userFacade.changePassword(email, userChangePasswordDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseMessage.builder()
+                        .message("Successfully changed password")
+                        .build());
     }
 
 }
