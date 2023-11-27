@@ -55,6 +55,21 @@ public class UserService {
         return userRepository.saveAndFlush(user);
     }
 
+    public void changePassword(String email, String currentPassword, String newPassword) {
+        User user = getUserByEmail(email);
+        verifyPassword(currentPassword, user.getPassword());
+
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+        userRepository.saveAndFlush(user);
+    }
+
+    private void verifyPassword(String givenPassword, String currentPassword) {
+        if(!passwordEncoder.matches(givenPassword, currentPassword)) {
+            throw new UnauthorizedException("Password", "Invalid password");
+        }
+    }
+
     public User updateUserById(Long userId, String firstName, String lastName) {
         User user = getUserById(userId);
         user.setFirstName(firstName);
