@@ -52,6 +52,8 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
         setPassword("");
         setConfirmPassword("");
 
+        setErrors({});
+
         onClose();
     }
 
@@ -92,7 +94,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
                         unmountOnExit
                     >
                         <Box component="form" onSubmit={handleSubmit} className="change-passwd-form">
-                            <Typography className="modal-header">
+                            <Typography className="change-passwd-header">
                                 {t('changePasswd.header')}
                             </Typography>
 
@@ -166,7 +168,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
                                 }}
                             />
 
-                            <Typography className="change-passwd-password-text">
+                            <Typography className="change-passwd-text">
                                 {t('changePasswd.passwordRequirements')}
                             </Typography>
                             <Box className="change-passwd-button-group">
@@ -181,6 +183,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
                                 <Button
                                     variant="outlined"
                                     onClick={cancel}
+                                    className="cancel-change-passwd-button"
                                 >
                                     {t('changePasswd.cancelButton')}
                                 </Button>
