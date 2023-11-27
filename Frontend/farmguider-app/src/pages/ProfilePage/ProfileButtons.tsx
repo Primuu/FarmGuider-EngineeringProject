@@ -24,7 +24,7 @@ const ProfileButtons: React.FC<ProfileButtonsProps> = (
 
     return (
         <div className="profile-buttons">
-            <div>
+            <div className="profile-buttons-acc-passwd">
                 <Button
                     className="delete-acc-button"
                     variant="contained"
@@ -45,7 +45,7 @@ const ProfileButtons: React.FC<ProfileButtonsProps> = (
                     {t('changePasswordButton')}
                 </Button>
             </div>
-            <div>
+            <div className="profile-buttons-edit">
                 {isEditing ? (
                     <div>
                         <Button

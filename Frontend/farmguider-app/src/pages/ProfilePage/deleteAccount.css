@@ -81,4 +81,20 @@
         transform: none;
         margin: 0;
     }
+
+    .delete-acc-form {
+        margin-top: 20%;
+    }
+
+    .delete-acc-button-group {
+        margin-top: 50px;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .delete-acc-button-group .confirm-delete-acc-button,
+    .delete-acc-button-group .cancel-delete-acc-button {
+        width: 90%;
+    }
 }
