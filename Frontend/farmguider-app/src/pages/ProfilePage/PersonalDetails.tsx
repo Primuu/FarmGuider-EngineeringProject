@@ -7,7 +7,7 @@ import {nameRegex} from "@/utils/validateRegister.ts";
 import {useTranslation} from "react-i18next";
 import {Errors} from "@/utils/validateProfile.ts";
 
-type PersonalDetailsProps  = {
+type PersonalDetailsProps = {
     email: string;
     firstName: string;
     firstNameState: string;
@@ -20,8 +20,10 @@ type PersonalDetailsProps  = {
 }
 
 const PersonalDetails: React.FC<PersonalDetailsProps> = (
-    {email, firstName, firstNameState, setFirstNameState, lastName, lastNameState,
-        setLastNameState, isEditing, errors}
+    {
+        email, firstName, firstNameState, setFirstNameState, lastName, lastNameState,
+        setLastNameState, isEditing, errors
+    }
 ) => {
     const {t} = useTranslation('profilePage');
 
@@ -98,9 +100,6 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = (
                     </Typography>
                 </div>
             )}
-
-            {/* TODO: Add change password button */}
-            Change password button placeholder
         </div>
     );
 };

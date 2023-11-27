@@ -26,9 +26,11 @@ interface AddressDetailsProps {
 }
 
 const AddressDetails: React.FC<AddressDetailsProps> = (
-    {locality, localityState, setLocalityState, street, streetState, setStreetState,
+    {
+        locality, localityState, setLocalityState, street, streetState, setStreetState,
         zipCode, zipCodeState, setZipCodeState, propertyNumber, propertyNumberState,
-        setPropertyNumberState, isEditing, errors}
+        setPropertyNumberState, isEditing, errors
+    }
 ) => {
     const {t} = useTranslation('profilePage');
 
@@ -114,7 +116,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = (
             ) : (
                 <div className="profile-data-container">
                     <Typography className="profile-text">
-                        <MarkunreadMailboxIcon  className="profile-icon" color="primary"/>
+                        <MarkunreadMailboxIcon className="profile-icon" color="primary"/>
                         {t('address.zipCode')}
                     </Typography>
                     <Typography className="profile-data">
@@ -137,7 +139,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = (
             ) : (
                 <div className="profile-data-container">
                     <Typography className="profile-text">
-                        <FormatListNumberedIcon  className="profile-icon" color="primary"/>
+                        <FormatListNumberedIcon className="profile-icon" color="primary"/>
                         {t('address.propertyNumber')}
                     </Typography>
                     <Typography className="profile-data">

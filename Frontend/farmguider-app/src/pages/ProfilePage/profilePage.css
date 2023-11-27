@@ -14,7 +14,6 @@
     background: #FFFFFF;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
 }
 
 .profile-details {
@@ -27,18 +26,32 @@
     margin-top: auto;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
 
 .profile-buttons .profile-button {
     width: 160px;
     margin-right: 30px;
-    margin-bottom: 30px;
 }
 
-.profile-button .profile-button-icon {
+.profile-button .profile-button-icon,
+.change-pswd-button .profile-button-icon,
+.delete-acc-button .profile-button-icon {
     font-size: 18px;
     vertical-align: middle;
     margin-right: 6px;
+}
+
+.profile-buttons .delete-acc-button {
+    width: 210px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.profile-buttons .change-pswd-button {
+    width: 210px;
+    margin-right: 30px;
 }
 
 .profile-item {
