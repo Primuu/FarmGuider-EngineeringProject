@@ -171,7 +171,7 @@ public class AuthenticationController {
                             schema = @Schema(implementation = ErrorResponse.class)
                     ))
     })
-    @PutMapping("/change-passwd")
+    @PatchMapping("/change-passwd")
     public ResponseEntity<ResponseMessage> changePassword(@RequestBody @Valid UserChangePasswordDTO userChangePasswordDTO) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         userFacade.changePassword(email, userChangePasswordDTO);
