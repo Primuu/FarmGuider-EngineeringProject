@@ -3,9 +3,9 @@ import {TextField, Typography} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
-import {nameRegex} from "@/utils/validateRegister.ts";
+import {nameRegex} from "@/utils/profileValidators.ts";
 import {useTranslation} from "react-i18next";
-import {Errors} from "@/utils/validateProfile.ts";
+import {ProfileErrors} from "@/utils/profileValidators.ts";
 
 type PersonalDetailsProps = {
     email: string;
@@ -16,7 +16,7 @@ type PersonalDetailsProps = {
     lastNameState: string;
     setLastNameState: (value: string) => void;
     isEditing: boolean;
-    errors: Errors;
+    errors: ProfileErrors;
 }
 
 const PersonalDetails: React.FC<PersonalDetailsProps> = (

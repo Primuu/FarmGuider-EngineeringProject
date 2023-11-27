@@ -11,9 +11,15 @@ type ProfileButtonsProps = {
     isEditing: boolean;
     handleCancel: () => void;
     handleEdit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    handleOpenChangePasswdModal: () => void;
+    handleOpenDeleteAccModal: () => void;
 }
 
-const ProfileButtons: React.FC<ProfileButtonsProps> = ({isEditing, handleCancel, handleEdit}) => {
+const ProfileButtons: React.FC<ProfileButtonsProps> = (
+    {
+        isEditing, handleCancel, handleEdit, handleOpenChangePasswdModal, handleOpenDeleteAccModal
+    }
+) => {
     const {t} = useTranslation('profilePage');
 
     return (
@@ -22,7 +28,7 @@ const ProfileButtons: React.FC<ProfileButtonsProps> = ({isEditing, handleCancel,
                 <Button
                     className="delete-acc-button"
                     variant="contained"
-                    // onClick={}
+                    onClick={handleOpenDeleteAccModal}
                     color="secondary"
                 >
                     <PersonOffIcon className="profile-button-icon"/>
@@ -30,9 +36,9 @@ const ProfileButtons: React.FC<ProfileButtonsProps> = ({isEditing, handleCancel,
                 </Button>
 
                 <Button
-                    className="change-pswd-button"
+                    className="change-passwd-button"
                     variant="contained"
-                    // onClick={}
+                    onClick={handleOpenChangePasswdModal}
                     color="primary"
                 >
                     <LockResetIcon className="profile-button-icon"/>

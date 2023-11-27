@@ -6,7 +6,7 @@ import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import {nullReplaceLackOfData} from "@/utils/textUtils.ts";
 import {useTranslation} from "react-i18next";
-import {Errors} from "@/utils/validateProfile.ts";
+import {ProfileErrors} from "@/utils/profileValidators.ts";
 
 interface AddressDetailsProps {
     locality: string | null;
@@ -22,7 +22,7 @@ interface AddressDetailsProps {
     propertyNumberState: string | null;
     setPropertyNumberState: (value: string) => void;
     isEditing: boolean;
-    errors: Errors;
+    errors: ProfileErrors;
 }
 
 const AddressDetails: React.FC<AddressDetailsProps> = (

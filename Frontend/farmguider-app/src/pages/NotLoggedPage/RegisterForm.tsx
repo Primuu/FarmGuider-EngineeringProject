@@ -5,7 +5,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {register} from "@/services/authenticationService.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
 import useValidation from "@/hooks/useValidation.ts";
-import {nameRegex, RegisterValues, validateRegister} from "@/utils/validateRegister.ts";
+import {nameRegex, RegisterValues, validateRegister} from "@/utils/profileValidators.ts";
 import '@/pages/NotLoggedPage/forms.css';
 import LockIcon from '@mui/icons-material/Lock';
 import {useTranslation} from "react-i18next";

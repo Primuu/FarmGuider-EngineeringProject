@@ -11,11 +11,13 @@ import PersonalDetails from "@/pages/ProfilePage/PersonalDetails.tsx";
 import AddressDetails from "@/pages/ProfilePage/AddressDetails.tsx";
 import {useTranslation} from "react-i18next";
 import useValidation from "@/hooks/useValidation.ts";
-import {ProfileValues, validateProfile} from "@/utils/validateProfile.ts";
+import {ProfileValues, validateProfile} from "@/utils/profileValidators.ts";
 import UserUpdateDTO from "@/entities/UserUpdateDTO.ts";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {useSnackbar} from "notistack";
 import ProfileButtons from "@/pages/ProfilePage/ProfileButtons.tsx";
+import ChangePasswordModal from "@/pages/ProfilePage/ChangePasswordModal.tsx";
+import DeleteAccountModal from "@/pages/ProfilePage/DeleteAccountModal.tsx";
 
 const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
@@ -26,6 +28,8 @@ const ProfilePage = () => {
     const {t} = useTranslation('profilePage');
     const {errors, validate, setErrors} = useValidation<ProfileValues>(validateProfile);
     const {enqueueSnackbar} = useSnackbar();
+    const [openChangePasswdModal, setOpenChangePasswdModal] = useState(false);
+    const [openDeleteAccModal, setOpenDeleteAccModal] = useState(false);
     // PersonalDetails States
     const [firstNameState, setFirstNameState] = useState<string>("");
     const [lastNameState, setLastNameState] = useState<string>("");
@@ -111,6 +115,11 @@ const ProfilePage = () => {
         setPropertyNumberState(userResponseDTO!.propertyNumber);
     };
 
+    const handleOpenDeleteAccountModal = () => setOpenDeleteAccModal(true);
+    const handleCloseDeleteAccountModal  = () => setOpenDeleteAccModal(false);
+    const handleOpenChangePasswdModal = () => setOpenChangePasswdModal(true);
+    const handleCloseChangePasswdModal = () => setOpenChangePasswdModal(false);
+
     if (loading) return <LoadingScreen/>;
     if (!userResponseDTO) return null;
 
@@ -154,6 +163,18 @@ const ProfilePage = () => {
                     isEditing={isEditing}
                     handleCancel={handleCancel}
                     handleEdit={handleEdit}
+                    handleOpenChangePasswdModal={handleOpenChangePasswdModal}
+                    handleOpenDeleteAccModal={handleOpenDeleteAccountModal}
+                />
+
+                <ChangePasswordModal
+                    open={openChangePasswdModal}
+                    onClose={handleCloseChangePasswdModal}
+                />
+
+                <DeleteAccountModal
+                    open={openDeleteAccModal}
+                    onClose={handleCloseDeleteAccountModal}
                 />
             </div>
         </form>
