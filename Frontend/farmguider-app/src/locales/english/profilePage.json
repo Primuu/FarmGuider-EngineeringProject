@@ -3,6 +3,8 @@
   "saveButton": "Save",
   "cancelButton": "Cancel",
   "editButton": "Edit Data",
+  "deleteAccountButton": "Delete Account",
+  "changePasswordButton": "Change Password",
   "personals": {
     "header": "Personal Data",
     "email": "Email Address",

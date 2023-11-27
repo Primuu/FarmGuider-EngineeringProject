@@ -26,7 +26,7 @@ const ProfileButtons: React.FC<ProfileButtonsProps> = ({isEditing, handleCancel,
                     color="secondary"
                 >
                     <PersonOffIcon className="profile-button-icon"/>
-                    Delete Account
+                    {t('deleteAccountButton')}
                 </Button>
 
                 <Button
@@ -36,7 +36,7 @@ const ProfileButtons: React.FC<ProfileButtonsProps> = ({isEditing, handleCancel,
                     color="primary"
                 >
                     <LockResetIcon className="profile-button-icon"/>
-                    Change Password
+                    {t('changePasswordButton')}
                 </Button>
             </div>
             <div>
