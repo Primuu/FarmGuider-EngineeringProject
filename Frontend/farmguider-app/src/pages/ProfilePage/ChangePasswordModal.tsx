@@ -1,10 +1,16 @@
 import {useTranslation} from "react-i18next";
 import {Box, Button, Fade, IconButton, InputAdornment, Modal, Slide, TextField, Typography} from "@mui/material";
 import React, {useState} from "react";
-
-import '@/pages/ProfilePage/modals.css';
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import useValidation from "@/hooks/useValidation.ts";
+import {ChangePasswordValues, validateChangePassword} from "@/utils/profileValidators.ts";
+import UserChangePasswordDTO from "@/entities/UserChangePasswordDTO.ts";
+import {changePassword} from "@/services/authenticationService.ts";
+import {useSnackbar} from "notistack";
+
+import '@/pages/ProfilePage/modals.css';
+import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 
 type ChangePasswordModalProps = {
     open: boolean;
@@ -18,6 +24,8 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const {t} = useTranslation('profilePage');
+    const {errors, validate, setErrors} = useValidation<ChangePasswordValues>(validateChangePassword);
+    const {enqueueSnackbar} = useSnackbar();
 
     const toggleCurrentPasswordVisibility = () => {
         setShowCurrentPassword(!showCurrentPassword);
@@ -39,10 +47,40 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
         setConfirmPassword(e.target.value);
     };
 
+    const cancel = () => {
+        setCurrentPassword("");
+        setPassword("");
+        setConfirmPassword("");
+
+        onClose();
+    }
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (!validate({password, confirmPassword}, t)) return;
+
+        const userChangePasswordDTO: UserChangePasswordDTO = {
+            currentPassword: currentPassword,
+            newPassword: password
+        };
+
+        changePassword(userChangePasswordDTO)
+            .then(() => {
+                cancel();
+                enqueueSnackbar(t('changePasswd.successSnackbar'), SnackbarSuccess);
+            })
+            .catch(() => {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    currentPassword: t('changePasswd.error')
+                }));
+            })
+    };
+
     return (
         <Modal
             open={open}
-            onClose={onClose}
+            onClose={cancel}
             closeAfterTransition
         >
             <Fade in={open}>
@@ -53,26 +91,50 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
                         mountOnEnter
                         unmountOnExit
                     >
-                        <div>
+                        <Box component="form" onSubmit={handleSubmit} className="change-passwd-form">
                             <Typography className="modal-header">
-                                Change Password
+                                {t('changePasswd.header')}
                             </Typography>
 
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                label={"Current Password"}
+                                autoComplete="new-password"
+                                label={t('changePasswd.currentPasswd')}
                                 type={showCurrentPassword ? "text" : "password"}
                                 value={currentPassword}
                                 onChange={handleCurrentPasswordChange}
-                                // error={!!errors.password}
-                                // helperText={errors.password}
+                                error={!!errors.currentPassword}
+                                helperText={errors.currentPassword}
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
                                             <IconButton
                                                 onClick={toggleCurrentPasswordVisibility}
+                                            >
+                                                {showCurrentPassword ? <Visibility/> : <VisibilityOff/>}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                label={t('changePasswd.newPasswd')}
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={handlePasswordChange}
+                                error={!!errors.password}
+                                helperText={errors.password}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                onClick={togglePasswordVisibility}
                                             >
                                                 {showPassword ? <Visibility/> : <VisibilityOff/>}
                                             </IconButton>
@@ -80,7 +142,50 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
                                     ),
                                 }}
                             />
-                        </div>
+
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                label={t('changePasswd.confirmPasswd')}
+                                type={showPassword ? "text" : "password"}
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                                error={!!errors.confirmPassword}
+                                helperText={errors.confirmPassword}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                onClick={togglePasswordVisibility}
+                                            >
+                                                {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+
+                            <Typography className="change-passwd-password-text">
+                                {t('changePasswd.passwordRequirements')}
+                            </Typography>
+                            <Box className="change-passwd-button-group">
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    className="confirm-change-passwd-button"
+                                >
+                                    {t('changePasswd.changePasswdButton')}
+                                </Button>
+
+                                <Button
+                                    variant="outlined"
+                                    onClick={cancel}
+                                >
+                                    {t('changePasswd.cancelButton')}
+                                </Button>
+                            </Box>
+                        </Box>
                     </Slide>
                 </Box>
             </Fade>

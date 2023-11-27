@@ -19,6 +19,18 @@
     "propertyNumber": "Numer Budynku",
     "dataNotProvided": "Dane niewprowadzone"
   },
+  "changePasswd": {
+    "header": "Zmiana Hasła",
+    "currentPasswd": "Obecne Hasło",
+    "newPasswd": "Nowe Hasło",
+    "confirmPasswd": "Potwierdź Hasło",
+    "changePasswdButton": "Zmień Hasło",
+    "cancelButton": "Anuluj",
+    "passwordRequirements": "Hasło musi zawierać przynajmniej jedną małą literę, jedną dużą literę, jeden znak specjalny i jedną cyfrę (minimum 8 znaków).",
+    "successSnackbar": "Hasło zmieniono pomyślnie",
+    "errorSnackbar": "Hasło nie zostało zmienione, coś poszło nie tak",
+    "error": "Nieprawidłowe hasło"
+  },
   "validation": {
     "firstNameFilled": "Imię musi być podane",
     "firstNameLength": "Imię może zawierać maksymalnie 45 znaków",
@@ -27,7 +39,10 @@
     "localityLength": "Nazwa miejscowości może zawierać maksymalnie 45 znaków",
     "streetLength": "Nazwa ulicy może zawierać maksymalnie 45 znaków",
     "zipCodeLength": "Kod pocztowy może zawierać maksymalnie 10 znaków",
-    "propertyNumberLength": "Numer budynku może zawierać maksymalnie 10 znaków"
+    "propertyNumberLength": "Numer budynku może zawierać maksymalnie 10 znaków",
+    "passwordLength": "Hasło musi zawierać przynajmniej 8 znaków",
+    "passwordRequirements": "Hasło musi spełniać wymogi złożoności",
+    "confirmPasswordMismatch": "Hasła nie są zgodne"
   },
   "snackbars": {
     "updateSuccess": "Pomyślnie zaktualizowano profil",

@@ -19,6 +19,18 @@
     "propertyNumber": "Property Number",
     "dataNotProvided": "Data not provided"
   },
+  "changePasswd": {
+    "header": "Change Password",
+    "currentPasswd": "Current Password",
+    "newPasswd": "New Password",
+    "confirmPasswd": "Confirm Password",
+    "changePasswdButton": "Change Password",
+    "cancelButton": "Cancel",
+    "passwordRequirements": "Password must contain at least one lowercase letter, one uppercase letter, one special character and one number (minimum 8 characters).",
+    "successSnackbar": "Password changed successfully",
+    "errorSnackbar": "Password wasn't changed, something went wrong",
+    "error": "Incorrect password"
+  },
   "validation": {
     "firstNameFilled": "First name must be filled in",
     "firstNameLength": "First name can contain a maximum of 45 characters",
@@ -27,7 +39,10 @@
     "localityLength": "Locality name can contain a maximum of 45 characters",
     "streetLength": "Street name can contain a maximum of 45 characters",
     "zipCodeLength": "Zip code can contain a maximum of 10 characters",
-    "propertyNumberLength": "Property number can contain a maximum of 6 characters"
+    "propertyNumberLength": "Property number can contain a maximum of 6 characters",
+    "passwordLength": "Password must contain at least 8 characters",
+    "passwordRequirements": "Password must meet the complexity requirements",
+    "confirmPasswordMismatch": "Passwords do not match"
   },
   "snackbars": {
     "updateSuccess": "Profile updated successfully",
