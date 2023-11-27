@@ -116,7 +116,7 @@ const ProfilePage = () => {
     };
 
     const handleOpenDeleteAccountModal = () => setOpenDeleteAccModal(true);
-    const handleCloseDeleteAccountModal  = () => setOpenDeleteAccModal(false);
+    const handleCloseDeleteAccountModal = () => setOpenDeleteAccModal(false);
     const handleOpenChangePasswdModal = () => setOpenChangePasswdModal(true);
     const handleCloseChangePasswdModal = () => setOpenChangePasswdModal(false);
 
@@ -124,60 +124,61 @@ const ProfilePage = () => {
     if (!userResponseDTO) return null;
 
     return (
-        <form onSubmit={handleSubmit}>
-            <Typography className="profile-header">
-                {t('header')}
-            </Typography>
-            <div className="profile-container">
-                <div className="profile-details">
-                    <PersonalDetails
-                        email={userResponseDTO.email}
-                        firstName={userResponseDTO.firstName}
-                        firstNameState={firstNameState}
-                        setFirstNameState={setFirstNameState}
-                        lastName={userResponseDTO.lastName}
-                        lastNameState={lastNameState}
-                        setLastNameState={setLastNameState}
+        <div>
+            <form onSubmit={handleSubmit}>
+                <Typography className="profile-header">
+                    {t('header')}
+                </Typography>
+                <div className="profile-container">
+                    <div className="profile-details">
+                        <PersonalDetails
+                            email={userResponseDTO.email}
+                            firstName={userResponseDTO.firstName}
+                            firstNameState={firstNameState}
+                            setFirstNameState={setFirstNameState}
+                            lastName={userResponseDTO.lastName}
+                            lastNameState={lastNameState}
+                            setLastNameState={setLastNameState}
+                            isEditing={isEditing}
+                            errors={errors}
+                        />
+                        <AddressDetails
+                            locality={userResponseDTO.locality}
+                            localityState={localityState}
+                            setLocalityState={setLocalityState}
+                            street={userResponseDTO.street}
+                            streetState={streetState}
+                            setStreetState={setStreetState}
+                            zipCode={userResponseDTO.zipCode}
+                            zipCodeState={zipCodeState}
+                            setZipCodeState={setZipCodeState}
+                            propertyNumber={userResponseDTO.propertyNumber}
+                            propertyNumberState={propertyNumberState}
+                            setPropertyNumberState={setPropertyNumberState}
+                            isEditing={isEditing}
+                            errors={errors}
+                        />
+                    </div>
+
+                    <ProfileButtons
                         isEditing={isEditing}
-                        errors={errors}
-                    />
-                    <AddressDetails
-                        locality={userResponseDTO.locality}
-                        localityState={localityState}
-                        setLocalityState={setLocalityState}
-                        street={userResponseDTO.street}
-                        streetState={streetState}
-                        setStreetState={setStreetState}
-                        zipCode={userResponseDTO.zipCode}
-                        zipCodeState={zipCodeState}
-                        setZipCodeState={setZipCodeState}
-                        propertyNumber={userResponseDTO.propertyNumber}
-                        propertyNumberState={propertyNumberState}
-                        setPropertyNumberState={setPropertyNumberState}
-                        isEditing={isEditing}
-                        errors={errors}
+                        handleCancel={handleCancel}
+                        handleEdit={handleEdit}
+                        handleOpenChangePasswdModal={handleOpenChangePasswdModal}
+                        handleOpenDeleteAccModal={handleOpenDeleteAccountModal}
                     />
                 </div>
+            </form>
+            <ChangePasswordModal
+                open={openChangePasswdModal}
+                onClose={handleCloseChangePasswdModal}
+            />
 
-                <ProfileButtons
-                    isEditing={isEditing}
-                    handleCancel={handleCancel}
-                    handleEdit={handleEdit}
-                    handleOpenChangePasswdModal={handleOpenChangePasswdModal}
-                    handleOpenDeleteAccModal={handleOpenDeleteAccountModal}
-                />
-
-                <ChangePasswordModal
-                    open={openChangePasswdModal}
-                    onClose={handleCloseChangePasswdModal}
-                />
-
-                <DeleteAccountModal
-                    open={openDeleteAccModal}
-                    onClose={handleCloseDeleteAccountModal}
-                />
-            </div>
-        </form>
+            <DeleteAccountModal
+                open={openDeleteAccModal}
+                onClose={handleCloseDeleteAccountModal}
+            />
+        </div>
     )
 }
 
