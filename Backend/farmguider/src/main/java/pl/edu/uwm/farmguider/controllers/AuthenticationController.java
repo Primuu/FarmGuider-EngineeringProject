@@ -118,7 +118,7 @@ public class AuthenticationController {
     public ResponseEntity<ResponseMessage> revoke() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         sessionService.revoke(email);
-        Cookie deletedSessionCookie = createCookie(SESSION_COOKIE_NAME, null, COOKIE_NULL_AGE, COOKIE_DEFAULT_PATH);
+        Cookie deletedSessionCookie = createCookie(SESSION_COOKIE_NAME, NULL_COOKIE_VALUE, COOKIE_NULL_AGE, COOKIE_DEFAULT_PATH);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .header(HttpHeaders.SET_COOKIE, formatCookieHeader(deletedSessionCookie))
@@ -151,35 +151,6 @@ public class AuthenticationController {
                         .userRole(authorities.iterator().next().getAuthority())
                         .build()
                 );
-    }
-
-    @Operation(summary = "Change password",
-            description = "Changes the user's password based on the provided payload")
-    @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Successful changed password",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = ResponseMessage.class)
-                    )),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "Bad Request - returns map of errors",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorResponse.class)
-                    ))
-    })
-    @PatchMapping("/change-passwd")
-    public ResponseEntity<ResponseMessage> changePassword(@RequestBody @Valid UserChangePasswordDTO userChangePasswordDTO) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        userFacade.changePassword(email, userChangePasswordDTO);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(ResponseMessage.builder()
-                        .message("Successfully changed password")
-                        .build());
     }
 
 }
