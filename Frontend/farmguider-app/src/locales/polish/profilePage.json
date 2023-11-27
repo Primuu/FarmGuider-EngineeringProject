@@ -31,6 +31,16 @@
     "errorSnackbar": "Hasło nie zostało zmienione, coś poszło nie tak",
     "error": "Nieprawidłowe hasło"
   },
+  "deleteAccount": {
+    "header": "Usuwanie Konta",
+    "password": "Hasło",
+    "instruction": "Aby usunąć konto, podaj swoje aktualne hasło",
+    "warning": "Uwaga! Usunięcie konta to operacja, której nie można cofnąć. Czy jesteś pewny że chcesz usunąć konto i wszystkie informacje z nim związane?",
+    "deleteAccountButton": "Usuń Konto",
+    "cancelButton": "Anuluj",
+    "error": "Nieprawidłowe hasło",
+    "snackbar": "Konto usunięte pomyślnie"
+  },
   "validation": {
     "firstNameFilled": "Imię musi być podane",
     "firstNameLength": "Imię może zawierać maksymalnie 45 znaków",

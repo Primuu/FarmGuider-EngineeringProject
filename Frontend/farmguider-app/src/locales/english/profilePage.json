@@ -31,6 +31,16 @@
     "errorSnackbar": "Password wasn't changed, something went wrong",
     "error": "Incorrect password"
   },
+  "deleteAccount": {
+    "header": "Delete Account",
+    "password": "Password",
+    "instruction": "To delete your account, enter your current password",
+    "warning": "Warning! Deleting an account is an operation that cannot be undone. Are you sure you want to delete your account and all information associated with it?",
+    "deleteAccountButton": "Delete Account",
+    "cancelButton": "Cancel",
+    "error": "Incorrect password",
+    "snackbar": "Deleted account successfully"
+  },
   "validation": {
     "firstNameFilled": "First name must be filled in",
     "firstNameLength": "First name can contain a maximum of 45 characters",
