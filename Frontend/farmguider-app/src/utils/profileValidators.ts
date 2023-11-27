@@ -46,6 +46,7 @@ export type ProfileErrors = {
 };
 
 export type PasswordErrors = {
+    currentPassword?: string;
     password?: string;
     confirmPassword?: string;
 };
@@ -58,8 +59,6 @@ export const validateRegister = (values: RegisterValues, t: TFunction): Register
     tempErrors.lastName = validateLastName(names.lastName, t);
     tempErrors.email = validateEmail(email, t);
     tempErrors.password = validatePassword(password, t);
-
-    tempErrors.password = validateConfirmPassword(password, confirmPassword, t);
     tempErrors.confirmPassword = validateConfirmPassword(password, confirmPassword, t);
 
     return tempErrors;
@@ -84,8 +83,6 @@ export const validateChangePassword = (values: ChangePasswordValues, t: TFunctio
     const tempErrors: PasswordErrors = {};
 
     tempErrors.password = validatePassword(password, t);
-
-    tempErrors.password = validateConfirmPassword(password, confirmPassword, t);
     tempErrors.confirmPassword = validateConfirmPassword(password, confirmPassword, t);
 
     return tempErrors;
