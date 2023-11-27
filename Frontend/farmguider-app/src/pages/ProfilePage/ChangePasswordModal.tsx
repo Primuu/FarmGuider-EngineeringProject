@@ -6,11 +6,13 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import useValidation from "@/hooks/useValidation.ts";
 import {ChangePasswordValues, validateChangePassword} from "@/utils/profileValidators.ts";
 import UserChangePasswordDTO from "@/entities/UserChangePasswordDTO.ts";
-import {changePassword} from "@/services/authenticationService.ts";
+import {changePassword} from "@/services/userService.ts";
 import {useSnackbar} from "notistack";
-
-import '@/pages/ProfilePage/modals.css';
 import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+
+import '@/pages/ProfilePage/changePassword.css';
 
 type ChangePasswordModalProps = {
     open: boolean;
@@ -53,7 +55,6 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
         setConfirmPassword("");
 
         setErrors({});
-
         onClose();
     }
 
@@ -177,6 +178,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
                                     variant="contained"
                                     className="confirm-change-passwd-button"
                                 >
+                                    <DoneOutlinedIcon className="change-passwd-button-icon"/>
                                     {t('changePasswd.changePasswdButton')}
                                 </Button>
 
@@ -185,6 +187,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({open, onClose}
                                     onClick={cancel}
                                     className="cancel-change-passwd-button"
                                 >
+                                    <CloseOutlinedIcon className="change-passwd-button-icon"/>
                                     {t('changePasswd.cancelButton')}
                                 </Button>
                             </Box>
