@@ -21,8 +21,5 @@
   },
   "farmGuider": {
     "bgImageAlt": "Zdjęcie pszenicy"
-  },
-  "logout": {
-    "snackbar": "Wylogowano pomyślnie"
   }
 }

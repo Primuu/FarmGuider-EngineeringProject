@@ -21,8 +21,5 @@
   },
   "farmGuider": {
     "bgImageAlt": "Wheat image"
-  },
-  "logout": {
-    "snackbar": "Logged out successfully"
   }
 }

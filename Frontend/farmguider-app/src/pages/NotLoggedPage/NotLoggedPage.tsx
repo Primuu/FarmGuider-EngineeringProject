@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Parallax} from 'react-parallax';
 import '@/pages/NotLoggedPage/notLoggedPage.css';
 import {Box, Button, Typography} from '@mui/material';
@@ -9,19 +9,15 @@ import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import {useTranslation} from 'react-i18next';
 import Navbar from "@/components/Navbar/Navbar.tsx";
 import AuthFormsModal from "@/pages/NotLoggedPage/AuthFormsModal.tsx";
-import {useSnackbar} from "notistack";
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
 import cropsImage from '@/assets/crops-image.jpg';
 import potatoesImage from '@/assets/potatoes-image.jpg';
 
 import logo from "@/assets/farmguider-logo.svg";
-import {LOGGED_OUT_ITEM} from "@/constants/CONFIG_CONSTS.ts";
-import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 
 const NotLoggedPage = () => {
     const [openModal, setOpenModal] = useState(false);
-    const { enqueueSnackbar } = useSnackbar();
 
     const handleOpen = () => setOpenModal(true);
     const handleClose = () => setOpenModal(false);
@@ -31,13 +27,6 @@ const NotLoggedPage = () => {
     const strength = 500;
 
     const {t} = useTranslation('notLoggedPage');
-
-    useEffect(() => {
-        if (localStorage.getItem(LOGGED_OUT_ITEM) === 'true') {
-            enqueueSnackbar(t('logout.snackbar'), SnackbarSuccess);
-            localStorage.removeItem(LOGGED_OUT_ITEM);
-        }
-    }, [enqueueSnackbar, t]);
 
     return (
         <Box className="page-container">

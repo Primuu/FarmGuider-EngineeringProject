@@ -1,6 +1,7 @@
 {
   "logout": "Wyloguj",
-  "logout-failed": "Wystąpił błąd podczas wylogowywania",
+  "logoutFail": "Wystąpił błąd podczas wylogowywania",
+  "logoutSuccess": "Wylogowano pomyślnie",
   "profile": "Profil",
   "farms": "Gospodarstwa",
   "animals": "Zwierzęta",

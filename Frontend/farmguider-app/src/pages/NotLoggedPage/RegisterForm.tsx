@@ -9,8 +9,6 @@ import {nameRegex, RegisterValues, validateRegister} from "@/utils/profileValida
 import '@/pages/NotLoggedPage/forms.css';
 import LockIcon from '@mui/icons-material/Lock';
 import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
-import {HOME_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 import {useSnackbar} from "notistack";
 import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 
@@ -29,8 +27,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const navigate = useNavigate();
-    const { enqueueSnackbar } = useSnackbar();
+    const {enqueueSnackbar} = useSnackbar();
 
     const {errors, validate, setErrors} = useValidation<RegisterValues>(validateRegister);
 
@@ -75,8 +72,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({cancel}) => {
 
         try {
             await register(userCreateDTO);
-
-            navigate(HOME_PAGE_URL);
             enqueueSnackbar(t('register.snackbar'), SnackbarSuccess);
         } catch (error) {
             setErrors(prevErrors => ({

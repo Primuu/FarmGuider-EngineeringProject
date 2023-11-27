@@ -5,8 +5,6 @@ import {authenticate} from "@/services/authenticationService.ts";
 import '@/pages/NotLoggedPage/forms.css';
 import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from "react-i18next";
-import {HOME_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
-import {useNavigate} from "react-router-dom";
 import {useSnackbar} from "notistack";
 import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 
@@ -14,12 +12,11 @@ interface LoginFormProps {
     cancel: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
+const LoginForm: React.FC<LoginFormProps> = ({cancel}) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loginError, setLoginError] = useState<boolean>(false);
-    const navigate = useNavigate();
-    const { enqueueSnackbar } = useSnackbar();
+    const {enqueueSnackbar} = useSnackbar();
 
     const {t} = useTranslation('authForms');
 
@@ -38,9 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ cancel }) => {
         void (async () => {
             try {
                 await authenticate(authenticationRequestDTO);
-
                 setLoginError(false);
-                navigate(HOME_PAGE_URL);
                 enqueueSnackbar(t('login.snackbar'), SnackbarSuccess);
             } catch (error) {
                 setLoginError(true);

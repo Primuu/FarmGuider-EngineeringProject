@@ -7,9 +7,8 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import {useTranslation} from "react-i18next";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import {revoke} from "@/services/authenticationService.ts";
-import {LOGGED_OUT_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 import {useSnackbar} from "notistack";
-import {SnackbarError} from "@/utils/snackbarVariants.ts";
+import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {GiBarn, GiCow, GiHighGrass} from 'react-icons/gi';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CloseIcon from '@mui/icons-material/Close';
@@ -36,19 +35,18 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
         try {
             await revoke();
             removeSessionCookie();
-            localStorage.setItem(LOGGED_OUT_ITEM, 'true');
-            window.location.reload();
+            enqueueSnackbar(t('logoutSuccess'), SnackbarSuccess);
         } catch (error) {
-            enqueueSnackbar(t('logout-failed'), SnackbarError);
+            enqueueSnackbar(t('logoutFail'), SnackbarError);
         }
     };
 
     const navigationItems = [
-        { icon: HomeOutlinedIcon, text: t('home'), onClick: () => navigate(HOME_PAGE_URL) },
-        { icon: PersonOutlineIcon, text: t('profile'), onClick: () => navigate(PROFILE_PAGE_URL) },
-        { icon: GiBarn as IconType, text: t('farms'), onClick: () => navigate("/") },
-        { icon: GiCow as IconType, text: t('animals'), onClick: () => navigate("/") },
-        { icon: GiHighGrass as IconType, text: t('crops'), onClick: () => navigate("/") },
+        {icon: HomeOutlinedIcon, text: t('home'), onClick: () => navigate(HOME_PAGE_URL)},
+        {icon: PersonOutlineIcon, text: t('profile'), onClick: () => navigate(PROFILE_PAGE_URL)},
+        {icon: GiBarn as IconType, text: t('farms'), onClick: () => navigate("/")},
+        {icon: GiCow as IconType, text: t('animals'), onClick: () => navigate("/")},
+        {icon: GiHighGrass as IconType, text: t('crops'), onClick: () => navigate("/")},
     ];
 
     return (
@@ -75,7 +73,7 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
                     {navigationItems.map((item, index) => (
                         <ListItemButton key={index} onClick={item.onClick}>
                             <ListItemIcon className="list-item-icon">
-                                <item.icon className="icon" />
+                                <item.icon className="icon"/>
                             </ListItemIcon>
                             <ListItemText primary={item.text}/>
                         </ListItemButton>
