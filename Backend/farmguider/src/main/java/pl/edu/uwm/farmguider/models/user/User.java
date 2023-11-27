@@ -21,7 +21,7 @@ import java.util.Collections;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends BasicEntity implements UserDetails {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     Address address;
 
