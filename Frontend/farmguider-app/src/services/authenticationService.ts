@@ -1,11 +1,18 @@
 import sendHttpRequest from "@/services/HttpRequestService/HttpRequestService.ts";
 import RequestTypes from "@/services/HttpRequestService/RequestTypes.ts";
-import {AUTHENTICATE_URL, GET_AUTH_DATA_URL, REGISTER_URL, REVOKE_URL} from "@/constants/API_ENDPOINTS.ts";
+import {
+    AUTHENTICATE_URL,
+    CHANGE_PASSWORD_URL,
+    GET_AUTH_DATA_URL,
+    REGISTER_URL,
+    REVOKE_URL
+} from "@/constants/API_ENDPOINTS.ts";
 import UserAuthDTO from "@/entities/UserAuthDTO.ts";
 import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
 import UserResponseDTO from "@/entities/UserResponseDTO.ts";
 import ResponseMessage from "@/entities/ResponseMessage.ts";
+import UserChangePasswordDTO from "@/entities/UserChangePasswordDTO.ts";
 
 export const fetchUserAuthData = async (): Promise<UserAuthDTO> => {
     return await sendHttpRequest<UserAuthDTO>({
@@ -35,5 +42,12 @@ export const revoke = async (): Promise<ResponseMessage>  => {
         endpointUrl: REVOKE_URL,
         typeOfRequest: RequestTypes.DELETE
     });
+}
 
+export const changePassword = async (userChangePasswordDTO: UserChangePasswordDTO): Promise<ResponseMessage>  => {
+    return await sendHttpRequest<ResponseMessage>({
+        endpointUrl: CHANGE_PASSWORD_URL,
+        typeOfRequest: RequestTypes.PATCH,
+        body: userChangePasswordDTO
+    });
 }
