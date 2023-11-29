@@ -9,6 +9,7 @@ type AuthContextType = {
     removeSessionCookie: () => void;
     userRole: UserRoles;
     userId: number | undefined;
+    farmId: number | undefined;
     loading: boolean;
 };
 
@@ -20,12 +21,14 @@ const AuthContext = createContext<AuthContextType>({
     removeSessionCookie: () => {},
     userRole: UserRoles.NON_LOGGED,
     userId: undefined,
+    farmId: undefined,
     loading: true,
 });
 
 export const AuthProvider = ({children}: AuthProviderProps) => {
     const [cookies, , removeCookie] = useCookies([SESSION_COOKIE]);
     const [userId, setUserId] = useState<number | undefined>(undefined)
+    const [farmId, setFarmId] = useState<number | undefined>(undefined)
     const [userRole, setUserRole] = useState(UserRoles.NON_LOGGED);
     const [loading, setLoading] = useState(false);
 
@@ -40,6 +43,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
 
                 const userAuthDTO: UserAuthDTO = await fetchUserAuthData();
                 setUserId(userAuthDTO.userId);
+                setFarmId(userAuthDTO.farmId);
                 setUserRole(userAuthDTO.userRole as UserRoles);
             } catch (error) {
                 setUserRole(UserRoles.NON_LOGGED);
@@ -52,6 +56,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
 
     const contextValue = {
         userId,
+        farmId,
         userRole,
         removeSessionCookie,
         loading,
