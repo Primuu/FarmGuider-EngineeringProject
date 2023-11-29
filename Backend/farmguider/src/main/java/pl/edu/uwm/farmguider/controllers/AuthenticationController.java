@@ -20,7 +20,6 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.UserFacade;
 import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.user.dtos.UserAuthDTO;
-import pl.edu.uwm.farmguider.models.user.dtos.UserChangePasswordDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserCreateDTO;
 import pl.edu.uwm.farmguider.models.user.dtos.UserResponseDTO;
 import pl.edu.uwm.farmguider.security.AuthenticationRequestDTO;
@@ -35,8 +34,7 @@ import static pl.edu.uwm.farmguider.security.utils.SecurityConstants.REGISTER_UR
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Authentication Controller",
-        description = "Functionalities intended for registration and login.")
+@Tag(name = "Authentication Controller", description = "Functionalities intended for registration and login.")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
