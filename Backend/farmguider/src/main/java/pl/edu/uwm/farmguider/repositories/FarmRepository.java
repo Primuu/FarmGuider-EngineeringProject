@@ -16,4 +16,11 @@ public interface FarmRepository extends JpaRepository<Farm, Long> {
             """)
     Optional<Farm> findFarmByOwnerEmail(@Param("email") String email);
 
+    @Query("""
+            SELECT f
+            FROM Farm f
+            WHERE f.owner.id = :ownerId
+            """)
+    Optional<Farm> findFarmByOwnerId(@Param("ownerId") Long ownerId);
+
 }
