@@ -17,6 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
+import pl.edu.uwm.farmguider.facades.FarmFacade;
 import pl.edu.uwm.farmguider.facades.UserFacade;
 import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.user.dtos.UserAuthDTO;
@@ -40,6 +41,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final SessionService sessionService;
     private final UserFacade userFacade;
+    private final FarmFacade farmFacade;
 
     @Operation(summary = "Register (create) User",
             description = "Creates a user based on the provided payload " +
@@ -139,13 +141,14 @@ public class AuthenticationController {
     @GetMapping("/auth-data")
     public ResponseEntity<UserAuthDTO> getAuthData() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Long userId = userFacade.getUserIdByEmail(authentication.getName());
+        Long farmId = farmFacade.getFarmIdByOwnerId(userId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(UserAuthDTO.builder()
                         .userId(userId)
+                        .farmId(farmId)
                         .userRole(authorities.iterator().next().getAuthority())
                         .build()
                 );
