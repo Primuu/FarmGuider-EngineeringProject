@@ -2,6 +2,7 @@ package pl.edu.uwm.farmguider.facades;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
 import pl.edu.uwm.farmguider.models.address.Address;
 import pl.edu.uwm.farmguider.models.user.User;
@@ -20,6 +21,7 @@ public class UserFacade {
     private final AddressService addressService;
     private final FarmService farmService;
 
+    @Transactional
     public UserResponseDTO createUser(UserCreateDTO userCreateDTO) {
         String email = userCreateDTO.email();
         if (userService.userExistsByEmail(email)) {
@@ -35,7 +37,9 @@ public class UserFacade {
         userService.changePassword(email, userChangePasswordDTO.currentPassword(), userChangePasswordDTO.newPassword());
     }
 
+    @Transactional
     public void deleteAccount(String email, UserPasswordDTO userPasswordDTO) {
+        farmService.deleteFarmByOwnerEmail(email);
         userService.deleteAccount(email, userPasswordDTO.password());
     }
 

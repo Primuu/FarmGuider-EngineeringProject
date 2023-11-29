@@ -3,7 +3,6 @@ package pl.edu.uwm.farmguider.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
 import pl.edu.uwm.farmguider.exceptions.global.UnauthorizedException;
 import pl.edu.uwm.farmguider.models.address.Address;
@@ -65,7 +64,6 @@ public class UserService {
         userRepository.saveAndFlush(user);
     }
 
-    @Transactional
     public void deleteAccount(String email, String password) {
         User user = getUserByEmail(email);
         verifyPassword(password, user.getPassword());
