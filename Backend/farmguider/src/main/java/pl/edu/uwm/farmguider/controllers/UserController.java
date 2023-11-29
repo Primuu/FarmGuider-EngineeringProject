@@ -133,6 +133,13 @@ public class UserController {
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - entities to delete not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
                     ))
     })
     @DeleteMapping("/delete-account")
