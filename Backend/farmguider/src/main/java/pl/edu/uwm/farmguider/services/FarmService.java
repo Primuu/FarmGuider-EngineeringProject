@@ -21,9 +21,15 @@ public class FarmService {
     public Farm getFarmByOwnerEmail(String email) {
         return farmRepository.findFarmByOwnerEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException(
-                        "Farm",
-                        "Farm for user with email: " + email + " not found."
-                ));
+                        "Farm", "Farm for user with email: " + email + " not found.")
+                );
+    }
+
+    public Farm getFarmByOwnerId(Long ownerId) {
+        return farmRepository.findFarmByOwnerId(ownerId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Farm", "Farm for user with id: " + ownerId + " not found.")
+                );
     }
 
     public Farm createFarm(User owner) {
