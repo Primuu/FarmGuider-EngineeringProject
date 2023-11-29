@@ -61,7 +61,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = (
                     <LocationCityIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
                                label={t('address.locality')}
-                               value={localityState}
+                               value={localityState || ''}
                                onChange={handleLocalityChange}
                                error={!!errors.locality}
                                helperText={errors.locality}
@@ -84,7 +84,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = (
                     <SignpostIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
                                label={t('address.street')}
-                               value={streetState}
+                               value={streetState || ''}
                                onChange={handleStreetChange}
                                error={!!errors.street}
                                helperText={errors.street}
@@ -107,7 +107,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = (
                     <MarkunreadMailboxIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
                                label={t('address.zipCode')}
-                               value={zipCodeState}
+                               value={zipCodeState || ''}
                                onChange={handleZipCodeChange}
                                error={!!errors.zipCode}
                                helperText={errors.zipCode}
@@ -130,7 +130,7 @@ const AddressDetails: React.FC<AddressDetailsProps> = (
                     <FormatListNumberedIcon className="profile-icon" color="primary"/>
                     <TextField className="profile-data-input"
                                label={t('address.propertyNumber')}
-                               value={propertyNumberState}
+                               value={propertyNumberState || ''}
                                onChange={handlePropertyNumberChange}
                                error={!!errors.propertyNumber}
                                helperText={errors.propertyNumber}
