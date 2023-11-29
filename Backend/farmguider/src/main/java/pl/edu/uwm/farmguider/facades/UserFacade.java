@@ -7,6 +7,7 @@ import pl.edu.uwm.farmguider.models.address.Address;
 import pl.edu.uwm.farmguider.models.user.User;
 import pl.edu.uwm.farmguider.models.user.dtos.*;
 import pl.edu.uwm.farmguider.services.AddressService;
+import pl.edu.uwm.farmguider.services.FarmService;
 import pl.edu.uwm.farmguider.services.UserService;
 
 import static pl.edu.uwm.farmguider.models.user.dtos.UserMapper.mapToUserResponseDTO;
@@ -17,6 +18,7 @@ public class UserFacade {
 
     private final UserService userService;
     private final AddressService addressService;
+    private final FarmService farmService;
 
     public UserResponseDTO createUser(UserCreateDTO userCreateDTO) {
         String email = userCreateDTO.email();
@@ -24,7 +26,9 @@ public class UserFacade {
             throw new EntityAlreadyExistsException("User", "User with email: " + email + " already exists.");
         }
         Address emptyAddress = addressService.createEmptyAddress();
-        return mapToUserResponseDTO(userService.createUser(userCreateDTO, emptyAddress));
+        User user = userService.createUser(userCreateDTO, emptyAddress);
+        farmService.createFarm(user);
+        return mapToUserResponseDTO(user);
     }
 
     public void changePassword(String email, UserChangePasswordDTO userChangePasswordDTO) {

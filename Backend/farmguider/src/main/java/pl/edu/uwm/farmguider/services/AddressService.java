@@ -21,13 +21,13 @@ public class AddressService {
         return addressRepository.saveAndFlush(new Address());
     }
 
-    public void updateAddressByUserId(Long userId, String locality, String street, String zipCode, String propertyNumber) {
+    public Address updateAddressByUserId(Long userId, String locality, String street, String zipCode, String propertyNumber) {
         Address address = getAddressByUserId(userId);
         address.setLocality(locality);
         address.setStreet(street);
         address.setZipCode(zipCode);
         address.setPropertyNumber(propertyNumber);
-        addressRepository.saveAndFlush(address);
+        return addressRepository.saveAndFlush(address);
     }
 
 }
