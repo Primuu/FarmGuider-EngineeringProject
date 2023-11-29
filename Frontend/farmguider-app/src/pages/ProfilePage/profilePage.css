@@ -97,7 +97,7 @@
     margin-right: 6px;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 1299px) {
     .profile-header {
         display: none;
     }
