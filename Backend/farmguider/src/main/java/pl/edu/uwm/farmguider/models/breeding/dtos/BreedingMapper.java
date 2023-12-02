@@ -6,6 +6,7 @@ public class BreedingMapper {
 
     public static BreedingResponseDTO mapToBreedingResponseDTO(Breeding breeding) {
         return BreedingResponseDTO.builder()
+                .breedingId(breeding.getId())
                 .breedingName(breeding.getBreedingName())
                 .build();
     }
