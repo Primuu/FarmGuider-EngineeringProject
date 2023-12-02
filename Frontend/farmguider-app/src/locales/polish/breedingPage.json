@@ -17,5 +17,11 @@
     "text": "Dodawanie krów do stada następuje w późniejszym etapie",
     "confirmButton": "Dodaj",
     "cancelButton": "Anuluj"
+  },
+  "breedingContent" : {
+    "pickerLabel": "Wybierz Stado",
+    "addHerdTooltip": "Dodaj Stado",
+    "editHerdTooltip": "Edytuj Stado",
+    "deleteHerdTooltip": "Usuń Stado"
   }
 }

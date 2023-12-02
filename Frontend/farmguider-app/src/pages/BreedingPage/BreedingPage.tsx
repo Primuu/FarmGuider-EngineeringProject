@@ -46,8 +46,6 @@ const BreedingPage = () => {
     if (loading) return <LoadingScreen/>;
     if (!breedingResponseDTOList) return null;
 
-    const firstBreeding = breedingResponseDTOList[0];
-
     return (
         <div>
             <Typography className="layout-header">
@@ -60,7 +58,8 @@ const BreedingPage = () => {
                     />}
                 {breedingResponseDTOList.length > 0 &&
                     <BreedingContent
-                        breeding={firstBreeding}
+                        breedingList={breedingResponseDTOList}
+                        handleOpenAddHerdModal={handleOpenAddHerdModal}
                     />}
             </div>
 

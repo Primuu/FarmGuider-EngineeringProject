@@ -17,5 +17,11 @@
     "text": "Adding cows to the herd occurs at a later stage",
     "confirmButton": "Add",
     "cancelButton": "Cancel"
+  },
+  "breedingContent" : {
+    "pickerLabel": "Select Herd",
+    "addHerdTooltip": "Add Herd",
+    "editHerdTooltip": "Edit Herd",
+    "deleteHerdTooltip": "Delete Herd"
   }
 }
