@@ -2,11 +2,16 @@ import {useTranslation} from "react-i18next";
 import {Button} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AddIcon from '@mui/icons-material/Add';
+import React from "react";
 
 import '@/pages/BreedingPage/noBreedingContent.css';
 import cowImage from "@/assets/cow-image.png";
 
-export const NoBreedingContent = () => {
+type NoBreedingContentProps = {
+    handleOpenAddHerdModal: () => void;
+}
+
+export const NoBreedingContent: React.FC<NoBreedingContentProps> = ({handleOpenAddHerdModal}) => {
     const {t} = useTranslation('breedingPage');
 
     return (
@@ -19,7 +24,7 @@ export const NoBreedingContent = () => {
                 className="add-herd-button-no-content"
                 variant="contained"
                 color="primary"
-                // onClick={}
+                onClick={handleOpenAddHerdModal}
             >
                 <AddIcon className="add-herd-button-icon-no-content"/>
                 {t('noBreedingContent.addButton')}
