@@ -79,7 +79,8 @@ public class UserController {
                     responseCode = "400",
                     description = "Bad Request - returns map of errors",
                     content = @Content(
-                            mediaType = "application/json"
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
                     ))
     })
     @PutMapping("/update/{userId}")

@@ -51,6 +51,7 @@ public class UserFacade {
         return mapToUserResponseDTO(userService.getUserById(userId));
     }
 
+    @Transactional
     public UserResponseDTO updateUserById(Long userId, UserUpdateDTO userUpdateDTO) {
         addressService.updateAddressByUserId(
                 userId,
