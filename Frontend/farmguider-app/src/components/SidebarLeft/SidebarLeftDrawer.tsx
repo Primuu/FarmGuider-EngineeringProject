@@ -9,11 +9,11 @@ import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import {revoke} from "@/services/authenticationService.ts";
 import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
-import {GiBarn, GiCow, GiHighGrass} from 'react-icons/gi';
+import {GiCow, GiHighGrass} from 'react-icons/gi';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import {useNavigate} from 'react-router-dom';
-import {HOME_PAGE_URL, PROFILE_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
+import {BREEDING_PAGE_URL, HOME_PAGE_URL, PROFILE_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
 import {IconType} from "react-icons/lib";
@@ -44,8 +44,7 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
     const navigationItems = [
         {icon: HomeOutlinedIcon, text: t('home'), onClick: () => navigate(HOME_PAGE_URL)},
         {icon: PersonOutlineIcon, text: t('profile'), onClick: () => navigate(PROFILE_PAGE_URL)},
-        {icon: GiBarn as IconType, text: t('farms'), onClick: () => navigate("/")},
-        {icon: GiCow as IconType, text: t('animals'), onClick: () => navigate("/")},
+        {icon: GiCow as IconType, text: t('breeding'), onClick: () => navigate(BREEDING_PAGE_URL)},
         {icon: GiHighGrass as IconType, text: t('crops'), onClick: () => navigate("/")},
     ];
 
