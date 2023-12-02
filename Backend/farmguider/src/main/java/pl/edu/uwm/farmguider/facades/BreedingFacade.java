@@ -35,4 +35,17 @@ public class BreedingFacade {
                 .toList();
     }
 
+    public BreedingResponseDTO updateBreedingById(Long breedingId, BreedingCreateDTO breedingCreateDTO) {
+        Breeding breeding = breedingService.updateBreedingById(breedingId, breedingCreateDTO.breedingName());
+        return mapToBreedingResponseDTO(breeding);
+    }
+
+    public void deleteBreedingById(Long breedingId) {
+        breedingService.deleteBreedingById(breedingId);
+    }
+
+    public Long x(Long breedingId) {
+        return breedingService.getUserIdByBreedingId(breedingId);
+    }
+
 }
