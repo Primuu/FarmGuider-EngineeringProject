@@ -1,6 +1,7 @@
 package pl.edu.uwm.farmguider.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
 import pl.edu.uwm.farmguider.models.breeding.Breeding;
 import pl.edu.uwm.farmguider.models.farm.Farm;
@@ -8,6 +9,7 @@ import pl.edu.uwm.farmguider.repositories.BreedingRepository;
 
 import java.util.List;
 
+@Service
 @RequiredArgsConstructor
 public class BreedingService {
 
