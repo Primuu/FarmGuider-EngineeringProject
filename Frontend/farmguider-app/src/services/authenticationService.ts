@@ -30,7 +30,7 @@ export const register = async (userCreateDTO: UserCreateDTO): Promise<UserRespon
     });
 }
 
-export const revoke = async (): Promise<ResponseMessage>  => {
+export const revoke = async (): Promise<ResponseMessage> => {
     return await sendHttpRequest<ResponseMessage>({
         endpointUrl: REVOKE_URL,
         typeOfRequest: RequestTypes.DELETE
