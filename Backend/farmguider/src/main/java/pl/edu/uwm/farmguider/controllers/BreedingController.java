@@ -1,6 +1,7 @@
 package pl.edu.uwm.farmguider.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,6 +16,8 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.BreedingFacade;
 import pl.edu.uwm.farmguider.models.breeding.dtos.BreedingCreateDTO;
 import pl.edu.uwm.farmguider.models.breeding.dtos.BreedingResponseDTO;
+
+import java.util.List;
 
 
 @RestController
@@ -57,6 +60,26 @@ public class BreedingController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(breedingResponseDTO);
+    }
+
+    @Operation(summary = "Get breedings data by id", description = "Retrieves a farm's breeding list by farm id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Breeding list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = BreedingResponseDTO.class)
+                            )
+                    ))
+    })
+    @GetMapping("/get-breedings/{farmId}")
+    public ResponseEntity<List<BreedingResponseDTO>> getBreedings(@PathVariable Long farmId) {
+        List<BreedingResponseDTO> breedings = breedingFacade.getBreedings(farmId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(breedings);
     }
 
 }
