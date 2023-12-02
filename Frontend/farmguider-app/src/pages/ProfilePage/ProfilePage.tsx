@@ -126,10 +126,10 @@ const ProfilePage = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <Typography className="profile-header">
+                <Typography className="layout-header">
                     {t('header')}
                 </Typography>
-                <div className="profile-container">
+                <div className="layout-container">
                     <div className="profile-details">
                         <PersonalDetails
                             email={userResponseDTO.email}
