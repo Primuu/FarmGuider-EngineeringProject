@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.BreedingFacade;
@@ -54,6 +55,7 @@ public class BreedingController {
                     ))
     })
     @PostMapping("/create-breeding/{farmId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFarmIdWithContext(#farmId)")
     public ResponseEntity<BreedingResponseDTO> createBreeding(@PathVariable Long farmId,
                                                               @RequestBody @Valid BreedingCreateDTO breedingCreateDTO) {
         BreedingResponseDTO breedingResponseDTO = breedingFacade.createBreeding(farmId, breedingCreateDTO);
@@ -75,6 +77,7 @@ public class BreedingController {
                     ))
     })
     @GetMapping("/get-breedings/{farmId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFarmIdWithContext(#farmId)")
     public ResponseEntity<List<BreedingResponseDTO>> getBreedings(@PathVariable Long farmId) {
         List<BreedingResponseDTO> breedings = breedingFacade.getBreedings(farmId);
         return ResponseEntity

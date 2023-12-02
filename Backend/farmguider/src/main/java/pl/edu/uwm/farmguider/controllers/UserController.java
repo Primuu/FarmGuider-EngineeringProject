@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
@@ -51,6 +52,7 @@ public class UserController {
                     ))
     })
     @GetMapping("/{userId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenUserIdWithContext(#userId)")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long userId) {
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -81,6 +83,7 @@ public class UserController {
                     ))
     })
     @PutMapping("/update/{userId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenUserIdWithContext(#userId)")
     public ResponseEntity<UserResponseDTO> updateUserById(@PathVariable Long userId, @RequestBody @Valid UserUpdateDTO userUpdateDTO) {
         UserResponseDTO updatedUser = userFacade.updateUserById(userId, userUpdateDTO);
         return ResponseEntity
