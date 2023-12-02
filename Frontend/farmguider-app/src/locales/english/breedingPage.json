@@ -1,3 +1,8 @@
 {
-  "header": "Breeding"
+  "header": "Breeding",
+  "noBreedingContent": {
+    "information": "It looks like you haven't added any cow herds yet",
+    "addButton": "Add Herd",
+    "imageAlt": "Cow Image"
+  }
 }

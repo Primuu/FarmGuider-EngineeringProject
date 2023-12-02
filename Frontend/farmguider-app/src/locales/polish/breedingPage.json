@@ -1,3 +1,8 @@
 {
-  "header": "Hodowla"
+  "header": "Hodowla",
+  "noBreedingContent": {
+    "information": "Wygląda na to, że nie dodałeś jeszcze żadnego stada krów",
+    "addButton": "Dodaj Stado",
+    "imageAlt": "Obraz Krowy"
+  }
 }
