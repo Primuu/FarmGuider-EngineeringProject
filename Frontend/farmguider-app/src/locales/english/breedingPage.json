@@ -4,5 +4,18 @@
     "information": "It looks like you haven't added any cow herds yet",
     "addButton": "Add Herd",
     "imageAlt": "Cow Image"
+  },
+  "addHerdModal": {
+    "header": "Adding a Herd",
+    "breedingName": "Herd Name",
+    "validation": "Herd name must be filled in",
+    "validationLength3": "Herd name must contain a minimum of 3 characters",
+    "validationLength45": "Herd name can contain a maximum of 45 characters",
+    "successSnackbar": "Herd created successfully",
+    "errorSnackbar": "Something went wrong",
+    "nameRequirements": "Herd name must contain from 3 to 45 characters",
+    "text": "Adding cows to the herd occurs at a later stage",
+    "confirmButton": "Add",
+    "cancelButton": "Cancel"
   }
 }

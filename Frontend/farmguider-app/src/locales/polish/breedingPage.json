@@ -4,5 +4,18 @@
     "information": "Wygląda na to, że nie dodałeś jeszcze żadnego stada krów",
     "addButton": "Dodaj Stado",
     "imageAlt": "Obraz Krowy"
+  },
+  "addHerdModal": {
+    "header": "Dodawanie Stada",
+    "breedingName": "Nazwa Stada",
+    "validation": "Nazwa stada musi być podana",
+    "validationLength3": "Nazwa stada musi zawierać minimum 3 znaki",
+    "validationLength45": "Nazwa stada może zawierać maksymalnie 45 znaków",
+    "successSnackbar": "Stado utworzone pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "nameRequirements": "Nazwa stada musi zawierać od 3 do 45 znaków",
+    "text": "Dodawanie krów do stada następuje w późniejszym etapie",
+    "confirmButton": "Dodaj",
+    "cancelButton": "Anuluj"
   }
 }
