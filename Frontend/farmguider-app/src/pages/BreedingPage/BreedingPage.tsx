@@ -20,12 +20,11 @@ const BreedingPage = () => {
     const navigate = useNavigate();
     const [openAddHerdModal, setOpenAddHerdModal] = useState(false);
 
-    useEffect(() => {
+    const fetchAndSetBreedings = () => {
         if (farmId) {
             fetchBreedings(farmId)
                 .then(data => {
                     setBreedingResponseDTOList(data);
-
                     setLoading(false);
                 })
                 .catch(() => {
@@ -33,8 +32,13 @@ const BreedingPage = () => {
                     navigate(NOT_FOUND_PAGE_URL, {replace: true});
                 })
         }
+    }
+
+    useEffect(() => {
+        fetchAndSetBreedings();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [farmId]);
+
 
     const handleOpenAddHerdModal = () => setOpenAddHerdModal(true);
     const handleCloseAddHerdModal = () => setOpenAddHerdModal(false);
@@ -42,29 +46,28 @@ const BreedingPage = () => {
     if (loading) return <LoadingScreen/>;
     if (!breedingResponseDTOList) return null;
 
+    const firstBreeding = breedingResponseDTOList[0];
+
     return (
         <div>
             <Typography className="layout-header">
                 {t('header')}
             </Typography>
-            {/*<div className="layout-container">*/}
-            {/*    {breedingResponseDTOList.length == 0 &&*/}
-            {/*        <NoBreedingContent*/}
-            {/*            handleOpenAddHerdModal={handleOpenAddHerdModal}*/}
-            {/*        />}*/}
-            {/*    {breedingResponseDTOList.length > 0 && <BreedingContent />}*/}
-            {/*</div>*/}
-
-
             <div className="layout-container">
-                <NoBreedingContent
-                    handleOpenAddHerdModal={handleOpenAddHerdModal}
-                />
+                {breedingResponseDTOList.length == 0 &&
+                    <NoBreedingContent
+                        handleOpenAddHerdModal={handleOpenAddHerdModal}
+                    />}
+                {breedingResponseDTOList.length > 0 &&
+                    <BreedingContent
+                        breeding={firstBreeding}
+                    />}
             </div>
 
             <AddHerdModal
                 open={openAddHerdModal}
                 onClose={handleCloseAddHerdModal}
+                refreshBreedings={fetchAndSetBreedings}
             />
         </div>
     )

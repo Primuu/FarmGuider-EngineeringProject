@@ -14,9 +14,10 @@ import BreedingCreateDTO from "@/entities/BreedingCreateDTO.ts";
 type AddHerdModalProps = {
     open: boolean;
     onClose: () => void;
+    refreshBreedings: () => void;
 }
 
-const AddHerdModal: React.FC<AddHerdModalProps> = ({open, onClose}) => {
+const AddHerdModal: React.FC<AddHerdModalProps> = ({open, onClose, refreshBreedings}) => {
     const {t} = useTranslation('breedingPage');
     const {farmId} = useAuth();
     const [breedingName, setBreedingName] = useState<string>('');
@@ -57,6 +58,7 @@ const AddHerdModal: React.FC<AddHerdModalProps> = ({open, onClose}) => {
                 .then(() => {
                     cancel();
                     enqueueSnackbar(t('addHerdModal.successSnackbar'), SnackbarSuccess);
+                    refreshBreedings();
                 })
                 .catch(() => {
                     enqueueSnackbar(t('addHerdModal.errorSnackbar'), SnackbarError);
