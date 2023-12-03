@@ -18,6 +18,15 @@
     "confirmButton": "Add",
     "cancelButton": "Cancel"
   },
+  "editHerdModal": {
+    "header": "Updating a Herd",
+    "breedingName": "Herd Name",
+    "nameRequirements": "Herd name must contain from 3 to 45 characters",
+    "confirmButton": "Edit",
+    "cancelButton": "Cancel",
+    "successSnackbar": "Herd updated successfully",
+    "errorSnackbar": "Something went wrong"
+  },
   "breedingContent" : {
     "pickerLabel": "Select Herd",
     "addHerdTooltip": "Add Herd",

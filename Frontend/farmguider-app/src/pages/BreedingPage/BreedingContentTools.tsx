@@ -9,6 +9,7 @@ import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
 import {deleteBreeding} from "@/services/breedingService.ts";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {useSnackbar} from "notistack";
+import EditHerdModal from "@/pages/BreedingPage/EditHerdModal.tsx";
 
 type BreedingContentToolsProps = {
     handleOpenAddHerdModal: () => void;
@@ -22,6 +23,11 @@ const BreedingContentTools: React.FC<BreedingContentToolsProps> = (
     const {t} = useTranslation('breedingPage');
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
     const {enqueueSnackbar} = useSnackbar();
+    const [openEditHerdModal, setOpenEditHerdModal] = useState(false);
+
+
+    const handleOpenEditHerdModal = () => setOpenEditHerdModal(true);
+    const handleCloseEditHerdModal = () => setOpenEditHerdModal(false);
 
     const handleOpenConfirmationDialog = () => {
         setOpenConfirmationDialog(true);
@@ -62,7 +68,7 @@ const BreedingContentTools: React.FC<BreedingContentToolsProps> = (
                     className="breeding-content-tools-button"
                     variant="contained"
                     color="primary"
-                    // onClick={}
+                    onClick={handleOpenEditHerdModal}
                 >
                     <EditIcon className="breeding-content-tools-icon"/>
                 </Button>
@@ -78,6 +84,13 @@ const BreedingContentTools: React.FC<BreedingContentToolsProps> = (
                     <DeleteIcon className="breeding-content-tools-icon"/>
                 </Button>
             </Tooltip>
+
+            <EditHerdModal
+                open={openEditHerdModal}
+                onClose={handleCloseEditHerdModal}
+                refreshBreedings={refreshBreedings}
+                selectedBreeding={selectedBreeding}
+            />
 
             <ConfirmationDialog
                 open={openConfirmationDialog}

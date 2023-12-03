@@ -18,6 +18,15 @@
     "confirmButton": "Dodaj",
     "cancelButton": "Anuluj"
   },
+  "editHerdModal": {
+    "header": "Edycja Stada",
+    "breedingName": "Nazwa Stada",
+    "nameRequirements": "Nazwa stada musi zawierać od 3 do 45 znaków",
+    "confirmButton": "Edytuj",
+    "cancelButton": "Anuluj",
+    "successSnackbar": "Stado zaktualizowano pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak"
+  },
   "breedingContent" : {
     "pickerLabel": "Wybierz Stado",
     "addHerdTooltip": "Dodaj Stado",
