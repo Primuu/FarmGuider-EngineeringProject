@@ -15,3 +15,5 @@ export const DELETE_ACCOUNT_URL: string = "/user/delete-account";
 // Breeding
 export const GET_BREEDINGS_URL: string = "/breeding/get-breedings/{farmId}";
 export const CREATE_BREEDING_URL: string = "/breeding/create-breeding/{farmId}";
+export const UPDATE_BREEDING_URL: string = "/breeding/update/{breedingId}";
+export const DELETE_BREEDING_URL: string = "/breeding/delete/{breedingId}";
