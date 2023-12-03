@@ -4,7 +4,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
-    height: 360px;
     max-height: 100vh;
     background: #f5f5f5;
     border: 2px solid #2CB178;
@@ -32,11 +31,12 @@
 }
 
 .add-herd-button-group {
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 16px;
+    margin-bottom: 20px;
 }
 
 .add-herd-button-group .confirm-add-herd-button,
