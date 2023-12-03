@@ -1,0 +1,9 @@
+.breeding-content-add-cow-button {
+    width: 200px;
+}
+
+.breeding-content-add-cow-button .breeding-content-add-cow-icon {
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 6px;
+}

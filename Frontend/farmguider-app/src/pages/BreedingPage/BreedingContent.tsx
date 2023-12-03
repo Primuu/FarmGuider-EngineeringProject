@@ -1,9 +1,11 @@
 import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
 import React, {useEffect, useState} from "react";
-import {Select, SelectChangeEvent} from "@mui/material";
+import {Button, Select, SelectChangeEvent} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import {useTranslation} from "react-i18next";
 import BreedingContentTools from "@/pages/BreedingPage/BreedingContentTools.tsx";
+import {GiCow} from 'react-icons/gi';
+import AddCowModal from "@/pages/BreedingPage/AddCowModal.tsx";
 
 type BreedingContentProps = {
     breedingList: BreedingResponseDTO[];
@@ -16,6 +18,10 @@ const BreedingContent: React.FC<BreedingContentProps> = (
 ) => {
     const {t} = useTranslation('breedingPage');
     const [breeding, setBreeding] = useState<BreedingResponseDTO>(breedingList[0]);
+    const [openAddCowModal, setOpenAddCowModal] = useState(false);
+
+    const handleOpenAddCowModal = () => setOpenAddCowModal(true);
+    const handleCloseAddCowModal = () => setOpenAddCowModal(false);
 
     useEffect(() => {
         setBreeding(breedingList[0]);
@@ -57,7 +63,23 @@ const BreedingContent: React.FC<BreedingContentProps> = (
                     selectedBreeding={breeding}
                     refreshBreedings={refreshBreedings}
                 />
+
+                <Button
+                    className="breeding-content-add-cow-button"
+                    variant="contained"
+                    color="primary"
+                    onClick={handleOpenAddCowModal}
+                >
+                    <GiCow className="breeding-content-add-cow-icon"/>
+                    {t('breedingContent.addCowButton')}
+                </Button>
             </div>
+
+            <AddCowModal
+                open={openAddCowModal}
+                onClose={handleCloseAddCowModal}
+                breedingId={breeding.breedingId}
+            />
         </div>
     )
 }

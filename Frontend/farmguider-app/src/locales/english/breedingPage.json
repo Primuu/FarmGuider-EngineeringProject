@@ -35,6 +35,22 @@
     "deleteDialogTitle": "Deleting Herd",
     "deleteDialogMessage": "Are you sure you want to delete herd: ",
     "deleteSuccessSnackbar": "Herd deleted successfully",
-    "deleteErrorSnackbar": "Something went wrong"
+    "deleteErrorSnackbar": "Something went wrong",
+    "addCowButton": "Add Cow"
+  },
+  "addCowModal":{
+    "header": "Adding a Cow",
+    "earTagNumber": "Ear Tag Number",
+    "cowName": "Cow Name",
+    "confirmButton": "Add Cow",
+    "cancelButton": "Cancel",
+    "successSnackbar": "Cow added successfully",
+    "errorSnackbar": "Something went wrong",
+    "validation": {
+      "cowNameLength": "Cow name can contain a maximum of 45 characters",
+      "earTagNumberRequired": "Ear tag number must be filled in",
+      "earTagNumberLength" : "Ear tag number must contain exactly 14 characters",
+      "earTagNumberPattern": "Ear tag number must contain 12 digits preceded by 2 letters"
+    }
   }
 }

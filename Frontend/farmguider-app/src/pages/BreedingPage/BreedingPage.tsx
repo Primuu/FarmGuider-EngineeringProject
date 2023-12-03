@@ -39,7 +39,6 @@ const BreedingPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [farmId]);
 
-
     const handleOpenAddHerdModal = () => setOpenAddHerdModal(true);
     const handleCloseAddHerdModal = () => setOpenAddHerdModal(false);
 
