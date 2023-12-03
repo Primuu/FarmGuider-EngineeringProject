@@ -1,18 +1,6 @@
 import {useTranslation} from "react-i18next";
-import {
-    Box,
-    Button,
-    Fade,
-    FormControl,
-    InputLabel,
-    Modal,
-    Select,
-    SelectChangeEvent,
-    Slide,
-    TextField,
-    Typography
-} from "@mui/material";
-import React, {useState} from "react";
+import {Box, Button, Fade, FormControl, InputLabel, Modal, Select, SelectChangeEvent, Slide, TextField, Typography} from "@mui/material";
+import React, {useEffect, useState} from "react";
 import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -25,6 +13,12 @@ import {createCow} from "@/services/cowService.ts";
 import MenuItem from "@mui/material/MenuItem";
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import plLocale from 'date-fns/locale/pl';
+import enLocale from 'date-fns/locale/en-US';
+import i18n from "i18next";
 
 type AddCowModalProps = {
     open: boolean;
@@ -36,10 +30,17 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
     const [earTagNumber, setEarTagNumber] = useState<string>('');
     const [gender, setGender] = useState<string>('FEMALE');
     const [cowName, setCowName] = useState<string>('');
-    // const [dateOfBirth, setDateOfBirth] = useState< DATE >( TODAY );
+    const [dateOfBirth, setDateOfBirth] = useState<Date | null>(new Date());
     const {t} = useTranslation('breedingPage');
     const {errors, validate, setErrors} = useValidation<CowValues>(validateAddCow);
     const {enqueueSnackbar} = useSnackbar();
+    const [locale, setLocale] = useState(enLocale);
+
+    useEffect(() => {
+        if (i18n.language === 'pl') setLocale(plLocale);
+        if (i18n.language === 'en') setLocale(enLocale);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [i18n.language]);
 
     const handleEarTagNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEarTagNumber(e.target.value.toUpperCase());
@@ -53,23 +54,27 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
         setCowName(e.target.value);
     };
 
+    const handleDateChange = (date: Date | null) => {
+        setDateOfBirth(date);
+    };
+
     const cancel = () => {
         setEarTagNumber("");
         setGender('FEMALE');
         setCowName("");
-        // setDateOfBirth( TODAY );
+        setDateOfBirth(new Date());
         setErrors({});
         onClose();
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if(!validate({earTagNumber, cowName}, t)) return;
+        if (!validate({earTagNumber, cowName, dateOfBirth}, t)) return;
 
         const cowCreateDTO: CowCreateDTO = {
             cowName: cowName === '' ? null : cowName,
             earTagNumber: earTagNumber,
-            // dateOfBirth: ,
+            dateOfBirth: dateOfBirth!,
             gender: gender
         };
 
@@ -104,58 +109,90 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
                                 {t('addCowModal.header')}
                             </Typography>
 
-                            <div className="add-cow-inputs">
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    label={t('addCowModal.earTagNumber')}
-                                    placeholder={"XX000123456789"}
-                                    type={"text"}
-                                    value={earTagNumber || ''}
-                                    onChange={handleEarTagNumberChange}
-                                    error={!!errors.earTagNumber}
-                                    helperText={errors.earTagNumber}
-                                    inputProps={{
-                                        maxLength: 14,
-                                        textTransform: 'uppercase'
-                                    }}
-                                />
+                            <Typography className="add-cow-sub-header">
+                                {t('addCowModal.subHeader')}
+                            </Typography>
 
-                                <FormControl fullWidth margin="normal">
-                                    <InputLabel>
-                                        {t('addCowModal.selectGender')}
-                                    </InputLabel>
-                                    <Select
-                                        value={gender}
-                                        label={t('addCowModal.selectGender')}
-                                        onChange={handleGenderChange}
-                                    >
-                                        <MenuItem value="FEMALE">
-                                            <FemaleIcon className="gender-icon"/>
-                                            {t('addCowModal.female')}
-                                        </MenuItem>
-                                        <MenuItem value="MALE">
-                                            <MaleIcon className="gender-icon"/>
-                                            {t('addCowModal.male')}
-                                        </MenuItem>
-                                    </Select>
-                                </FormControl>
+                            <div className="add-cow-form-container">
+                                <div className="add-cow-inputs">
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label={t('addCowModal.earTagNumber')}
+                                        placeholder={"XX000123456789"}
+                                        type={"text"}
+                                        value={earTagNumber || ''}
+                                        onChange={handleEarTagNumberChange}
+                                        error={!!errors.earTagNumber}
+                                        helperText={errors.earTagNumber}
+                                        inputProps={{
+                                            maxLength: 14
+                                        }}
+                                    />
 
-                                <TextField
-                                    margin="normal"
-                                    fullWidth
-                                    label={t('addCowModal.cowName')}
-                                    type={"text"}
-                                    value={cowName || ''}
-                                    onChange={handleCowNameChange}
-                                    error={!!errors.cowName}
-                                    helperText={errors.cowName}
-                                />
+                                    <TextField
+                                        margin="normal"
+                                        fullWidth
+                                        label={t('addCowModal.cowName')}
+                                        type={"text"}
+                                        value={cowName || ''}
+                                        onChange={handleCowNameChange}
+                                        error={!!errors.cowName}
+                                        helperText={errors.cowName}
+                                    />
+                                </div>
+                                <div className="add-cow-selectors">
+                                    <FormControl fullWidth margin="normal">
+                                        <InputLabel>
+                                            {t('addCowModal.selectGender')}
+                                        </InputLabel>
+                                        <Select
+                                            value={gender}
+                                            label={t('addCowModal.selectGender')}
+                                            onChange={handleGenderChange}
+                                        >
+                                            <MenuItem value="FEMALE">
+                                                <FemaleIcon className="gender-icon"/>
+                                                {t('addCowModal.female')}
+                                            </MenuItem>
+                                            <MenuItem value="MALE">
+                                                <MaleIcon className="gender-icon"/>
+                                                {t('addCowModal.male')}
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
+
+                                    <div className="calendar">
+                                        <LocalizationProvider
+                                            dateAdapter={AdapterDateFns}
+                                            adapterLocale={locale}
+                                        >
+                                            <DatePicker
+                                                label={t('addCowModal.calendarLabel')}
+                                                value={dateOfBirth}
+                                                onChange={handleDateChange}
+                                                maxDate={new Date()}
+                                                disableFuture
+                                                openTo="day"
+                                                views={['year', 'month', 'day']}
+                                                desktopModeMediaQuery="@media (min-width:600px)"
+                                                slotProps={{
+                                                    textField: {
+                                                        error: !!errors.dateOfBirth,
+                                                        helperText: errors.dateOfBirth
+                                                    }
+                                                }}
+                                            />
+                                        </LocalizationProvider>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="add-cow-calendar">
 
-                            </div>
+                            <Typography className="add-cow-sub-req">
+                                {t('addCowModal.requirements')}
+                            </Typography>
+
                             <Box className="add-cow-button-group">
                                 <Button
                                     type="submit"
