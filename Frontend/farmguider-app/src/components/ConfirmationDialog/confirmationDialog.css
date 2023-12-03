@@ -1,0 +1,19 @@
+.confirmation-dialog-button {
+    width: 150px;
+}
+
+.confirmation-dialog-icon {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+@media (max-width: 599px) {
+    .confirmation-dialog-button {
+        width: unset;
+    }
+
+    .confirmation-dialog-icon {
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+}
