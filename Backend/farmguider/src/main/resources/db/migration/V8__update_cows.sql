@@ -1,0 +1,1 @@
+ALTER TABLE public.cows ADD COLUMN cow_name VARCHAR(45) NULL;
