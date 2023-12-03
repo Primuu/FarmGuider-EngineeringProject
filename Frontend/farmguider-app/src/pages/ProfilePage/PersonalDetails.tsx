@@ -3,7 +3,7 @@ import {TextField, Typography} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
-import {nameRegex} from "@/utils/profileValidators.ts";
+import {NAME_REGEX} from "@/utils/profileValidators.ts";
 import {useTranslation} from "react-i18next";
 import {ProfileErrors} from "@/utils/profileValidators.ts";
 
@@ -28,12 +28,12 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = (
     const {t} = useTranslation('profilePage');
 
     const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const sanitizedValue = event.target.value.replace(nameRegex, '');
+        const sanitizedValue = event.target.value.replace(NAME_REGEX, '');
         setFirstNameState(sanitizedValue);
     };
 
     const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const sanitizedValue = event.target.value.replace(nameRegex, '');
+        const sanitizedValue = event.target.value.replace(NAME_REGEX, '');
         setLastNameState(sanitizedValue);
     };
 

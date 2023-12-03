@@ -1,8 +1,8 @@
 import {TFunction} from "i18next";
 
-export const nameRegex = /[^\p{L}-]/gu;
-export const emailRegex = /^[A-Za-z0-9+_.-]+@(.+\.)+[A-Za-z]{2,}$/;
-export const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+export const NAME_REGEX = /[^\p{L}-]/gu;
+export const EMAIL_REGEX = /^[A-Za-z0-9+_.-]+@(.+\.)+[A-Za-z]{2,}$/;
+export const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
 
 export type RegisterValues = {
@@ -90,26 +90,26 @@ export const validateChangePassword = (values: ChangePasswordValues, t: TFunctio
 };
 
 export const validateFirstName = (firstName: string, t: TFunction): string => {
-    if (!firstName) return t('validation.lastNameFilled');
-    if (firstName && firstName.length > 45) return t('validation.lastNameLength');
+    if (!firstName) return t('validation.firstNameFilled');
+    if (firstName && firstName.length > 45) return t('validation.firstNameLength');
     return '';
 };
 
 export const validateLastName = (lastName: string, t: TFunction): string => {
-    if (!lastName) return t('validation.firstNameFilled');
-    if (lastName && lastName.length > 45) return t('validation.firstNameLength');
+    if (!lastName) return t('validation.lastNameFilled');
+    if (lastName && lastName.length > 45) return t('validation.lastNameLength');
     return '';
 };
 
 export const validateEmail = (email: string, t: TFunction): string => {
     if (!email) return t('validation.emailFilled');
-    if (!emailRegex.test(email)) return t('validation.emailInvalid');
+    if (!EMAIL_REGEX.test(email)) return t('validation.emailInvalid');
     return '';
 };
 
 export const validatePassword = (password: string, t: TFunction): string => {
     if (password.length < 8) return t('validation.passwordLength');
-    if (!passwordRegex.test(password)) return t('validation.passwordRequirements');
+    if (!PASSWORD_REGEX.test(password)) return t('validation.passwordRequirements');
     return '';
 };
 
