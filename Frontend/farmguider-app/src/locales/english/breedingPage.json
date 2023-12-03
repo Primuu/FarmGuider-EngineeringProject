@@ -40,12 +40,15 @@
   },
   "addCowModal":{
     "header": "Adding a Cow",
+    "subHeader": "Cow will be added to the currently selected herd",
     "earTagNumber": "Ear Tag Number",
     "selectGender": "Select Gender",
     "genderLabel": "Gender",
     "female": "Female",
     "male": "Male",
     "cowName": "Cow Name",
+    "calendarLabel": "Birth date",
+    "requirements": "To add a cow, provide it's ear tag number, select it's gender and enter it's birth date. Cow's name is optional.",
     "confirmButton": "Add Cow",
     "cancelButton": "Cancel",
     "successSnackbar": "Cow added successfully",
@@ -54,7 +57,9 @@
       "cowNameLength": "Cow name can contain a maximum of 45 characters",
       "earTagNumberRequired": "Ear tag number must be filled in",
       "earTagNumberLength" : "Ear tag number must contain exactly 14 characters",
-      "earTagNumberPattern": "Ear tag number must contain 12 digits preceded by 2 letters"
+      "earTagNumberPattern": "Ear tag number must contain 12 digits preceded by 2 letters",
+      "dateOfBirthRequired": "Birth date field must be filled in",
+      "dateOfBirthPastOrPresent": "Birth date cannot be a future date"
     }
   }
 }

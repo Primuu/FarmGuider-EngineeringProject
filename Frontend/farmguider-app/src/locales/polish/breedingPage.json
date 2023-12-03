@@ -37,5 +37,29 @@
     "deleteSuccessSnackbar": "Stado usunięte pomyślnie",
     "deleteErrorSnackbar": "Coś poszło nie tak",
     "addCowButton": "Dodaj Krowę"
+  },
+  "addCowModal":{
+    "header": "Dodawanie Krowy",
+    "subHeader": "Krowa zostanie dodana do aktualnie wybranego stada",
+    "earTagNumber": "Numer Kolczyka",
+    "selectGender": "Wybierz Płeć",
+    "genderLabel": "Płeć",
+    "female": "Samica",
+    "male": "Samiec",
+    "cowName": "Imię Krowy",
+    "calendarLabel": "Data Urodzenia",
+    "requirements": "Aby dodać krowę należy podać jej numer kolczyka, wybrać płeć oraz wprowadzić datę urodzenia. Imię krowy jest opcjonalne.",
+    "confirmButton": "Dodaj Krowę",
+    "cancelButton": "Anuluj",
+    "successSnackbar": "Krowa dodana pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "validation": {
+      "cowNameLength": "Imię krowy może zawierać maksymalnie 45 znaków",
+      "earTagNumberRequired": "Numer kolczyka musi być podany",
+      "earTagNumberLength" : "Numer kolczyka musi zawierać dokładnie 14 znaków",
+      "earTagNumberPattern": "Numer kolczyka musi zawierać 12 cyfr poprzedzonych 2 literami",
+      "dateOfBirthRequired": "Data urodzenia musi być podana",
+      "dateOfBirthPastOrPresent": "Data urodzenia nie może być datą przyszłą"
+    }
   }
 }
