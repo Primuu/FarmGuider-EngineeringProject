@@ -7,9 +7,9 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import {createBreeding} from "@/services/breedingService.ts";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
-
-import '@/pages/BreedingPage/addHerdModal.css';
+import '@/pages/BreedingPage/herdModal.css';
 import BreedingCreateDTO from "@/entities/BreedingCreateDTO.ts";
+import {validateBreedingName} from "@/utils/breedingValidators.ts";
 
 type AddHerdModalProps = {
     open: boolean;
@@ -34,16 +34,9 @@ const AddHerdModal: React.FC<AddHerdModalProps> = ({open, onClose, refreshBreedi
         onClose();
     }
 
-    const validateBreedingName = (breedingName: string): string => {
-        if (!breedingName) return t('addHerdModal.validation');
-        if (breedingName && breedingName.length < 3) return  t('addHerdModal.validationLength3');
-        if (breedingName && breedingName.length > 45) return  t('addHerdModal.validationLength45');
-        return '';
-    };
-
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const validationError = validateBreedingName(breedingName);
+        const validationError = validateBreedingName(breedingName, t);
         if (validationError !== '') {
             setError(validationError);
             return;
@@ -53,7 +46,7 @@ const AddHerdModal: React.FC<AddHerdModalProps> = ({open, onClose, refreshBreedi
             breedingName: breedingName
         };
 
-        if (farmId){
+        if (farmId) {
             createBreeding(farmId, breedingCreateDTO)
                 .then(() => {
                     cancel();
