@@ -14,7 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Breeding extends BasicEntity {
 
@@ -26,5 +25,10 @@ public class Breeding extends BasicEntity {
 
     @OneToMany(mappedBy = "breeding", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Cow> cows;
+
+    public Breeding(Farm farm, String breedingName) {
+        this.farm = farm;
+        this.breedingName = breedingName;
+    }
 
 }
