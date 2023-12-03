@@ -1,5 +1,17 @@
 import {useTranslation} from "react-i18next";
-import {Box, Button, Fade, Modal, Slide, TextField, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Fade,
+    FormControl,
+    InputLabel,
+    Modal,
+    Select,
+    SelectChangeEvent,
+    Slide,
+    TextField,
+    Typography
+} from "@mui/material";
 import React, {useState} from "react";
 import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
@@ -10,6 +22,9 @@ import useValidation from "@/hooks/useValidation.ts";
 import {CowValues, validateAddCow} from "@/utils/cowValidators.ts";
 import CowCreateDTO from "@/entities/CowCreateDTO.ts";
 import {createCow} from "@/services/cowService.ts";
+import MenuItem from "@mui/material/MenuItem";
+import FemaleIcon from "@mui/icons-material/Female";
+import MaleIcon from "@mui/icons-material/Male";
 
 type AddCowModalProps = {
     open: boolean;
@@ -19,7 +34,7 @@ type AddCowModalProps = {
 
 const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) => {
     const [earTagNumber, setEarTagNumber] = useState<string>('');
-    // const [gender, setGender] = useState<string | null>(null); // FEMALE INITIALLY
+    const [gender, setGender] = useState<string>('FEMALE');
     const [cowName, setCowName] = useState<string>('');
     // const [dateOfBirth, setDateOfBirth] = useState< DATE >( TODAY );
     const {t} = useTranslation('breedingPage');
@@ -30,13 +45,17 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
         setEarTagNumber(e.target.value.toUpperCase());
     };
 
+    const handleGenderChange = (event: SelectChangeEvent) => {
+        setGender(event.target.value);
+    };
+
     const handleCowNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCowName(e.target.value);
     };
 
     const cancel = () => {
         setEarTagNumber("");
-        // setGender( female );
+        setGender('FEMALE');
         setCowName("");
         // setDateOfBirth( TODAY );
         setErrors({});
@@ -49,7 +68,9 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
 
         const cowCreateDTO: CowCreateDTO = {
             cowName: cowName === '' ? null : cowName,
-            earTagNumber: earTagNumber
+            earTagNumber: earTagNumber,
+            // dateOfBirth: ,
+            gender: gender
         };
 
         if (breedingId) {
@@ -101,7 +122,25 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
                                     }}
                                 />
 
-                            {/*    SELECT GENDER */}
+                                <FormControl fullWidth margin="normal">
+                                    <InputLabel>
+                                        {t('addCowModal.selectGender')}
+                                    </InputLabel>
+                                    <Select
+                                        value={gender}
+                                        label={t('addCowModal.selectGender')}
+                                        onChange={handleGenderChange}
+                                    >
+                                        <MenuItem value="FEMALE">
+                                            <FemaleIcon className="gender-icon"/>
+                                            {t('addCowModal.female')}
+                                        </MenuItem>
+                                        <MenuItem value="MALE">
+                                            <MaleIcon className="gender-icon"/>
+                                            {t('addCowModal.male')}
+                                        </MenuItem>
+                                    </Select>
+                                </FormControl>
 
                                 <TextField
                                     margin="normal"

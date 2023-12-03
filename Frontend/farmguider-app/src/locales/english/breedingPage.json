@@ -41,6 +41,10 @@
   "addCowModal":{
     "header": "Adding a Cow",
     "earTagNumber": "Ear Tag Number",
+    "selectGender": "Select Gender",
+    "genderLabel": "Gender",
+    "female": "Female",
+    "male": "Male",
     "cowName": "Cow Name",
     "confirmButton": "Add Cow",
     "cancelButton": "Cancel",
