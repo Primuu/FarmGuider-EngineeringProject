@@ -18,7 +18,7 @@ public record CowCreateDTO(@Length(max = 45, message = "Cow name can contain a m
                            @Length(min = 14, max = 14, message = "Ear tag number must contain exactly 14 characters.")
                            @Pattern(regexp = EAR_TAG_REGEX, message = "Ear tag number must contain 12 digits preceded by 2 letters.")
                            String earTagNumber,
-                           @NotNull(message = "Birth date field must be filled in.")
+                           @NotNull(message = "Date of birth field must be filled in.")
                            @PastOrPresent(message = "Date of birth cannot be a future date.")
                            LocalDate dateOfBirth,
                            @NotNull(message = "Gender cannot be empty.")
