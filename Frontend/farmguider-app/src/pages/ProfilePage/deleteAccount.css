@@ -4,7 +4,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
-    height: 380px;
     max-height: 100vh;
     background: #f5f5f5;
     border: 2px solid #D85954;
@@ -45,11 +44,12 @@
 }
 
 .delete-acc-button-group {
-    margin-top: 50px;
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 32px;
+    margin-bottom: 20px;
 }
 
 .delete-acc-button-group .confirm-delete-acc-button,
