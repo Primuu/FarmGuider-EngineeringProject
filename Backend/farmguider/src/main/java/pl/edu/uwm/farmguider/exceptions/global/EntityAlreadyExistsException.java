@@ -7,9 +7,9 @@ public class EntityAlreadyExistsException extends RuntimeException {
 
     private final String entityName;
 
-    public EntityAlreadyExistsException(String fieldName, String message) {
+    public EntityAlreadyExistsException(String entityName, String message) {
         super(message);
-        this.entityName = fieldName;
+        this.entityName = entityName;
     }
 
 }
