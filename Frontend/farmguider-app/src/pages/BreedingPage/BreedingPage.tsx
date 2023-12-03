@@ -60,6 +60,7 @@ const BreedingPage = () => {
                     <BreedingContent
                         breedingList={breedingResponseDTOList}
                         handleOpenAddHerdModal={handleOpenAddHerdModal}
+                        refreshBreedings={fetchAndSetBreedings}
                     />}
             </div>
 

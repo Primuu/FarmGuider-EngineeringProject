@@ -1,5 +1,5 @@
 import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Select, SelectChangeEvent} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import {useTranslation} from "react-i18next";
@@ -8,13 +8,20 @@ import BreedingContentTools from "@/pages/BreedingPage/BreedingContentTools.tsx"
 type BreedingContentProps = {
     breedingList: BreedingResponseDTO[];
     handleOpenAddHerdModal: () => void;
+    refreshBreedings: () => void;
 }
 
-const BreedingContent: React.FC<BreedingContentProps> = ({breedingList, handleOpenAddHerdModal}) => {
+const BreedingContent: React.FC<BreedingContentProps> = (
+    {breedingList, handleOpenAddHerdModal, refreshBreedings}
+) => {
     const {t} = useTranslation('breedingPage');
     const [breeding, setBreeding] = useState<BreedingResponseDTO>(breedingList[0]);
 
-    const handleChange = (event: SelectChangeEvent) => {
+    useEffect(() => {
+        setBreeding(breedingList[0]);
+    }, [breedingList]);
+
+    const handleChangeHerd = (event: SelectChangeEvent) => {
         const breedingIdNum = Number(event.target.value);
         const selectedBreeding = breedingList.find(
             b => b.breedingId === breedingIdNum
@@ -35,7 +42,7 @@ const BreedingContent: React.FC<BreedingContentProps> = ({breedingList, handleOp
                     <Select
                         value={breeding.breedingId.toString()}
                         label={t('breedingContent.pickerLabel')}
-                        onChange={handleChange}
+                        onChange={handleChangeHerd}
                     >
                         {breedingList.map((breeding) => (
                             <MenuItem key={breeding.breedingId} value={breeding.breedingId}>
@@ -47,6 +54,8 @@ const BreedingContent: React.FC<BreedingContentProps> = ({breedingList, handleOp
 
                 <BreedingContentTools
                     handleOpenAddHerdModal={handleOpenAddHerdModal}
+                    selectedBreeding={breeding}
+                    refreshBreedings={refreshBreedings}
                 />
             </div>
         </div>

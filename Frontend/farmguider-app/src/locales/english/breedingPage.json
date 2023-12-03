@@ -22,6 +22,10 @@
     "pickerLabel": "Select Herd",
     "addHerdTooltip": "Add Herd",
     "editHerdTooltip": "Edit Herd",
-    "deleteHerdTooltip": "Delete Herd"
+    "deleteHerdTooltip": "Delete Herd",
+    "deleteDialogTitle": "Deleting Herd",
+    "deleteDialogMessage": "Are you sure you want to delete herd: ",
+    "deleteSuccessSnackbar": "Herd deleted successfully",
+    "deleteErrorSnackbar": "Something went wrong"
   }
 }

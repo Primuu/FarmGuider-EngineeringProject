@@ -22,6 +22,10 @@
     "pickerLabel": "Wybierz Stado",
     "addHerdTooltip": "Dodaj Stado",
     "editHerdTooltip": "Edytuj Stado",
-    "deleteHerdTooltip": "Usuń Stado"
+    "deleteHerdTooltip": "Usuń Stado",
+    "deleteDialogTitle": "Usuwanie Stada",
+    "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć stado: ",
+    "deleteSuccessSnackbar": "Stado usunięte pomyślnie",
+    "deleteErrorSnackbar": "Coś poszło nie tak"
   }
 }
