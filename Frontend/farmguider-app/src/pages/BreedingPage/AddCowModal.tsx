@@ -114,11 +114,11 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
                             </Typography>
 
                             <div className="add-cow-form-container">
-                                <div className="add-cow-inputs">
+                                <div className="add-cow-row-inputs">
                                     <TextField
+                                        className="add-cow-text-field"
                                         margin="normal"
                                         required
-                                        fullWidth
                                         label={t('addCowModal.earTagNumber')}
                                         placeholder={"XX000123456789"}
                                         type={"text"}
@@ -131,9 +131,32 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
                                         }}
                                     />
 
+                                    <div className="selector">
+                                        <FormControl fullWidth margin="normal">
+                                            <InputLabel>
+                                                {t('addCowModal.selectGender')}
+                                            </InputLabel>
+                                            <Select
+                                                value={gender}
+                                                label={t('addCowModal.selectGender')}
+                                                onChange={handleGenderChange}
+                                            >
+                                                <MenuItem value="FEMALE">
+                                                    <FemaleIcon className="gender-icon"/>
+                                                    {t('addCowModal.female')}
+                                                </MenuItem>
+                                                <MenuItem value="MALE">
+                                                    <MaleIcon className="gender-icon"/>
+                                                    {t('addCowModal.male')}
+                                                </MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                </div>
+                                <div className="add-cow-row-inputs">
                                     <TextField
+                                        className="add-cow-text-field"
                                         margin="normal"
-                                        fullWidth
                                         label={t('addCowModal.cowName')}
                                         type={"text"}
                                         value={cowName || ''}
@@ -141,27 +164,6 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
                                         error={!!errors.cowName}
                                         helperText={errors.cowName}
                                     />
-                                </div>
-                                <div className="add-cow-selectors">
-                                    <FormControl fullWidth margin="normal">
-                                        <InputLabel>
-                                            {t('addCowModal.selectGender')}
-                                        </InputLabel>
-                                        <Select
-                                            value={gender}
-                                            label={t('addCowModal.selectGender')}
-                                            onChange={handleGenderChange}
-                                        >
-                                            <MenuItem value="FEMALE">
-                                                <FemaleIcon className="gender-icon"/>
-                                                {t('addCowModal.female')}
-                                            </MenuItem>
-                                            <MenuItem value="MALE">
-                                                <MaleIcon className="gender-icon"/>
-                                                {t('addCowModal.male')}
-                                            </MenuItem>
-                                        </Select>
-                                    </FormControl>
 
                                     <div className="calendar">
                                         <LocalizationProvider
@@ -189,7 +191,7 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
                                 </div>
                             </div>
 
-                            <Typography className="add-cow-sub-req">
+                            <Typography className="add-cow-req">
                                 {t('addCowModal.requirements')}
                             </Typography>
 

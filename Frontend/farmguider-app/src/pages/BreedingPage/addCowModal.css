@@ -30,6 +30,38 @@
     color: #406064;
 }
 
+.add-cow-modal-box .add-cow-sub-header {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #5b5b5b;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.add-cow-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-cow-row-inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.add-cow-text-field {
+    width: 55%;
+}
+
+.selector,
+.calendar {
+    width: 45%;
+}
+
+.calendar {
+    margin-top: 15px;
+}
+
 .add-cow-button-group {
     margin-top: 20px;
     display: flex;
@@ -56,8 +88,14 @@
     margin-right: 6px;
 }
 
+.add-cow-form .add-cow-req {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
 @media (max-width: 660px) {
-    .add-herd-modal-box {
+    .add-cow-modal-box {
         width: 100%;
         height: 100%;
         border-radius: 0;
@@ -67,24 +105,44 @@
         margin: 0;
     }
 
-    .add-herd-form {
-        margin-top: 25%;
+    .add-cow-form {
+        margin-top: 15%;
     }
 
-    .add-herd-button-group {
+    .add-cow-row-inputs {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .add-cow-text-field {
+        width: 100%;
+    }
+
+    .selector,
+    .calendar {
+        width: 100%;
+    }
+
+    .calendar {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .add-cow-button-group {
         margin-top: 50px;
         flex-direction: column;
         align-items: center;
         gap: 16px;
     }
 
-    .add-herd-button-group .confirm-add-herd-button,
-    .add-herd-button-group .cancel-add-herd-button {
+    .add-cow-button-group .confirm-add-cow-button,
+    .add-cow-button-group .cancel-add-cow-button {
         width: 90%;
     }
 
-    .add-herd-modal-box .add-herd-text {
+    .add-cow-form .add-cow-req {
         margin-top: 20px;
-        font-size: 16px;
+        font-size: 14px;
     }
 }
