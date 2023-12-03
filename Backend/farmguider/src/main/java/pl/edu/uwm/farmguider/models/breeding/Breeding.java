@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.edu.uwm.farmguider.models.basic.BasicEntity;
+import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.farm.Farm;
+
+import java.util.List;
 
 @Entity
 @Table(name = "breedings")
@@ -20,5 +23,8 @@ public class Breeding extends BasicEntity {
     Farm farm;
 
     String breedingName;
+
+    @OneToMany(mappedBy = "breeding", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Cow> cows;
 
 }
