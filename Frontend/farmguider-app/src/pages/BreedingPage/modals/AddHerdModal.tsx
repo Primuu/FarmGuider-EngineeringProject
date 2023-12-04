@@ -7,7 +7,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import {createBreeding} from "@/services/breedingService.ts";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
-import '@/pages/BreedingPage/herdModal.css';
+import '@/pages/BreedingPage/modals/herdModal.css';
 import BreedingCreateDTO from "@/entities/BreedingCreateDTO.ts";
 import {validateBreedingName} from "@/utils/breedingValidators.ts";
 

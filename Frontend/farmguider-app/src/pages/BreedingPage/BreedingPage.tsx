@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen.tsx";
 import NoBreedingContent from "@/pages/BreedingPage/NoBreedingContent.tsx";
 import BreedingContent from "@/pages/BreedingPage/BreedingContent.tsx";
-import AddHerdModal from "@/pages/BreedingPage/AddHerdModal.tsx";
+import AddHerdModal from "@/pages/BreedingPage/modals/AddHerdModal.tsx";
 
 const BreedingPage = () => {
     const {t} = useTranslation('breedingPage');

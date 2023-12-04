@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import {useTranslation} from "react-i18next";
 import BreedingContentTools from "@/pages/BreedingPage/BreedingContentTools.tsx";
 import {GiCow} from 'react-icons/gi';
-import AddCowModal from "@/pages/BreedingPage/AddCowModal.tsx";
+import AddCowModal from "@/pages/BreedingPage/modals/AddCowModal.tsx";
 
 type BreedingContentProps = {
     breedingList: BreedingResponseDTO[];

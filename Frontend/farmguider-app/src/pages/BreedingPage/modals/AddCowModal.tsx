@@ -5,7 +5,7 @@ import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
-import '@/pages/BreedingPage/addCowModal.css';
+import '@/pages/BreedingPage/modals/addCowModal.css';
 import useValidation from "@/hooks/useValidation.ts";
 import {CowValues, validateAddCow} from "@/utils/cowValidators.ts";
 import CowCreateDTO from "@/entities/CowCreateDTO.ts";

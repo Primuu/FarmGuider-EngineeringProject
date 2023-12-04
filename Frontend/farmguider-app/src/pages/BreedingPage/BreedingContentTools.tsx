@@ -9,7 +9,7 @@ import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
 import {deleteBreeding} from "@/services/breedingService.ts";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {useSnackbar} from "notistack";
-import EditHerdModal from "@/pages/BreedingPage/EditHerdModal.tsx";
+import EditHerdModal from "@/pages/BreedingPage/modals/EditHerdModal.tsx";
 
 type BreedingContentToolsProps = {
     handleOpenAddHerdModal: () => void;
