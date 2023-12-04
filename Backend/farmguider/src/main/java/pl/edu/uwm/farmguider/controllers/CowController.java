@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +17,7 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.CowFacade;
 import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.cow.dtos.CowCreateDTO;
+import pl.edu.uwm.farmguider.models.cow.dtos.CowPageResponseDTO;
 import pl.edu.uwm.farmguider.models.cow.dtos.CowResponseDTO;
 import pl.edu.uwm.farmguider.models.cow.dtos.CowSearchParams;
 
@@ -30,9 +30,9 @@ public class CowController {
     private final CowFacade cowFacade;
 
     @GetMapping("/get-cows/{breedingId}")
-    public ResponseEntity<Page<CowResponseDTO>> getCowsByBreedingId(@PathVariable Long breedingId,
-                                                                    @ModelAttribute @Valid CowSearchParams cowSearchParams) {
-        Page<CowResponseDTO> cows = cowFacade.getCowsByBreedingId(breedingId, cowSearchParams);
+    public ResponseEntity<Page<CowPageResponseDTO>> getCowsByBreedingId(@PathVariable Long breedingId,
+                                                                        @ModelAttribute @Valid CowSearchParams cowSearchParams) {
+        Page<CowPageResponseDTO> cows = cowFacade.getCowsByBreedingId(breedingId, cowSearchParams);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(cows);
