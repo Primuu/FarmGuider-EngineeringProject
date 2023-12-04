@@ -1,10 +1,7 @@
 package pl.edu.uwm.farmguider.models.milking;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.edu.uwm.farmguider.models.basic.BasicEntity;
 import pl.edu.uwm.farmguider.models.cow.Cow;
@@ -17,6 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Milking extends BasicEntity {
 
