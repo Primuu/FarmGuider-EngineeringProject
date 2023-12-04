@@ -11,6 +11,25 @@ export interface RequestConfig {
     body?: unknown;
 }
 
+export const mapToUrlParams = (params: Record<string, unknown>): UrlParams => {
+    const urlParams: UrlParams = {};
+
+    Object.keys(params).forEach(key => {
+        const value = params[key];
+        if (value !== undefined && value !== null) {
+            if (value instanceof Date) {
+                urlParams[key] = value.toISOString();
+            } else if (Array.isArray(value)) {
+                urlParams[key] = value.map(String);
+            } else {
+                urlParams[key] = String(value);
+            }
+        }
+    });
+
+    return urlParams;
+};
+
 const constructUrl = (endpointUrl: string, urlParams?: UrlParams, pathParams?: Record<string, string | number>) => {
     let url: string = `${BASE_URL}${endpointUrl || ''}`;
 
