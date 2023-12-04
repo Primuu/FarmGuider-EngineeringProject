@@ -5,13 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.edu.uwm.farmguider.models.breeding.Breeding;
 import pl.edu.uwm.farmguider.models.cow.Cow;
-import pl.edu.uwm.farmguider.models.cow.dtos.*;
+import pl.edu.uwm.farmguider.models.cow.dtos.CowCreateDTO;
+import pl.edu.uwm.farmguider.models.cow.dtos.CowMapper;
+import pl.edu.uwm.farmguider.models.cow.dtos.CowResponseDTO;
+import pl.edu.uwm.farmguider.models.cow.dtos.CowSearchParams;
 import pl.edu.uwm.farmguider.services.BreedingService;
 import pl.edu.uwm.farmguider.services.CowService;
-import pl.edu.uwm.farmguider.services.MilkingService;
-import pl.edu.uwm.farmguider.services.WeightGainService;
-
-import java.math.BigDecimal;
 
 import static pl.edu.uwm.farmguider.models.cow.dtos.CowMapper.mapToCowResponseDTO;
 
@@ -21,8 +20,6 @@ public class CowFacade {
 
     private final CowService cowService;
     private final BreedingService breedingService;
-    private final MilkingService milkingService;
-    private final WeightGainService weightGainService;
 
     public CowResponseDTO createCow(Long breedingId, CowCreateDTO cowCreateDTO) {
         Breeding breeding = breedingService.getBreedingById(breedingId);
@@ -36,13 +33,9 @@ public class CowFacade {
         return mapToCowResponseDTO(cow);
     }
 
-    public Page<CowPageResponseDTO> getCowsByBreedingId(Long breedingId, CowSearchParams cowSearchParams) {
+    public Page<CowResponseDTO> getCowsByBreedingId(Long breedingId, CowSearchParams cowSearchParams) {
         Page<Cow> cows = cowService.getCowsByBreedingId(breedingId, cowSearchParams.toPageable());
-        return cows.map(cow -> {
-            BigDecimal currentWeight = weightGainService.getCurrentWeightByCowId(cow.getId());
-            BigDecimal latestMilkingQuantity = milkingService.getLatestMilkingQuantityByCowId(cow.getId());
-            return CowMapper.mapToCowPageResponseDTO(cow, currentWeight, latestMilkingQuantity);
-        });
+        return cows.map(CowMapper::mapToCowResponseDTO);
     }
 
     public void deleteCowById(Long cowId) {
