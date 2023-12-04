@@ -20,3 +20,11 @@ export const DELETE_BREEDING_URL: string = "/breeding/delete/{breedingId}";
 
 // Cow
 export const CREATE_COW_URL: string = "/cow/create-cow/{breedingId}";
+export const GET_COWS_URL: string = "/cow/get-cows/{breedingId}";
+export const DELETE_COW_URL: string = "/cow/delete/{cowId}";
+
+// Milking
+export const CREATE_MILKING_URL: string = "/milking/create-milking/{cowId}";
+
+// WeightGain
+export const CREATE_WEIGHT_GAIN_URL: string = "/weight-gain/create-weight-gain/{cowId}";
