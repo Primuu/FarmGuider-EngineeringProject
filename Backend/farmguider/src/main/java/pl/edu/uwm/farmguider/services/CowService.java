@@ -11,6 +11,7 @@ import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.cow.enums.Gender;
 import pl.edu.uwm.farmguider.repositories.CowRepository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Service
@@ -44,6 +45,16 @@ public class CowService {
     public void deleteCowById(Long cowId) {
         Cow cow = getCowById(cowId);
         cowRepository.delete(cow);
+    }
+
+    public void updateLatestMilkingQuantity(Cow cow, BigDecimal milkQuantity) {
+        cow.setLatestMilkingQuantity(milkQuantity);
+        cowRepository.saveAndFlush(cow);
+    }
+
+    public void updateCurrentWeight(Cow cow, BigDecimal weight) {
+        cow.setCurrentWeight(weight);
+        cowRepository.saveAndFlush(cow);
     }
 
 }
