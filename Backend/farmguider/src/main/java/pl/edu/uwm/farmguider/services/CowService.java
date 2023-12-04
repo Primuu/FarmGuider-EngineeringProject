@@ -40,6 +40,15 @@ public class CowService {
         if (searchParams.getGender() != null) {
             spec = spec.and(hasGender(searchParams.getGender()));
         }
+        if (searchParams.getMinDateOfBirth() != null || searchParams.getMaxDateOfBirth() != null) {
+            spec = spec.and(hasDateOfBirthBetween(searchParams.getMinDateOfBirth(), searchParams.getMaxDateOfBirth()));
+        }
+        if (searchParams.getMinWeight() != null || searchParams.getMaxWeight() != null) {
+            spec = spec.and(hasWeightBetween(searchParams.getMinWeight(), searchParams.getMaxWeight()));
+        }
+        if (searchParams.getMinMilkingQuantity() != null || searchParams.getMaxMilkingQuantity() != null) {
+            spec = spec.and(hasMilkingQuantityBetween(searchParams.getMinMilkingQuantity(), searchParams.getMaxMilkingQuantity()));
+        }
 
         return cowRepository.findAll(spec, searchParams.toPageable());
     }
