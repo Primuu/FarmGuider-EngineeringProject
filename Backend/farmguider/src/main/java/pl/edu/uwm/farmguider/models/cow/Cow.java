@@ -12,6 +12,7 @@ import pl.edu.uwm.farmguider.models.cow.enums.Gender;
 import pl.edu.uwm.farmguider.models.milking.Milking;
 import pl.edu.uwm.farmguider.models.weightGain.WeightGain;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class Cow extends BasicEntity {
     String cowName;
     String earTagNumber;
     LocalDate dateOfBirth;
+    BigDecimal currentWeight;
+    BigDecimal latestMilkingQuantity;
 
     @Enumerated(EnumType.STRING)
     Gender gender;
