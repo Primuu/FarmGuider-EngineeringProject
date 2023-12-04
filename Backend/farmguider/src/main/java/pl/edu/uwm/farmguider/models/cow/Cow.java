@@ -9,8 +9,11 @@ import lombok.experimental.FieldDefaults;
 import pl.edu.uwm.farmguider.models.basic.BasicEntity;
 import pl.edu.uwm.farmguider.models.breeding.Breeding;
 import pl.edu.uwm.farmguider.models.cow.enums.Gender;
+import pl.edu.uwm.farmguider.models.milking.Milking;
+import pl.edu.uwm.farmguider.models.weightGain.WeightGain;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "cows")
@@ -30,6 +33,12 @@ public class Cow extends BasicEntity {
 
     @Enumerated(EnumType.STRING)
     Gender gender;
+
+    @OneToMany(mappedBy = "cow", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Milking> milkings;
+
+    @OneToMany(mappedBy = "cow", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<WeightGain> weightGains;
 
     public Cow(Breeding breeding, String cowName, String earTagNumber, LocalDate dateOfBirth, Gender gender) {
         this.breeding = breeding;
