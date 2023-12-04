@@ -11,7 +11,7 @@ export interface RequestConfig {
     body?: unknown;
 }
 
-export const mapToUrlParams = (params: Record<string, unknown>): UrlParams => {
+export const mapToUrlParams = (params: Partial<Record<string, unknown>>): UrlParams => {
     const urlParams: UrlParams = {};
 
     Object.keys(params).forEach(key => {
