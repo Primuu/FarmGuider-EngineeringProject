@@ -8,6 +8,7 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+    # Should not be set in prod env
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
