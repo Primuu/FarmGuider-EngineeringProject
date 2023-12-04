@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.CowFacade;
+import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.cow.dtos.CowCreateDTO;
 import pl.edu.uwm.farmguider.models.cow.dtos.CowResponseDTO;
 
@@ -58,6 +59,35 @@ public class CowController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(cowResponseDTO);
+    }
+
+    @Operation(summary = "Delete cow",
+            description = "Deletes cow and all information associated with it")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful deleted cow",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - entities to delete not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @DeleteMapping("/delete/{cowId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCowIdWithContext(#cowId)")
+    public ResponseEntity<ResponseMessage> deleteCowById(@PathVariable Long cowId) {
+        cowFacade.deleteCowById(cowId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseMessage.builder()
+                        .message("Successfully deleted cow")
+                        .build());
     }
 
 }

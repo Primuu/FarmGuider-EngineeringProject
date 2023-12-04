@@ -35,4 +35,9 @@ public class CowService {
         return cowRepository.saveAndFlush(cow);
     }
 
+    public void deleteCowById(Long cowId) {
+        Cow cow = getCowById(cowId);
+        cowRepository.delete(cow);
+    }
+
 }

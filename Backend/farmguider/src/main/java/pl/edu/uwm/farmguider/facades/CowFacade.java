@@ -30,4 +30,8 @@ public class CowFacade {
         return mapToCowResponseDTO(cow);
     }
 
+    public void deleteCowById(Long cowId) {
+        cowService.deleteCowById(cowId);
+    }
+
 }
