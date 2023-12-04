@@ -2,17 +2,20 @@ package pl.edu.uwm.farmguider.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import pl.edu.uwm.farmguider.exceptions.cow.InvalidGenderException;
 import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
 import pl.edu.uwm.farmguider.models.breeding.Breeding;
 import pl.edu.uwm.farmguider.models.cow.Cow;
+import pl.edu.uwm.farmguider.models.cow.dtos.CowSearchParams;
 import pl.edu.uwm.farmguider.models.cow.enums.Gender;
 import pl.edu.uwm.farmguider.repositories.CowRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import static pl.edu.uwm.farmguider.utils.CowSpecification.*;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +28,20 @@ public class CowService {
                 .orElseThrow(() -> new EntityNotFoundException("Cow", "Cow with id: " + cowId + " not found."));
     }
 
-    public Page<Cow> getCowsByBreedingId(Long breedingId, Pageable pageable) {
-        return cowRepository.findAllByBreedingId(breedingId, pageable);
+    public Page<Cow> getCowsByBreedingId(Long breedingId, CowSearchParams searchParams) {
+        Specification<Cow> spec = Specification.where(hasBreedingId(breedingId));
+
+        if (searchParams.getEarTagNumber() != null) {
+            spec = spec.and(hasEarTagNumberLike(searchParams.getEarTagNumber()));
+        }
+        if (searchParams.getCowName() != null) {
+            spec = spec.and(hasCowNameLike(searchParams.getCowName()));
+        }
+        if (searchParams.getGender() != null) {
+            spec = spec.and(hasGender(searchParams.getGender()));
+        }
+
+        return cowRepository.findAll(spec, searchParams.toPageable());
     }
 
     public Long getUserIdByCowId(Long cowId) {

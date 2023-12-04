@@ -34,7 +34,7 @@ public class CowFacade {
     }
 
     public Page<CowResponseDTO> getCowsByBreedingId(Long breedingId, CowSearchParams cowSearchParams) {
-        Page<Cow> cows = cowService.getCowsByBreedingId(breedingId, cowSearchParams.toPageable());
+        Page<Cow> cows = cowService.getCowsByBreedingId(breedingId, cowSearchParams);
         return cows.map(CowMapper::mapToCowResponseDTO);
     }
 

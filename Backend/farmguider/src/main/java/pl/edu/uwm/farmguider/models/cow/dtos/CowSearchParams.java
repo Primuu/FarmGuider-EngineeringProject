@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -18,8 +22,25 @@ public class CowSearchParams {
     @Max(value = 100)
     private int size = 25;
 
+    private String sortBy = "earTagNumber";
+    private boolean sortDesc = false;
+
+    private String earTagNumber;
+    private String gender;
+    private String cowName;
+//
+//    private LocalDate minDateOfBirth;
+//    private LocalDate maxDateOfBirth;
+//
+//    private BigDecimal minWeight;
+//    private BigDecimal maxWeight;
+//
+//    private BigDecimal minMilkingQuantity;
+//    private BigDecimal maxMilkingQuantity;
+
     public Pageable toPageable() {
-        return PageRequest.of(page, size);
+        Sort sort = Sort.by(sortDesc ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
+        return PageRequest.of(page, size, sort);
     }
 
 }
