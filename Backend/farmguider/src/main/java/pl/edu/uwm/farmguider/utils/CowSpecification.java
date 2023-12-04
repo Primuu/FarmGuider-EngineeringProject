@@ -2,12 +2,38 @@ package pl.edu.uwm.farmguider.utils;
 
 import org.springframework.data.jpa.domain.Specification;
 import pl.edu.uwm.farmguider.models.cow.Cow;
+import pl.edu.uwm.farmguider.models.cow.dtos.CowSearchParams;
 import pl.edu.uwm.farmguider.models.cow.enums.Gender;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class CowSpecification {
+
+    public static Specification<Cow> bySearchParams(Long breedingId, CowSearchParams params) {
+        Specification<Cow> spec = Specification.where(hasBreedingId(breedingId));
+
+        if (params.getEarTagNumber() != null) {
+            spec = spec.and(hasEarTagNumberLike(params.getEarTagNumber()));
+        }
+        if (params.getCowName() != null) {
+            spec = spec.and(hasCowNameLike(params.getCowName()));
+        }
+        if (params.getGender() != null) {
+            spec = spec.and(hasGender(params.getGender()));
+        }
+        if (params.getMinDateOfBirth() != null || params.getMaxDateOfBirth() != null) {
+            spec = spec.and(hasDateOfBirthBetween(params.getMinDateOfBirth(), params.getMaxDateOfBirth()));
+        }
+        if (params.getMinWeight() != null || params.getMaxWeight() != null) {
+            spec = spec.and(hasWeightBetween(params.getMinWeight(), params.getMaxWeight()));
+        }
+        if (params.getMinMilkingQuantity() != null || params.getMaxMilkingQuantity() != null) {
+            spec = spec.and(hasMilkingQuantityBetween(params.getMinMilkingQuantity(), params.getMaxMilkingQuantity()));
+        }
+
+        return spec;
+    }
 
     public static Specification<Cow> hasBreedingId(Long breedingId) {
         return (root, query, criteriaBuilder) ->

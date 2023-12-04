@@ -29,27 +29,7 @@ public class CowService {
     }
 
     public Page<Cow> getCowsByBreedingId(Long breedingId, CowSearchParams searchParams) {
-        Specification<Cow> spec = Specification.where(hasBreedingId(breedingId));
-
-        if (searchParams.getEarTagNumber() != null) {
-            spec = spec.and(hasEarTagNumberLike(searchParams.getEarTagNumber()));
-        }
-        if (searchParams.getCowName() != null) {
-            spec = spec.and(hasCowNameLike(searchParams.getCowName()));
-        }
-        if (searchParams.getGender() != null) {
-            spec = spec.and(hasGender(searchParams.getGender()));
-        }
-        if (searchParams.getMinDateOfBirth() != null || searchParams.getMaxDateOfBirth() != null) {
-            spec = spec.and(hasDateOfBirthBetween(searchParams.getMinDateOfBirth(), searchParams.getMaxDateOfBirth()));
-        }
-        if (searchParams.getMinWeight() != null || searchParams.getMaxWeight() != null) {
-            spec = spec.and(hasWeightBetween(searchParams.getMinWeight(), searchParams.getMaxWeight()));
-        }
-        if (searchParams.getMinMilkingQuantity() != null || searchParams.getMaxMilkingQuantity() != null) {
-            spec = spec.and(hasMilkingQuantityBetween(searchParams.getMinMilkingQuantity(), searchParams.getMaxMilkingQuantity()));
-        }
-
+        Specification<Cow> spec = bySearchParams(breedingId, searchParams);
         return cowRepository.findAll(spec, searchParams.toPageable());
     }
 
