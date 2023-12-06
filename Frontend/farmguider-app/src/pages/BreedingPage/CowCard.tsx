@@ -58,34 +58,40 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted}) => {
                     </Tooltip>
                 )}
             </TableCell>
+
             <TableCell>
                 {cow.earTagNumber}
             </TableCell>
+
             <TableCell>
                 <div className="center-cell">
                     {nullReplaceLackOfData(cow.cowName, "-")}
                 </div>
             </TableCell>
+
             <TableCell>
                 {nullReplaceLackOfData(cow.dateOfBirth.toString(), "-")}
             </TableCell>
+
             <TableCell>
                 <div className="center-cell">
                     {nullReplaceLackOfData(cow.currentWeight, "-")} {cow.currentWeight && " kg"}
                 </div>
             </TableCell>
+
             <TableCell>
                 <div className="center-cell">
                     {nullReplaceLackOfData(cow.latestMilkingQuantity, "-")} {cow.latestMilkingQuantity && " l"}
                 </div>
                 </TableCell>
-            <TableCell>
 
+            <TableCell>
                 <Tooltip title={t('cowResults.milkingButton')}>
                     <Button
                         className="table-button"
                         variant="contained"
                         color="primary"
+                        disabled={cow.gender !== "FEMALE"}
                         // onClick={}
                     >
                         <LuMilk className="table-icon"/>
