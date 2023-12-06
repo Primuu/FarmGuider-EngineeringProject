@@ -73,6 +73,14 @@
     "femaleTooltip": "Cow",
     "maleTooltip": "Bull",
     "rows": "Rows per page:",
-    "page": "{{from}}–{{to}} of {{count}}"
+    "page": "{{from}}–{{to}} of {{count}}",
+    "weighting": "Weighting",
+    "milking": "Milking",
+    "editing": "Editing",
+    "deleting": "Deleting",
+    "milkingButton": "Add Milking",
+    "weightingButton": "Add Weighting",
+    "editingButton": "Edit Cow's Data",
+    "deletingButton": "Delete Cow"
   }
 }

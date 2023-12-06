@@ -3,3 +3,11 @@
     align-items: center;
     justify-content: center;
 }
+
+.table-button {
+    min-width: 30px !important;
+}
+
+.table-button .table-icon {
+    font-size: 20px;
+}

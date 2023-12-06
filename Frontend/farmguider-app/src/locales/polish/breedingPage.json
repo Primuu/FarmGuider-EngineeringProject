@@ -73,6 +73,14 @@
     "femaleTooltip": "Krowa",
     "maleTooltip": "Byk",
     "rows": "Wierszy na stronę:",
-    "page": "{{from}}–{{to}} z {{count}}"
+    "page": "{{from}}–{{to}} z {{count}}",
+    "weighting": "Ważenie",
+    "milking": "Dojenie",
+    "editing": "Edycja",
+    "deleting": "Usuwanie",
+    "milkingButton": "Dodaj Udój",
+    "weightingButton": "Dodaj Ważenie",
+    "editingButton": "Edytuj Informacje o Krowie",
+    "deletingButton": "Usuń Krowę"
   }
 }

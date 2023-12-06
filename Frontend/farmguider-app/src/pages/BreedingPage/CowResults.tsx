@@ -8,7 +8,6 @@ import {useTranslation} from "react-i18next";
 import '@/pages/BreedingPage/cowResults.css';
 import {LabelDisplayedRowsArgs} from '@mui/material/TablePagination';
 
-
 type CowResultsProps = {
     loading: boolean;
     cowsPage: Page<CowResponseDTO>
@@ -37,10 +36,10 @@ const CowResults: React.FC<CowResultsProps> = ({loading, cowsPage, onPageChange,
                             <TableCell>{t('cowResults.dateOfBirth')}</TableCell>
                             <TableCell>{t('cowResults.currentWeight')}</TableCell>
                             <TableCell>{t('cowResults.latestMilking')}</TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
+                            <TableCell>{t('cowResults.milking')}</TableCell>
+                            <TableCell>{t('cowResults.weighting')}</TableCell>
+                            <TableCell>{t('cowResults.editing')}</TableCell>
+                            <TableCell>{t('cowResults.deleting')}</TableCell>
                         </TableRow>
                     </TableHead>
                     {loading ? (
