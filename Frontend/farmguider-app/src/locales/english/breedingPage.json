@@ -49,7 +49,7 @@
     "female": "Cow",
     "male": "Bull",
     "cowName": "Cow Name",
-    "calendarLabel": "Birth date",
+    "calendarLabel": "Birth Date",
     "requirements": "To add a cow, provide it's ear tag number, select it's gender and enter it's birth date. Cow's name is optional.",
     "confirmButton": "Add Cow",
     "cancelButton": "Cancel",
@@ -80,6 +80,7 @@
     "editing": "Editing",
     "deleting": "Deleting",
     "milkingButton": "Add Milking",
+    "milkingButtonDisabled": "Not available for this gender",
     "weightingButton": "Add Weighting",
     "editingButton": "Edit Cow's Data",
     "deletingButton": "Delete Cow",
@@ -88,5 +89,26 @@
     "deleteDialogTitle": "Deleting Cow",
     "deleteDialogMessage1": "Are you sure you want to delete cow with ear tag number: ",
     "deleteDialogMessage2": " and all information related to it?"
+  },
+  "addMilkingModal": {
+    "successSnackbar": "Milking added successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Adding a Milking",
+    "subHeader": "Milking will be added to the currently selected cow",
+    "requirements": "To add a milking, provide the milking date and milk quantity. Milking time is optional.",
+    "confirmButton": "Add Milking",
+    "cancelButton": "Cancel",
+    "dateOfMilking": "Date of Milking",
+    "milkQuantity": "Milk Quantity (liters)",
+    "milkingDuration": "Milking Duration",
+    "validation": {
+      "milkQuantityRange": "Milk quantity must be within the range of 0.000 to 999.999",
+      "milkQuantityNonNegative" : "Milk quantity cannot be negative",
+      "milkQuantityRequired": "Milk quantity must be filled in",
+      "dateOfMilkingRequired": "Date of milking field must be filled in",
+      "dateOfMilkingPastOrPresent": "Date of milking cannot be a future date",
+      "milkingDurationFormat": "Provide time in format minutes : seconds",
+      "milkingDurationRange": "Provide a valid time range"
+    }
   }
 }

@@ -80,6 +80,7 @@
     "editing": "Edycja",
     "deleting": "Usuwanie",
     "milkingButton": "Dodaj Udój",
+    "milkingButtonDisabled": "Nie dostępne dla tej płci",
     "weightingButton": "Dodaj Ważenie",
     "editingButton": "Edytuj Informacje o Krowie",
     "deletingButton": "Usuń Krowę",
@@ -88,5 +89,27 @@
     "deleteDialogTitle": "Usuwanie Krowy",
     "deleteDialogMessage1": "Czy jesteś pewny, że chcesz usunąć krowę z numerem kolczyka: ",
     "deleteDialogMessage2": " i wszystkie informacje z nią związane?"
+  },
+  "addMilkingModal": {
+    "successSnackbar": "Udój dodano pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Dodawanie Udoju",
+    "subHeader": "Udój zostanie dodane do aktualnie wybranej krowy",
+    "requirements": "Aby dodać udój, podaj datę udoju i ilość mleka. Czas udoju jest opcjonalny.",
+    "confirmButton": "Dodaj Udój",
+    "cancelButton": "Anuluj",
+    "dateOfMilking": "Data Udoju",
+    "milkQuantity": "Ilość Mleka (litry)",
+    "milkingDuration": "Czas Trwania Udoju",
+    "validation": {
+      "milkQuantityRange": "Ilość mleka musi znajdować się w zakresie od 0.000 do 999.999",
+      "milkQuantityNonNegative": "Ilość mleka nie może być ujemna",
+      "milkQuantityRequired": "Ilość mleka musi być podana",
+      "dateOfMilkingRequired": "Data udoju musi być podana",
+      "dateOfMilkingPastOrPresent": "Data udoju nie może być datą przyszłą",
+      "milkingDurationFormat": "Podaj czas w formacie minuty : sekundy",
+      "milkingDurationRange": "Podaj prawidłowy zakres czasu"
+    }
   }
+
 }

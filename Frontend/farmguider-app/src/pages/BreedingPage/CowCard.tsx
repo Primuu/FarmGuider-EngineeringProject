@@ -13,6 +13,7 @@ import ConfirmationDialog from "@/components/ConfirmationDialog/ConfirmationDial
 import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {deleteCow} from "@/services/cowService.ts";
+import AddMilkingModal from "@/pages/BreedingPage/modals/AddMilkingModal.tsx";
 
 type CowCardProps = {
     cow: CowResponseDTO
@@ -23,6 +24,10 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted}) => {
     const {t} = useTranslation('breedingPage');
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
     const {enqueueSnackbar} = useSnackbar();
+    const [openAddMilkingModal, setOpenAddMilkingModal] = useState(false);
+
+    const handleOpenAddMilkingModal = () => setOpenAddMilkingModal(true);
+    const handleCloseAddMilkingModal = () => setOpenAddMilkingModal(false);
 
     const handleOpenConfirmationDialog = () => {
         setOpenConfirmationDialog(true);
@@ -50,11 +55,11 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted}) => {
             <TableCell>
                 {cow.gender === "FEMALE" ? (
                     <Tooltip title={t('cowResults.femaleTooltip')}>
-                        <FemaleIcon />
+                        <FemaleIcon/>
                     </Tooltip>
                 ) : (
                     <Tooltip title={t('cowResults.maleTooltip')}>
-                        <MaleIcon />
+                        <MaleIcon/>
                     </Tooltip>
                 )}
             </TableCell>
@@ -83,19 +88,25 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted}) => {
                 <div className="center-cell">
                     {nullReplaceLackOfData(cow.latestMilkingQuantity, "-")} {cow.latestMilkingQuantity && " l"}
                 </div>
-                </TableCell>
+            </TableCell>
 
             <TableCell>
-                <Tooltip title={t('cowResults.milkingButton')}>
-                    <Button
-                        className="table-button"
-                        variant="contained"
-                        color="primary"
-                        disabled={cow.gender !== "FEMALE"}
-                        // onClick={}
-                    >
-                        <LuMilk className="table-icon"/>
-                    </Button>
+                <Tooltip
+                    title={cow.gender === "FEMALE"
+                        ? t('cowResults.milkingButton')
+                        : t('cowResults.milkingButtonDisabled')}
+                >
+                    <span>
+                        <Button
+                            className="table-button"
+                            variant="contained"
+                            color="primary"
+                            disabled={cow.gender !== "FEMALE"}
+                            onClick={handleOpenAddMilkingModal}
+                        >
+                            <LuMilk className="table-icon"/>
+                        </Button>
+                    </span>
                 </Tooltip>
             </TableCell>
 
@@ -144,6 +155,12 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted}) => {
                 onConfirm={handleDeleteCow}
                 title={t('cowResults.deleteDialogTitle')}
                 message={t('cowResults.deleteDialogMessage1') + cow.earTagNumber + t('cowResults.deleteDialogMessage2')}
+            />
+
+            <AddMilkingModal
+                open={openAddMilkingModal}
+                onClose={handleCloseAddMilkingModal}
+                cowId={cow.cowId}
             />
         </TableRow>
     )
