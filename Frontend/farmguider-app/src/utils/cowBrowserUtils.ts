@@ -1,3 +1,6 @@
+import Page from "@/entities/Page.ts";
+import CowResponseDTO from "@/entities/CowResponseDTO.ts";
+
 export enum CowSortBy {
     CowName = "cowName",
     EarTagNumber = "earTagNumber",
@@ -26,4 +29,27 @@ export const defaultSearchParams = {
     maxWeight: DEFAULT_UNDEFINED,
     minMilkingQuantity: DEFAULT_UNDEFINED,
     maxMilkingQuantity: DEFAULT_UNDEFINED
+};
+
+export const emptyPage: Page<CowResponseDTO> = {
+    content: [],
+    pageable: {
+        offset: 0,
+        pageSize: DEFAULT_PAGE_SIZE,
+        pageNumber: DEFAULT_PAGE,
+        unpaged: false,
+        paged: true
+    },
+    totalElements: 0,
+    totalPages: 0,
+    size: DEFAULT_PAGE_SIZE,
+    number: DEFAULT_PAGE,
+    sort: {
+        empty: true,
+        sorted: false,
+        unsorted: true
+    },
+    first: true,
+    numberOfElements: 0,
+    empty: true
 };

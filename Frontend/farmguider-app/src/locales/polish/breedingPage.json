@@ -45,8 +45,8 @@
     "earTagNumber": "Numer Kolczyka",
     "selectGender": "Wybierz Płeć",
     "genderLabel": "Płeć",
-    "female": "Samica",
-    "male": "Samiec",
+    "female": "Krowa",
+    "male": "Byk",
     "cowName": "Imię Krowy",
     "calendarLabel": "Data Urodzenia",
     "requirements": "Aby dodać krowę należy podać jej numer kolczyka, wybrać płeć oraz wprowadzić datę urodzenia. Imię krowy jest opcjonalne.",
@@ -62,5 +62,17 @@
       "dateOfBirthRequired": "Data urodzenia musi być podana",
       "dateOfBirthPastOrPresent": "Data urodzenia nie może być datą przyszłą"
     }
+  },
+  "cowResults": {
+    "gender": "Płeć",
+    "cowName": "Imię Krowy",
+    "earTagNumber": "Numer Kolczyka",
+    "dateOfBirth": "Data Urodzenia",
+    "currentWeight": "Aktualna Waga",
+    "latestMilking": "Ostatni Udój",
+    "femaleTooltip": "Krowa",
+    "maleTooltip": "Byk",
+    "rows": "Wierszy na stronę:",
+    "page": "{{from}}–{{to}} z {{count}}"
   }
 }

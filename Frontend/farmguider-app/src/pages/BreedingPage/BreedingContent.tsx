@@ -7,7 +7,7 @@ import BreedingContentTools from "@/pages/BreedingPage/BreedingContentTools.tsx"
 import {GiCow} from 'react-icons/gi';
 import AddCowModal from "@/pages/BreedingPage/modals/AddCowModal.tsx";
 import CowSearchParams from "@/entities/CowSearchParams.ts";
-import {defaultSearchParams} from "@/utils/cowBrowserUtils.ts";
+import {DEFAULT_PAGE, defaultSearchParams, emptyPage} from "@/utils/cowBrowserUtils.ts";
 import {getCows} from "@/services/cowService.ts";
 import CowBrowser from "@/pages/BreedingPage/CowBrowser.tsx";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
@@ -30,7 +30,7 @@ const BreedingContent: React.FC<BreedingContentProps> = (
     const [openAddCowModal, setOpenAddCowModal] = useState(false);
     const [cowSearchParams, setCowSearchParams] = useState<CowSearchParams>(defaultSearchParams);
     const [loading, setLoading] = useState<boolean>(false);
-    const [cowsPage, setCowsPage] = useState<Page<CowResponseDTO>>({content: [], totalElements: 0});
+    const [cowsPage, setCowsPage] = useState<Page<CowResponseDTO>>(emptyPage);
     const {enqueueSnackbar} = useSnackbar();
 
     const relevantSearchParams = useMemo(() => ({
@@ -78,6 +78,15 @@ const BreedingContent: React.FC<BreedingContentProps> = (
                 })
         }
     }
+
+    const handlePageChange = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        updateSearchParams('page', newPage);
+    };
+
+    const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        updateSearchParams('size', parseInt(event.target.value, 10));
+        updateSearchParams('page', DEFAULT_PAGE);
+    };
 
     const updateSearchParams = (key: keyof CowSearchParams, value: string | number | boolean | Date | undefined) => {
         setCowSearchParams(prevState => ({...prevState, [key]: value}));
@@ -129,6 +138,8 @@ const BreedingContent: React.FC<BreedingContentProps> = (
             <CowResults
                 loading={loading}
                 cowsPage={cowsPage}
+                onPageChange={handlePageChange}
+                onRowsPerPageChange={handleRowsPerPageChange}
             />
 
             <AddCowModal

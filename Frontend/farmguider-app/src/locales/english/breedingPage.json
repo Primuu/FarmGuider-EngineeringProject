@@ -45,8 +45,8 @@
     "earTagNumber": "Ear Tag Number",
     "selectGender": "Select Gender",
     "genderLabel": "Gender",
-    "female": "Female",
-    "male": "Male",
+    "female": "Cow",
+    "male": "Bull",
     "cowName": "Cow Name",
     "calendarLabel": "Birth date",
     "requirements": "To add a cow, provide it's ear tag number, select it's gender and enter it's birth date. Cow's name is optional.",
@@ -62,5 +62,17 @@
       "dateOfBirthRequired": "Birth date field must be filled in",
       "dateOfBirthPastOrPresent": "Birth date cannot be a future date"
     }
+  },
+  "cowResults": {
+    "gender": "Gender",
+    "cowName": "Cow's Name",
+    "earTagNumber": "Ear Tag Number",
+    "dateOfBirth": "Date of Birth",
+    "currentWeight": "Current Weight",
+    "latestMilking": "Latest Milking",
+    "femaleTooltip": "Cow",
+    "maleTooltip": "Bull",
+    "rows": "Rows per page:",
+    "page": "{{from}}–{{to}} of {{count}}"
   }
 }
