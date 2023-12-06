@@ -33,7 +33,8 @@
     "editHerdTooltip": "Edytuj Stado",
     "deleteHerdTooltip": "Usuń Stado",
     "deleteDialogTitle": "Usuwanie Stada",
-    "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć stado: ",
+    "deleteDialogMessage1": "Czy jesteś pewny, że chcesz usunąć stado: ",
+    "deleteDialogMessage2": " i wszystkie informacje z nim związane?",
     "deleteSuccessSnackbar": "Stado usunięte pomyślnie",
     "deleteErrorSnackbar": "Coś poszło nie tak",
     "getCowsErrorSnackbar": "Coś poszło nie tak",
@@ -81,6 +82,11 @@
     "milkingButton": "Dodaj Udój",
     "weightingButton": "Dodaj Ważenie",
     "editingButton": "Edytuj Informacje o Krowie",
-    "deletingButton": "Usuń Krowę"
+    "deletingButton": "Usuń Krowę",
+    "deleteSuccessSnackbar": "Krowa usunięta pomyślnie",
+    "deleteErrorSnackbar": "Coś poszło nie tak",
+    "deleteDialogTitle": "Usuwanie Krowy",
+    "deleteDialogMessage1": "Czy jesteś pewny, że chcesz usunąć krowę z numerem kolczyka: ",
+    "deleteDialogMessage2": " i wszystkie informacje z nią związane?"
   }
 }

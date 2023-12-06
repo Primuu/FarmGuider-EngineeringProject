@@ -97,7 +97,7 @@ const BreedingContentTools: React.FC<BreedingContentToolsProps> = (
                 onClose={handleCloseConfirmationDialog}
                 onConfirm={handleDeleteBreeding}
                 title={t('breedingContent.deleteDialogTitle')}
-                message={t('breedingContent.deleteDialogMessage') + selectedBreeding.breedingName + "?"}
+                message={t('breedingContent.deleteDialogMessage1') + selectedBreeding.breedingName + t('breedingContent.deleteDialogMessage2')}
             />
         </div>
     );

@@ -140,6 +140,7 @@ const BreedingContent: React.FC<BreedingContentProps> = (
                 cowsPage={cowsPage}
                 onPageChange={handlePageChange}
                 onRowsPerPageChange={handleRowsPerPageChange}
+                onCowDeleted={handleSearch}
             />
 
             <AddCowModal

@@ -33,7 +33,8 @@
     "editHerdTooltip": "Edit Herd",
     "deleteHerdTooltip": "Delete Herd",
     "deleteDialogTitle": "Deleting Herd",
-    "deleteDialogMessage": "Are you sure you want to delete herd: ",
+    "deleteDialogMessage1": "Are you sure you want to delete herd: ",
+    "deleteDialogMessage2": " and all information related to it?",
     "deleteSuccessSnackbar": "Herd deleted successfully",
     "deleteErrorSnackbar": "Something went wrong",
     "getCowsErrorSnackbar": "Something went wrong",
@@ -81,6 +82,11 @@
     "milkingButton": "Add Milking",
     "weightingButton": "Add Weighting",
     "editingButton": "Edit Cow's Data",
-    "deletingButton": "Delete Cow"
+    "deletingButton": "Delete Cow",
+    "deleteSuccessSnackbar": "Cow deleted successfully",
+    "deleteErrorSnackbar": "Something went wrong",
+    "deleteDialogTitle": "Deleting Cow",
+    "deleteDialogMessage1": "Are you sure you want to delete cow with ear tag number: ",
+    "deleteDialogMessage2": " and all information related to it?"
   }
 }

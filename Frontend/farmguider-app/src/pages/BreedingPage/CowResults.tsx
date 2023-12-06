@@ -13,9 +13,12 @@ type CowResultsProps = {
     cowsPage: Page<CowResponseDTO>
     onPageChange: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
     onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onCowDeleted: () => void;
 }
 
-const CowResults: React.FC<CowResultsProps> = ({loading, cowsPage, onPageChange, onRowsPerPageChange}) => {
+const CowResults: React.FC<CowResultsProps> = (
+    {loading, cowsPage, onPageChange, onRowsPerPageChange, onCowDeleted}
+) => {
     const {t} = useTranslation('breedingPage');
 
     const labelDisplayedRows = ({from, to, count}: LabelDisplayedRowsArgs) => {
@@ -47,7 +50,11 @@ const CowResults: React.FC<CowResultsProps> = ({loading, cowsPage, onPageChange,
                     ) : (
                         <TableBody>
                             {cowsPage.content.map(cow => (
-                                <CowCard key={cow.cowId} cow={cow}/>
+                                <CowCard
+                                    key={cow.cowId}
+                                    cow={cow}
+                                    onCowDeleted={onCowDeleted}
+                                />
                             ))}
                         </TableBody>
                     )}
