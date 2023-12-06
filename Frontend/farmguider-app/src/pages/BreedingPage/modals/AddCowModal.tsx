@@ -24,9 +24,10 @@ type AddCowModalProps = {
     open: boolean;
     onClose: () => void;
     breedingId: number;
+    onCowAdded: () => void;
 }
 
-const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) => {
+const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId, onCowAdded}) => {
     const [earTagNumber, setEarTagNumber] = useState<string>('');
     const [gender, setGender] = useState<string>('FEMALE');
     const [cowName, setCowName] = useState<string>('');
@@ -82,6 +83,7 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId}) =>
             createCow(breedingId, cowCreateDTO)
                 .then(() => {
                     cancel();
+                    onCowAdded();
                     enqueueSnackbar(t('addCowModal.successSnackbar'), SnackbarSuccess);
                 })
                 .catch(() => {

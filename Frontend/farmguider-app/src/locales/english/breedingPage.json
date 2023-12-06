@@ -36,6 +36,7 @@
     "deleteDialogMessage": "Are you sure you want to delete herd: ",
     "deleteSuccessSnackbar": "Herd deleted successfully",
     "deleteErrorSnackbar": "Something went wrong",
+    "getCowsErrorSnackbar": "Something went wrong",
     "addCowButton": "Add Cow"
   },
   "addCowModal":{

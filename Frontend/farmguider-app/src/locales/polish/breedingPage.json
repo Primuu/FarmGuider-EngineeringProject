@@ -36,6 +36,7 @@
     "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć stado: ",
     "deleteSuccessSnackbar": "Stado usunięte pomyślnie",
     "deleteErrorSnackbar": "Coś poszło nie tak",
+    "getCowsErrorSnackbar": "Coś poszło nie tak",
     "addCowButton": "Dodaj Krowę"
   },
   "addCowModal":{

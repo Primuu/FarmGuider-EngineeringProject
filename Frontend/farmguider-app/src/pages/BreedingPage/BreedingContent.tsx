@@ -1,11 +1,20 @@
 import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {Button, Select, SelectChangeEvent} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import {useTranslation} from "react-i18next";
 import BreedingContentTools from "@/pages/BreedingPage/BreedingContentTools.tsx";
 import {GiCow} from 'react-icons/gi';
 import AddCowModal from "@/pages/BreedingPage/modals/AddCowModal.tsx";
+import CowSearchParams from "@/entities/CowSearchParams.ts";
+import {defaultSearchParams} from "@/utils/cowBrowserUtils.ts";
+import {getCows} from "@/services/cowService.ts";
+import CowBrowser from "@/pages/BreedingPage/CowBrowser.tsx";
+import CowResponseDTO from "@/entities/CowResponseDTO.ts";
+import Page from "@/entities/Page.ts";
+import {useSnackbar} from "notistack";
+import {SnackbarError} from "@/utils/snackbarVariants.ts";
+import CowResults from "@/pages/BreedingPage/CowResults.tsx";
 
 type BreedingContentProps = {
     breedingList: BreedingResponseDTO[];
@@ -19,13 +28,30 @@ const BreedingContent: React.FC<BreedingContentProps> = (
     const {t} = useTranslation('breedingPage');
     const [breeding, setBreeding] = useState<BreedingResponseDTO>(breedingList[0]);
     const [openAddCowModal, setOpenAddCowModal] = useState(false);
+    const [cowSearchParams, setCowSearchParams] = useState<CowSearchParams>(defaultSearchParams);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [cowsPage, setCowsPage] = useState<Page<CowResponseDTO>>({content: [], totalElements: 0});
+    const {enqueueSnackbar} = useSnackbar();
 
-    const handleOpenAddCowModal = () => setOpenAddCowModal(true);
-    const handleCloseAddCowModal = () => setOpenAddCowModal(false);
+    const relevantSearchParams = useMemo(() => ({
+        page: cowSearchParams.page,
+        size: cowSearchParams.size,
+        sortBy: cowSearchParams.sortBy,
+        sortDesc: cowSearchParams.sortDesc,
+        gender: cowSearchParams.gender
+    }), [cowSearchParams.page, cowSearchParams.size, cowSearchParams.sortBy, cowSearchParams.sortDesc, cowSearchParams.gender]);
 
     useEffect(() => {
         setBreeding(breedingList[0]);
     }, [breedingList]);
+
+    useEffect(() => {
+        handleSearch();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [relevantSearchParams]);
+
+    const handleOpenAddCowModal = () => setOpenAddCowModal(true);
+    const handleCloseAddCowModal = () => setOpenAddCowModal(false);
 
     const handleChangeHerd = (event: SelectChangeEvent) => {
         const breedingIdNum = Number(event.target.value);
@@ -35,6 +61,26 @@ const BreedingContent: React.FC<BreedingContentProps> = (
         if (selectedBreeding) {
             setBreeding(selectedBreeding);
         }
+    };
+
+    const handleSearch = () => {
+        setLoading(true);
+
+        if (breeding.breedingId) {
+            getCows(breeding.breedingId, cowSearchParams)
+                .then(data => {
+                    setCowsPage(data);
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setLoading(false);
+                    enqueueSnackbar(t('breedingContent.getCowsErrorSnackbar'), SnackbarError);
+                })
+        }
+    }
+
+    const updateSearchParams = (key: keyof CowSearchParams, value: string | number | boolean | Date | undefined) => {
+        setCowSearchParams(prevState => ({...prevState, [key]: value}));
     };
 
     return (
@@ -75,10 +121,21 @@ const BreedingContent: React.FC<BreedingContentProps> = (
                 </Button>
             </div>
 
+            <CowBrowser
+                updateSearchParams={updateSearchParams}
+                handleSearch={handleSearch}
+            />
+
+            <CowResults
+                loading={loading}
+                cowsPage={cowsPage}
+            />
+
             <AddCowModal
                 open={openAddCowModal}
                 onClose={handleCloseAddCowModal}
                 breedingId={breeding.breedingId}
+                onCowAdded={handleSearch}
             />
         </div>
     )
