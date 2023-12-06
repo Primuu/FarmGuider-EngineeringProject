@@ -1,7 +1,7 @@
 import {Box, CircularProgress, Container} from '@mui/material';
-import '@/components/LoadingScreen/loadingScreen.css';
+import '@/components/LoadingComponent/loadingComponent.css';
 
-const LoadingScreen = () => {
+const LoadingComponent = () => {
     return (
         <Container>
             <Box className="loading-box">
@@ -11,4 +11,4 @@ const LoadingScreen = () => {
     );
 }
 
-export default LoadingScreen;
+export default LoadingComponent;
