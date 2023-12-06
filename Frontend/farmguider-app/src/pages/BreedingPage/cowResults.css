@@ -1,3 +1,20 @@
+.cows-table-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.cows-table-content {
+    overflow-y: auto;
+    max-height: 62vh;
+}
+
+.cows-paginator {
+    margin-top: auto;
+    align-self: center;
+}
+
 .center-cell {
     display: flex;
     align-items: center;

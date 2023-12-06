@@ -93,7 +93,7 @@ const BreedingContent: React.FC<BreedingContentProps> = (
     };
 
     return (
-        <div>
+        <div className="breeding-content-container">
             <div className="breeding-content-header">
                 <div className="breeding-content-herd-name">
                     {breeding.breedingName}

@@ -28,39 +28,42 @@ const CowResults: React.FC<CowResultsProps> = (
     const labelRowsPerPage = t('cowResults.rows');
 
     return (
-        <div>
-            <TableContainer>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>{t('cowResults.gender')}</TableCell>
-                            <TableCell>{t('cowResults.earTagNumber')}</TableCell>
-                            <TableCell>{t('cowResults.cowName')}</TableCell>
-                            <TableCell>{t('cowResults.dateOfBirth')}</TableCell>
-                            <TableCell>{t('cowResults.currentWeight')}</TableCell>
-                            <TableCell>{t('cowResults.latestMilking')}</TableCell>
-                            <TableCell>{t('cowResults.milking')}</TableCell>
-                            <TableCell>{t('cowResults.weighting')}</TableCell>
-                            <TableCell>{t('cowResults.editing')}</TableCell>
-                            <TableCell>{t('cowResults.deleting')}</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    {loading ? (
-                        <LoadingComponent/>
-                    ) : (
-                        <TableBody>
-                            {cowsPage.content.map(cow => (
-                                <CowCard
-                                    key={cow.cowId}
-                                    cow={cow}
-                                    onCowDeleted={onCowDeleted}
-                                />
-                            ))}
-                        </TableBody>
-                    )}
-                </Table>
-            </TableContainer>
+        <div className="cows-table-container">
+            <div className="cows-table-content">
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>{t('cowResults.gender')}</TableCell>
+                                <TableCell>{t('cowResults.earTagNumber')}</TableCell>
+                                <TableCell>{t('cowResults.cowName')}</TableCell>
+                                <TableCell>{t('cowResults.dateOfBirth')}</TableCell>
+                                <TableCell>{t('cowResults.currentWeight')}</TableCell>
+                                <TableCell>{t('cowResults.latestMilking')}</TableCell>
+                                <TableCell>{t('cowResults.milking')}</TableCell>
+                                <TableCell>{t('cowResults.weighting')}</TableCell>
+                                <TableCell>{t('cowResults.editing')}</TableCell>
+                                <TableCell>{t('cowResults.deleting')}</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        {loading ? (
+                            <LoadingComponent/>
+                        ) : (
+                            <TableBody>
+                                {cowsPage.content.map(cow => (
+                                    <CowCard
+                                        key={cow.cowId}
+                                        cow={cow}
+                                        onCowDeleted={onCowDeleted}
+                                    />
+                                ))}
+                            </TableBody>
+                        )}
+                    </Table>
+                </TableContainer>
+            </div>
             <TablePagination
+                className="cows-paginator"
                 component="div"
                 count={cowsPage.totalElements}
                 page={cowsPage.pageable.pageNumber}
