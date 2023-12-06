@@ -1,6 +1,7 @@
 import {TFunction} from "i18next";
 
 export const EAR_TAG_REGEX = /^[A-Z]{2}\d{12}$/;
+export const MINUTES_SECONDS_REGEX = /^\d{0,2}?:?\d{0,2}$/;
 
 export type CowValues = {
     earTagNumber: string | null;
@@ -8,10 +9,22 @@ export type CowValues = {
     dateOfBirth: Date | null;
 }
 
+export type MilkingValues = {
+    dateOfMilking: Date | null;
+    milkQuantity: number | null;
+    milkingDuration: string | null;
+}
+
 export type CowErrors = {
     earTagNumber?: string;
     cowName?: string;
     dateOfBirth?: string;
+}
+
+export type MilkingErrors = {
+    dateOfMilking?: string;
+    milkQuantity?: string;
+    milkingDuration?: string;
 }
 
 export const validateAddCow = (values: CowValues, t: TFunction): CowErrors => {
@@ -24,6 +37,17 @@ export const validateAddCow = (values: CowValues, t: TFunction): CowErrors => {
 
     return tempErrors;
 }
+
+export const validateAddMilking = (values: MilkingValues, t: TFunction): MilkingErrors => {
+    const {dateOfMilking, milkQuantity, milkingDuration} = values;
+    const tempErrors: MilkingErrors = {};
+
+    tempErrors.dateOfMilking = validateDateOfMilking(dateOfMilking, t);
+    tempErrors.milkQuantity = validateMilkQuantity(milkQuantity, t);
+    tempErrors.milkingDuration = validateMilkingDuration(milkingDuration, t);
+
+    return tempErrors;
+};
 
 export const validateCowName = (cowName: string | null, t: TFunction): string => {
     if (cowName && cowName.length > 45) return t('addCowModal.validation.cowNameLength');
@@ -42,3 +66,31 @@ export const validateDateOfBirth = (dateOfBirth: Date | null, t: TFunction): str
     if (dateOfBirth > new Date()) return t('addCowModal.validation.dateOfBirthPastOrPresent');
     return '';
 };
+
+export const validateDateOfMilking = (date: Date | null, t: TFunction): string => {
+    if (!date) return t('addMilkingModal.validation.dateOfMilkingRequired');
+
+    const dateWithoutSeconds = new Date(date);
+    dateWithoutSeconds.setSeconds(0, 0);
+
+    if (dateWithoutSeconds > new Date()) return t('addMilkingModal.validation.dateOfMilkingPastOrPresent');
+    return '';
+};
+
+export const validateMilkQuantity = (quantity: number | null, t: TFunction): string => {
+    if (quantity === null) return t('addMilkingModal.validation.milkQuantityRequired');
+    if (quantity < 0) return t('addMilkingModal.validation.milkQuantityNonNegative');
+    if (quantity > 999.999) return t('addMilkingModal.validation.milkQuantityRange');
+    return '';
+};
+
+export const validateMilkingDuration = (duration: string | null, t: TFunction): string => {
+    if (!duration) return '';
+    if (!MINUTES_SECONDS_REGEX.test(duration)) return t('addMilkingModal.validation.milkingDurationFormat');
+    if (duration) {
+        const [minutes, seconds] = duration.split(':').map(Number);
+        if (minutes > 59 || seconds > 59) return t('addMilkingModal.validation.milkingDurationRange');
+    }
+    return '';
+};
+
