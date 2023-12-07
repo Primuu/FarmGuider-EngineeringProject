@@ -129,5 +129,32 @@
       "measurementDateRequired": "Data pomiaru musi być podana",
       "measurementDatePastOrPresent": "Data pomiaru nie może być datą przyszłą"
     }
+  },
+  "cowBrowser": {
+    "earTagNumber": "Numer Kolczyka",
+    "cowName": "Imię Krowy",
+    "selectGender": "Wybierz Płeć",
+    "female": "Krowa",
+    "male": "Byk",
+    "notSelected": "Nie Wybrano",
+    "sortBy": "Sortuj Po",
+    "sortDesc": "Sortowanie",
+    "ascending": "Rosnąco",
+    "descending": "Malejąco",
+    "minDateOfBirth": "Data Urodzenia Od",
+    "maxDateOfBirth": "Data Urodzenia Do",
+    "minWeight": "Waga Od",
+    "maxWeight": "Waga Do",
+    "minMilkQuantity": "Udój Od",
+    "maxMilkQuantity": "Udój Do",
+    "search": "Szukaj",
+    "cowSortBy" : {
+      "cowName": "Imię Krowy",
+      "earTagNumber": "Numer Kolczyka",
+      "dateOfBirth": "Data Urodzenia",
+      "currentWeight": "Aktualna Waga",
+      "latestMilkingQuantity": "Ostatni Udój",
+      "gender": "Płeć"
+    }
   }
 }

@@ -40,8 +40,30 @@ const BreedingContent: React.FC<BreedingContentProps> = (
         size: cowSearchParams.size,
         sortBy: cowSearchParams.sortBy,
         sortDesc: cowSearchParams.sortDesc,
-        gender: cowSearchParams.gender
-    }), [cowSearchParams.page, cowSearchParams.size, cowSearchParams.sortBy, cowSearchParams.sortDesc, cowSearchParams.gender]);
+        earTagNumber: cowSearchParams.earTagNumber,
+        gender: cowSearchParams.gender,
+        cowName: cowSearchParams.cowName,
+        minDateOfBirth: cowSearchParams.minDateOfBirth,
+        maxDateOfBirth: cowSearchParams.maxDateOfBirth,
+        minWeight: cowSearchParams.minWeight,
+        maxWeight: cowSearchParams.maxWeight,
+        minMilkingQuantity: cowSearchParams.minMilkingQuantity,
+        maxMilkingQuantity: cowSearchParams.maxMilkingQuantity
+    }), [
+        cowSearchParams.page,
+        cowSearchParams.size,
+        cowSearchParams.sortBy,
+        cowSearchParams.sortDesc,
+        cowSearchParams.gender,
+        cowSearchParams.earTagNumber,
+        cowSearchParams.cowName,
+        cowSearchParams.minDateOfBirth,
+        cowSearchParams.maxDateOfBirth,
+        cowSearchParams.minWeight,
+        cowSearchParams.maxWeight,
+        cowSearchParams.minMilkingQuantity,
+        cowSearchParams.maxMilkingQuantity
+    ]);
 
     useEffect(() => {
         handleSearch();
@@ -138,7 +160,7 @@ const BreedingContent: React.FC<BreedingContentProps> = (
 
             <CowBrowser
                 updateSearchParams={updateSearchParams}
-                handleSearch={handleSearch}
+                cowSearchParams={cowSearchParams}
             />
 
             <CowResults

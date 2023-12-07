@@ -129,5 +129,32 @@
       "measurementDateRequired": "Date of measurement field must be filled in",
       "measurementDatePastOrPresent": "Date of measurement cannot be a future date"
     }
+  },
+  "cowBrowser": {
+    "earTagNumber": "Ear Tag Number",
+    "cowName": "Cow's Name",
+    "selectGender": "Select Gender",
+    "female": "Cow",
+    "male": "Bull",
+    "notSelected": "Not Selected",
+    "sortBy": "Sort By",
+    "sortDesc": "Sorting",
+    "ascending": "Ascending",
+    "descending": "Descending",
+    "minDateOfBirth": "Birth Date From",
+    "maxDateOfBirth": "Birth Date To",
+    "minWeight": "Weight From",
+    "maxWeight": "Weight To",
+    "minMilkQuantity": "Milking From",
+    "maxMilkQuantity": "Milking To",
+    "search": "Search",
+    "cowSortBy" : {
+      "cowName": "Cow's Name",
+      "earTagNumber": "Ear Tag Number",
+      "dateOfBirth": "Date of Birth",
+      "currentWeight": "Current Weight",
+      "latestMilkingQuantity": "Latest Milking",
+      "gender": "Gender"
+    }
   }
 }
