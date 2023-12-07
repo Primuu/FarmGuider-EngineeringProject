@@ -81,7 +81,7 @@
     "deleting": "Deleting",
     "milkingButton": "Add Milking",
     "milkingButtonDisabled": "Not available for this gender",
-    "weightingButton": "Add Weighting",
+    "weightingButton": "Add Weight Measurement",
     "editingButton": "Edit Cow's Data",
     "deletingButton": "Delete Cow",
     "deleteSuccessSnackbar": "Cow deleted successfully",
@@ -109,6 +109,24 @@
       "dateOfMilkingPastOrPresent": "Date of milking cannot be a future date",
       "milkingDurationFormat": "Provide time in format minutes : seconds",
       "milkingDurationRange": "Provide a valid time range"
+    }
+  },
+  "addWeightGainModal": {
+    "successSnackbar": "Weight measurement added successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Adding a Weight Measurement",
+    "subHeader": "Weight measurement will be added to the currently selected cow",
+    "requirements": "To add a weight measurement, provide the measurement date and weight",
+    "confirmButton": "Add Measurement",
+    "cancelButton": "Cancel",
+    "measurementDate": "Measurement Date",
+    "weight": "Weight (kilograms)",
+    "validation": {
+      "weightRange": "Weight must be within the range of 0.000 to 999.999",
+      "weightNonNegative" : "Weight cannot be negative",
+      "weightRequired": "Weight must be filled in",
+      "measurementDateRequired": "Date of measurement field must be filled in",
+      "measurementDatePastOrPresent": "Date of measurement cannot be a future date"
     }
   }
 }

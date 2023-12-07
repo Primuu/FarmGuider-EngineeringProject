@@ -15,6 +15,8 @@ import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {deleteCow} from "@/services/cowService.ts";
 import AddMilkingModal from "@/pages/BreedingPage/modals/AddMilkingModal.tsx";
 import MilkingCreateDTO from "@/entities/MilkingCreateDTO.ts";
+import AddWeightGainModal from "@/pages/BreedingPage/modals/AddWeightGainModal.tsx";
+import WeightGainCreateDTO from "@/entities/WeightGainCreateDTO.ts";
 
 type CowCardProps = {
     cow: CowResponseDTO
@@ -27,9 +29,13 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
     const {enqueueSnackbar} = useSnackbar();
     const [openAddMilkingModal, setOpenAddMilkingModal] = useState(false);
+    const [openAddWeightGainModal, setOpenAddWeightGainModal] = useState(false);
 
     const handleOpenAddMilkingModal = () => setOpenAddMilkingModal(true);
     const handleCloseAddMilkingModal = () => setOpenAddMilkingModal(false);
+
+    const handleOpenAddWeightGainModal = () => setOpenAddWeightGainModal(true);
+    const handleCloseAddWeightGainModal = () => setOpenAddWeightGainModal(false);
 
     const handleOpenConfirmationDialog = () => {
         setOpenConfirmationDialog(true);
@@ -60,6 +66,20 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
                 ...cow,
                 latestMilkingQuantity: milkingCreateDTO.milkQuantity,
                 latestMilkingDate: milkingCreateDTO.dateOfMilking
+            };
+            onCowUpdated(updatedCow);
+        }
+    };
+
+    const onWeightGainAdded = (weightGainCreateDTO: WeightGainCreateDTO) => {
+        const shouldUpdate: boolean = cow.latestWeightMeasurementDate === null
+            || new Date(cow.latestWeightMeasurementDate) < new Date(weightGainCreateDTO.measurementDate);
+
+        if (shouldUpdate) {
+            const updatedCow: CowResponseDTO = {
+                ...cow,
+                currentWeight: weightGainCreateDTO.weight,
+                latestWeightMeasurementDate: weightGainCreateDTO.measurementDate
             };
             onCowUpdated(updatedCow);
         }
@@ -132,7 +152,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
                         className="table-button"
                         variant="contained"
                         color="primary"
-                        // onClick={}
+                        onClick={handleOpenAddWeightGainModal}
                     >
                         <GiInjustice className="table-icon"/>
                     </Button>
@@ -178,6 +198,13 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
                 onClose={handleCloseAddMilkingModal}
                 cowId={cow.cowId}
                 onMilkingAdded={onMilkingAdded}
+            />
+
+            <AddWeightGainModal
+                open={openAddWeightGainModal}
+                onClose={handleCloseAddWeightGainModal}
+                cowId={cow.cowId}
+                onWeightGainAdded={onWeightGainAdded}
             />
         </TableRow>
     )

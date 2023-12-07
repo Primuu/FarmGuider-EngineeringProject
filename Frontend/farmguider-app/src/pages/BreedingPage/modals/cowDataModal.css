@@ -54,6 +54,14 @@
     gap: 20px;
 }
 
+.add-weight-input {
+    align-self: center;
+}
+
+.add-weight-text-field {
+    width: 300px;
+}
+
 .add-cow-data-button-group {
     margin-top: 20px;
     display: flex;
@@ -101,6 +109,10 @@
         gap: 0;
         width: 80%;
         align-self: center;
+    }
+
+    .add-weight-text-field {
+        width: 250px;
     }
 
     .add-cow-data-button-group {

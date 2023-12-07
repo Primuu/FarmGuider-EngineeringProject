@@ -81,7 +81,7 @@
     "deleting": "Usuwanie",
     "milkingButton": "Dodaj Udój",
     "milkingButtonDisabled": "Nie dostępne dla tej płci",
-    "weightingButton": "Dodaj Ważenie",
+    "weightingButton": "Dodaj Pomiar Wagi",
     "editingButton": "Edytuj Informacje o Krowie",
     "deletingButton": "Usuń Krowę",
     "deleteSuccessSnackbar": "Krowa usunięta pomyślnie",
@@ -110,6 +110,23 @@
       "milkingDurationFormat": "Podaj czas w formacie minuty : sekundy",
       "milkingDurationRange": "Podaj prawidłowy zakres czasu"
     }
+  },
+  "addWeightGainModal": {
+    "successSnackbar": "Pomiar wagi dodano pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Dodawanie Pomiaru Wagi",
+    "subHeader": "Pomiar wagi zostanie dodany do aktualnie wybranej krowy",
+    "requirements": "Aby dodać pomiar wagi, podaj datę ważenia i wagę",
+    "confirmButton": "Dodaj Pomiar",
+    "cancelButton": "Anuluj",
+    "measurementDate": "Data Pomiaru",
+    "weight": "Waga (kilogramy)",
+    "validation": {
+      "weightRange": "Waga musi znajdować się w zakresie od 0.000 do 9999.999",
+      "weightNonNegative" : "Waga nie może być ujemna",
+      "weightRequired": "Waga musi być podana",
+      "measurementDateRequired": "Data pomiaru musi być podana",
+      "measurementDatePastOrPresent": "Data pomiaru nie może być datą przyszłą"
+    }
   }
-
 }
