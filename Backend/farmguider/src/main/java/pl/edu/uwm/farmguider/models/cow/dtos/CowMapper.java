@@ -13,6 +13,8 @@ public class CowMapper {
                 .gender(cow.getGender().name())
                 .currentWeight(cow.getCurrentWeight())
                 .latestMilkingQuantity(cow.getLatestMilkingQuantity())
+                .latestMilkingDate(cow.getLatestMilkingDate())
+                .latestWeightMeasurementDate(cow.getLatestWeightMeasurementDate())
                 .build();
     }
 

@@ -4,6 +4,7 @@ import lombok.Builder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record CowResponseDTO(Long cowId,
                              String cowName,
@@ -11,7 +12,9 @@ public record CowResponseDTO(Long cowId,
                              LocalDate dateOfBirth,
                              String gender,
                              BigDecimal currentWeight,
-                             BigDecimal latestMilkingQuantity) {
+                             BigDecimal latestMilkingQuantity,
+                             LocalDateTime latestMilkingDate,
+                             LocalDate latestWeightMeasurementDate) {
 
     @Builder
     public CowResponseDTO {}
