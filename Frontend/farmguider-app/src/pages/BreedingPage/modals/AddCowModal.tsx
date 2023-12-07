@@ -19,6 +19,7 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import plLocale from 'date-fns/locale/pl';
 import enLocale from 'date-fns/locale/en-US';
 import i18n from "i18next";
+import {NAME_REGEX} from "@/utils/profileValidators.ts";
 
 type AddCowModalProps = {
     open: boolean;
@@ -52,7 +53,8 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId, onC
     };
 
     const handleCowNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCowName(e.target.value);
+        const sanitizedValue = e.target.value.replace(NAME_REGEX, '');
+        setCowName(sanitizedValue);
     };
 
     const handleDateChange = (date: Date | null) => {
