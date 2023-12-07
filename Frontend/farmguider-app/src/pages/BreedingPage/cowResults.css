@@ -24,6 +24,15 @@
     max-height: 65vh;
 }
 
+.no-results {
+    display: flex;
+    height: 50vh;
+    align-items: center;
+    justify-content: center;
+    color: #9B9B9B;
+    font-style: italic;
+}
+
 .cows-paginator {
     margin-top: auto;
     align-self: center;

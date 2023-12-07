@@ -1,7 +1,7 @@
 import Page from "@/entities/Page.ts";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import React from "react";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from "@mui/material";
+import {Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography} from "@mui/material";
 import CowCard from "@/pages/BreedingPage/CowCard.tsx";
 import LoadingComponent from "@/components/LoadingComponent/LoadingComponent.tsx";
 import {useTranslation} from "react-i18next";
@@ -61,7 +61,7 @@ const CowResults: React.FC<CowResultsProps> = (
                                         <LoadingComponent/>
                                     </TableCell>
                                 </TableRow>
-                            ) : (
+                            ) : cowsPage.content.length > 0 ? (
                                 cowsPage.content.map(cow => (
                                         <CowCard
                                             key={cow.cowId}
@@ -69,8 +69,17 @@ const CowResults: React.FC<CowResultsProps> = (
                                             onCowDeleted={onCowDeleted}
                                             onCowUpdated={handleCowUpdated}
                                         />
-                                    ))
-                            )}
+                                    )))
+                                : (
+                                    <TableRow>
+                                        <TableCell colSpan={10}>
+                                            <Typography className="no-results">
+                                                {t('cowResults.noResults')}
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>

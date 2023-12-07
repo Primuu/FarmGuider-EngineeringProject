@@ -65,6 +65,7 @@
     }
   },
   "cowResults": {
+    "noResults": "Brak wyników wyszukiwania",
     "gender": "Płeć",
     "cowName": "Imię Krowy",
     "earTagNumber": "Numer Kolczyka",

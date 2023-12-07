@@ -65,6 +65,7 @@
     }
   },
   "cowResults": {
+    "noResults": "No search results",
     "gender": "Gender",
     "cowName": "Cow's Name",
     "earTagNumber": "Ear Tag Number",
