@@ -15,6 +15,11 @@ export type MilkingValues = {
     milkingDuration: string | null;
 }
 
+export type WeightGainValues = {
+    measurementDate: Date | null;
+    weight: number | null;
+}
+
 export type CowErrors = {
     earTagNumber?: string;
     cowName?: string;
@@ -25,6 +30,11 @@ export type MilkingErrors = {
     dateOfMilking?: string;
     milkQuantity?: string;
     milkingDuration?: string;
+}
+
+export type WeightingErrors = {
+    measurementDate?: string;
+    weight?: string;
 }
 
 export const validateAddCow = (values: CowValues, t: TFunction): CowErrors => {
@@ -48,6 +58,16 @@ export const validateAddMilking = (values: MilkingValues, t: TFunction): Milking
 
     return tempErrors;
 };
+
+export const validateAddWeightGain = (values: WeightGainValues, t: TFunction): WeightingErrors => {
+    const {measurementDate, weight} = values;
+    const tempErrors: WeightingErrors = {};
+
+    tempErrors.measurementDate = validateMeasurementDate(measurementDate, t);
+    tempErrors.weight = validateWeight(weight, t);
+
+    return tempErrors;
+}
 
 export const validateCowName = (cowName: string | null, t: TFunction): string => {
     if (cowName && cowName.length > 45) return t('addCowModal.validation.cowNameLength');
@@ -94,3 +114,15 @@ export const validateMilkingDuration = (duration: string | null, t: TFunction): 
     return '';
 };
 
+export const validateMeasurementDate = (measurementDate: Date | null, t: TFunction): string => {
+    if (!measurementDate) return t('addWeightGainModal.validation.measurementDateRequired');
+    if (measurementDate > new Date()) return t('addWeightGainModal.validation.measurementDatePastOrPresent');
+    return '';
+};
+
+export const validateWeight = (weight: number | null, t: TFunction): string => {
+    if (weight === null) return t('addWeightGainModal.validation.weightRequired');
+    if (weight < 0) return t('addWeightGainModal.validation.weightNonNegative');
+    if (weight > 9999.999) return t('addWeightGainModal.validation.weightRange');
+    return '';
+};
