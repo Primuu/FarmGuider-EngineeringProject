@@ -10,14 +10,15 @@ import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import '@/pages/BreedingPage/modals/herdModal.css';
 import BreedingCreateDTO from "@/entities/BreedingCreateDTO.ts";
 import {validateBreedingName} from "@/utils/breedingValidators.ts";
+import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
 
 type AddHerdModalProps = {
     open: boolean;
     onClose: () => void;
-    refreshBreedings: () => void;
+    onBreedingAdded: (newBreeding: BreedingResponseDTO) => void;
 }
 
-const AddHerdModal: React.FC<AddHerdModalProps> = ({open, onClose, refreshBreedings}) => {
+const AddHerdModal: React.FC<AddHerdModalProps> = ({open, onClose, onBreedingAdded}) => {
     const {t} = useTranslation('breedingPage');
     const {farmId} = useAuth();
     const [breedingName, setBreedingName] = useState<string>('');
@@ -48,10 +49,10 @@ const AddHerdModal: React.FC<AddHerdModalProps> = ({open, onClose, refreshBreedi
 
         if (farmId) {
             createBreeding(farmId, breedingCreateDTO)
-                .then(() => {
+                .then((breedingResponseDTO) => {
                     cancel();
                     enqueueSnackbar(t('addHerdModal.successSnackbar'), SnackbarSuccess);
-                    refreshBreedings();
+                    onBreedingAdded(breedingResponseDTO);
                 })
                 .catch(() => {
                     enqueueSnackbar(t('addHerdModal.errorSnackbar'), SnackbarError);

@@ -7,7 +7,7 @@ import BreedingContentTools from "@/pages/BreedingPage/BreedingContentTools.tsx"
 import {GiCow} from 'react-icons/gi';
 import AddCowModal from "@/pages/BreedingPage/modals/AddCowModal.tsx";
 import CowSearchParams from "@/entities/CowSearchParams.ts";
-import {DEFAULT_PAGE, defaultSearchParams, emptyPage} from "@/utils/cowBrowserUtils.ts";
+import {DEFAULT_PAGE, emptyPage} from "@/utils/cowBrowserUtils.ts";
 import {getCows} from "@/services/cowService.ts";
 import CowBrowser from "@/pages/BreedingPage/CowBrowser.tsx";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
@@ -15,27 +15,22 @@ import Page from "@/entities/Page.ts";
 import {useSnackbar} from "notistack";
 import {SnackbarError} from "@/utils/snackbarVariants.ts";
 import CowResults from "@/pages/BreedingPage/CowResults.tsx";
-import {SELECTED_BREEDING_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 
 type BreedingContentProps = {
     breedingList: BreedingResponseDTO[];
     handleOpenAddHerdModal: () => void;
     refreshBreedings: () => void;
+    breeding: BreedingResponseDTO | null;
+    handleChangeHerd: (breedingId: number) => void;
+    cowSearchParams: CowSearchParams;
+    updateSearchParams: (key: keyof CowSearchParams, value: string | number | boolean | Date | undefined) => void;
 }
 
 const BreedingContent: React.FC<BreedingContentProps> = (
-    {breedingList, handleOpenAddHerdModal, refreshBreedings}
+    {breedingList, handleOpenAddHerdModal, refreshBreedings, breeding, handleChangeHerd, cowSearchParams, updateSearchParams}
 ) => {
     const {t} = useTranslation('breedingPage');
-
-    const savedBreedingId = localStorage.getItem(SELECTED_BREEDING_ITEM);
-    const defaultBreeding = savedBreedingId
-        ? breedingList.find(b => b.breedingId === Number(savedBreedingId)) || breedingList[0]
-        : breedingList[0];
-
-    const [breeding, setBreeding] = useState<BreedingResponseDTO>(defaultBreeding);
     const [openAddCowModal, setOpenAddCowModal] = useState(false);
-    const [cowSearchParams, setCowSearchParams] = useState<CowSearchParams>(defaultSearchParams);
     const [loading, setLoading] = useState<boolean>(false);
     const [cowsPage, setCowsPage] = useState<Page<CowResponseDTO>>(emptyPage);
     const {enqueueSnackbar} = useSnackbar();
@@ -61,22 +56,15 @@ const BreedingContent: React.FC<BreedingContentProps> = (
     const handleOpenAddCowModal = () => setOpenAddCowModal(true);
     const handleCloseAddCowModal = () => setOpenAddCowModal(false);
 
-    const handleChangeHerd = (event: SelectChangeEvent) => {
+    const handleSelectHerd = (event: SelectChangeEvent) => {
         const breedingIdNum = Number(event.target.value);
-        const selectedBreeding = breedingList.find(
-            b => b.breedingId === breedingIdNum
-        );
-        if (selectedBreeding) {
-            setCowSearchParams(defaultSearchParams);
-            setBreeding(selectedBreeding);
-            localStorage.setItem(SELECTED_BREEDING_ITEM, breedingIdNum.toString());
-        }
+        handleChangeHerd(breedingIdNum);
     };
 
     const handleSearch = () => {
         setLoading(true);
 
-        if (breeding.breedingId) {
+        if (breeding && breeding.breedingId) {
             getCows(breeding.breedingId, cowSearchParams)
                 .then(data => {
                     setCowsPage(data);
@@ -98,9 +86,8 @@ const BreedingContent: React.FC<BreedingContentProps> = (
         updateSearchParams('page', DEFAULT_PAGE);
     };
 
-    const updateSearchParams = (key: keyof CowSearchParams, value: string | number | boolean | Date | undefined) => {
-        setCowSearchParams(prevState => ({...prevState, [key]: value}));
-    };
+
+    if (!breeding) return (<div></div>);
 
     return (
         <div className="breeding-content-container">
@@ -118,7 +105,7 @@ const BreedingContent: React.FC<BreedingContentProps> = (
                             <Select
                                 className="breeding-content-selector"
                                 value={breeding.breedingId.toString()}
-                                onChange={handleChangeHerd}
+                                onChange={handleSelectHerd}
                             >
                                 {breedingList.map((breeding) => (
                                     <MenuItem key={breeding.breedingId} value={breeding.breedingId}>
