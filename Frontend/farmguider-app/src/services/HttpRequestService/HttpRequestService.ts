@@ -18,7 +18,7 @@ export const mapToUrlParams = (params: Partial<Record<string, unknown>>): UrlPar
         const value = params[key];
         if (value !== undefined && value !== null) {
             if (value instanceof Date) {
-                urlParams[key] = value.toISOString();
+                urlParams[key] = value.toISOString().split('T')[0];
             } else if (Array.isArray(value)) {
                 urlParams[key] = value.map(String);
             } else {
