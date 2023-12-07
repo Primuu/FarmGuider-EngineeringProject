@@ -61,7 +61,7 @@ const BreedingPage = () => {
         const selectedBreeding = breedingList.find(
             b => b.breedingId === newBreedingId);
         if (selectedBreeding) {
-            // setCowSearchParams(defaultSearchParams);
+            setCowSearchParams(defaultSearchParams);
             setBreeding(selectedBreeding);
             localStorage.setItem(SELECTED_BREEDING_ITEM, newBreedingId.toString());
         }
@@ -69,6 +69,7 @@ const BreedingPage = () => {
 
     const handleBreedingAdded = (breedingResponseDTO: BreedingResponseDTO) => {
         fetchAndSetBreedings();
+        setCowSearchParams(defaultSearchParams);
         localStorage.setItem(SELECTED_BREEDING_ITEM, breedingResponseDTO.breedingId.toString());
     }
 

@@ -38,7 +38,7 @@ const CowResults: React.FC<CowResultsProps> = (
     return (
         <div className="cows-table-container">
             <div>
-                <TableContainer>
+                <TableContainer className="table-body-container">
                     <Table stickyHeader={true}>
                         <TableHead>
                             <TableRow>
@@ -54,24 +54,24 @@ const CowResults: React.FC<CowResultsProps> = (
                                 <TableCell className="th-r">{t('cowResults.deleting')}</TableCell>
                             </TableRow>
                         </TableHead>
-                    </Table>
-                </TableContainer>
-                <TableContainer className="table-body-container">
-                    <Table>
-                        {loading ? (
-                            <LoadingComponent/>
-                        ) : (
-                            <TableBody>
-                                {cowsPage.content.map(cow => (
-                                    <CowCard
-                                        key={cow.cowId}
-                                        cow={cow}
-                                        onCowDeleted={onCowDeleted}
-                                        onCowUpdated={handleCowUpdated}
-                                    />
-                                ))}
-                            </TableBody>
-                        )}
+                        <TableBody>
+                            {loading ? (
+                                <TableRow>
+                                    <TableCell colSpan={10}>
+                                        <LoadingComponent/>
+                                    </TableCell>
+                                </TableRow>
+                            ) : (
+                                cowsPage.content.map(cow => (
+                                        <CowCard
+                                            key={cow.cowId}
+                                            cow={cow}
+                                            onCowDeleted={onCowDeleted}
+                                            onCowUpdated={handleCowUpdated}
+                                        />
+                                    ))
+                            )}
+                        </TableBody>
                     </Table>
                 </TableContainer>
             </div>
