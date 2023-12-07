@@ -14,13 +14,15 @@ import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {deleteCow} from "@/services/cowService.ts";
 import AddMilkingModal from "@/pages/BreedingPage/modals/AddMilkingModal.tsx";
+import MilkingCreateDTO from "@/entities/MilkingCreateDTO.ts";
 
 type CowCardProps = {
     cow: CowResponseDTO
     onCowDeleted: () => void;
+    onCowUpdated: (updatedCow: CowResponseDTO) => void;
 }
 
-const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted}) => {
+const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
     const {t} = useTranslation('breedingPage');
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
     const {enqueueSnackbar} = useSnackbar();
@@ -49,6 +51,20 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted}) => {
                 });
         }
     };
+
+    const onMilkingAdded = (milkingCreateDTO: MilkingCreateDTO) => {
+        const shouldUpdate: boolean = cow.latestMilkingDate === null || new Date(cow.latestMilkingDate) < new Date(milkingCreateDTO.dateOfMilking);
+
+        if (shouldUpdate) {
+            const updatedCow: CowResponseDTO = {
+                ...cow,
+                latestMilkingQuantity: milkingCreateDTO.milkQuantity,
+                latestMilkingDate: milkingCreateDTO.dateOfMilking
+            };
+            onCowUpdated(updatedCow);
+        }
+    };
+
 
     return (
         <TableRow key={cow.cowId}>
@@ -161,6 +177,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted}) => {
                 open={openAddMilkingModal}
                 onClose={handleCloseAddMilkingModal}
                 cowId={cow.cowId}
+                onMilkingAdded={onMilkingAdded}
             />
         </TableRow>
     )

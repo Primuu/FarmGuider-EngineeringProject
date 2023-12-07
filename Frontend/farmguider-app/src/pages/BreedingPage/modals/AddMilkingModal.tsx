@@ -21,10 +21,10 @@ type AddMilkingModalProps = {
     open: boolean;
     onClose: () => void;
     cowId: number;
-    // onCowEdited: () => void;
+    onMilkingAdded: (milkingCreateDTO: MilkingCreateDTO) => void;
 }
 
-const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cowId}) => {
+const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cowId, onMilkingAdded}) => {
     const [dateOfMilking, setDateOfMilking] = useState<Date | null>(new Date());
     const [milkQuantity, setMilkQuantity] = useState<number | null>(null);
     const [milkingDuration, setMilkingDuration] = useState<string | null>(null);
@@ -80,7 +80,7 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cowId})
             createMilking(cowId, milkingCreateDTO)
                 .then(() => {
                     cancel();
-                    // onCowEdited();
+                    onMilkingAdded(milkingCreateDTO);
                     enqueueSnackbar(t('addMilkingModal.successSnackbar'), SnackbarSuccess);
                 })
                 .catch(() => {
@@ -134,7 +134,8 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cowId})
                                                 textField: {
                                                     error: !!errors.dateOfMilking,
                                                     helperText: errors.dateOfMilking
-                                                }}
+                                                }
+                                            }
                                             }
                                         />
                                     </LocalizationProvider>
