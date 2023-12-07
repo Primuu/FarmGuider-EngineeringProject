@@ -6,4 +6,6 @@ export default interface CowResponseDTO {
     gender: string;
     currentWeight: number;
     latestMilkingQuantity: number;
+    latestMilkingDate: Date | null;
+    latestWeightMeasurementDate: Date | null;
 }
