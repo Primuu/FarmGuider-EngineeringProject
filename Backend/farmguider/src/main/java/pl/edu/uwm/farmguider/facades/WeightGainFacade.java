@@ -22,7 +22,10 @@ public class WeightGainFacade {
     @Transactional
     public WeightGainResponseDTO createWeightGain(Long cowId, WeightGainCreateDTO weightGainCreateDTO) {
         Cow cow = cowService.getCowById(cowId);
-        cowService.updateCurrentWeight(cow, weightGainCreateDTO.weight());
+
+        if (cow.getLatestWeightMeasurementDate() == null || !cow.getLatestWeightMeasurementDate().isAfter(weightGainCreateDTO.measurementDate())) {
+            cowService.updateCurrentWeight(cow, weightGainCreateDTO.weight(), weightGainCreateDTO.measurementDate());
+        }
 
         WeightGain weightGain = weightGainService.createWeightGain(
                 cow,

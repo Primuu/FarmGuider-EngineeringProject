@@ -14,6 +14,7 @@ import pl.edu.uwm.farmguider.repositories.CowRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static pl.edu.uwm.farmguider.utils.CowSpecification.*;
 
@@ -51,13 +52,15 @@ public class CowService {
         cowRepository.delete(cow);
     }
 
-    public void updateLatestMilkingQuantity(Cow cow, BigDecimal milkQuantity) {
+    public void updateLatestMilkingQuantity(Cow cow, BigDecimal milkQuantity, LocalDateTime dateOfMilking) {
         cow.setLatestMilkingQuantity(milkQuantity);
+        cow.setLatestMilkingDate(dateOfMilking);
         cowRepository.saveAndFlush(cow);
     }
 
-    public void updateCurrentWeight(Cow cow, BigDecimal weight) {
+    public void updateCurrentWeight(Cow cow, BigDecimal weight, LocalDate measurementDate) {
         cow.setCurrentWeight(weight);
+        cow.setLatestWeightMeasurementDate(measurementDate);
         cowRepository.saveAndFlush(cow);
     }
 

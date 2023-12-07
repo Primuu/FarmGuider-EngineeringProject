@@ -14,6 +14,7 @@ import pl.edu.uwm.farmguider.models.weightGain.WeightGain;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,8 @@ public class Cow extends BasicEntity {
     LocalDate dateOfBirth;
     BigDecimal currentWeight;
     BigDecimal latestMilkingQuantity;
+    LocalDateTime latestMilkingDate;
+    LocalDate latestWeightMeasurementDate;
 
     @Enumerated(EnumType.STRING)
     Gender gender;

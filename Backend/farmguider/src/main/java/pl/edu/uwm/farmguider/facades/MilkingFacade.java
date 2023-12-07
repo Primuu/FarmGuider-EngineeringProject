@@ -28,7 +28,9 @@ public class MilkingFacade {
             throw new InvalidGenderException("Gender", "Gender of this animal does not allow this operation to be performed.");
         }
 
-        cowService.updateLatestMilkingQuantity(cow, milkingCreateDTO.milkQuantity());
+        if (cow.getLatestMilkingDate() == null || !cow.getLatestMilkingDate().isAfter(milkingCreateDTO.dateOfMilking())) {
+            cowService.updateLatestMilkingQuantity(cow, milkingCreateDTO.milkQuantity(), milkingCreateDTO.dateOfMilking());
+        }
 
         Milking milking = milkingService.createMilking(
                 cow,
