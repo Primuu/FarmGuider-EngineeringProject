@@ -15,6 +15,7 @@ import Page from "@/entities/Page.ts";
 import {useSnackbar} from "notistack";
 import {SnackbarError} from "@/utils/snackbarVariants.ts";
 import CowResults from "@/pages/BreedingPage/CowResults.tsx";
+import {SELECTED_BREEDING_ITEM} from "@/constants/CONFIG_CONSTS.ts";
 
 type BreedingContentProps = {
     breedingList: BreedingResponseDTO[];
@@ -26,7 +27,13 @@ const BreedingContent: React.FC<BreedingContentProps> = (
     {breedingList, handleOpenAddHerdModal, refreshBreedings}
 ) => {
     const {t} = useTranslation('breedingPage');
-    const [breeding, setBreeding] = useState<BreedingResponseDTO>(breedingList[0]);
+
+    const savedBreedingId = localStorage.getItem(SELECTED_BREEDING_ITEM);
+    const defaultBreeding = savedBreedingId
+        ? breedingList.find(b => b.breedingId === Number(savedBreedingId)) || breedingList[0]
+        : breedingList[0];
+
+    const [breeding, setBreeding] = useState<BreedingResponseDTO>(defaultBreeding);
     const [openAddCowModal, setOpenAddCowModal] = useState(false);
     const [cowSearchParams, setCowSearchParams] = useState<CowSearchParams>(defaultSearchParams);
     const [loading, setLoading] = useState<boolean>(false);
@@ -42,13 +49,14 @@ const BreedingContent: React.FC<BreedingContentProps> = (
     }), [cowSearchParams.page, cowSearchParams.size, cowSearchParams.sortBy, cowSearchParams.sortDesc, cowSearchParams.gender]);
 
     useEffect(() => {
-        setBreeding(breedingList[0]);
-    }, [breedingList]);
+        handleSearch();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [relevantSearchParams]);
 
     useEffect(() => {
         handleSearch();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [relevantSearchParams]);
+    }, [breeding]);
 
     const handleOpenAddCowModal = () => setOpenAddCowModal(true);
     const handleCloseAddCowModal = () => setOpenAddCowModal(false);
@@ -59,7 +67,9 @@ const BreedingContent: React.FC<BreedingContentProps> = (
             b => b.breedingId === breedingIdNum
         );
         if (selectedBreeding) {
+            setCowSearchParams(defaultSearchParams);
             setBreeding(selectedBreeding);
+            localStorage.setItem(SELECTED_BREEDING_ITEM, breedingIdNum.toString());
         }
     };
 
