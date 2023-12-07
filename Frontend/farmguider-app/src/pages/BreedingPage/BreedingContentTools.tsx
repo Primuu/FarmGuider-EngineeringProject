@@ -51,7 +51,7 @@ const BreedingContentTools: React.FC<BreedingContentToolsProps> = (
     };
 
     return (
-        <div>
+        <div className="breeding-content-tools-container">
             <Tooltip title={t('breedingContent.addHerdTooltip')} >
                 <Button
                     className="breeding-content-tools-button"

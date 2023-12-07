@@ -5,9 +5,23 @@
     flex-grow: 1;
 }
 
-.cows-table-content {
+.cows-table-container .th,
+.cows-table-container .th-l,
+.cows-table-container .th-r {
+    background-color: #F5F5F5;
+}
+
+.cows-table-container .th-l {
+    border-left: 2px solid #FFFFFF;
+}
+
+.cows-table-container .th-r {
+    border-right: 2px solid #FFFFFF;
+}
+
+.table-body-container {
     overflow-y: auto;
-    max-height: 62vh;
+    max-height: 59vh;
 }
 
 .cows-paginator {

@@ -26,7 +26,7 @@ const CowResults: React.FC<CowResultsProps> = (
         const updatedCows = cowsPage.content.map(cow =>
             cow.cowId === updatedCow.cowId ? updatedCow : cow
         );
-        setCowsPage({ ...cowsPage, content: updatedCows });
+        setCowsPage({...cowsPage, content: updatedCows});
     };
 
     const labelDisplayedRows = ({from, to, count}: LabelDisplayedRowsArgs) => {
@@ -37,23 +37,27 @@ const CowResults: React.FC<CowResultsProps> = (
 
     return (
         <div className="cows-table-container">
-            <div className="cows-table-content">
+            <div>
                 <TableContainer>
-                    <Table>
+                    <Table stickyHeader={true}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>{t('cowResults.gender')}</TableCell>
-                                <TableCell>{t('cowResults.earTagNumber')}</TableCell>
-                                <TableCell>{t('cowResults.cowName')}</TableCell>
-                                <TableCell>{t('cowResults.dateOfBirth')}</TableCell>
-                                <TableCell>{t('cowResults.currentWeight')}</TableCell>
-                                <TableCell>{t('cowResults.latestMilking')}</TableCell>
-                                <TableCell>{t('cowResults.milking')}</TableCell>
-                                <TableCell>{t('cowResults.weighting')}</TableCell>
-                                <TableCell>{t('cowResults.editing')}</TableCell>
-                                <TableCell>{t('cowResults.deleting')}</TableCell>
+                                <TableCell className="th-l">{t('cowResults.gender')}</TableCell>
+                                <TableCell className="th">{t('cowResults.earTagNumber')}</TableCell>
+                                <TableCell className="th">{t('cowResults.cowName')}</TableCell>
+                                <TableCell className="th">{t('cowResults.dateOfBirth')}</TableCell>
+                                <TableCell className="th">{t('cowResults.currentWeight')}</TableCell>
+                                <TableCell className="th">{t('cowResults.latestMilking')}</TableCell>
+                                <TableCell className="th">{t('cowResults.milking')}</TableCell>
+                                <TableCell className="th">{t('cowResults.weighting')}</TableCell>
+                                <TableCell className="th">{t('cowResults.editing')}</TableCell>
+                                <TableCell className="th-r">{t('cowResults.deleting')}</TableCell>
                             </TableRow>
                         </TableHead>
+                    </Table>
+                </TableContainer>
+                <TableContainer className="table-body-container">
+                    <Table>
                         {loading ? (
                             <LoadingComponent/>
                         ) : (
