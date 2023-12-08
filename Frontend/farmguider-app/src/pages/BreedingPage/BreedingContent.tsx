@@ -1,6 +1,6 @@
 import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
 import React, {useEffect, useMemo, useState} from "react";
-import {Button, InputLabel, Select, SelectChangeEvent} from "@mui/material";
+import {Button, FormControl, InputLabel, Select, SelectChangeEvent} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import {useTranslation} from "react-i18next";
 import BreedingContentTools from "@/pages/BreedingPage/BreedingContentTools.tsx";
@@ -121,40 +121,42 @@ const BreedingContent: React.FC<BreedingContentProps> = (
                 <div className="breeding-content-button-group">
                     {breedingList.length > 1 &&
                         <div>
-                            <InputLabel>
-                                {t('breedingContent.pickerLabel')}
-                            </InputLabel>
-                            <Select
+                            <FormControl
+                                size={"small"}
                                 className="breeding-content-selector"
-                                value={breeding.breedingId.toString()}
-                                onChange={handleSelectHerd}
                             >
-                                {breedingList.map((breeding) => (
-                                    <MenuItem key={breeding.breedingId} value={breeding.breedingId}>
-                                        {breeding.breedingName}
-                                    </MenuItem>
-                                ))}
-                            </Select>
+                                <InputLabel>
+                                    {t('breedingContent.pickerLabel')}
+                                </InputLabel>
+                                <Select
+                                    value={breeding.breedingId.toString()}
+                                    onChange={handleSelectHerd}
+                                    label={t('breedingContent.pickerLabel')}
+                                >
+                                    {breedingList.map((breeding) => (
+                                        <MenuItem key={breeding.breedingId} value={breeding.breedingId}>
+                                            {breeding.breedingName}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </div>
                     }
+                    <Button
+                        className="breeding-content-add-cow-button"
+                        variant="contained"
+                        color="primary"
+                        onClick={handleOpenAddCowModal}
+                    >
+                        <GiCow className="breeding-content-add-cow-icon"/>
+                        {t('breedingContent.addCowButton')}
+                    </Button>
 
-                    <div>
-                        <BreedingContentTools
-                            handleOpenAddHerdModal={handleOpenAddHerdModal}
-                            selectedBreeding={breeding}
-                            refreshBreedings={refreshBreedings}
-                        />
-
-                        <Button
-                            className="breeding-content-add-cow-button"
-                            variant="contained"
-                            color="primary"
-                            onClick={handleOpenAddCowModal}
-                        >
-                            <GiCow className="breeding-content-add-cow-icon"/>
-                            {t('breedingContent.addCowButton')}
-                        </Button>
-                    </div>
+                    <BreedingContentTools
+                        handleOpenAddHerdModal={handleOpenAddHerdModal}
+                        selectedBreeding={breeding}
+                        refreshBreedings={refreshBreedings}
+                    />
                 </div>
             </div>
 

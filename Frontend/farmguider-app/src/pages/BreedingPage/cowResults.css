@@ -21,7 +21,7 @@
 
 .table-body-container {
     overflow-y: auto;
-    max-height: 65vh;
+    max-height: 60vh;
 }
 
 .no-results {

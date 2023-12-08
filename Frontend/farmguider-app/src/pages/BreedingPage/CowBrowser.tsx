@@ -13,6 +13,7 @@ import i18n from "i18next";
 import plLocale from "date-fns/locale/pl";
 import enLocale from "date-fns/locale/en-US";
 import SearchIcon from '@mui/icons-material/Search';
+import '@/pages/BreedingPage/cowBrowser.css';
 
 type CowBrowserProps = {
     updateSearchParams: (key: keyof CowSearchParams, value: string | number | boolean | Date | undefined) => void;
@@ -93,199 +94,212 @@ const CowBrowser: React.FC<CowBrowserProps> = ({updateSearchParams, cowSearchPar
     }
 
     return (
-        <div>
-            <TextField
-                className="cow-search"
-                margin="normal"
-                label={t('cowBrowser.earTagNumber')}
-                placeholder={"XX000123456789"}
-                type={"text"}
-                value={earTagNumber || ''}
-                onChange={handleEarTagNumberChange}
-                inputProps={{
-                    maxLength: 14
-                }}
-            />
+        <div className="cow-browser-container">
+            <div className="column-group g1">
+                <TextField
+                    size={"small"}
+                    label={t('cowBrowser.earTagNumber')}
+                    placeholder={"XX000123456789"}
+                    type={"text"}
+                    value={earTagNumber || ''}
+                    onChange={handleEarTagNumberChange}
+                    inputProps={{
+                        maxLength: 14
+                    }}
+                />
 
-            <TextField
-                className="cow-search"
-                margin="normal"
-                label={t('cowBrowser.cowName')}
-                type={"text"}
-                value={cowName || ''}
-                onChange={handleCowNameChange}
-            />
+                <TextField
+                    size={"small"}
+                    label={t('cowBrowser.cowName')}
+                    type={"text"}
+                    value={cowName || ''}
+                    onChange={handleCowNameChange}
+                />
+            </div>
 
-            <FormControl
-                // fullWidth
-                margin="normal"
-                variant="outlined"
-            >
-                <InputLabel shrink>
-                    {t('cowBrowser.selectGender')}
-                </InputLabel>
-                <Select
-                    value={cowSearchParams.gender || ' '}
-                    label={t('cowBrowser.selectGender')}
-                    onChange={handleGenderChange}
-                    displayEmpty
+            <div className="column-group g2">
+                <LocalizationProvider
+                    dateAdapter={AdapterDateFns}
+                    adapterLocale={locale}
                 >
-                    <MenuItem value=" ">
-                        <em>{t('cowBrowser.notSelected')}</em>
-                    </MenuItem>
-                    <MenuItem value="FEMALE">
-                        <FemaleIcon className="gender-icon"/>
-                        {t('cowBrowser.female')}
-                    </MenuItem>
-                    <MenuItem value="MALE">
-                        <MaleIcon className="gender-icon"/>
-                        {t('cowBrowser.male')}
-                    </MenuItem>
-                </Select>
-            </FormControl>
+                    <DatePicker
+                        className="date-picker"
+                        label={t('cowBrowser.minDateOfBirth')}
+                        value={minDateOfBirth}
+                        onChange={handleMinDateOfBirthChange}
+                        disableFuture
+                        openTo="year"
+                        views={['year', 'month', 'day']}
+                        desktopModeMediaQuery="@media (min-width:600px)"
+                        slotProps={{
+                            field: {
+                                clearable: true
+                            },
+                            textField:
+                                {
+                                    size: 'small'
+                                }
+                        }}
+                    />
 
-            <FormControl
-                margin="normal"
-                variant="outlined"
-                // fullWidth
-            >
-                <InputLabel>
-                    {t('cowBrowser.sortBy')}
-                </InputLabel>
-                <Select
-                    labelId="sort-by-label"
-                    value={cowSearchParams.sortBy}
-                    label={t('cowBrowser.sortBy')}
-                    onChange={handleSortByChange}
+                    <DatePicker
+                        className="date-picker"
+                        label={t('cowBrowser.maxDateOfBirth')}
+                        value={maxDateOfBirth}
+                        onChange={handleMaxDateOfBirthChange}
+                        disableFuture
+                        openTo="year"
+                        views={['year', 'month', 'day']}
+                        desktopModeMediaQuery="@media (min-width:600px)"
+                        slotProps={{
+                            field: {
+                                clearable: true
+                            },
+                            textField:
+                                {
+                                    size: 'small'
+                                }
+                        }}
+                    />
+                </LocalizationProvider>
+            </div>
+
+            <div className="column-group g3">
+                <TextField
+                    size={"small"}
+                    label={t('cowBrowser.minWeight')}
+                    type="number"
+                    inputProps={{
+                        step: "0.001",
+                        min: "0.000",
+                        max: "9999.999"
+                    }}
+                    value={minWeight || ''}
+                    placeholder={"0,000"}
+                    onChange={handleMinWeightChange}
+                />
+
+                <TextField
+                    size={"small"}
+                    label={t('cowBrowser.maxWeight')}
+                    type="number"
+                    inputProps={{
+                        step: "0.001",
+                        min: "0.000",
+                        max: "9999.999"
+                    }}
+                    value={maxWeight || ''}
+                    placeholder={"0,000"}
+                    onChange={handleMaxWeightChange}
+                />
+            </div>
+
+            <div className="column-group g4">
+                <TextField
+                    size={"small"}
+                    label={t('cowBrowser.minMilkQuantity')}
+                    type="number"
+                    inputProps={{
+                        step: "0.001",
+                        min: "0.000",
+                        max: "999.999"
+                    }}
+                    value={minMilkingQuantity || ''}
+                    placeholder={"0,000"}
+                    onChange={handleMinMilkingQuantity}
+                />
+
+                <TextField
+                    size={"small"}
+                    label={t('cowBrowser.maxMilkQuantity')}
+                    type="number"
+                    inputProps={{
+                        step: "0.001",
+                        min: "0.000",
+                        max: "999.999"
+                    }}
+                    value={maxMilkingQuantity || ''}
+                    placeholder={"0,000"}
+                    onChange={handleMaxMilkingQuantity}
+                />
+            </div>
+
+            <div className="column-group g5">
+                <FormControl
+                    size={"small"}
                 >
-                    {Object.values(CowSortBy).map((value) => (
-                        <MenuItem key={value} value={value}>
-                            {t(`cowBrowser.cowSortBy.${value}`)}
+                    <InputLabel>
+                        {t('cowBrowser.sortBy')}
+                    </InputLabel>
+                    <Select
+                        value={cowSearchParams.sortBy}
+                        label={t('cowBrowser.sortBy')}
+                        onChange={handleSortByChange}
+                    >
+                        {Object.values(CowSortBy).map((value) => (
+                            <MenuItem key={value} value={value}>
+                                {t(`cowBrowser.cowSortBy.${value}`)}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+                <FormControl
+                    size={"small"}
+                >
+                    <InputLabel>
+                        {t('cowBrowser.sortDesc')}
+                    </InputLabel>
+                    <Select
+                        value={String(cowSearchParams.sortDesc)}
+                        label={t('cowBrowser.sortDesc')}
+                        onChange={handleSortDescChange}
+                    >
+                        <MenuItem value="false">
+                            {t('cowBrowser.ascending')}
                         </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+                        <MenuItem value="true">
+                            {t('cowBrowser.descending')}
+                        </MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
 
-            <FormControl
-                // fullWidth
-                margin="normal"
-                variant="outlined"
-            >
-                <InputLabel>
-                    {t('cowBrowser.sortDesc')}
-                </InputLabel>
-                <Select
-                    value={String(cowSearchParams.sortDesc)}
-                    label={t('cowBrowser.sortDesc')}
-                    onChange={handleSortDescChange}
+            <div className="column-group g6">
+                <FormControl
+                    size={"small"}
                 >
-                    <MenuItem value="false">
-                        {t('cowBrowser.ascending')}
-                    </MenuItem>
-                    <MenuItem value="true">
-                        {t('cowBrowser.descending')}
-                    </MenuItem>
-                </Select>
-            </FormControl>
+                    <InputLabel shrink>
+                        {t('cowBrowser.selectGender')}
+                    </InputLabel>
+                    <Select
+                        value={cowSearchParams.gender || ' '}
+                        label={t('cowBrowser.selectGender')}
+                        onChange={handleGenderChange}
+                        displayEmpty
+                    >
+                        <MenuItem value=" ">
+                            <em>{t('cowBrowser.notSelected')}</em>
+                        </MenuItem>
+                        <MenuItem value="FEMALE">
+                            <FemaleIcon className="gender-icon"/>
+                            {t('cowBrowser.female')}
+                        </MenuItem>
+                        <MenuItem value="MALE">
+                            <MaleIcon className="gender-icon"/>
+                            {t('cowBrowser.male')}
+                        </MenuItem>
+                    </Select>
+                </FormControl>
 
-            <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                adapterLocale={locale}
-            >
-                <DatePicker
-                    label={t('cowBrowser.minDateOfBirth')}
-                    value={minDateOfBirth}
-                    onChange={handleMinDateOfBirthChange}
-                    disableFuture
-                    openTo="year"
-                    views={['year', 'month', 'day']}
-                    desktopModeMediaQuery="@media (min-width:600px)"
-                    slotProps={{
-                        field: {
-                            clearable: true
-                        },
-                    }}
-                />
-
-                <DatePicker
-                    label={t('cowBrowser.maxDateOfBirth')}
-                    value={maxDateOfBirth}
-                    onChange={handleMaxDateOfBirthChange}
-                    disableFuture
-                    openTo="year"
-                    views={['year', 'month', 'day']}
-                    desktopModeMediaQuery="@media (min-width:600px)"
-                    slotProps={{
-                        field: {
-                            clearable: true
-                        },
-                    }}
-                />
-            </LocalizationProvider>
-
-            <TextField
-                margin="normal"
-                label={t('cowBrowser.minWeight')}
-                type="number"
-                inputProps={{
-                    step: "0.001",
-                    min: "0.000",
-                    max: "9999.999"
-                }}
-                value={minWeight ||''}
-                placeholder={"0,000"}
-                onChange={handleMinWeightChange}
-            />
-
-            <TextField
-                margin="normal"
-                label={t('cowBrowser.maxWeight')}
-                type="number"
-                inputProps={{
-                    step: "0.001",
-                    min: "0.000",
-                    max: "9999.999"
-                }}
-                value={maxWeight ||''}
-                placeholder={"0,000"}
-                onChange={handleMaxWeightChange}
-            />
-
-            <TextField
-                margin="normal"
-                label={t('cowBrowser.minMilkQuantity')}
-                type="number"
-                inputProps={{
-                    step: "0.001",
-                    min: "0.000",
-                    max: "999.999"
-                }}
-                value={minMilkingQuantity || ''}
-                placeholder={"0,000"}
-                onChange={handleMinMilkingQuantity}
-            />
-
-            <TextField
-                margin="normal"
-                label={t('cowBrowser.maxMilkQuantity')}
-                type="number"
-                inputProps={{
-                    step: "0.001",
-                    min: "0.000",
-                    max: "999.999"
-                }}
-                value={maxMilkingQuantity || ''}
-                placeholder={"0,000"}
-                onChange={handleMaxMilkingQuantity}
-            />
-
-            <Button
-                variant="contained"
-                onClick={search}
-            >
-                <SearchIcon/>
-                {t('cowBrowser.search')}
-            </Button>
+                <Button
+                    variant="contained"
+                    onClick={search}
+                >
+                    <SearchIcon/>
+                    {t('cowBrowser.search')}
+                </Button>
+            </div>
         </div>
     )
 }
