@@ -58,3 +58,9 @@
         max-height: 56vh;
     }
 }
+
+@media (max-width: 599px) {
+    .table-body-container {
+        max-height: 80vh;
+    }
+}

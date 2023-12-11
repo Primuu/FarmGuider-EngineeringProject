@@ -1,15 +1,16 @@
 .cow-browser-container {
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
     background-color: #F5F5F5;
     border: 2px solid #FFFFFF;
     border-bottom: none;
     border-top: none;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 5px;
+    padding: 5px 20px;
     gap: 15px;
+    overflow-x: auto;
+    min-width: 100%
 }
 
 .column-group {
@@ -21,24 +22,61 @@
 
 .g1 {
     min-width: 150px;
+    order: 1;
 }
 
 .g2 {
     min-width: 200px;
+    order: 2;
 }
 
 .g3 {
     min-width: 150px;
+    order: 3;
 }
 
 .g4 {
     min-width: 150px;
+    order: 4;
 }
 
 .g5 {
     min-width: 170px;
+    order: 5;
 }
 
 .g6 {
     min-width: 150px;
+    order: 6;
+}
+
+@media (max-width: 1510px) {
+    .cow-browser-container {
+        justify-content: flex-start;
+        padding-bottom: 20px;
+    }
+
+    .g1 {
+        order: 2;
+    }
+
+    .g2 {
+        order: 3;
+    }
+
+    .g3 {
+        order: 4;
+    }
+
+    .g4 {
+        order: 5;
+    }
+
+    .g5 {
+        order: 6;
+    }
+
+    .g6 {
+        order: 1;
+    }
 }
