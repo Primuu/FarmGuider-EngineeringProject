@@ -57,8 +57,8 @@
     width: 190px;
 }
 
-.confirm-delete-acc-button .delete-acc-button-icon,
-.cancel-delete-acc-button .delete-acc-button-icon {
+.delete-acc-button-group .confirm-delete-acc-button .delete-acc-button-icon,
+.delete-acc-button-group .cancel-delete-acc-button .delete-acc-button-icon {
     font-size: 18px;
     vertical-align: middle;
     margin-right: 6px;

@@ -17,9 +17,9 @@
     margin-right: 30px;
 }
 
-.profile-button .profile-button-icon,
-.change-passwd-button .profile-button-icon,
-.delete-acc-button .profile-button-icon {
+.profile-buttons .profile-button .profile-button-icon,
+.profile-buttons .change-passwd-button .profile-button-icon,
+.profile-buttons .delete-acc-button .profile-button-icon {
     font-size: 18px;
     vertical-align: middle;
     margin-right: 6px;
