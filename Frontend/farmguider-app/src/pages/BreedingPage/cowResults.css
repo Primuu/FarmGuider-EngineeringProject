@@ -59,7 +59,7 @@
     }
 }
 
-@media (max-width: 599px) {
+@media (max-width: 1000px) {
     .table-body-container {
         max-height: 80vh;
     }
