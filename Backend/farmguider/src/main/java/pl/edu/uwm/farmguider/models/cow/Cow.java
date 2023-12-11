@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import pl.edu.uwm.farmguider.models.basic.BasicEntity;
 import pl.edu.uwm.farmguider.models.breeding.Breeding;
 import pl.edu.uwm.farmguider.models.cow.enums.Gender;
+import pl.edu.uwm.farmguider.models.lactationPeriod.LactationPeriod;
 import pl.edu.uwm.farmguider.models.milking.Milking;
 import pl.edu.uwm.farmguider.models.weightGain.WeightGain;
 
@@ -45,6 +46,9 @@ public class Cow extends BasicEntity {
 
     @OneToMany(mappedBy = "cow", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<WeightGain> weightGains;
+
+    @OneToMany(mappedBy = "cow", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<LactationPeriod> lactationPeriods;
 
     public Cow(Breeding breeding, String cowName, String earTagNumber, LocalDate dateOfBirth, Gender gender) {
         this.breeding = breeding;
