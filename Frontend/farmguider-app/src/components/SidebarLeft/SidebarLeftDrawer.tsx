@@ -41,11 +41,16 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
         }
     };
 
+    const handleClick = (url: string) => {
+        navigate(url);
+        if (!isDesktop) onClose();
+    };
+
     const navigationItems = [
-        {icon: HomeOutlinedIcon, text: t('home'), onClick: () => navigate(HOME_PAGE_URL)},
-        {icon: PersonOutlineIcon, text: t('profile'), onClick: () => navigate(PROFILE_PAGE_URL)},
-        {icon: GiCow as IconType, text: t('breeding'), onClick: () => navigate(BREEDING_PAGE_URL)},
-        {icon: GiHighGrass as IconType, text: t('crops'), onClick: () => navigate("/")},
+        {icon: HomeOutlinedIcon, text: t('home'), onClick: () => handleClick(HOME_PAGE_URL)},
+        {icon: PersonOutlineIcon, text: t('profile'), onClick: () => handleClick(PROFILE_PAGE_URL)},
+        {icon: GiCow as IconType, text: t('breeding'), onClick: () => handleClick(BREEDING_PAGE_URL)},
+        {icon: GiHighGrass as IconType, text: t('crops'), onClick: () => handleClick("/")},
     ];
 
     return (
