@@ -20,6 +20,10 @@
     color: #406064;
     font-size: 20px;
     font-weight: bold;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .breeding-content-button-group {
@@ -58,4 +62,42 @@
     font-size: 32px;
     vertical-align: middle;
     margin-right: 6px;
+}
+
+@media (max-width: 1000px) {
+    .breeding-content-header {
+        flex-direction: column;
+    }
+
+    .breeding-content-herd-name {
+        width: unset;
+        max-width: 100%;
+    }
+
+    .breeding-content-selector {
+        width: 100%;
+    }
+
+    .breeding-content-button-group {
+        padding-top: 0;
+    }
+
+    .breeding-content-button-group .breeding-content-add-cow-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 850px) {
+    .breeding-content-button-group {
+        flex-direction: column;
+        padding-top: 0;
+    }
+
+    .breeding-content-herd-name {
+        max-width: 100%;
+    }
+
+    .breeding-content-tools-container .breeding-content-tools-button {
+        width: 100%;
+    }
 }

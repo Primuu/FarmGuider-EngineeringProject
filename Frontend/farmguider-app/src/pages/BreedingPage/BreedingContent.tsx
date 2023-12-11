@@ -68,12 +68,7 @@ const BreedingContent: React.FC<BreedingContentProps> = (
     useEffect(() => {
         handleSearch();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [relevantSearchParams]);
-
-    useEffect(() => {
-        handleSearch();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [breeding]);
+    }, [relevantSearchParams, breeding]);
 
     const handleOpenAddCowModal = () => setOpenAddCowModal(true);
     const handleCloseAddCowModal = () => setOpenAddCowModal(false);
@@ -114,13 +109,8 @@ const BreedingContent: React.FC<BreedingContentProps> = (
     return (
         <div className="breeding-content-container">
             <div className="breeding-content-header">
-                <div className="breeding-content-herd-name">
-                    {breeding.breedingName}
-                </div>
-
-                <div className="breeding-content-button-group">
-                    {breedingList.length > 1 &&
-                        <div>
+                    {breedingList.length > 1 ? (
+                            <div className="breeding-content-herd-name">
                             <FormControl
                                 size={"small"}
                                 className="breeding-content-selector"
@@ -141,7 +131,14 @@ const BreedingContent: React.FC<BreedingContentProps> = (
                                 </Select>
                             </FormControl>
                         </div>
+                        ) : (
+                        <div className="breeding-content-herd-name">
+                            {breeding.breedingName}
+                        </div>
+                        )
                     }
+
+                <div className="breeding-content-button-group">
                     <Button
                         className="breeding-content-add-cow-button"
                         variant="contained"
