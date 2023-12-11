@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
+    overflow-x: auto;
 }
 
 .cows-table-container .th,
@@ -21,7 +22,7 @@
 
 .table-body-container {
     overflow-y: auto;
-    max-height: 60vh;
+    max-height: 58vh;
 }
 
 .no-results {
@@ -50,4 +51,10 @@
 
 .table-button .table-icon {
     font-size: 20px;
+}
+
+@media (max-width: 1510px) {
+    .table-body-container {
+        max-height: 56vh;
+    }
 }

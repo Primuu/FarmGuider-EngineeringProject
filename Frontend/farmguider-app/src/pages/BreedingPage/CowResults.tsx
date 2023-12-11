@@ -37,7 +37,7 @@ const CowResults: React.FC<CowResultsProps> = (
 
     return (
         <div className="cows-table-container">
-            <div>
+            <div className="cows-table">
                 <TableContainer className="table-body-container">
                     <Table stickyHeader={true}>
                         <TableHead>
