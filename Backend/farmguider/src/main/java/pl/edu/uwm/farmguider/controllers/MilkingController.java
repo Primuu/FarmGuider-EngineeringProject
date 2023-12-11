@@ -26,7 +26,8 @@ public class MilkingController {
     private final MilkingFacade milkingFacade;
 
     @Operation(summary = "Create milking",
-            description = "Creates a cow's milking based on the provided payload")
+            description = "Creates a cow's milking based on the provided payload." +
+                    "If it's latest milking, it also updates data. Milking cannot be added to the male.")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",

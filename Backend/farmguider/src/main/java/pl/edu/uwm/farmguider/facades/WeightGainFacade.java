@@ -10,6 +10,8 @@ import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.WeightGainService;
 
+import java.time.LocalDate;
+
 import static pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainMapper.mapToWeightGainResponseDTO;
 
 @Component
@@ -23,7 +25,7 @@ public class WeightGainFacade {
     public WeightGainResponseDTO createWeightGain(Long cowId, WeightGainCreateDTO weightGainCreateDTO) {
         Cow cow = cowService.getCowById(cowId);
 
-        if (cow.getLatestWeightMeasurementDate() == null || !cow.getLatestWeightMeasurementDate().isAfter(weightGainCreateDTO.measurementDate())) {
+        if (isLatestWeightGain(cow, weightGainCreateDTO.measurementDate())) {
             cowService.updateCurrentWeight(cow, weightGainCreateDTO.weight(), weightGainCreateDTO.measurementDate());
         }
 
@@ -33,6 +35,10 @@ public class WeightGainFacade {
                 weightGainCreateDTO.weight()
         );
         return mapToWeightGainResponseDTO(weightGain);
+    }
+
+    private boolean isLatestWeightGain(Cow cow, LocalDate measurementDate) {
+        return cow.getLatestWeightMeasurementDate() == null || !cow.getLatestWeightMeasurementDate().isAfter(measurementDate);
     }
 
 }

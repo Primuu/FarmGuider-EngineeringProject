@@ -26,7 +26,8 @@ public class WeightGainController {
     private final WeightGainFacade weightGainFacade;
 
     @Operation(summary = "Create weight gain",
-            description = "Creates a cow's weight gain based on the provided payload")
+            description = "Creates a cow's weight gain based on the provided payload." +
+                    "If it's latest weight gain, it also updates data.")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
