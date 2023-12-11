@@ -12,6 +12,8 @@ import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.MilkingService;
 
+import java.time.LocalDateTime;
+
 import static pl.edu.uwm.farmguider.models.milking.dtos.MilkingMapper.mapToMilkingResponseDTO;
 
 @Component
@@ -24,11 +26,9 @@ public class MilkingFacade {
     @Transactional
     public MilkingResponseDTO createMilking(Long cowId, MilkingCreateDTO milkingCreateDTO) {
         Cow cow = cowService.getCowById(cowId);
-        if (!cow.getGender().equals(Gender.FEMALE)) {
-            throw new InvalidGenderException("Gender", "Gender of this animal does not allow this operation to be performed.");
-        }
+        checkGender(cow.getGender());
 
-        if (cow.getLatestMilkingDate() == null || !cow.getLatestMilkingDate().isAfter(milkingCreateDTO.dateOfMilking())) {
+        if (isLatestMilking(cow, milkingCreateDTO.dateOfMilking())) {
             cowService.updateLatestMilkingQuantity(cow, milkingCreateDTO.milkQuantity(), milkingCreateDTO.dateOfMilking());
         }
 
@@ -39,6 +39,16 @@ public class MilkingFacade {
                 milkingCreateDTO.milkingDuration()
         );
         return mapToMilkingResponseDTO(milking);
+    }
+
+    private void checkGender(Gender gender) {
+        if (!gender.equals(Gender.FEMALE)) {
+            throw new InvalidGenderException("Gender", "Gender of this animal does not allow this operation to be performed.");
+        }
+    }
+
+    private boolean isLatestMilking(Cow cow, LocalDateTime dateOfMilking) {
+        return cow.getLatestMilkingDate() == null || !cow.getLatestMilkingDate().isAfter(dateOfMilking);
     }
 
 }
