@@ -8,8 +8,11 @@
     font-weight: bold !important;
 }
 
-.close-icon {
+.close-button {
     margin-left: 250px;
+}
+
+.close-icon {
     color: #406064;
 }
 

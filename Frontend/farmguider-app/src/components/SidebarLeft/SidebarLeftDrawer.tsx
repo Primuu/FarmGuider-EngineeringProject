@@ -52,9 +52,11 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
         <div>
             <List className="sidebar-list">
                 {!isDesktop && (
-                    <IconButton onClick={onClose}>
-                        <CloseIcon className="close-icon"/>
-                    </IconButton>
+                    <div className="close-button">
+                        <IconButton onClick={onClose}>
+                            <CloseIcon className="close-icon"/>
+                        </IconButton>
+                    </div>
                 )}
 
                 <Box className="logo-box">
