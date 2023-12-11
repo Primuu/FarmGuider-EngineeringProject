@@ -1,14 +1,16 @@
 .main-layout {
-    display: flex;
+    /*width: 100%;*/
 }
 
 .sidebar-left {
     position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
 }
 
 .content {
     margin-left: 300px;
-    flex-grow: 1;
 }
 
 .content .layout-header {
@@ -37,17 +39,12 @@
 }
 
 @media (max-width: 599px) {
-    .main-layout {
-        display: block;
-    }
-
     .sidebar-left {
         position: static;
     }
 
     .content {
         margin-left: 0;
-        flex-grow: 0;
     }
 
     .layout-header {
