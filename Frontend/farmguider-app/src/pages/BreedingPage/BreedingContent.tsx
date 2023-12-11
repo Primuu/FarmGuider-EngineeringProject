@@ -110,7 +110,7 @@ const BreedingContent: React.FC<BreedingContentProps> = (
         <div className="breeding-content-container">
             <div className="breeding-content-header">
                     {breedingList.length > 1 ? (
-                            <div className="breeding-content-herd-name">
+                            <div className="breeding-content-selector-container">
                             <FormControl
                                 size={"small"}
                                 className="breeding-content-selector"
