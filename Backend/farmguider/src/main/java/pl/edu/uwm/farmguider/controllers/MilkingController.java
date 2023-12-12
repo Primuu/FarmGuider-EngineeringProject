@@ -85,4 +85,38 @@ public class MilkingController {
                 .body(milkings);
     }
 
+    @Operation(summary = "Update milking by id", description = "Updates milking data based on the provided payload")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Milking data updated successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = MilkingResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Milking not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @PutMapping("/update/{milkingId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenMilkingIdWithContext(#milkingId)")
+    public ResponseEntity<MilkingResponseDTO> updateMilkingById(@PathVariable Long milkingId,
+                                                                @RequestBody @Valid MilkingCreateDTO milkingCreateDTO) {
+        MilkingResponseDTO milkingResponseDTO = milkingFacade.updateMilkingById(milkingId, milkingCreateDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(milkingResponseDTO);
+    }
+
 }

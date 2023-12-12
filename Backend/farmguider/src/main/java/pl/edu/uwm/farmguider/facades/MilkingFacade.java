@@ -12,7 +12,9 @@ import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.MilkingService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.milking.dtos.MilkingMapper.mapToMilkingResponseDTO;
@@ -28,11 +30,9 @@ public class MilkingFacade {
     @Transactional
     public MilkingResponseDTO createMilking(Long cowId, MilkingCreateDTO milkingCreateDTO) {
         Cow cow = cowService.getCowById(cowId);
-        verifyIsFemale(cow.getGender());
 
-        if (milkingCreateDTO.dateOfMilking().toLocalDate().isBefore(cow.getDateOfBirth())) {
-            throw new InvalidDateException("Milking", "Milking date cannot be before cow's date of birth.");
-        }
+        verifyIsFemale(cow.getGender());
+        verifyMilkingDate(cow.getDateOfBirth(), milkingCreateDTO.dateOfMilking());
 
         if (isLatestMilking(cow, milkingCreateDTO.dateOfMilking())) {
             cowService.updateLatestMilkingQuantity(cow, milkingCreateDTO.milkQuantity(), milkingCreateDTO.dateOfMilking());
@@ -51,12 +51,43 @@ public class MilkingFacade {
         return cow.getLatestMilkingDate() == null || !cow.getLatestMilkingDate().isAfter(dateOfMilking);
     }
 
+    private void verifyMilkingDate(LocalDate dateOfBirth, LocalDateTime dateOfMilking) {
+        if (dateOfMilking.toLocalDate().isBefore(dateOfBirth)) {
+            throw new InvalidDateException("Milking", "Milking date cannot be before cow's date of birth.");
+        }
+    }
+
     public List<MilkingResponseDTO> getMilkingsByCowId(Long cowId) {
         List<Milking> milkings = milkingService.getMilkingsByCowId(cowId);
         return milkings
                 .stream()
                 .map(MilkingMapper::mapToMilkingResponseDTO)
                 .toList();
+    }
+
+    @Transactional
+    public MilkingResponseDTO updateMilkingById(Long milkingId, MilkingCreateDTO milkingCreateDTO) {
+        Cow cow = milkingService.getCowByMilkingId(milkingId);
+        verifyMilkingDate(cow.getDateOfBirth(), milkingCreateDTO.dateOfMilking());
+
+        Milking milking = milkingService.updateMilking(
+                milkingId,
+                milkingCreateDTO.dateOfMilking(),
+                milkingCreateDTO.milkQuantity(),
+                milkingCreateDTO.milkingDuration()
+        );
+        updateCowLatestMilkingIfNecessary(cow);
+
+        return mapToMilkingResponseDTO(milking);
+    }
+
+    private void updateCowLatestMilkingIfNecessary(Cow cow) {
+        milkingService.getMilkingsByCowId(cow.getId())
+                .stream()
+                .max(Comparator.comparing(Milking::getDateOfMilking))
+                .ifPresent(latestMilking ->
+                        cowService.updateLatestMilkingQuantity(cow, latestMilking.getMilkQuantity(), latestMilking.getDateOfMilking())
+                );
     }
 
 }
