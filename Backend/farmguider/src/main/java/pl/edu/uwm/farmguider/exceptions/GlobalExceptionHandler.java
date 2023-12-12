@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.edu.uwm.farmguider.exceptions.cow.InvalidGenderException;
 import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
 import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
+import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
 import pl.edu.uwm.farmguider.exceptions.global.UnauthorizedException;
+import pl.edu.uwm.farmguider.exceptions.lactationPeriod.LactationPeriodConflictException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +57,20 @@ public class GlobalExceptionHandler {
     public ErrorResponse invalidGenderException(InvalidGenderException exception) {
         Map<String, String> errors = Map.of(exception.getEnumName(), exception.getMessage());
         return new ErrorResponse("InvalidGenderException", errors);
+    }
+
+    @ExceptionHandler(value = LactationPeriodConflictException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse lactationPeriodConflictException(LactationPeriodConflictException exception) {
+        Map<String, String> errors = Map.of(exception.getEntityName(), exception.getMessage());
+        return new ErrorResponse("LactationPeriodConflictException", errors);
+    }
+
+    @ExceptionHandler(value = InvalidDateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse InvalidDateException(InvalidDateException exception) {
+        Map<String, String> errors = Map.of(exception.getEntityName(), exception.getMessage());
+        return new ErrorResponse("InvalidDateException", errors);
     }
 
 }
