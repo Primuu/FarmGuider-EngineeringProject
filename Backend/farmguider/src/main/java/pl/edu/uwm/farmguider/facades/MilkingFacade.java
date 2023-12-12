@@ -7,11 +7,13 @@ import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.milking.Milking;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingCreateDTO;
+import pl.edu.uwm.farmguider.models.milking.dtos.MilkingMapper;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.MilkingService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.milking.dtos.MilkingMapper.mapToMilkingResponseDTO;
 import static pl.edu.uwm.farmguider.utils.GenderUtils.verifyIsFemale;
@@ -47,6 +49,14 @@ public class MilkingFacade {
 
     private boolean isLatestMilking(Cow cow, LocalDateTime dateOfMilking) {
         return cow.getLatestMilkingDate() == null || !cow.getLatestMilkingDate().isAfter(dateOfMilking);
+    }
+
+    public List<MilkingResponseDTO> getMilkingsByCowId(Long cowId) {
+        List<Milking> milkings = milkingService.getMilkingsByCowId(cowId);
+        return milkings
+                .stream()
+                .map(MilkingMapper::mapToMilkingResponseDTO)
+                .toList();
     }
 
 }

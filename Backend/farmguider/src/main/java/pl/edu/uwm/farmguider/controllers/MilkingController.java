@@ -1,6 +1,7 @@
 package pl.edu.uwm.farmguider.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +17,8 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.MilkingFacade;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingCreateDTO;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -59,6 +62,27 @@ public class MilkingController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(milkingResponseDTO);
+    }
+
+    @Operation(summary = "Get milking data by id", description = "Retrieves a cow's milking list by cow id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Milking list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = MilkingResponseDTO.class)
+                            )
+                    ))
+    })
+    @GetMapping("/get-milkings/{cowId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCowIdWithContext(#cowId)")
+    public ResponseEntity<List<MilkingResponseDTO>> getMilkingsByCowId(@PathVariable Long cowId) {
+        List<MilkingResponseDTO> milkings = milkingFacade.getMilkingsByCowId(cowId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(milkings);
     }
 
 }
