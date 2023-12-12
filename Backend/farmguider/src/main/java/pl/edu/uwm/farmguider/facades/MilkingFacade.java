@@ -91,7 +91,11 @@ public class MilkingFacade {
     }
 
     public void deleteMilkingById(Long milkingId) {
+        Cow cow = milkingService.getCowByMilkingId(milkingId);
+
         milkingService.deleteMilkingById(milkingId);
+
+        updateCowLatestMilkingIfNecessary(cow);
     }
 
 }
