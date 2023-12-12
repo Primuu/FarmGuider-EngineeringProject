@@ -203,7 +203,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
             <AddWeightGainModal
                 open={openAddWeightGainModal}
                 onClose={handleCloseAddWeightGainModal}
-                cowId={cow.cowId}
+                cow={cow}
                 onWeightGainAdded={onWeightGainAdded}
             />
         </TableRow>

@@ -16,15 +16,16 @@ import i18n from "i18next";
 import WeightGainCreateDTO from "@/entities/WeightGainCreateDTO.ts";
 import {createWeightGain} from "@/services/weightGainService.ts";
 import {validateAddWeightGain, WeightGainValues} from "@/utils/cowValidators.ts";
+import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 
 type AddWeightGainModalProps = {
     open: boolean;
     onClose: () => void;
-    cowId: number;
+    cow: CowResponseDTO;
     onWeightGainAdded: (weightGainCreateDTO: WeightGainCreateDTO) => void;
 }
 
-const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, cowId, onWeightGainAdded}) => {
+const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, cow, onWeightGainAdded}) => {
     const [measurementDate, setMeasurementDate] = useState<Date | null>(new Date());
     const [weight, setWeight] = useState<number | null>(null);
     const {t} = useTranslation('breedingPage');
@@ -62,8 +63,8 @@ const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, c
             weight: weight!
         };
 
-        if (cowId) {
-            createWeightGain(cowId, weightGainCreateDTO)
+        if (cow.cowId) {
+            createWeightGain(cow.cowId, weightGainCreateDTO)
                 .then(() => {
                     cancel();
                     onWeightGainAdded(weightGainCreateDTO);
@@ -108,6 +109,7 @@ const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, c
                                             label={t('addWeightGainModal.measurementDate')}
                                             value={measurementDate}
                                             onChange={handleDateChange}
+                                            minDate={new Date(cow.dateOfBirth)}
                                             maxDate={new Date()}
                                             disableFuture
                                             openTo="day"

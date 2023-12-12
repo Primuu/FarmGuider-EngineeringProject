@@ -117,7 +117,7 @@
     "errorSnackbar": "Something went wrong",
     "header": "Adding a Weight Measurement",
     "subHeader": "Weight measurement will be added to the currently selected cow",
-    "requirements": "To add a weight measurement, provide the measurement date and weight",
+    "requirements": "To add a weight measurement, provide the measurement date (it cannot be earlier than the date of birth) and weight",
     "confirmButton": "Add Measurement",
     "cancelButton": "Cancel",
     "measurementDate": "Measurement Date",

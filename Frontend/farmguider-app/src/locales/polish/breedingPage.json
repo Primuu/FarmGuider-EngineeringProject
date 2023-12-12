@@ -117,7 +117,7 @@
     "errorSnackbar": "Coś poszło nie tak",
     "header": "Dodawanie Pomiaru Wagi",
     "subHeader": "Pomiar wagi zostanie dodany do aktualnie wybranej krowy",
-    "requirements": "Aby dodać pomiar wagi, podaj datę ważenia i wagę",
+    "requirements": "Aby dodać pomiar wagi, podaj datę ważenia (nie może być wcześniejsza niż data urodzenia) i wagę",
     "confirmButton": "Dodaj Pomiar",
     "cancelButton": "Anuluj",
     "measurementDate": "Data Pomiaru",
