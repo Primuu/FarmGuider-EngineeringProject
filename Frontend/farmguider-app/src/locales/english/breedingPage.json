@@ -96,7 +96,7 @@
     "errorSnackbar": "Something went wrong",
     "header": "Adding a Milking",
     "subHeader": "Milking will be added to the currently selected cow",
-    "requirements": "To add a milking, provide the milking date and milk quantity. Milking time is optional.",
+    "requirements": "To add a milking, provide the milking date (it cannot be earlier than the date of birth) and milk quantity. Milking time is optional.",
     "confirmButton": "Add Milking",
     "cancelButton": "Cancel",
     "dateOfMilking": "Date of Milking",

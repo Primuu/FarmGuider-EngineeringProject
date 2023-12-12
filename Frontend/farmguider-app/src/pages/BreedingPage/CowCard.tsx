@@ -196,7 +196,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
             <AddMilkingModal
                 open={openAddMilkingModal}
                 onClose={handleCloseAddMilkingModal}
-                cowId={cow.cowId}
+                cow={cow}
                 onMilkingAdded={onMilkingAdded}
             />
 

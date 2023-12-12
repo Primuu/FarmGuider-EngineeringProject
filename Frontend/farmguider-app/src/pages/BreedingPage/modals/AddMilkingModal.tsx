@@ -16,15 +16,17 @@ import enLocale from 'date-fns/locale/en-US';
 import i18n from "i18next";
 import MilkingCreateDTO from "@/entities/MilkingCreateDTO.ts";
 import {createMilking} from "@/services/milkingService.ts";
+import CowResponseDTO from "@/entities/CowResponseDTO.ts";
+import {localDateToISOString} from "@/utils/dateUtils.ts";
 
 type AddMilkingModalProps = {
     open: boolean;
     onClose: () => void;
-    cowId: number;
+    cow: CowResponseDTO;
     onMilkingAdded: (milkingCreateDTO: MilkingCreateDTO) => void;
 }
 
-const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cowId, onMilkingAdded}) => {
+const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, onMilkingAdded}) => {
     const [dateOfMilking, setDateOfMilking] = useState<Date | null>(new Date());
     const [milkQuantity, setMilkQuantity] = useState<number | null>(null);
     const [milkingDuration, setMilkingDuration] = useState<string | null>(null);
@@ -71,13 +73,13 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cowId, 
         const milkingDurationInSeconds = milkingDuration ? convertToSeconds(milkingDuration) : null;
 
         const milkingCreateDTO: MilkingCreateDTO = {
-            dateOfMilking: dateOfMilking!,
+            dateOfMilking: localDateToISOString(dateOfMilking!),
             milkQuantity: milkQuantity!,
             milkingDuration: milkingDurationInSeconds
         };
 
-        if (cowId) {
-            createMilking(cowId, milkingCreateDTO)
+        if (cow.cowId) {
+            createMilking(cow.cowId, milkingCreateDTO)
                 .then(() => {
                     cancel();
                     onMilkingAdded(milkingCreateDTO);
@@ -126,6 +128,7 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cowId, 
                                             label={t('addMilkingModal.dateOfMilking')}
                                             value={dateOfMilking}
                                             onChange={handleDateChange}
+                                            minDate={new Date(cow.dateOfBirth)}
                                             maxDate={new Date()}
                                             disableFuture
                                             ampm={i18n.language !== 'pl'}
