@@ -13,6 +13,7 @@ import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.WeightGainService;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainMapper.mapToWeightGainResponseDTO;
@@ -27,10 +28,7 @@ public class WeightGainFacade {
     @Transactional
     public WeightGainResponseDTO createWeightGain(Long cowId, WeightGainCreateDTO weightGainCreateDTO) {
         Cow cow = cowService.getCowById(cowId);
-
-        if (weightGainCreateDTO.measurementDate().isBefore(cow.getDateOfBirth())) {
-            throw new InvalidDateException("WeightGain", "Weight measurement date cannot be before cow's date of birth.");
-        }
+        verifyWeightGainDate(cow.getDateOfBirth(), weightGainCreateDTO.measurementDate());
 
         if (isLatestWeightGain(cow, weightGainCreateDTO.measurementDate())) {
             cowService.updateCurrentWeight(cow, weightGainCreateDTO.weight(), weightGainCreateDTO.measurementDate());
@@ -48,6 +46,12 @@ public class WeightGainFacade {
         return cow.getLatestWeightMeasurementDate() == null || !cow.getLatestWeightMeasurementDate().isAfter(measurementDate);
     }
 
+    private void verifyWeightGainDate(LocalDate dateOfBirth, LocalDate measurementDate) {
+        if (measurementDate.isBefore(dateOfBirth)) {
+            throw new InvalidDateException("WeightGain", "Weight measurement date cannot be before cow's date of birth.");
+        }
+    }
+
     public List<WeightGainResponseDTO> getWeightGainsByCowId(Long cowId) {
         List<WeightGain> weightGains = weightGainService.getWeightGainsByCowId(cowId);
         return weightGains
@@ -55,6 +59,30 @@ public class WeightGainFacade {
                 .map(WeightGainMapper::mapToWeightGainResponseDTO)
                 .toList();
 
+    }
+
+    @Transactional
+    public WeightGainResponseDTO updateWeightGainById(Long weightGainId, WeightGainCreateDTO weightGainCreateDTO) {
+        Cow cow = weightGainService.getCowByWeightGainId(weightGainId);
+        verifyWeightGainDate(cow.getDateOfBirth(), weightGainCreateDTO.measurementDate());
+
+        WeightGain weightGain = weightGainService.updateWeightGain(
+                weightGainId,
+                weightGainCreateDTO.measurementDate(),
+                weightGainCreateDTO.weight()
+        );
+        updateCowCurrentWeightIfNecessary(cow);
+
+        return mapToWeightGainResponseDTO(weightGain);
+    }
+
+    private void updateCowCurrentWeightIfNecessary(Cow cow) {
+        weightGainService.getWeightGainsByCowId(cow.getId())
+                .stream()
+                .max(Comparator.comparing(WeightGain::getMeasurementDate))
+                .ifPresent(currentWeight ->
+                        cowService.updateCurrentWeight(cow, currentWeight.getWeight(), currentWeight.getMeasurementDate())
+                );
     }
 
 }

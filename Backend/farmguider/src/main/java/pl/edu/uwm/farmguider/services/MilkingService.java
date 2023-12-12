@@ -22,7 +22,7 @@ public class MilkingService {
                 .orElseThrow(() -> new EntityNotFoundException("Milking", "Milking with id: " + milkingId + " not found."));
     }
 
-    public Long getUserByMilkingId(Long milkingId) {
+    public Long getUserIdByMilkingId(Long milkingId) {
         return milkingRepository.findUserIdByMilkingId(milkingId);
     }
 

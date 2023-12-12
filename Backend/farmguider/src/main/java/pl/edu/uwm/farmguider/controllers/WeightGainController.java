@@ -85,4 +85,38 @@ public class WeightGainController {
                 .body(weightGains);
     }
 
+    @Operation(summary = "Update weight gain by id", description = "Updates weight gain data based on the provided payload")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Weight gain data updated successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = WeightGainResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Weight gain not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @PutMapping("/update/{weightGainId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenWeightGainIdWithContext(#weightGainId)")
+    public ResponseEntity<WeightGainResponseDTO> updateWeightGainById(@PathVariable Long weightGainId,
+                                                                      @RequestBody @Valid WeightGainCreateDTO weightGainCreateDTO) {
+        WeightGainResponseDTO weightGainResponseDTO = weightGainFacade.updateWeightGainById(weightGainId, weightGainCreateDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(weightGainResponseDTO);
+    }
+
 }
