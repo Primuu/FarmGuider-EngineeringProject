@@ -47,4 +47,9 @@ public class MilkingService {
         return milkingRepository.saveAndFlush(milking);
     }
 
+    public void deleteMilkingById(Long milkingId) {
+        Milking milking = getMilkingById(milkingId);
+        milkingRepository.delete(milking);
+    }
+
 }

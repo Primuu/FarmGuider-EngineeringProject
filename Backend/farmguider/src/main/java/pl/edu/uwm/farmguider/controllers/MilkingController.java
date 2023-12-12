@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.MilkingFacade;
+import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingCreateDTO;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
 
@@ -117,6 +118,34 @@ public class MilkingController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(milkingResponseDTO);
+    }
+
+    @Operation(summary = "Delete milking", description = "Deletes milking by id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful deleted milking",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - entity to delete not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @DeleteMapping("/delete/{milkingId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenMilkingIdWithContext(#milkingId)")
+    public ResponseEntity<ResponseMessage> deleteMilkingById(@PathVariable Long milkingId) {
+        milkingFacade.deleteMilkingById(milkingId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseMessage.builder()
+                        .message("Successfully deleted milking")
+                        .build());
     }
 
 }

@@ -90,4 +90,8 @@ public class MilkingFacade {
                 );
     }
 
+    public void deleteMilkingById(Long milkingId) {
+        milkingService.deleteMilkingById(milkingId);
+    }
+
 }
