@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.WeightGainFacade;
+import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainCreateDTO;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainResponseDTO;
 
@@ -117,6 +118,34 @@ public class WeightGainController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(weightGainResponseDTO);
+    }
+
+    @Operation(summary = "Delete weight gain", description = "Deletes weight gain by id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful deleted weight gain",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - entity to delete not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @DeleteMapping("/delete/{weightGainId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenWeightGainIdWithContext(#weightGainId)")
+    public ResponseEntity<ResponseMessage> deleteWeightGainById(@PathVariable Long weightGainId) {
+        weightGainFacade.deleteWeightGainById(weightGainId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseMessage.builder()
+                        .message("Successfully deleted weight gain")
+                        .build());
     }
 
 }

@@ -85,4 +85,13 @@ public class WeightGainFacade {
                 );
     }
 
+    @Transactional
+    public void deleteWeightGainById(Long weightGainId) {
+        Cow cow = weightGainService.getCowByWeightGainId(weightGainId);
+
+        weightGainService.deleteWeightGainById(weightGainId);
+
+        updateCowCurrentWeightIfNecessary(cow);
+    }
+
 }

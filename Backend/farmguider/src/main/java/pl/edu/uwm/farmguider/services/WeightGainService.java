@@ -46,4 +46,9 @@ public class WeightGainService {
         return weightGainRepository.saveAndFlush(weightGain);
     }
 
+    public void deleteWeightGainById(Long weightGainId) {
+        WeightGain weightGain = getWeightGainById(weightGainId);
+        weightGainRepository.delete(weightGain);
+    }
+
 }
