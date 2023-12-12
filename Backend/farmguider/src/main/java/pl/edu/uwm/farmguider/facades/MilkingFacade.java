@@ -3,6 +3,7 @@ package pl.edu.uwm.farmguider.facades;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.milking.Milking;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingCreateDTO;
@@ -26,6 +27,10 @@ public class MilkingFacade {
     public MilkingResponseDTO createMilking(Long cowId, MilkingCreateDTO milkingCreateDTO) {
         Cow cow = cowService.getCowById(cowId);
         verifyIsFemale(cow.getGender());
+
+        if (milkingCreateDTO.dateOfMilking().toLocalDate().isBefore(cow.getDateOfBirth())) {
+            throw new InvalidDateException("Milking", "Milking date cannot be before cow's date of birth.");
+        }
 
         if (isLatestMilking(cow, milkingCreateDTO.dateOfMilking())) {
             cowService.updateLatestMilkingQuantity(cow, milkingCreateDTO.milkQuantity(), milkingCreateDTO.dateOfMilking());

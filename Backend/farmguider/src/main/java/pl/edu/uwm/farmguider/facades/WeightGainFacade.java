@@ -3,6 +3,7 @@ package pl.edu.uwm.farmguider.facades;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.weightGain.WeightGain;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainCreateDTO;
@@ -24,6 +25,10 @@ public class WeightGainFacade {
     @Transactional
     public WeightGainResponseDTO createWeightGain(Long cowId, WeightGainCreateDTO weightGainCreateDTO) {
         Cow cow = cowService.getCowById(cowId);
+
+        if (weightGainCreateDTO.measurementDate().isBefore(cow.getDateOfBirth())) {
+            throw new InvalidDateException("WeightGain", "Weight measurement date cannot be before cow's date of birth.");
+        }
 
         if (isLatestWeightGain(cow, weightGainCreateDTO.measurementDate())) {
             cowService.updateCurrentWeight(cow, weightGainCreateDTO.weight(), weightGainCreateDTO.measurementDate());
