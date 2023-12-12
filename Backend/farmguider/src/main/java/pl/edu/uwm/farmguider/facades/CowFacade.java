@@ -33,9 +33,24 @@ public class CowFacade {
         return mapToCowResponseDTO(cow);
     }
 
+    public CowResponseDTO getCowById(Long cowId) {
+        return mapToCowResponseDTO(cowService.getCowById(cowId));
+    }
+
     public Page<CowResponseDTO> getCowsByBreedingId(Long breedingId, CowSearchParams cowSearchParams) {
         Page<Cow> cows = cowService.getCowsByBreedingId(breedingId, cowSearchParams);
         return cows.map(CowMapper::mapToCowResponseDTO);
+    }
+
+    public CowResponseDTO updateCowById(Long cowId, CowCreateDTO cowCreateDTO) {
+        Cow cow = cowService.updateCowById(
+                cowId,
+                cowCreateDTO.cowName(),
+                cowCreateDTO.earTagNumber(),
+                cowCreateDTO.dateOfBirth(),
+                cowCreateDTO.gender()
+        );
+        return mapToCowResponseDTO(cow);
     }
 
     public void deleteCowById(Long cowId) {

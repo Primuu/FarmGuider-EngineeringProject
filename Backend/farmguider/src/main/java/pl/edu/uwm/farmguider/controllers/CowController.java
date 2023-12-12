@@ -69,6 +69,31 @@ public class CowController {
                 .body(cows);
     }
 
+    @Operation(summary = "Get cow data by id", description = "Retrieves a cow's data by their id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Cow data retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = CowResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Cow not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @GetMapping("/{cowId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCowIdWithContext(#cowId)")
+    public ResponseEntity<CowResponseDTO> getCowById(@PathVariable Long cowId) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(cowFacade.getCowById(cowId));
+    }
+
     @Operation(summary = "Create cow",
             description = "Creates a cow based on the provided payload")
     @ApiResponses(value = {
@@ -101,6 +126,40 @@ public class CowController {
         CowResponseDTO cowResponseDTO = cowFacade.createCow(breedingId, cowCreateDTO);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
+                .body(cowResponseDTO);
+    }
+
+    @Operation(summary = "Update cow by id", description = "Updates cow's data")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Cow's data updated successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = CowResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Cow not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @PutMapping("/update/{cowId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCowIdWithContext(#cowId)")
+    public ResponseEntity<CowResponseDTO> updateCowById(@PathVariable Long cowId,
+                                                        @RequestBody @Valid CowCreateDTO cowCreateDTO) {
+        CowResponseDTO cowResponseDTO = cowFacade.updateCowById(cowId, cowCreateDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
                 .body(cowResponseDTO);
     }
 
