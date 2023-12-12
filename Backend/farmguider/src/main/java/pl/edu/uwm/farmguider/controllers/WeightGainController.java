@@ -1,6 +1,7 @@
 package pl.edu.uwm.farmguider.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +17,8 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.WeightGainFacade;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainCreateDTO;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainResponseDTO;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -59,6 +62,27 @@ public class WeightGainController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(weightGainResponseDTO);
+    }
+
+    @Operation(summary = "Get weight gain data by id", description = "Retrieves a cow's weight gains list by cow id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Weight gains list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = WeightGainResponseDTO.class)
+                            )
+                    ))
+    })
+    @GetMapping("/get-weight-gains/{cowId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCowIdWithContext(#cowId)")
+    public ResponseEntity<List<WeightGainResponseDTO>> getWeightGainsByCowId(@PathVariable Long cowId) {
+        List<WeightGainResponseDTO> weightGains = weightGainFacade.getWeightGainsByCowId(cowId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(weightGains);
     }
 
 }

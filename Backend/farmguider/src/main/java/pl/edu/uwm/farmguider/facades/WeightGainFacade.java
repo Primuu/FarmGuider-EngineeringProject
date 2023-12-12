@@ -7,11 +7,13 @@ import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.weightGain.WeightGain;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainCreateDTO;
+import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainMapper;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.WeightGainService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainMapper.mapToWeightGainResponseDTO;
 
@@ -44,6 +46,15 @@ public class WeightGainFacade {
 
     private boolean isLatestWeightGain(Cow cow, LocalDate measurementDate) {
         return cow.getLatestWeightMeasurementDate() == null || !cow.getLatestWeightMeasurementDate().isAfter(measurementDate);
+    }
+
+    public List<WeightGainResponseDTO> getWeightGainsByCowId(Long cowId) {
+        List<WeightGain> weightGains = weightGainService.getWeightGainsByCowId(cowId);
+        return weightGains
+                .stream()
+                .map(WeightGainMapper::mapToWeightGainResponseDTO)
+                .toList();
+
     }
 
 }
