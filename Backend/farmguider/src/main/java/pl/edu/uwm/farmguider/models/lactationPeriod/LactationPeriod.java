@@ -1,10 +1,7 @@
 package pl.edu.uwm.farmguider.models.lactationPeriod;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.edu.uwm.farmguider.models.basic.BasicEntity;
 import pl.edu.uwm.farmguider.models.cow.Cow;
@@ -16,6 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LactationPeriod extends BasicEntity {
 
@@ -25,10 +23,5 @@ public class LactationPeriod extends BasicEntity {
 
     LocalDate startDate;
     LocalDate endDate;
-
-    public LactationPeriod(Cow cow, LocalDate startDate) {
-        this.cow = cow;
-        this.startDate = startDate;
-    }
 
 }
