@@ -17,7 +17,7 @@ public class LactationPeriodService {
 
     private final LactationPeriodRepository lactationPeriodRepository;
 
-    public List<LactationPeriod> getAllLactationPeriodsByCowId(Long cowId) {
+    public List<LactationPeriod> getLactationPeriodsByCowId(Long cowId) {
         return lactationPeriodRepository.findAllByCowId(cowId);
     }
 
@@ -32,7 +32,7 @@ public class LactationPeriodService {
     }
 
     private void validateLactationPeriodOverlaps(LocalDate newLactationStart, LocalDate newLactationEnd, Long cowId) {
-        List<LactationPeriod> lactationPeriods = getAllLactationPeriodsByCowId(cowId);
+        List<LactationPeriod> lactationPeriods = getLactationPeriodsByCowId(cowId);
 
         boolean overlapExists = lactationPeriods.stream()
                 .anyMatch(existingPeriod -> {

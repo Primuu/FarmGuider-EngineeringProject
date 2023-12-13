@@ -1,6 +1,7 @@
 package pl.edu.uwm.farmguider.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +17,8 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.LactationPeriodFacade;
 import pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodCreateDTO;
 import pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodResponseDTO;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -59,6 +62,28 @@ public class LactationPeriodController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(lactationPeriodResponseDTO);
+    }
+
+    @Operation(summary = "Get lactation period data by id",
+            description = "Retrieves a cow's lactation periods list by cow id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Lactation periods list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = LactationPeriodResponseDTO.class)
+                            )
+                    ))
+    })
+    @GetMapping("/get-lactation-periods/{cowId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCowIdWithContext(#cowId)")
+    public ResponseEntity<List<LactationPeriodResponseDTO>> getLactationPeriodsByCowId(@PathVariable Long cowId) {
+        List<LactationPeriodResponseDTO> lactationPeriods = lactationPeriodFacade.getLactationPeriodsByCowId(cowId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(lactationPeriods);
     }
 
 }

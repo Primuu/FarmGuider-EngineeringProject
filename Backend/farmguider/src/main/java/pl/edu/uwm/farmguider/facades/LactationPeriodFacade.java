@@ -6,9 +6,12 @@ import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.lactationPeriod.LactationPeriod;
 import pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodCreateDTO;
+import pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodMapper;
 import pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.LactationPeriodService;
+
+import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodMapper.mapToLactationPeriodResponseDTO;
 import static pl.edu.uwm.farmguider.utils.GenderUtils.verifyIsFemale;
@@ -34,6 +37,14 @@ public class LactationPeriodFacade {
                 lactationPeriodCreateDTO.endDate()
         );
         return mapToLactationPeriodResponseDTO(lactationPeriod);
+    }
+
+    public List<LactationPeriodResponseDTO> getLactationPeriodsByCowId(Long cowId) {
+        List<LactationPeriod> lactationPeriods = lactationPeriodService.getLactationPeriodsByCowId(cowId);
+        return lactationPeriods
+                .stream()
+                .map(LactationPeriodMapper::mapToLactationPeriodResponseDTO)
+                .toList();
     }
 
 }
