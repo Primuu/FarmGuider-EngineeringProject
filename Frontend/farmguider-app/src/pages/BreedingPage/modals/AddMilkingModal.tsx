@@ -17,7 +17,7 @@ import i18n from "i18next";
 import MilkingCreateDTO from "@/entities/MilkingCreateDTO.ts";
 import {createMilking} from "@/services/milkingService.ts";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
-import {localDateToISOString} from "@/utils/dateUtils.ts";
+import {removeTimezoneAndSeconds} from "@/utils/dateUtils.ts";
 
 type AddMilkingModalProps = {
     open: boolean;
@@ -73,7 +73,7 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
         const milkingDurationInSeconds = milkingDuration ? convertToSeconds(milkingDuration) : null;
 
         const milkingCreateDTO: MilkingCreateDTO = {
-            dateOfMilking: localDateToISOString(dateOfMilking!),
+            dateOfMilking: removeTimezoneAndSeconds(dateOfMilking!),
             milkQuantity: milkQuantity!,
             milkingDuration: milkingDurationInSeconds
         };

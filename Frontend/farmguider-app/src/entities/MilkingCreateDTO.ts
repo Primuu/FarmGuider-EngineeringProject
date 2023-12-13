@@ -1,5 +1,5 @@
 export default interface MilkingCreateDTO {
-    dateOfMilking: string;
+    dateOfMilking: Date;
     milkQuantity: number;
     milkingDuration: number | null;
 }
