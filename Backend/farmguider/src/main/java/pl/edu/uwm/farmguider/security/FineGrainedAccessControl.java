@@ -15,6 +15,7 @@ public class FineGrainedAccessControl {
     private final CowService cowService;
     private final MilkingService milkingService;
     private final WeightGainService weightGainService;
+    private final LactationPeriodService lactationPeriodService;
 
     private String getEmailFromContext() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
@@ -46,6 +47,10 @@ public class FineGrainedAccessControl {
 
     public boolean compareGivenWeightGainIdWithContext(Long weightGainId) {
         return weightGainService.getUserIdByWeightGainId(weightGainId).equals(getUserIdFromContext());
+    }
+
+    public boolean compareGivenLactationPeriodIdWithContext(Long lactationPeriodId) {
+        return lactationPeriodService.getUserIdByLactationPeriodId(lactationPeriodId).equals(getUserIdFromContext());
     }
 
 }

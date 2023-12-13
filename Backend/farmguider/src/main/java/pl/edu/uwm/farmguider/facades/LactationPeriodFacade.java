@@ -11,6 +11,7 @@ import pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodResponse
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.LactationPeriodService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodMapper.mapToLactationPeriodResponseDTO;
@@ -25,11 +26,9 @@ public class LactationPeriodFacade {
 
     public LactationPeriodResponseDTO createLactationPeriod(Long cowId, LactationPeriodCreateDTO lactationPeriodCreateDTO) {
         Cow cow = cowService.getCowById(cowId);
-        verifyIsFemale(cow.getGender());
 
-        if (lactationPeriodCreateDTO.startDate().isBefore(cow.getDateOfBirth())) {
-            throw new InvalidDateException("LactationPeriod", "Lactation Period start date cannot be before cow's date of birth.");
-        }
+        verifyIsFemale(cow.getGender());
+        verifyLactationPeriodDate(lactationPeriodCreateDTO.startDate(), cow.getDateOfBirth());
 
         LactationPeriod lactationPeriod = lactationPeriodService.createLactationPeriod(
                 cow,
@@ -39,12 +38,31 @@ public class LactationPeriodFacade {
         return mapToLactationPeriodResponseDTO(lactationPeriod);
     }
 
+    private void verifyLactationPeriodDate(LocalDate lactationPeriodStartDate, LocalDate dateOfBirt) {
+        if (lactationPeriodStartDate.isBefore(dateOfBirt)) {
+            throw new InvalidDateException("LactationPeriod", "Lactation Period start date cannot be before cow's date of birth.");
+        }
+    }
+
     public List<LactationPeriodResponseDTO> getLactationPeriodsByCowId(Long cowId) {
         List<LactationPeriod> lactationPeriods = lactationPeriodService.getLactationPeriodsByCowId(cowId);
         return lactationPeriods
                 .stream()
                 .map(LactationPeriodMapper::mapToLactationPeriodResponseDTO)
                 .toList();
+    }
+
+    public LactationPeriodResponseDTO updateLactationPeriodById(Long lactationPeriodId, LactationPeriodCreateDTO lactationPeriodCreateDTO) {
+        Cow cow = lactationPeriodService.getCowByLactationPeriodId(lactationPeriodId);
+        verifyLactationPeriodDate(lactationPeriodCreateDTO.startDate(), cow.getDateOfBirth());
+
+        LactationPeriod lactationPeriod = lactationPeriodService.updateLactationPeriod(
+                cow.getId(),
+                lactationPeriodId,
+                lactationPeriodCreateDTO.startDate(),
+                lactationPeriodCreateDTO.endDate()
+        );
+        return mapToLactationPeriodResponseDTO(lactationPeriod);
     }
 
 }

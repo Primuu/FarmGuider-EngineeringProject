@@ -86,4 +86,39 @@ public class LactationPeriodController {
                 .body(lactationPeriods);
     }
 
+    @Operation(summary = "Update lactation period by id",
+            description = "Updates lactation period data based on the provided payload")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Lactation Period data updated successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = LactationPeriodResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Lactation Period not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @PutMapping("/update/{lactationPeriodId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenLactationPeriodIdWithContext(#lactationPeriodId)")
+    public ResponseEntity<LactationPeriodResponseDTO> updateLactationPeriodById(@PathVariable Long lactationPeriodId,
+                                                                                @RequestBody @Valid LactationPeriodCreateDTO lactationPeriodCreateDTO) {
+        LactationPeriodResponseDTO lactationPeriodResponseDTO = lactationPeriodFacade.updateLactationPeriodById(lactationPeriodId, lactationPeriodCreateDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(lactationPeriodResponseDTO);
+    }
+
 }
