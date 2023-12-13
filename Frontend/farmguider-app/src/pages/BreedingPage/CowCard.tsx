@@ -5,7 +5,7 @@ import MaleIcon from "@mui/icons-material/Male";
 import {Button, TableCell, TableRow, Tooltip} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {nullReplaceLackOfData} from "@/utils/textUtils.ts";
-import EditIcon from '@mui/icons-material/Edit';
+import {BsInfoLg} from "react-icons/bs";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {GiInjustice} from "react-icons/gi";
 import {LuMilk} from "react-icons/lu";
@@ -17,6 +17,8 @@ import AddMilkingModal from "@/pages/BreedingPage/modals/AddMilkingModal.tsx";
 import MilkingCreateDTO from "@/entities/MilkingCreateDTO.ts";
 import AddWeightGainModal from "@/pages/BreedingPage/modals/AddWeightGainModal.tsx";
 import WeightGainCreateDTO from "@/entities/WeightGainCreateDTO.ts";
+import {useNavigate} from "react-router-dom";
+import {COW_PAGE_WITH_ID} from "@/constants/ROUTER_URLS.ts";
 
 type CowCardProps = {
     cow: CowResponseDTO
@@ -30,6 +32,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
     const {enqueueSnackbar} = useSnackbar();
     const [openAddMilkingModal, setOpenAddMilkingModal] = useState(false);
     const [openAddWeightGainModal, setOpenAddWeightGainModal] = useState(false);
+    const navigate = useNavigate();
 
     const handleOpenAddMilkingModal = () => setOpenAddMilkingModal(true);
     const handleCloseAddMilkingModal = () => setOpenAddMilkingModal(false);
@@ -57,6 +60,10 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
                 });
         }
     };
+
+    const handleDetailsClick = () => {
+        navigate(COW_PAGE_WITH_ID(cow.cowId));
+    }
 
     const onMilkingAdded = (milkingCreateDTO: MilkingCreateDTO) => {
         const shouldUpdate: boolean = cow.latestMilkingDate === null || new Date(cow.latestMilkingDate) < new Date(milkingCreateDTO.dateOfMilking);
@@ -160,14 +167,14 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
             </TableCell>
 
             <TableCell>
-                <Tooltip title={t('cowResults.editingButton')}>
+                <Tooltip title={t('cowResults.detailsButton')}>
                     <Button
                         className="table-button"
                         variant="contained"
                         color="primary"
-                        // onClick={}
+                        onClick={handleDetailsClick}
                     >
-                        <EditIcon className="table-icon"/>
+                        <BsInfoLg className="table-icon"/>
                     </Button>
                 </Tooltip>
             </TableCell>
