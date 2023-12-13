@@ -1,7 +1,7 @@
 import '@/pages/ProfilePage/profilePage.css';
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import React, {useEffect, useState} from "react";
-import {fetchUserData, updateUser} from "@/services/userService.ts";
+import {getUserData, updateUser} from "@/services/userService.ts";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen.tsx";
 import UserResponseDTO from "@/entities/UserResponseDTO.ts";
 import {useNavigate} from "react-router-dom";
@@ -41,7 +41,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if (userId) {
-            fetchUserData(userId)
+            getUserData(userId)
                 .then(data => {
                     setUserResponseDTO(data);
 

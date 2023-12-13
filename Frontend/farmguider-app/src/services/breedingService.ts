@@ -5,7 +5,7 @@ import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
 import BreedingCreateDTO from "@/entities/BreedingCreateDTO.ts";
 import ResponseMessage from "@/entities/ResponseMessage.ts";
 
-export const fetchBreedings = async (farmId: number): Promise<BreedingResponseDTO[]> => {
+export const getBreedings = async (farmId: number): Promise<BreedingResponseDTO[]> => {
     return await sendHttpRequest<BreedingResponseDTO[]>({
         endpointUrl: GET_BREEDINGS_URL,
         typeOfRequest: RequestTypes.GET,

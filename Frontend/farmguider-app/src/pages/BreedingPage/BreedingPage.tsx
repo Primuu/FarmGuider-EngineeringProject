@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import {useEffect, useState} from "react";
 import {NOT_FOUND_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
-import {fetchBreedings} from "@/services/breedingService.ts";
+import {getBreedings} from "@/services/breedingService.ts";
 import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
 import {useNavigate} from "react-router-dom";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen.tsx";
@@ -42,7 +42,7 @@ const BreedingPage = () => {
 
     const fetchAndSetBreedings = () => {
         if (farmId) {
-            fetchBreedings(farmId)
+            getBreedings(farmId)
                 .then(data => {
                     setBreedingList(data);
                     setLoading(false);

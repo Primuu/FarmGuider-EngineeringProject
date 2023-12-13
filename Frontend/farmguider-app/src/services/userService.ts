@@ -7,7 +7,7 @@ import UserChangePasswordDTO from "@/entities/UserChangePasswordDTO.ts";
 import ResponseMessage from "@/entities/ResponseMessage.ts";
 import UserPasswordDTO from "@/entities/UserPasswordDTO.ts";
 
-export const fetchUserData = async (userId: number): Promise<UserResponseDTO> => {
+export const getUserData = async (userId: number): Promise<UserResponseDTO> => {
     return await sendHttpRequest<UserResponseDTO>({
         endpointUrl: GET_USER_DATA_URL,
         typeOfRequest: RequestTypes.GET,
