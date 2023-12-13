@@ -21,10 +21,24 @@ export const DELETE_BREEDING_URL: string = "/breeding/delete/{breedingId}";
 // Cow
 export const CREATE_COW_URL: string = "/cow/create-cow/{breedingId}";
 export const GET_COWS_URL: string = "/cow/get-cows/{breedingId}";
+export const GET_COW_URL: string = "/cow/{cowId}";
+export const UPDATE_COW_URL: string = "/cow/update/{cowId}";
 export const DELETE_COW_URL: string = "/cow/delete/{cowId}";
 
 // Milking
 export const CREATE_MILKING_URL: string = "/milking/create-milking/{cowId}";
+export const GET_MILKINGS_URL: string = "/milking/get-milkings/{cowId}";
+export const UPDATE_MILKING_URL: string = "/milking/update/{milkingId}";
+export const DELETE_MILKING_URL: string = "/milking/delete/{milkingId}";
 
 // WeightGain
 export const CREATE_WEIGHT_GAIN_URL: string = "/weight-gain/create-weight-gain/{cowId}";
+export const GET_WEIGHT_GAINS_URL: string = "/weight-gain/get-weight-gains/{cowId}";
+export const UPDATE_WEIGHT_GAIN_URL: string = "/weight-gain/update/{weightGainId}";
+export const DELETE_WEIGHT_GAIN_URL: string = "/weight-gain/delete/{weightGainId}";
+
+// LactationPeriod
+export const CREATE_LACTATION_PERIOD_URL: string = "/lactation-period/create-lactation-period/{cowId}";
+export const GET_LACTATION_PERIODS_URL: string = "/lactation-period/get-lactation-periods/{cowId}";
+export const UPDATE_LACTATION_PERIOD_URL: string = "/lactation-period/update/{lactationPeriodId}";
+export const DELETE_LACTATION_PERIOD_URL: string = "/lactation-period/delete/{lactationPeriodId}";
