@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.LactationPeriodFacade;
+import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodCreateDTO;
 import pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodResponseDTO;
 
@@ -119,6 +120,34 @@ public class LactationPeriodController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(lactationPeriodResponseDTO);
+    }
+
+    @Operation(summary = "Delete lactation period", description = "Deletes lactation period by id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful deleted lactation period",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - entity to delete not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @DeleteMapping("/delete/{lactationPeriodId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenLactationPeriodIdWithContext(#lactationPeriodId)")
+    public ResponseEntity<ResponseMessage> deleteLactationPeriodById(@PathVariable Long lactationPeriodId) {
+        lactationPeriodFacade.deleteLactationPeriodById(lactationPeriodId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseMessage.builder()
+                        .message("Successfully deleted lactation period")
+                        .build());
     }
 
 }

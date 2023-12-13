@@ -79,4 +79,9 @@ public class LactationPeriodService {
         return lactationPeriodRepository.saveAndFlush(lactationPeriod);
     }
 
+    public void deleteLactationPeriodById(Long lactationPeriodId) {
+        LactationPeriod lactationPeriod = getLactationPeriodById(lactationPeriodId);
+        lactationPeriodRepository.delete(lactationPeriod);
+    }
+
 }

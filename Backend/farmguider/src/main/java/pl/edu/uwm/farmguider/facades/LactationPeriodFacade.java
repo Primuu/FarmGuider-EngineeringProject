@@ -65,4 +65,8 @@ public class LactationPeriodFacade {
         return mapToLactationPeriodResponseDTO(lactationPeriod);
     }
 
+    public void deleteLactationPeriodById(Long lactationPeriodId) {
+        lactationPeriodService.deleteLactationPeriodById(lactationPeriodId);
+    }
+
 }
