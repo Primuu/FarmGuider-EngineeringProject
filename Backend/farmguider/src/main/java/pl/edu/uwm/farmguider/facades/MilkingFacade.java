@@ -90,6 +90,7 @@ public class MilkingFacade {
                 );
     }
 
+    @Transactional
     public void deleteMilkingById(Long milkingId) {
         Cow cow = milkingService.getCowByMilkingId(milkingId);
 
