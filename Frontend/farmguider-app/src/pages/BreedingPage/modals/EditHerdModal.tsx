@@ -1,31 +1,34 @@
 import {useTranslation} from "react-i18next";
 import {Box, Button, Fade, Modal, Slide, TextField, Typography} from "@mui/material";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import {updateBreeding} from "@/services/breedingService.ts";
-
 import '@/pages/BreedingPage/modals/herdModal.css';
 import BreedingCreateDTO from "@/entities/BreedingCreateDTO.ts";
 import BreedingResponseDTO from "@/entities/BreedingResponseDTO.ts";
 import {validateBreedingName} from "@/utils/breedingValidators.ts";
 
-type AddHerdModalProps = {
+type EditHerdModalProps = {
     open: boolean;
     onClose: () => void;
     refreshBreedings: () => void;
     selectedBreeding: BreedingResponseDTO;
 }
 
-const EditHerdModal: React.FC<AddHerdModalProps> = (
+const EditHerdModal: React.FC<EditHerdModalProps> = (
     {open, onClose, refreshBreedings, selectedBreeding}
 ) => {
     const {t} = useTranslation('breedingPage');
     const [breedingName, setBreedingName] = useState<string>(selectedBreeding.breedingName);
     const [error, setError] = useState<string>("");
     const {enqueueSnackbar} = useSnackbar();
+
+    useEffect(() => {
+        setBreedingName(selectedBreeding.breedingName);
+    }, [selectedBreeding]);
 
     const handleBreedingNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setBreedingName(e.target.value);
