@@ -78,7 +78,7 @@
     "page": "{{from}}–{{to}} z {{count}}",
     "weighting": "Ważenie",
     "milking": "Dojenie",
-    "editing": "Szczegóły",
+    "details": "Szczegóły",
     "deleting": "Usuwanie",
     "milkingButton": "Dodaj Udój",
     "milkingButtonDisabled": "Nie dostępne dla tej płci",

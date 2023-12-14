@@ -19,7 +19,7 @@
     "cancelButton": "Cancel"
   },
   "editHerdModal": {
-    "header": "Updating a Herd",
+    "header": "Editing a Herd",
     "breedingName": "Herd Name",
     "nameRequirements": "Herd name must contain from 3 to 45 characters",
     "confirmButton": "Edit",
@@ -78,7 +78,7 @@
     "page": "{{from}}–{{to}} of {{count}}",
     "weighting": "Weighting",
     "milking": "Milking",
-    "editing": "Details",
+    "details": "Details",
     "deleting": "Deleting",
     "milkingButton": "Add Milking",
     "milkingButtonDisabled": "Not available for this gender",

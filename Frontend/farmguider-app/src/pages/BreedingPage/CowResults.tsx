@@ -50,7 +50,7 @@ const CowResults: React.FC<CowResultsProps> = (
                                 <TableCell className="th">{t('cowResults.latestMilking')}</TableCell>
                                 <TableCell className="th">{t('cowResults.milking')}</TableCell>
                                 <TableCell className="th">{t('cowResults.weighting')}</TableCell>
-                                <TableCell className="th">{t('cowResults.editing')}</TableCell>
+                                <TableCell className="th">{t('cowResults.details')}</TableCell>
                                 <TableCell className="th-r">{t('cowResults.deleting')}</TableCell>
                             </TableRow>
                         </TableHead>
