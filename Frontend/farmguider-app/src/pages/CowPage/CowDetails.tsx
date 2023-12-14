@@ -9,7 +9,7 @@ import {
     InputLabel,
     Select,
     SelectChangeEvent,
-    TextField
+    TextField, Typography
 } from "@mui/material";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers";
@@ -136,141 +136,146 @@ const CowDetails: React.FC<CowDetailsProps> = ({cow, setCow, locale}) => {
     };
 
     return (
-        <div className="edit-cow-container">
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                className="edit-cow-form"
-            >
-                <div className="edit-cow-inputs">
-                    <TextField
-                        className="edit-cow-text-field"
-                        margin="normal"
-                        required
-                        size={"small"}
-                        label={t('editCow.earTagNumber')}
-                        placeholder={"XX000123456789"}
-                        type={"text"}
-                        value={cowState.earTagNumber || ''}
-                        onChange={handleEarTagNumberChange}
-                        error={!!errors.earTagNumber}
-                        helperText={errors.earTagNumber}
-                        disabled={!isEditing}
-                        inputProps={{
-                            maxLength: 14
-                        }}
-                    />
-
-                    <div className="edit-cow-selector">
-                        <FormControl
-                            size={"small"}
-                            fullWidth
+        <div>
+            <Typography className="edit-cow-details">
+                {t('editCow.details')}
+            </Typography>
+            <div className="edit-cow-container">
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    className="edit-cow-form"
+                >
+                    <div className="edit-cow-inputs">
+                        <TextField
+                            className="edit-cow-text-field"
                             margin="normal"
-                            error={!!errors.gender}
-                        >
-                            <InputLabel>
-                                {t('editCow.selectGender')}
-                            </InputLabel>
-                            <Select
-                                value={cowState.gender}
-                                label={t('editCow.selectGender')}
-                                onChange={handleGenderChange}
-                                disabled={!isEditing}
+                            required
+                            size={"small"}
+                            label={t('editCow.earTagNumber')}
+                            placeholder={"XX000123456789"}
+                            type={"text"}
+                            value={cowState.earTagNumber || ''}
+                            onChange={handleEarTagNumberChange}
+                            error={!!errors.earTagNumber}
+                            helperText={errors.earTagNumber}
+                            disabled={!isEditing}
+                            inputProps={{
+                                maxLength: 14
+                            }}
+                        />
+
+                        <div className="edit-cow-selector">
+                            <FormControl
+                                size={"small"}
+                                fullWidth
+                                margin="normal"
                                 error={!!errors.gender}
                             >
-                                <MenuItem value="FEMALE">
-                                    <FemaleIcon className="edit-cow-gender-icon"/>
-                                    {t('editCow.female')}
-                                </MenuItem>
-                                <MenuItem value="MALE">
-                                    <MaleIcon className="edit-cow-gender-icon"/>
-                                    {t('editCow.male')}
-                                </MenuItem>
-                            </Select>
-                            {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
-                        </FormControl>
+                                <InputLabel>
+                                    {t('editCow.selectGender')}
+                                </InputLabel>
+                                <Select
+                                    value={cowState.gender}
+                                    label={t('editCow.selectGender')}
+                                    onChange={handleGenderChange}
+                                    disabled={!isEditing}
+                                    error={!!errors.gender}
+                                >
+                                    <MenuItem value="FEMALE">
+                                        <FemaleIcon className="edit-cow-gender-icon"/>
+                                        {t('editCow.female')}
+                                    </MenuItem>
+                                    <MenuItem value="MALE">
+                                        <MaleIcon className="edit-cow-gender-icon"/>
+                                        {t('editCow.male')}
+                                    </MenuItem>
+                                </Select>
+                                {errors.gender && <FormHelperText>{errors.gender}</FormHelperText>}
+                            </FormControl>
+                        </div>
                     </div>
-                </div>
 
-                <div className="edit-cow-inputs">
-                    <TextField
-                        className="edit-cow-text-field"
-                        margin="normal"
-                        size={"small"}
-                        label={t('editCow.cowName')}
-                        type={"text"}
-                        disabled={!isEditing}
-                        value={cowState.cowName || ''}
-                        onChange={handleCowNameChange}
-                        error={!!errors.cowName}
-                        helperText={errors.cowName}
-                    />
+                    <div className="edit-cow-inputs">
+                        <TextField
+                            className="edit-cow-text-field"
+                            margin="normal"
+                            size={"small"}
+                            label={t('editCow.cowName')}
+                            type={"text"}
+                            disabled={!isEditing}
+                            value={cowState.cowName || ''}
+                            onChange={handleCowNameChange}
+                            error={!!errors.cowName}
+                            helperText={errors.cowName}
+                        />
 
-                    <div className="edit-cow-calendar">
-                        <LocalizationProvider
-                            dateAdapter={AdapterDateFns}
-                            adapterLocale={locale}
-                        >
-                            <DatePicker
-                                label={t('editCow.calendarLabel')}
+                        <div className="edit-cow-calendar">
+                            <LocalizationProvider
+                                dateAdapter={AdapterDateFns}
+                                adapterLocale={locale}
+                            >
+                                <DatePicker
+                                    label={t('editCow.calendarLabel')}
 
-                                value={dateOfBirth}
-                                onChange={handleDateChange}
-                                maxDate={new Date()}
-                                disableFuture
-                                disabled={!isEditing}
-                                openTo="year"
-                                views={['year', 'month', 'day']}
-                                desktopModeMediaQuery="@media (min-width:600px)"
-                                slotProps={{
-                                    textField: {
-                                        error: !!errors.dateOfBirth,
-                                        helperText: errors.dateOfBirth,
-                                        size: 'small',
-                                        margin: 'normal',
-                                        fullWidth: true
-                                    }
-                                }}
-                            />
-                        </LocalizationProvider>
+                                    value={dateOfBirth}
+                                    onChange={handleDateChange}
+                                    maxDate={new Date()}
+                                    disableFuture
+                                    disabled={!isEditing}
+                                    openTo="year"
+                                    views={['year', 'month', 'day']}
+                                    desktopModeMediaQuery="@media (min-width:600px)"
+                                    slotProps={{
+                                        textField: {
+                                            error: !!errors.dateOfBirth,
+                                            helperText: errors.dateOfBirth,
+                                            size: 'small',
+                                            margin: 'normal',
+                                            fullWidth: true
+                                        }
+                                    }}
+                                />
+                            </LocalizationProvider>
+                        </div>
                     </div>
-                </div>
 
-                {isEditing ? (
-                    <div className="cow-details-button-group">
-                        <Button
-                            className="cow-edit-button"
-                            variant="contained"
-                            type="submit"
-                            color="primary"
-                        >
-                            <DoneOutlinedIcon className="cow-edit-button-icon"/>
-                            {t('editCow.saveButton')}
-                        </Button>
-                        <Button
-                            className="cow-edit-button"
-                            variant="outlined"
-                            onClick={handleCancel}
-                            color="primary"
-                        >
-                            <CloseOutlinedIcon className="cow-edit-button-icon"/>
-                            {t('editCow.cancelButton')}
-                        </Button>
-                    </div>
-                ) : (
-                    <div className="cow-details-button-group">
-                        <Button
-                            className="cow-edit-button"
-                            variant="contained"
-                            onClick={handleEdit}
-                            color="primary"
-                        >
-                            <EditIcon className="cow-edit-button-icon"/>
-                            {t('editCow.editButton')}
-                        </Button>
-                    </div>
-                )}
-            </Box>
+                    {isEditing ? (
+                        <div className="cow-details-button-group">
+                            <Button
+                                className="cow-edit-button"
+                                variant="contained"
+                                type="submit"
+                                color="primary"
+                            >
+                                <DoneOutlinedIcon className="cow-edit-button-icon"/>
+                                {t('editCow.saveButton')}
+                            </Button>
+                            <Button
+                                className="cow-edit-button"
+                                variant="outlined"
+                                onClick={handleCancel}
+                                color="primary"
+                            >
+                                <CloseOutlinedIcon className="cow-edit-button-icon"/>
+                                {t('editCow.cancelButton')}
+                            </Button>
+                        </div>
+                    ) : (
+                        <div className="cow-details-button-group">
+                            <Button
+                                className="cow-edit-button"
+                                variant="contained"
+                                onClick={handleEdit}
+                                color="primary"
+                            >
+                                <EditIcon className="cow-edit-button-icon"/>
+                                {t('editCow.editButton')}
+                            </Button>
+                        </div>
+                    )}
+                </Box>
+            </div>
         </div>
     )
 }

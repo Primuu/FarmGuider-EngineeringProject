@@ -1,6 +1,7 @@
 {
   "header": "Informacje o Krowie",
   "editCow": {
+    "details": "Informacje Podstawowe",
     "successSnackbar": "Dane krowy zaktualizowano pomyślnie",
     "errorSnackbar": "Coś poszło nie tak",
     "earTagNumber": "Numer Kolczyka",

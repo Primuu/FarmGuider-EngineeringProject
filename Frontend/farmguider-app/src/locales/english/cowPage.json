@@ -1,6 +1,7 @@
 {
   "header": "Cow Details",
   "editCow": {
+    "details": "Basic Information",
     "successSnackbar": "Cow's data updated successfully",
     "errorSnackbar": "Something went wrong",
     "earTagNumber": "Ear Tag Number",

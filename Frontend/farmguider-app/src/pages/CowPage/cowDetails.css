@@ -1,3 +1,9 @@
+.edit-cow-details {
+    font-style: italic;
+    margin-left: 10px;
+    color: #5b5b5b;
+}
+
 .edit-cow-container {
     background-color: #F8F8F8;
     border: 2px solid #2CB178;
@@ -59,6 +65,10 @@
 }
 
 @media (max-width: 699px) {
+    .cows-data-container .edit-cow-details {
+        font-size: 12px;
+    }
+
     .edit-cow-container {
         padding: 20px;
     }
