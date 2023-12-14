@@ -24,6 +24,7 @@ export type CowErrors = {
     earTagNumber?: string;
     cowName?: string;
     dateOfBirth?: string;
+    gender?: string;
 }
 
 export type MilkingErrors = {
