@@ -5,31 +5,33 @@ import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
-import '@/pages/BreedingPage/modals/cowDataModal.css';
+import '@/components/sharedModals/cowDataModal.css';
 import useValidation from "@/hooks/useValidation.ts";
+import {MilkingValues, MINUTES_SECONDS_REGEX, validateAddMilking} from "@/utils/cowValidators.ts";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {DatePicker} from "@mui/x-date-pickers";
+import {DateTimePicker} from "@mui/x-date-pickers";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import plLocale from 'date-fns/locale/pl';
 import enLocale from 'date-fns/locale/en-US';
 import i18n from "i18next";
-import WeightGainCreateDTO from "@/entities/WeightGainCreateDTO.ts";
-import {createWeightGain} from "@/services/weightGainService.ts";
-import {validateAddWeightGain, WeightGainValues} from "@/utils/cowValidators.ts";
+import MilkingCreateDTO from "@/entities/MilkingCreateDTO.ts";
+import {createMilking} from "@/services/milkingService.ts";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
+import {convertToSeconds, removeTimezoneAndSeconds} from "@/utils/dateUtils.ts";
 
-type AddWeightGainModalProps = {
+type AddMilkingModalProps = {
     open: boolean;
     onClose: () => void;
     cow: CowResponseDTO;
-    onWeightGainAdded: (weightGainCreateDTO: WeightGainCreateDTO) => void;
+    onMilkingAdded: (milkingCreateDTO: MilkingCreateDTO) => void;
 }
 
-const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, cow, onWeightGainAdded}) => {
-    const [measurementDate, setMeasurementDate] = useState<Date | null>(new Date());
-    const [weight, setWeight] = useState<number | null>(null);
+const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, onMilkingAdded}) => {
+    const [dateOfMilking, setDateOfMilking] = useState<Date | null>(new Date());
+    const [milkQuantity, setMilkQuantity] = useState<number | null>(null);
+    const [milkingDuration, setMilkingDuration] = useState<string | null>(null);
     const {t} = useTranslation('breedingPage');
-    const {errors, validate, setErrors} = useValidation<WeightGainValues>(validateAddWeightGain);
+    const {errors, validate, setErrors} = useValidation<MilkingValues>(validateAddMilking);
     const {enqueueSnackbar} = useSnackbar();
     const [locale, setLocale] = useState(enLocale);
 
@@ -40,38 +42,51 @@ const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, c
     }, [i18n.language]);
 
     const handleDateChange = (date: Date | null) => {
-        setMeasurementDate(date);
+        setDateOfMilking(date);
     };
 
-    const handleWeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setWeight(parseFloat(event.target.value));
+    const handleMilkQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setMilkQuantity(parseFloat(event.target.value));
+    };
+
+    const handleMilkingDurationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+
+        const isValidFormat = MINUTES_SECONDS_REGEX.test(value);
+        if (isValidFormat) {
+            setMilkingDuration(value);
+        }
     };
 
     const cancel = () => {
-        setWeight(null);
-        setMeasurementDate(new Date());
+        setMilkingDuration(null);
+        setMilkQuantity(null);
+        setDateOfMilking(new Date());
         setErrors({});
         onClose();
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!validate({measurementDate: measurementDate, weight: weight}, t)) return;
+        if (!validate({dateOfMilking, milkQuantity, milkingDuration}, t)) return;
 
-        const weightGainCreateDTO: WeightGainCreateDTO = {
-            measurementDate: measurementDate!,
-            weight: weight!
+        const milkingDurationInSeconds = milkingDuration ? convertToSeconds(milkingDuration) : null;
+
+        const milkingCreateDTO: MilkingCreateDTO = {
+            dateOfMilking: removeTimezoneAndSeconds(dateOfMilking!),
+            milkQuantity: milkQuantity!,
+            milkingDuration: milkingDurationInSeconds
         };
 
         if (cow.cowId) {
-            createWeightGain(cow.cowId, weightGainCreateDTO)
+            createMilking(cow.cowId, milkingCreateDTO)
                 .then(() => {
                     cancel();
-                    onWeightGainAdded(weightGainCreateDTO);
-                    enqueueSnackbar(t('addWeightGainModal.successSnackbar'), SnackbarSuccess);
+                    onMilkingAdded(milkingCreateDTO);
+                    enqueueSnackbar(t('addMilkingModal.successSnackbar'), SnackbarSuccess);
                 })
                 .catch(() => {
-                    enqueueSnackbar(t('addWeightGainModal.errorSnackbar'), SnackbarError);
+                    enqueueSnackbar(t('addCowModal.errorSnackbar'), SnackbarError);
                 })
         }
     };
@@ -92,62 +107,71 @@ const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, c
                     >
                         <Box component="form" onSubmit={handleSubmit} className="add-cow-data-form">
                             <Typography className="add-cow-data-header">
-                                {t('addWeightGainModal.header')}
+                                {t('addMilkingModal.header')}
                             </Typography>
 
                             <Typography className="add-cow-data-sub-header">
-                                {t('addWeightGainModal.subHeader')}
+                                {t('addMilkingModal.subHeader')}
                             </Typography>
 
                             <div className="add-cow-data-form-container">
                                 <div className="date-time-picker">
                                     <LocalizationProvider
                                         dateAdapter={AdapterDateFns}
-                                        adapterLocale={locale}
-                                    >
-                                        <DatePicker
-                                            label={t('addWeightGainModal.measurementDate')}
-                                            value={measurementDate}
+                                        adapterLocale={locale}>
+                                        <DateTimePicker
+                                            label={t('addMilkingModal.dateOfMilking')}
+                                            value={dateOfMilking}
                                             onChange={handleDateChange}
                                             minDate={new Date(cow.dateOfBirth)}
                                             maxDate={new Date()}
                                             disableFuture
-                                            openTo="day"
-                                            views={['year', 'month', 'day']}
+                                            ampm={i18n.language !== 'pl'}
                                             desktopModeMediaQuery="@media (min-width:600px)"
                                             slotProps={{
                                                 textField: {
-                                                    error: !!errors.measurementDate,
-                                                    helperText: errors.measurementDate
+                                                    error: !!errors.dateOfMilking,
+                                                    helperText: errors.dateOfMilking
                                                 }
-                                            }}
+                                            }
+                                            }
                                         />
                                     </LocalizationProvider>
                                 </div>
 
-                                <div className="add-weight-input">
+                                <div className="add-cow-data-inputs">
                                     <TextField
                                         margin="normal"
-                                        className="add-weight-text-field"
                                         required
-                                        label={t('addWeightGainModal.weight')}
+                                        label={t('addMilkingModal.milkQuantity')}
                                         type="number"
                                         inputProps={{
                                             step: "0.001",
                                             min: "0.000",
-                                            max: "9999.999"
+                                            max: "999.999"
                                         }}
-                                        value={weight !== null && weight !== undefined ? weight : ''}
+                                        value={milkQuantity !== null && milkQuantity !== undefined ? milkQuantity : ''}
                                         placeholder={"0,000"}
-                                        onChange={handleWeightChange}
-                                        error={!!errors.weight}
-                                        helperText={errors.weight}
+                                        onChange={handleMilkQuantityChange}
+                                        error={!!errors.milkQuantity}
+                                        helperText={errors.milkQuantity}
+                                    />
+
+                                    <TextField
+                                        margin="normal"
+                                        label={t('addMilkingModal.milkingDuration')}
+                                        type="text"
+                                        value={milkingDuration || ''}
+                                        onChange={handleMilkingDurationChange}
+                                        error={!!errors.milkingDuration}
+                                        helperText={errors.milkingDuration}
+                                        placeholder="MM:SS"
                                     />
                                 </div>
                             </div>
 
                             <Typography className="add-cow-data-req">
-                                {t('addWeightGainModal.requirements')}
+                                {t('addMilkingModal.requirements')}
                             </Typography>
 
                             <Box className="add-cow-data-button-group">
@@ -157,7 +181,7 @@ const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, c
                                     className="confirm-add-cow-data-button"
                                 >
                                     <DoneOutlinedIcon className="add-cow-data-button-icon"/>
-                                    {t('addWeightGainModal.confirmButton')}
+                                    {t('addMilkingModal.confirmButton')}
                                 </Button>
 
                                 <Button
@@ -166,7 +190,7 @@ const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, c
                                     className="cancel-add-cow-data-button"
                                 >
                                     <CloseOutlinedIcon className="add-cow-data-button-icon"/>
-                                    {t('addWeightGainModal.cancelButton')}
+                                    {t('addMilkingModal.cancelButton')}
                                 </Button>
                             </Box>
                         </Box>
@@ -177,4 +201,4 @@ const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, c
     );
 }
 
-export default AddWeightGainModal;
+export default AddMilkingModal;

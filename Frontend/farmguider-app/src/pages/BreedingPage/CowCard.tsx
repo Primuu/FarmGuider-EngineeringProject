@@ -13,9 +13,9 @@ import ConfirmationDialog from "@/components/ConfirmationDialog/ConfirmationDial
 import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {deleteCow} from "@/services/cowService.ts";
-import AddMilkingModal from "@/pages/BreedingPage/modals/AddMilkingModal.tsx";
+import AddMilkingModal from "@/components/sharedModals/AddMilkingModal.tsx";
 import MilkingCreateDTO from "@/entities/MilkingCreateDTO.ts";
-import AddWeightGainModal from "@/pages/BreedingPage/modals/AddWeightGainModal.tsx";
+import AddWeightGainModal from "@/components/sharedModals/AddWeightGainModal.tsx";
 import WeightGainCreateDTO from "@/entities/WeightGainCreateDTO.ts";
 import {useNavigate} from "react-router-dom";
 import {COW_PAGE_WITH_ID} from "@/constants/ROUTER_URLS.ts";
@@ -118,7 +118,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
             </TableCell>
 
             <TableCell>
-                {nullReplaceLackOfData(cow.dateOfBirth.toString(), "-")}
+                {cow.dateOfBirth.toString()}
             </TableCell>
 
             <TableCell>
