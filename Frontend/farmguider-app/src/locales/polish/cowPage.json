@@ -27,5 +27,44 @@
       "dateOfBirthRequired": "Data urodzenia musi być podana",
       "dateOfBirthPastOrPresent": "Data urodzenia nie może być datą przyszłą"
     }
+  },
+  "milking": {
+    "details": "Informacje o Udojach",
+    "date": "Data Udoju",
+    "quantity": "Ilość",
+    "duration": "Czas",
+    "editing": "Edytowanie",
+    "deleting": "Usuwanie",
+    "noResults": "Brak wyników wyszukiwania",
+    "noResultsForGender": "Niedostępne dla tej płci",
+    "editButton": "Edytuj Udój",
+    "deleteButton": "Usuń Udój",
+    "deleteDialogTitle": "Usuwanie Udoju",
+    "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć ten udój?",
+    "deleteSuccessSnackbar": "Udój usunięty pomyślnie",
+    "deleteErrorSnackbar": "Coś poszło nie tak",
+    "milkingButton": "Dodaj Udój"
+  },
+  "editMilkingModal": {
+    "successSnackbar": "Udój zaktualizowano pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Edycja Udoju",
+    "dateOfMilking": "Data Udoju",
+    "milkQuantity": "Ilość Mleka (litry)",
+    "milkingDuration": "Czas Trwania Udoju",
+    "requirements": "Aby edytować udój, podaj datę udoju (nie może być wcześniejsza niż data urodzenia) i ilość mleka. Czas udoju jest opcjonalny.",
+    "confirmButton": "Edytuj",
+    "cancelButton": "Anuluj"
+  },
+  "addMilkingModal": {
+    "validation": {
+      "milkQuantityRange": "Ilość mleka musi znajdować się w zakresie od 0.000 do 999.999",
+      "milkQuantityNonNegative": "Ilość mleka nie może być ujemna",
+      "milkQuantityRequired": "Ilość mleka musi być podana",
+      "dateOfMilkingRequired": "Data udoju musi być podana",
+      "dateOfMilkingPastOrPresent": "Data udoju nie może być datą przyszłą",
+      "milkingDurationFormat": "Podaj czas w formacie minuty : sekundy",
+      "milkingDurationRange": "Podaj prawidłowy zakres czasu"
+    }
   }
 }

@@ -1,16 +1,7 @@
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {
-    Box,
-    Button,
-    FormControl,
-    FormHelperText,
-    InputLabel,
-    Select,
-    SelectChangeEvent,
-    TextField, Typography
-} from "@mui/material";
+import {Box, Button, FormControl, FormHelperText, InputLabel, Select, SelectChangeEvent, TextField, Typography} from "@mui/material";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";

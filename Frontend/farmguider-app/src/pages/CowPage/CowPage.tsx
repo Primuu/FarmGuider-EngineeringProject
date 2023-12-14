@@ -11,6 +11,9 @@ import CowDetails from "@/pages/CowPage/CowDetails.tsx";
 import enLocale from "date-fns/locale/en-US";
 import i18n from "i18next";
 import plLocale from "date-fns/locale/pl";
+import MilkingTable from "@/pages/CowPage/MilkingTable.tsx";
+import MilkingResponseDTO from "@/entities/MilkingResponseDTO.ts";
+import {getMilkings} from "@/services/milkingService.ts";
 
 const CowPage = () => {
     const {cowId} = useParams();
@@ -19,9 +22,11 @@ const CowPage = () => {
     const navigate = useNavigate();
     const [locale, setLocale] = useState(enLocale);
     const [cow, setCow] = useState<CowResponseDTO>();
+    const [milkingList, setMilkingList] = useState<MilkingResponseDTO[]>([]);
 
     useEffect(() => {
         fetchAndSetCow();
+        fetchAndSetMilkingList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cowId]);
 
@@ -45,6 +50,20 @@ const CowPage = () => {
         }
     }
 
+    const fetchAndSetMilkingList = () => {
+        if (cowId) {
+            getMilkings(parseInt(cowId))
+                .then(data => {
+                    setMilkingList(data);
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+    }
+
     if (loading) return <LoadingScreen />;
     if (!cow) return null;
 
@@ -59,6 +78,14 @@ const CowPage = () => {
                         cow={cow}
                         setCow={setCow}
                         locale={locale}
+                    />
+
+                    <MilkingTable
+                        cow={cow}
+                        milkingList={milkingList}
+                        setMilkingList={setMilkingList}
+                        locale={locale}
+                        onMilkingAdded={fetchAndSetMilkingList}
                     />
                 </div>
                 <div className="cows-charts-data-container">

@@ -5,41 +5,41 @@ import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
-import '@/pages/BreedingPage/modals/cowDataModal.css';
+import '@/pages/CowPage/modals/cowDataModal.css';
 import useValidation from "@/hooks/useValidation.ts";
 import {MilkingValues, MINUTES_SECONDS_REGEX, validateAddMilking} from "@/utils/cowValidators.ts";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DateTimePicker} from "@mui/x-date-pickers";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
-import plLocale from 'date-fns/locale/pl';
-import enLocale from 'date-fns/locale/en-US';
 import i18n from "i18next";
 import MilkingCreateDTO from "@/entities/MilkingCreateDTO.ts";
-import {createMilking} from "@/services/milkingService.ts";
+import {updateMilking} from "@/services/milkingService.ts";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
-import {removeTimezoneAndSeconds} from "@/utils/dateUtils.ts";
+import {convertToMinuteAndSecondsFormat, convertToSeconds, removeTimezoneAndSeconds} from "@/utils/dateUtils.ts";
+import MilkingResponseDTO from "@/entities/MilkingResponseDTO.ts";
 
-type AddMilkingModalProps = {
+type EditMilkingModalProps = {
     open: boolean;
     onClose: () => void;
+    milking: MilkingResponseDTO;
+    onMilkingUpdated: (milkingResponseDTO: MilkingResponseDTO) => void;
+    locale: Locale;
     cow: CowResponseDTO;
-    onMilkingAdded: (milkingCreateDTO: MilkingCreateDTO) => void;
 }
 
-const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, onMilkingAdded}) => {
-    const [dateOfMilking, setDateOfMilking] = useState<Date | null>(new Date());
-    const [milkQuantity, setMilkQuantity] = useState<number | null>(null);
-    const [milkingDuration, setMilkingDuration] = useState<string | null>(null);
-    const {t} = useTranslation('breedingPage');
+const EditMilkingModal: React.FC<EditMilkingModalProps> = ({open, onClose, milking, onMilkingUpdated, locale, cow}) => {
+    const [dateOfMilking, setDateOfMilking] = useState<Date | null>(new Date(milking.dateOfMilking));
+    const [milkQuantity, setMilkQuantity] = useState<number | null>(milking.milkQuantity);
+    const [milkingDuration, setMilkingDuration] = useState<string | null>(convertToMinuteAndSecondsFormat(milking.milkingDuration));
+    const {t} = useTranslation('cowPage');
     const {errors, validate, setErrors} = useValidation<MilkingValues>(validateAddMilking);
     const {enqueueSnackbar} = useSnackbar();
-    const [locale, setLocale] = useState(enLocale);
 
     useEffect(() => {
-        if (i18n.language === 'pl') setLocale(plLocale);
-        if (i18n.language === 'en') setLocale(enLocale);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [i18n.language]);
+        setMilkingDuration(convertToMinuteAndSecondsFormat(milking.milkingDuration));
+        setMilkQuantity(milking.milkQuantity);
+        setDateOfMilking(new Date(milking.dateOfMilking));
+    }, [milking]);
 
     const handleDateChange = (date: Date | null) => {
         setDateOfMilking(date);
@@ -59,9 +59,9 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
     };
 
     const cancel = () => {
-        setMilkingDuration(null);
-        setMilkQuantity(null);
-        setDateOfMilking(new Date());
+        setMilkingDuration(convertToMinuteAndSecondsFormat(milking.milkingDuration));
+        setMilkQuantity(milking.milkQuantity);
+        setDateOfMilking(new Date(milking.dateOfMilking));
         setErrors({});
         onClose();
     }
@@ -78,22 +78,17 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
             milkingDuration: milkingDurationInSeconds
         };
 
-        if (cow.cowId) {
-            createMilking(cow.cowId, milkingCreateDTO)
-                .then(() => {
+        if (milking.milkingId) {
+            updateMilking(milking.milkingId, milkingCreateDTO)
+                .then(data => {
                     cancel();
-                    onMilkingAdded(milkingCreateDTO);
-                    enqueueSnackbar(t('addMilkingModal.successSnackbar'), SnackbarSuccess);
+                    onMilkingUpdated(data);
+                    enqueueSnackbar(t('editMilkingModal.successSnackbar'), SnackbarSuccess);
                 })
                 .catch(() => {
-                    enqueueSnackbar(t('addCowModal.errorSnackbar'), SnackbarError);
+                    enqueueSnackbar(t('editMilkingModal.errorSnackbar'), SnackbarError);
                 })
         }
-    };
-
-    const convertToSeconds = (time: string) => {
-        const [minutes, seconds] = time.split(':').map(Number);
-        return (minutes * 60) + seconds;
     };
 
     return (
@@ -103,29 +98,25 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
             closeAfterTransition
         >
             <Fade in={open}>
-                <Box className="add-cow-data-modal-box">
+                <Box className="edit-cow-data-modal-box">
                     <Slide
                         direction="right"
                         in={open}
                         mountOnEnter
                         unmountOnExit
                     >
-                        <Box component="form" onSubmit={handleSubmit} className="add-cow-data-form">
-                            <Typography className="add-cow-data-header">
-                                {t('addMilkingModal.header')}
+                        <Box component="form" onSubmit={handleSubmit} className="edit-cow-data-form">
+                            <Typography className="edit-cow-data-header">
+                                {t('editMilkingModal.header')}
                             </Typography>
 
-                            <Typography className="add-cow-data-sub-header">
-                                {t('addMilkingModal.subHeader')}
-                            </Typography>
-
-                            <div className="add-cow-data-form-container">
-                                <div className="date-time-picker">
+                            <div className="edit-cow-data-form-container">
+                                <div className="edit-cow-date-time-picker">
                                     <LocalizationProvider
                                         dateAdapter={AdapterDateFns}
                                         adapterLocale={locale}>
                                         <DateTimePicker
-                                            label={t('addMilkingModal.dateOfMilking')}
+                                            label={t('editMilkingModal.dateOfMilking')}
                                             value={dateOfMilking}
                                             onChange={handleDateChange}
                                             minDate={new Date(cow.dateOfBirth)}
@@ -138,17 +129,16 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
                                                     error: !!errors.dateOfMilking,
                                                     helperText: errors.dateOfMilking
                                                 }
-                                            }
-                                            }
+                                            }}
                                         />
                                     </LocalizationProvider>
                                 </div>
 
-                                <div className="add-cow-data-inputs">
+                                <div className="edit-cow-data-inputs">
                                     <TextField
                                         margin="normal"
                                         required
-                                        label={t('addMilkingModal.milkQuantity')}
+                                        label={t('editMilkingModal.milkQuantity')}
                                         type="number"
                                         inputProps={{
                                             step: "0.001",
@@ -164,7 +154,7 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
 
                                     <TextField
                                         margin="normal"
-                                        label={t('addMilkingModal.milkingDuration')}
+                                        label={t('editMilkingModal.milkingDuration')}
                                         type="text"
                                         value={milkingDuration || ''}
                                         onChange={handleMilkingDurationChange}
@@ -175,27 +165,27 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
                                 </div>
                             </div>
 
-                            <Typography className="add-cow-data-req">
-                                {t('addMilkingModal.requirements')}
+                            <Typography className="edit-cow-data-req">
+                                {t('editMilkingModal.requirements')}
                             </Typography>
 
-                            <Box className="add-cow-data-button-group">
+                            <Box className="edit-cow-data-button-group">
                                 <Button
                                     type="submit"
                                     variant="contained"
-                                    className="confirm-add-cow-data-button"
+                                    className="confirm-edit-cow-data-button"
                                 >
-                                    <DoneOutlinedIcon className="add-cow-data-button-icon"/>
-                                    {t('addMilkingModal.confirmButton')}
+                                    <DoneOutlinedIcon className="edit-cow-data-button-icon"/>
+                                    {t('editMilkingModal.confirmButton')}
                                 </Button>
 
                                 <Button
                                     variant="outlined"
                                     onClick={cancel}
-                                    className="cancel-add-cow-data-button"
+                                    className="cancel-edit-cow-data-button"
                                 >
-                                    <CloseOutlinedIcon className="add-cow-data-button-icon"/>
-                                    {t('addMilkingModal.cancelButton')}
+                                    <CloseOutlinedIcon className="edit-cow-data-button-icon"/>
+                                    {t('editMilkingModal.cancelButton')}
                                 </Button>
                             </Box>
                         </Box>
@@ -206,4 +196,4 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
     );
 }
 
-export default AddMilkingModal;
+export default EditMilkingModal;
