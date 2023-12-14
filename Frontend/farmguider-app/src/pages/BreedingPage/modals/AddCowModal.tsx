@@ -180,7 +180,7 @@ const AddCowModal: React.FC<AddCowModalProps> = ({open, onClose, breedingId, onC
                                                 onChange={handleDateChange}
                                                 maxDate={new Date()}
                                                 disableFuture
-                                                openTo="day"
+                                                openTo="year"
                                                 views={['year', 'month', 'day']}
                                                 desktopModeMediaQuery="@media (min-width:600px)"
                                                 slotProps={{
