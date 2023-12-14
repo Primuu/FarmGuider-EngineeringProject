@@ -1,3 +1,30 @@
 {
-  "header": "Cow Details"
+  "header": "Cow Details",
+  "editCow": {
+    "successSnackbar": "Cow's data updated successfully",
+    "errorSnackbar": "Something went wrong",
+    "earTagNumber": "Ear Tag Number",
+    "cowName": "Cow Name",
+    "calendarLabel": "Birth Date",
+    "weightConflict": "Weight measurements conflict with new date of birth",
+    "lactationPeriodConflict": "Lactation periods conflict with new date of birth",
+    "milkingConflict": "Milking conflict with new date of birth",
+    "genderConflict": "New gender conflicts with gender-specific data",
+    "selectGender": "Select Gender",
+    "female": "Cow",
+    "male": "Bull",
+    "saveButton": "Save",
+    "cancelButton": "Cancel",
+    "editButton": "Edit"
+  },
+  "addCowModal": {
+    "validation": {
+      "cowNameLength": "Cow name can contain a maximum of 45 characters",
+      "earTagNumberRequired": "Ear tag number must be filled in",
+      "earTagNumberLength": "Ear tag number must contain exactly 14 characters",
+      "earTagNumberPattern": "Ear tag number must contain 12 digits preceded by 2 letters",
+      "dateOfBirthRequired": "Birth date field must be filled in",
+      "dateOfBirthPastOrPresent": "Birth date cannot be a future date"
+    }
+  }
 }

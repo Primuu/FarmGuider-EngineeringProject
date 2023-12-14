@@ -1,0 +1,93 @@
+.edit-cow-container {
+    background-color: #F8F8F8;
+    border: 2px solid #2CB178;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.edit-cow-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-cow-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.edit-cow-text-field {
+    width: 50%;
+}
+
+.edit-cow-selector {
+    width: 50%;
+    min-width: 120px;
+}
+
+.edit-cow-calendar {
+    width: 50%;
+    min-width: 150px;
+}
+
+.edit-cow-gender-icon {
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.edit-cow-inputs .edit-cow-gender-icon {
+    font-size: 20px;
+}
+
+.cow-details-button-group {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.cow-edit-button {
+    width: 120px;
+}
+
+.cow-edit-button .cow-edit-button-icon {
+    font-size: 18px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+@media (max-width: 699px) {
+    .edit-cow-container {
+        padding: 20px;
+    }
+
+    .edit-cow-inputs {
+        flex-direction: column;
+        justify-content: unset;
+    }
+
+    .edit-cow-text-field {
+        width: 100%;
+    }
+
+    .edit-cow-selector {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .edit-cow-calendar {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .cow-details-button-group {
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .cow-edit-button {
+        width: 100%;
+    }
+}

@@ -1,3 +1,30 @@
 {
-  "header": "Informacje o Krowie"
+  "header": "Informacje o Krowie",
+  "editCow": {
+    "successSnackbar": "Dane krowy zaktualizowano pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "earTagNumber": "Numer Kolczyka",
+    "cowName": "Imię Krowy",
+    "calendarLabel": "Data Urodzenia",
+    "weightConflict": "Pomiary wagi kolidują z nową datą urodzenia",
+    "lactationPeriodConflict": "Okresy laktacyjne kolidują z nową datą urodzenia",
+    "milkingConflict": "Udoje kolidują z nową datą urodzenia",
+    "genderConflict": "Nowa płeć koliduje z danymi związanymi z płcią",
+    "selectGender": "Wybierz Płeć",
+    "female": "Krowa",
+    "male": "Byk",
+    "saveButton": "Zapisz",
+    "cancelButton": "Anuluj",
+    "editButton": "Edytuj"
+  },
+  "addCowModal": {
+    "validation": {
+      "cowNameLength": "Imię krowy może zawierać maksymalnie 45 znaków",
+      "earTagNumberRequired": "Numer kolczyka musi być podany",
+      "earTagNumberLength" : "Numer kolczyka musi zawierać dokładnie 14 znaków",
+      "earTagNumberPattern": "Numer kolczyka musi zawierać 12 cyfr poprzedzonych 2 literami",
+      "dateOfBirthRequired": "Data urodzenia musi być podana",
+      "dateOfBirthPastOrPresent": "Data urodzenia nie może być datą przyszłą"
+    }
+  }
 }
