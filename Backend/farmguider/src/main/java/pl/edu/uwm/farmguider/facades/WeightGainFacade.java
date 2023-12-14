@@ -57,6 +57,7 @@ public class WeightGainFacade {
         return weightGains
                 .stream()
                 .map(WeightGainMapper::mapToWeightGainResponseDTO)
+                .sorted(Comparator.comparing(WeightGainResponseDTO::measurementDate).reversed())
                 .toList();
 
     }

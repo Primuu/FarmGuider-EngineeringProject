@@ -62,6 +62,7 @@ public class MilkingFacade {
         return milkings
                 .stream()
                 .map(MilkingMapper::mapToMilkingResponseDTO)
+                .sorted(Comparator.comparing(MilkingResponseDTO::dateOfMilking).reversed())
                 .toList();
     }
 
