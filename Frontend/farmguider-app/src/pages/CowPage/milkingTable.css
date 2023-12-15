@@ -1,0 +1,90 @@
+.cows-data-container .milking-details {
+    font-style: italic;
+    margin-left: 10px;
+    color: #5b5b5b;
+    font-size: 14px;
+}
+
+.milking-table-container {
+    background-color: #F8F8F8;
+    border: 2px solid #2CB178;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.milking-table-container .m-th {
+    background-color: #F5F5F5;
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+}
+
+.milking-table-body-container {
+    overflow-y: auto;
+    max-height: 18vh;
+}
+
+.milking-no-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9B9B9B;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.milking-table-button-container {
+    padding: 5px 15px 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.milking-table-button-container .add-milking-button {
+    font-size: 12px;
+}
+
+.add-milking-button .add-milking-icon {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.milking-cell {
+    font-size: 12px;
+    text-align: center;
+}
+
+.milking-table-button {
+    min-width: 30px !important;
+}
+
+.milking-table-button .milking-table-icon {
+    font-size: 14px;
+}
+
+@media (max-width: 699px) {
+    .cows-data-container .milking-details {
+        font-size: 12px;
+    }
+
+    .milking-table-container .m-th {
+        padding: 5px 3px;
+    }
+
+    .milking-table-body-container {
+        max-height: 45vh;
+    }
+
+    .add-milking-button .add-milking-icon {
+        font-size: 14px;
+    }
+
+    .milking-table-button {
+        width: 8px;
+    }
+
+    .milking-table-button .milking-table-icon {
+        font-size: 16px;
+    }
+}

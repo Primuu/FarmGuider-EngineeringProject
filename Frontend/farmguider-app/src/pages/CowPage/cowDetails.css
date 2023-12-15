@@ -1,14 +1,15 @@
-.edit-cow-details {
+.cows-data-container .edit-cow-details {
     font-style: italic;
     margin-left: 10px;
     color: #5b5b5b;
+    font-size: 14px;
 }
 
 .edit-cow-container {
     background-color: #F8F8F8;
     border: 2px solid #2CB178;
     border-radius: 16px;
-    padding: 20px;
+    padding: 15px 15px 10px;
 }
 
 .edit-cow-form {
@@ -47,19 +48,19 @@
 }
 
 .cow-details-button-group {
-    margin-top: 5px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     gap: 15px;
 }
 
-.cow-edit-button {
+.cow-details-button-group .cow-edit-button {
     width: 120px;
+    font-size: 12px;
 }
 
 .cow-edit-button .cow-edit-button-icon {
-    font-size: 18px;
+    font-size: 16px;
     vertical-align: middle;
     margin-right: 6px;
 }
@@ -70,7 +71,7 @@
     }
 
     .edit-cow-container {
-        padding: 20px;
+        padding: 15px;
     }
 
     .edit-cow-inputs {
@@ -97,7 +98,7 @@
         gap: 10px;
     }
 
-    .cow-edit-button {
+    .cow-details-button-group .cow-edit-button {
         width: 100%;
     }
 }

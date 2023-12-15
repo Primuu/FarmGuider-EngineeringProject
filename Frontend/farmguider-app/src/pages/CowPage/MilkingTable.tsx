@@ -6,6 +6,7 @@ import MilkingCard from "@/pages/CowPage/MilkingCard.tsx";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import AddMilkingModal from "@/components/sharedModals/AddMilkingModal.tsx";
 import {LuMilk} from "react-icons/lu";
+import '@/pages/CowPage/milkingTable.css';
 
 type MilkingTableProps = {
     cow: CowResponseDTO;
@@ -77,19 +78,20 @@ const MilkingTable: React.FC<MilkingTableProps> = ({cow, milkingList, setMilking
                             </Table>
                         </TableContainer>
                     </div>
+                    <div className="milking-table-button-container">
+                        <Button
+                            className="add-milking-button"
+                            variant="contained"
+                            color="primary"
+                            disabled={cow.gender !== "FEMALE"}
+                            onClick={handleOpenAddMilkingModal}
+                        >
+                            <LuMilk className="add-milking-icon"/>
+                            {t('milking.milkingButton')}
+                        </Button>
+                    </div>
                 </div>
             </div>
-            <Button
-                className="add-milking-button"
-                variant="contained"
-                color="primary"
-                disabled={cow.gender !== "FEMALE"}
-                onClick={handleOpenAddMilkingModal}
-            >
-                <LuMilk className="add-milking-icon"/>
-                {t('milking.milkingButton')}
-            </Button>
-
             <AddMilkingModal
                 open={openAddMilkingModal}
                 onClose={handleCloseAddMilkingModal}

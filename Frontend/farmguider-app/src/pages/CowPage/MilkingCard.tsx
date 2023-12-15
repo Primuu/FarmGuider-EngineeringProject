@@ -47,23 +47,19 @@ const MilkingCard: React.FC<MilkingCardProps> = ({milking, onMilkingDeleted, onM
 
     return (
         <TableRow key={milking.milkingId}>
-            <TableCell>
+            <TableCell className="milking-cell">
                 {formatDateTime(milking.dateOfMilking)}
             </TableCell>
 
-            <TableCell>
-                <div className="milking-center-cell">
-                    {milking.milkQuantity.toString() + " l"}
-                </div>
+            <TableCell className="milking-cell">
+                {milking.milkQuantity.toString() + " l"}
             </TableCell>
 
-            <TableCell>
-                <div className="milking-center-cell">
-                    {formatTimeInSeconds(milking.milkingDuration)}
-                </div>
+            <TableCell className="milking-cell">
+                {formatTimeInSeconds(milking.milkingDuration)}
             </TableCell>
 
-            <TableCell>
+            <TableCell className="milking-cell">
                 <Tooltip title={t('milking.editButton')}>
                     <Button
                         className="milking-table-button"
@@ -76,7 +72,7 @@ const MilkingCard: React.FC<MilkingCardProps> = ({milking, onMilkingDeleted, onM
                 </Tooltip>
             </TableCell>
 
-            <TableCell>
+            <TableCell className="milking-cell">
                 <Tooltip title={t('milking.deleteButton')}>
                     <Button
                         className="milking-table-button"
