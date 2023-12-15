@@ -50,7 +50,7 @@
     margin-right: 6px;
 }
 
-.milking-cell {
+.milking-table-body-container .milking-cell {
     font-size: 12px;
     text-align: center;
 }
@@ -80,7 +80,7 @@
         font-size: 14px;
     }
 
-    .milking-cell {
+    .milking-table-body-container .milking-cell {
         padding: 10px;
     }
 
