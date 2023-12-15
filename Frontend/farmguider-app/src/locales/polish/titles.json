@@ -1,5 +1,6 @@
 {
   "default": "FarmGuider",
   "profile": "Profil",
-  "breeding": "Hodowla"
+  "breeding": "Hodowla",
+  "cow": "Informacje o Krowie"
 }
