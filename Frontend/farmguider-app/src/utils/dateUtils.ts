@@ -24,6 +24,15 @@ export const formatDateTime = (givenDate: Date): string => {
     return `${formattedDate} ${formattedTime}`;
 }
 
+export const formatDate = (givenDate: Date): string => {
+    const date = new Date(givenDate);
+    return date.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+}
+
 export const formatTimeInSeconds = (seconds: number | null): string => {
     if (seconds == null) return '-';
 
