@@ -137,7 +137,7 @@ const AddWeightGainModal: React.FC<AddWeightGainModalProps> = ({open, onClose, c
                                             min: "0.000",
                                             max: "9999.999"
                                         }}
-                                        value={weight !== null && weight !== undefined ? weight : ''}
+                                        value={weight !== null && weight !== undefined ? weight.toString() : ''}
                                         placeholder={"0,000"}
                                         onChange={handleWeightChange}
                                         error={!!errors.weight}
