@@ -80,8 +80,12 @@
         font-size: 14px;
     }
 
+    .milking-cell {
+        padding: 10px;
+    }
+
     .milking-table-button {
-        width: 8px;
+        width: 40px;
     }
 
     .milking-table-button .milking-table-icon {
