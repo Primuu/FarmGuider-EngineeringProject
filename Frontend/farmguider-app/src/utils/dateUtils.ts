@@ -27,17 +27,15 @@ export const formatDateTime = (givenDate: Date): string => {
 export const formatTimeInSeconds = (seconds: number | null): string => {
     if (seconds == null) return '-';
 
-    const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
 
-    if (hours == 0 && minutes == 0 && secs == 0) return '-';
+    if (minutes == 0 && secs == 0) return '-';
 
-    const paddedHours = String(hours).padStart(2, '0');
     const paddedMinutes = String(minutes).padStart(2, '0');
     const paddedSeconds = String(secs).padStart(2, '0');
 
-    return `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
+    return `${paddedMinutes}:${paddedSeconds}`;
 }
 
 export const convertToSeconds = (time: string): number => {
