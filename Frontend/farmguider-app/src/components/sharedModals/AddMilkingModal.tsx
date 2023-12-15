@@ -150,7 +150,7 @@ const AddMilkingModal: React.FC<AddMilkingModalProps> = ({open, onClose, cow, on
                                             min: "0.000",
                                             max: "999.999"
                                         }}
-                                        value={milkQuantity !== null && milkQuantity !== undefined ? milkQuantity : ''}
+                                        value={milkQuantity !== null && milkQuantity !== undefined ? milkQuantity.toString() : ''}
                                         placeholder={"0,000"}
                                         onChange={handleMilkQuantityChange}
                                         error={!!errors.milkQuantity}

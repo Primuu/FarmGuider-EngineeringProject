@@ -95,7 +95,7 @@
     "successSnackbar": "Udój dodano pomyślnie",
     "errorSnackbar": "Coś poszło nie tak",
     "header": "Dodawanie Udoju",
-    "subHeader": "Udój zostanie dodane do aktualnie wybranej krowy",
+    "subHeader": "Udój zostanie dodany do aktualnie wybranej krowy",
     "requirements": "Aby dodać udój, podaj datę udoju (nie może być wcześniejsza niż data urodzenia) i ilość mleka. Czas udoju jest opcjonalny.",
     "confirmButton": "Dodaj Udój",
     "cancelButton": "Anuluj",
