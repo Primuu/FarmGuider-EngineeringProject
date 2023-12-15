@@ -14,6 +14,9 @@ import plLocale from "date-fns/locale/pl";
 import MilkingTable from "@/pages/CowPage/MilkingTable.tsx";
 import MilkingResponseDTO from "@/entities/MilkingResponseDTO.ts";
 import {getMilkings} from "@/services/milkingService.ts";
+import WeightGainTable from "@/pages/CowPage/WeightGainTable.tsx";
+import WeightGainResponseDTO from "@/entities/WeightGainResponseDTO.ts";
+import {getWeightGains} from "@/services/weightGainService.ts";
 
 const CowPage = () => {
     const {cowId} = useParams();
@@ -23,10 +26,12 @@ const CowPage = () => {
     const [locale, setLocale] = useState(enLocale);
     const [cow, setCow] = useState<CowResponseDTO>();
     const [milkingList, setMilkingList] = useState<MilkingResponseDTO[]>([]);
+    const [weightGainList, setWeightGainList] = useState<WeightGainResponseDTO[]>([]);
 
     useEffect(() => {
         fetchAndSetCow();
         fetchAndSetMilkingList();
+        fetchAndSetWeightGainList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cowId]);
 
@@ -55,7 +60,19 @@ const CowPage = () => {
             getMilkings(parseInt(cowId))
                 .then(data => {
                     setMilkingList(data);
+                })
+                .catch(() => {
                     setLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+    }
+
+    const fetchAndSetWeightGainList = () => {
+        if (cowId) {
+            getWeightGains(parseInt(cowId))
+                .then(data => {
+                    setWeightGainList(data);
                 })
                 .catch(() => {
                     setLoading(false);
@@ -86,6 +103,14 @@ const CowPage = () => {
                         setMilkingList={setMilkingList}
                         locale={locale}
                         onMilkingAdded={fetchAndSetMilkingList}
+                    />
+
+                    <WeightGainTable
+                        cow={cow}
+                        weightGainList={weightGainList}
+                        setWeightGainList={setWeightGainList}
+                        locale={locale}
+                        onWeightGainAdded={fetchAndSetWeightGainList}
                     />
                 </div>
                 <div className="cows-charts-data-container">

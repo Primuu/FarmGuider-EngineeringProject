@@ -66,5 +66,39 @@
       "milkingDurationFormat": "Podaj czas w formacie minuty : sekundy",
       "milkingDurationRange": "Podaj prawidłowy zakres czasu"
     }
+  },
+  "weightGain": {
+    "details": "Informacje o Pomiarach Wagi",
+    "date": "Data Ważenia",
+    "weight": "Waga",
+    "editing": "Edytowanie",
+    "deleting": "Usuwanie",
+    "noResults": "Nie dodano jeszcze żadnego pomiaru wagi",
+    "weightGainButton": "Dodaj Pomiar",
+    "deleteSuccessSnackbar": "Pomiar wagi usunięty pomyślnie",
+    "deleteErrorSnackbar": "Coś poszło nie tak",
+    "editButton": "Edytuj Pomiar Wagi",
+    "deleteButton": "Usuń Pomiar Wagi",
+    "deleteDialogTitle": "Usuwanie Pomiaru Wagi",
+    "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć ten pomiar wagi?"
+  },
+  "editWeightGainModal": {
+    "successSnackbar": "Pomiar wagi zaktualizowano pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Edycja Pomiaru Wagi",
+    "measurementDate": "Data Pomiaru",
+    "weight": "Waga (kilogramy)",
+    "requirements": "Aby edytować pomiar wagi, podaj datę ważenia (nie może być wcześniejsza niż data urodzenia) i wagę",
+    "confirmButton": "Edytuj",
+    "cancelButton": "Anuluj"
+  },
+  "addWeightGainModal": {
+    "validation": {
+      "weightRange": "Waga musi znajdować się w zakresie od 0.000 do 9999.999",
+      "weightNonNegative" : "Waga nie może być ujemna",
+      "weightRequired": "Waga musi być podana",
+      "measurementDateRequired": "Data pomiaru musi być podana",
+      "measurementDatePastOrPresent": "Data pomiaru nie może być datą przyszłą"
+    }
   }
 }

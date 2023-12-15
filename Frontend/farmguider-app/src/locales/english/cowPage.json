@@ -66,5 +66,39 @@
       "milkingDurationFormat": "Provide time in format minutes : seconds",
       "milkingDurationRange": "Provide a valid time range"
     }
+  },
+  "weightGain": {
+    "details": "Weigh Measurement Information",
+    "date": "Measurement Date",
+    "weight": "Weight",
+    "editing": "Editing",
+    "deleting": "Deleting",
+    "noResults": "No weight measurements have been added yet",
+    "weightGainButton": "Add Measurement",
+    "deleteSuccessSnackbar": "Weight measurement deleted successfully",
+    "deleteErrorSnackbar": "Something went wrong",
+    "editButton": "Edit Weight Measurement",
+    "deleteButton": "Delete Weight Measurement",
+    "deleteDialogTitle": "Deleting Weight Measurement",
+    "deleteDialogMessage": "Are you sure you want to delete this weight measurement?"
+  },
+  "editWeightGainModal": {
+    "successSnackbar": "Weight measurement updated successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Editing Weight Measurement",
+    "measurementDate": "Measurement Date",
+    "weight": "Weight (kilograms)",
+    "requirements": "To edit a weight measurement, provide the measurement date (it cannot be earlier than the date of birth) and weight",
+    "confirmButton": "Edit",
+    "cancelButton": "Cancel"
+  },
+  "addWeightGainModal": {
+    "validation": {
+      "weightRange": "Weight must be within the range of 0.000 to 999.999",
+      "weightNonNegative" : "Weight cannot be negative",
+      "weightRequired": "Weight must be filled in",
+      "measurementDateRequired": "Date of measurement field must be filled in",
+      "measurementDatePastOrPresent": "Date of measurement cannot be a future date"
+    }
   }
 }
