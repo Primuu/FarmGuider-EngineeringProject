@@ -95,7 +95,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
 
     return (
         <TableRow key={cow.cowId}>
-            <TableCell>
+            <TableCell className="center-cell">
                 {cow.gender === "FEMALE" ? (
                     <Tooltip title={t('cowResults.femaleTooltip')}>
                         <FemaleIcon/>
@@ -107,33 +107,27 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
                 )}
             </TableCell>
 
-            <TableCell>
+            <TableCell className="center-cell">
                 {cow.earTagNumber}
             </TableCell>
 
-            <TableCell>
-                <div className="center-cell">
-                    {nullReplaceLackOfData(cow.cowName, "-")}
-                </div>
+            <TableCell className="center-cell">
+                {nullReplaceLackOfData(cow.cowName, "-")}
             </TableCell>
 
-            <TableCell>
+            <TableCell className="center-cell">
                 {cow.dateOfBirth.toString()}
             </TableCell>
 
-            <TableCell>
-                <div className="center-cell">
-                    {nullReplaceLackOfData(cow.currentWeight, "-")} {cow.currentWeight && " kg"}
-                </div>
+            <TableCell className="center-cell">
+                {nullReplaceLackOfData(cow.currentWeight, "-")} {cow.currentWeight && " kg"}
             </TableCell>
 
-            <TableCell>
-                <div className="center-cell">
-                    {nullReplaceLackOfData(cow.latestMilkingQuantity, "-")} {cow.latestMilkingQuantity && " l"}
-                </div>
+            <TableCell className="center-cell">
+                {nullReplaceLackOfData(cow.latestMilkingQuantity, "-")} {cow.latestMilkingQuantity && " l"}
             </TableCell>
 
-            <TableCell>
+            <TableCell className="center-cell">
                 <Tooltip
                     title={cow.gender === "FEMALE"
                         ? t('cowResults.milkingButton')
@@ -153,7 +147,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
                 </Tooltip>
             </TableCell>
 
-            <TableCell>
+            <TableCell className="center-cell">
                 <Tooltip title={t('cowResults.weightingButton')}>
                     <Button
                         className="table-button"
@@ -166,7 +160,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
                 </Tooltip>
             </TableCell>
 
-            <TableCell>
+            <TableCell className="center-cell">
                 <Tooltip title={t('cowResults.detailsButton')}>
                     <Button
                         className="table-button"
@@ -179,7 +173,7 @@ const CowCard: React.FC<CowCardProps> = ({cow, onCowDeleted, onCowUpdated}) => {
                 </Tooltip>
             </TableCell>
 
-            <TableCell>
+            <TableCell className="center-cell">
                 <Tooltip title={t('cowResults.deletingButton')}>
                     <Button
                         className="table-button"

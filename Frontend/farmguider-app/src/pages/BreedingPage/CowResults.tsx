@@ -72,7 +72,7 @@ const CowResults: React.FC<CowResultsProps> = (
                                     )))
                                 : (
                                     <TableRow>
-                                        <TableCell colSpan={10}>
+                                        <TableCell colSpan={10} className="no-results-cell">
                                             <Typography className="no-results">
                                                 {t('cowResults.noResults')}
                                             </Typography>

@@ -28,13 +28,12 @@
 .breeding-content-button-group {
     display: flex;
     flex-direction: row;
-    padding: 20px;
-    padding-bottom: 15px;
+    padding: 20px 20px 15px;
     gap: 20px;
 }
 
 .breeding-content-selector-container {
-    padding: 20px;
+    padding: 20px 20px 15px;
     width: 100%;
 }
 
@@ -83,6 +82,22 @@
 
     .breeding-content-button-group .breeding-content-add-cow-button {
         width: 100%;
+    }
+
+    .breeding-content-tools-container .breeding-content-tools-button {
+        height: 30px;
+    }
+
+    .breeding-content-tools-button .breeding-content-tools-icon{
+        font-size: 20px;
+    }
+
+    .breeding-content-button-group .breeding-content-add-cow-button {
+        height: 30px;
+    }
+
+    .breeding-content-add-cow-button .breeding-content-add-cow-icon {
+        font-size: 24px;
     }
 }
 

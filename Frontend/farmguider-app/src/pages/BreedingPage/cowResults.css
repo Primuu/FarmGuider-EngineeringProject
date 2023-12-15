@@ -10,6 +10,9 @@
 .cows-table-container .th-l,
 .cows-table-container .th-r {
     background-color: #F5F5F5;
+    font-size: 14px;
+    /*padding: 10px;*/
+    text-align: center;
 }
 
 .cows-table-container .th-l {
@@ -22,16 +25,20 @@
 
 .table-body-container {
     overflow-y: auto;
-    max-height: 58vh;
+    max-height: 56vh;
+}
+
+.table-body-container .no-results-cell {
+    border: none;
 }
 
 .no-results {
     display: flex;
-    height: 50vh;
     align-items: center;
     justify-content: center;
     color: #9B9B9B;
     font-style: italic;
+    height: 40vh;
 }
 
 .cows-paginator {
@@ -39,10 +46,8 @@
     align-self: center;
 }
 
-.center-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.table-body-container .center-cell {
+    text-align: center;
 }
 
 .table-button {
@@ -55,7 +60,39 @@
 
 @media (max-width: 1510px) {
     .table-body-container {
-        max-height: 56vh;
+        max-height: 55vh;
+    }
+}
+
+@media (max-width: 1400px) {
+    .cows-table-container .th,
+    .cows-table-container .th-l,
+    .cows-table-container .th-r {
+        padding: 10px;
+    }
+
+    .table-body-container .center-cell {
+        padding: 15px;
+    }
+
+    .table-button {
+        width: 50px;
+    }
+
+    .table-button .table-icon {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 1240px) {
+    .cows-table-container .th,
+    .cows-table-container .th-l,
+    .cows-table-container .th-r {
+        padding: 5px;
+    }
+
+    .table-body-container .center-cell {
+        padding: 10px;
     }
 }
 
