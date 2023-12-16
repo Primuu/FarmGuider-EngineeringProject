@@ -106,5 +106,11 @@
       "measurementDateRequired": "Date of measurement field must be filled in",
       "measurementDatePastOrPresent": "Date of measurement cannot be a future date"
     }
+  },
+  "milkingChart": {
+    "details": "Cow's Milk Yield Chart",
+    "valueName": "Quantity",
+    "axisY": "Milk quantity (liters)",
+    "tooltipNullValue": "Not provided"
   }
 }

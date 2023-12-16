@@ -17,6 +17,7 @@ import {getMilkings} from "@/services/milkingService.ts";
 import WeightGainTable from "@/pages/CowPage/WeightGainTable.tsx";
 import WeightGainResponseDTO from "@/entities/WeightGainResponseDTO.ts";
 import {getWeightGains} from "@/services/weightGainService.ts";
+import MilkingChart from "@/pages/CowPage/MilkingChart.tsx";
 import {Button} from "@mui/material";
 import ConfirmationDialog from "@/components/ConfirmationDialog/ConfirmationDialog.tsx";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -150,7 +151,7 @@ const CowPage = () => {
                     </div>
                 </div>
                 <div className="cows-charts-data-container">
-
+                    <MilkingChart/>
                 </div>
             </div>
 

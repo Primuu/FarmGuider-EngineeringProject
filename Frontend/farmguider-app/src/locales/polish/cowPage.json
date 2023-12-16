@@ -106,5 +106,11 @@
       "measurementDateRequired": "Data pomiaru musi być podana",
       "measurementDatePastOrPresent": "Data pomiaru nie może być datą przyszłą"
     }
+  },
+  "milkingChart": {
+    "details": "Wykres Wydajności Mlecznej Krowy",
+    "valueName": "Ilość",
+    "axisY": "Ilość mleka (litry)",
+    "tooltipNullValue": "Nie wprowadzono"
   }
 }

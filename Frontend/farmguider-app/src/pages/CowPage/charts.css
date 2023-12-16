@@ -1,0 +1,17 @@
+.cows-charts-data-container .chart-details {
+    font-style: italic;
+    margin-left: 10px;
+    color: #5b5b5b;
+    font-size: 14px;
+}
+
+.chart-container {
+    background-color: #F8F8F8;
+    border: 2px solid #2CB178;
+    border-radius: 16px;
+    padding: 15px 15px 10px;
+}
+
+.chartGrid {
+    stroke: rgb(228, 225, 225);
+}
