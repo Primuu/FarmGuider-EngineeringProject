@@ -112,7 +112,9 @@
     "valueName": "Ilość",
     "axisY": "Ilość mleka (litry)",
     "tooltipNullValue": "Nie wprowadzono",
-    "addLactationButton": "Dodaj Okres Laktacji"
+    "addLactationButton": "Dodaj Okres Laktacji",
+    "noResultsForGender": "Niedostępne dla tej płci",
+    "noResults": "Aby zacząć monitorować wydajność mleczną, utwórz okres laktacji"
   },
   "addLactationPeriodModal": {
     "successSnackbar": "Okres laktacji dodany pomyślnie",

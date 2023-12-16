@@ -10,14 +10,37 @@
     border: 2px solid #2CB178;
     border-radius: 16px;
     padding: 15px 15px 10px;
+    min-height: 35vh;
 }
 
 .chartGrid {
     stroke: rgb(228, 225, 225);
 }
 
+.no-results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    width: 100%;
+}
+
+.chart-no-results {
+    color: #9B9B9B;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.milking-chart-buttons {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
 .milking-chart-buttons .add-lactation-button {
     font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .add-lactation-button .add-lactation-icon{

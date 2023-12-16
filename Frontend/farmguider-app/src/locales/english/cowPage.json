@@ -112,7 +112,9 @@
     "valueName": "Quantity",
     "axisY": "Milk quantity (liters)",
     "tooltipNullValue": "Not provided",
-    "addLactationButton": "Add Lactation Period"
+    "addLactationButton": "Add Lactation Period",
+    "noResultsForGender": "Not available for this gender",
+    "noResults": "To start monitoring milk yield, create a lactation period"
   },
   "addLactationPeriodModal": {
     "successSnackbar": "Lactation period added successfully",

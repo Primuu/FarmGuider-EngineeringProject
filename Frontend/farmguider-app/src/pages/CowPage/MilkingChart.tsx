@@ -1,6 +1,5 @@
 import {Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 import '@/pages/CowPage/charts.css';
-import {Typography} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import theme from "@/styles/theme.ts";
@@ -31,63 +30,58 @@ const MilkingChart = () => {
 
     return (
         <div>
-            <Typography className="chart-details">
-                {t('milkingChart.details')}
-            </Typography>
-            <div className="chart-container">
-                <ResponsiveContainer width="100%" height={responsiveHeight}>
-                    <AreaChart
-                        data={processedData}
-                        margin={{top: 0, right: 20, left: 0, bottom: 0}}
-                    >
-                        <defs>
-                            <linearGradient id="value" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#2CB178" stopOpacity={0.9}/>
-                                <stop offset="95%" stopColor="#2CB178" stopOpacity={0.1}/>
-                            </linearGradient>
-                        </defs>
-                        <XAxis
-                            dataKey="date"
-                            stroke="#406064"
-                            fontSize="12"
-                            interval="preserveStartEnd"
-                            tickMargin={10}
-                            minTickGap={responsiveMinTickGap}
-                        />
-                        <YAxis
-                            label={{
-                                value: t('milkingChart.axisY'),
-                                angle: -90,
-                                position: 'insideLeft',
-                                fontSize: 14
-                        }}
-                            unit={" l"}
-                            fontSize="14"
-                        />
-                        <CartesianGrid strokeDasharray="3 3" className="chartGrid"/>
-                        <Tooltip
-                            filterNull={false}
-                            formatter={tooltipFormatter}
-                            separator=" "
-                        />
-                        <Legend
-                            verticalAlign="top"
-                            iconSize={16}
-                            iconType="plainline"
-                        />
-                        <Area
-                            type="monotone"
-                            dataKey="value"
-                            activeDot={{ stroke: '#406064', strokeWidth: 2, r: 4 }}
-                            name={valueName}
-                            stroke="#2CB178"
-                            strokeWidth={3}
-                            fillOpacity={1}
-                            fill="url(#value)"
-                        />
-                    </AreaChart>
-                </ResponsiveContainer>
-            </div>
+            <ResponsiveContainer width="100%" height={responsiveHeight}>
+                <AreaChart
+                    data={processedData}
+                    margin={{top: 0, right: 20, left: 0, bottom: 0}}
+                >
+                    <defs>
+                        <linearGradient id="value" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#2CB178" stopOpacity={0.9}/>
+                            <stop offset="95%" stopColor="#2CB178" stopOpacity={0.1}/>
+                        </linearGradient>
+                    </defs>
+                    <XAxis
+                        dataKey="date"
+                        stroke="#406064"
+                        fontSize="12"
+                        interval="preserveStartEnd"
+                        tickMargin={10}
+                        minTickGap={responsiveMinTickGap}
+                    />
+                    <YAxis
+                        label={{
+                            value: t('milkingChart.axisY'),
+                            angle: -90,
+                            position: 'insideLeft',
+                            fontSize: 14
+                    }}
+                        unit={" l"}
+                        fontSize="14"
+                    />
+                    <CartesianGrid strokeDasharray="3 3" className="chartGrid"/>
+                    <Tooltip
+                        filterNull={false}
+                        formatter={tooltipFormatter}
+                        separator=" "
+                    />
+                    <Legend
+                        verticalAlign="top"
+                        iconSize={16}
+                        iconType="plainline"
+                    />
+                    <Area
+                        type="monotone"
+                        dataKey="value"
+                        activeDot={{ stroke: '#406064', strokeWidth: 2, r: 4 }}
+                        name={valueName}
+                        stroke="#2CB178"
+                        strokeWidth={3}
+                        fillOpacity={1}
+                        fill="url(#value)"
+                    />
+                </AreaChart>
+            </ResponsiveContainer>
         </div>
     );
 }
