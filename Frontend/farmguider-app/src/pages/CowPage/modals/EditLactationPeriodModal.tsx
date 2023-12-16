@@ -15,7 +15,7 @@ import LactationPeriodCreateDTO from "@/entities/LactationPeriodCreateDTO.ts";
 import {updateLactationPeriod} from "@/services/lactationPeriodService.ts";
 import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
 import {LactationPeriodValues, validateLactationPeriod} from "@/utils/lactationPeriodValidators.ts";
-import {MAX_DATE, normalizeDate} from "@/utils/dateUtils.ts";
+import {isDateInLactationPeriods, normalizeDate} from "@/utils/dateUtils.ts";
 import {AxiosError} from "axios";
 import ErrorResponse from "@/entities/ErrorResponse.ts";
 
@@ -104,16 +104,6 @@ const EditLactationPeriodModal: React.FC<EditLactationPeriodModalProps> = (
                     }
                 })
         }
-    };
-
-    const isDateInLactationPeriods = (date: Date, lactationPeriods: LactationPeriodResponseDTO[]) => {
-        return lactationPeriods.some(period => {
-            const normalizedDate = normalizeDate(date)!;
-            const startDate = new Date(period.startDate);
-            const endDate = period.endDate ? new Date(period.endDate).setHours(23, 59, 59, 999) : MAX_DATE;
-
-            return normalizedDate >= startDate && normalizedDate <= endDate;
-        });
     };
 
     return (

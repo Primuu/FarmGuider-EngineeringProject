@@ -1,3 +1,5 @@
+import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
+
 export const MAX_DATE = new Date(8640000000000000);
 
 export const removeTimezoneAndSeconds = (date: Date) => {
@@ -79,3 +81,13 @@ export const convertToMinuteAndSecondsFormat = (seconds: number | null): string 
 
     return `${paddedMinutes}:${paddedSeconds}`;
 }
+
+export const isDateInLactationPeriods = (date: Date, lactationPeriods: LactationPeriodResponseDTO[]) => {
+    return lactationPeriods.some(period => {
+        const normalizedDate = normalizeDate(date)!;
+        const startDate = new Date(period.startDate);
+        const endDate = period.endDate ? new Date(period.endDate).setHours(23, 59, 59, 999) : MAX_DATE;
+
+        return normalizedDate >= startDate && normalizedDate <= endDate;
+    });
+};
