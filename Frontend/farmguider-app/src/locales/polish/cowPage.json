@@ -1,5 +1,11 @@
 {
   "header": "Informacje o Krowie",
+  "deleteCowButton": "Usuń Krowę",
+  "deleteCowDialogTitle": "Usuwanie Krowy",
+  "deleteCowDialogMessage1": "Czy jesteś pewny, że chcesz usunąć krowę z numerem kolczyka: ",
+  "deleteCowDialogMessage2": " i wszystkie informacje z nią związane?",
+  "deleteCowSuccessSnackbar": "Krowa usunięta pomyślnie",
+  "deleteCowErrorSnackbar": "Coś poszło nie tak",
   "editCow": {
     "details": "Informacje Podstawowe",
     "successSnackbar": "Dane krowy zaktualizowano pomyślnie",

@@ -1,5 +1,11 @@
 {
   "header": "Cow Details",
+  "deleteCowButton": "Delete Cow",
+  "deleteCowDialogTitle": "Deleting Cow",
+  "deleteCowDialogMessage1": "Are you sure you want to delete cow with ear tag number: ",
+  "deleteCowDialogMessage2": " and all information related to it?",
+  "deleteCowSuccessSnackbar": "Cow deleted successfully",
+  "deleteCowErrorSnackbar": "Something went wrong",
   "editCow": {
     "details": "Basic Information",
     "successSnackbar": "Cow's data updated successfully",

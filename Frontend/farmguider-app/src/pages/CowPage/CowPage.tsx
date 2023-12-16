@@ -3,8 +3,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
-import {NOT_FOUND_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
-import {getCow} from "@/services/cowService.ts";
+import {BREEDING_PAGE_URL, NOT_FOUND_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
+import {deleteCow, getCow} from "@/services/cowService.ts";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen.tsx";
 import CowDetails from "@/pages/CowPage/CowDetails.tsx";
@@ -17,6 +17,11 @@ import {getMilkings} from "@/services/milkingService.ts";
 import WeightGainTable from "@/pages/CowPage/WeightGainTable.tsx";
 import WeightGainResponseDTO from "@/entities/WeightGainResponseDTO.ts";
 import {getWeightGains} from "@/services/weightGainService.ts";
+import {Button} from "@mui/material";
+import ConfirmationDialog from "@/components/ConfirmationDialog/ConfirmationDialog.tsx";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
+import {useSnackbar} from "notistack";
 
 const CowPage = () => {
     const {cowId} = useParams();
@@ -27,6 +32,8 @@ const CowPage = () => {
     const [cow, setCow] = useState<CowResponseDTO>();
     const [milkingList, setMilkingList] = useState<MilkingResponseDTO[]>([]);
     const [weightGainList, setWeightGainList] = useState<WeightGainResponseDTO[]>([]);
+    const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
+    const {enqueueSnackbar} = useSnackbar();
 
     useEffect(() => {
         fetchAndSetCow();
@@ -81,7 +88,24 @@ const CowPage = () => {
         }
     }
 
-    if (loading) return <LoadingScreen />;
+    const handleDeleteCow = () => {
+        if (cowId) {
+            deleteCow(parseInt(cowId))
+                .then(() => {
+                    enqueueSnackbar(t('deleteCowSuccessSnackbar'), SnackbarSuccess);
+                    navigate(BREEDING_PAGE_URL, {replace: true});
+                })
+                .catch(() => {
+                    enqueueSnackbar(t('deleteCowErrorSnackbar'), SnackbarError);
+                });
+        }
+    };
+
+    const handleOpenConfirmationDialog = () => setOpenConfirmationDialog(true);
+
+    const handleCloseConfirmationDialog = () => setOpenConfirmationDialog(false);
+
+    if (loading) return <LoadingScreen/>;
     if (!cow) return null;
 
     return (
@@ -112,11 +136,31 @@ const CowPage = () => {
                         locale={locale}
                         onWeightGainAdded={fetchAndSetWeightGainList}
                     />
+
+                    <div className="cow-button-container">
+                        <Button
+                            className="delete-cow-button"
+                            variant="contained"
+                            onClick={handleOpenConfirmationDialog}
+                            color="secondary"
+                        >
+                            <DeleteIcon className="delete-cow-button-icon"/>
+                            {t('deleteCowButton')}
+                        </Button>
+                    </div>
                 </div>
                 <div className="cows-charts-data-container">
 
                 </div>
             </div>
+
+            <ConfirmationDialog
+                open={openConfirmationDialog}
+                onClose={handleCloseConfirmationDialog}
+                onConfirm={handleDeleteCow}
+                title={t('deleteCowDialogTitle')}
+                message={t('deleteCowDialogMessage1') + cow.earTagNumber + t('deleteCowDialogMessage2')}
+            />
         </div>
     )
 }
