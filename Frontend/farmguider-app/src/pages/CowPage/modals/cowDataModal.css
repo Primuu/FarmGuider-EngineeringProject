@@ -30,6 +30,14 @@
     color: #406064;
 }
 
+.edit-cow-data-modal-box .edit-cow-data-sub-header {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #5b5b5b;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 .edit-cow-data-form-container {
     display: flex;
     flex-direction: column;
@@ -93,7 +101,7 @@
     }
 
     .edit-cow-data-form {
-        margin-top: 15%;
+        margin-top: 25%;
     }
 
     .edit-cow-data-inputs {

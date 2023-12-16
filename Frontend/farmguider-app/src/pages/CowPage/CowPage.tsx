@@ -17,12 +17,14 @@ import {getMilkings} from "@/services/milkingService.ts";
 import WeightGainTable from "@/pages/CowPage/WeightGainTable.tsx";
 import WeightGainResponseDTO from "@/entities/WeightGainResponseDTO.ts";
 import {getWeightGains} from "@/services/weightGainService.ts";
-import MilkingChart from "@/pages/CowPage/MilkingChart.tsx";
 import {Button} from "@mui/material";
 import ConfirmationDialog from "@/components/ConfirmationDialog/ConfirmationDialog.tsx";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {useSnackbar} from "notistack";
+import CowMilkingYield from "@/pages/CowPage/CowMilkingYield.tsx";
+import {getLactationPeriods} from "@/services/lactationPeriodService.ts";
+import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
 
 const CowPage = () => {
     const {cowId} = useParams();
@@ -33,6 +35,7 @@ const CowPage = () => {
     const [cow, setCow] = useState<CowResponseDTO>();
     const [milkingList, setMilkingList] = useState<MilkingResponseDTO[]>([]);
     const [weightGainList, setWeightGainList] = useState<WeightGainResponseDTO[]>([]);
+    const [lactationPeriodList, setLactationPeriodList] = useState<LactationPeriodResponseDTO[]>([]);
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
     const {enqueueSnackbar} = useSnackbar();
 
@@ -40,6 +43,7 @@ const CowPage = () => {
         fetchAndSetCow();
         fetchAndSetMilkingList();
         fetchAndSetWeightGainList();
+        fetchAndSetLactationPeriodList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cowId]);
 
@@ -81,6 +85,19 @@ const CowPage = () => {
             getWeightGains(parseInt(cowId))
                 .then(data => {
                     setWeightGainList(data);
+                })
+                .catch(() => {
+                    setLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+    }
+
+    const fetchAndSetLactationPeriodList = () => {
+        if (cowId) {
+            getLactationPeriods(parseInt(cowId))
+                .then(data => {
+                    setLactationPeriodList(data);
                 })
                 .catch(() => {
                     setLoading(false);
@@ -151,7 +168,13 @@ const CowPage = () => {
                     </div>
                 </div>
                 <div className="cows-charts-data-container">
-                    <MilkingChart/>
+                    <CowMilkingYield
+                        lactationPeriodList={lactationPeriodList}
+                        cow={cow}
+                        locale={locale}
+                        onLactationPeriodAdded={fetchAndSetLactationPeriodList}
+                    />
+
                 </div>
             </div>
 

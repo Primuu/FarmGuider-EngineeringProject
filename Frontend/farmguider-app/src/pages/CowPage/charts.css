@@ -15,3 +15,13 @@
 .chartGrid {
     stroke: rgb(228, 225, 225);
 }
+
+.milking-chart-buttons .add-lactation-button {
+    font-size: 12px;
+}
+
+.add-lactation-button .add-lactation-icon{
+    font-size: 18px;
+    vertical-align: middle;
+    margin-right: 6px;
+}

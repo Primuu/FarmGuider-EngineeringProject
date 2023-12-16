@@ -111,6 +111,26 @@
     "details": "Cow's Milk Yield Chart",
     "valueName": "Quantity",
     "axisY": "Milk quantity (liters)",
-    "tooltipNullValue": "Not provided"
+    "tooltipNullValue": "Not provided",
+    "addLactationButton": "Add Lactation Period"
+  },
+  "addLactationPeriodModal": {
+    "successSnackbar": "Lactation period added successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Adding Lactation Period",
+    "subHeader": "Lactation period will be added to the currently selected cow",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "requirements": "To add a lactation period, enter the start date (it cannot be earlier than the date of birth). The end date is optional and can be added later.",
+    "endDateRequirements": "If no end date is selected, the lactation period will be treated as continuing indefinitely",
+    "confirmButton": "Add Period",
+    "cancelButton": "Cancel",
+    "validation": {
+      "startDateRequired": "Start date field must be filled in",
+      "startDatePastOrPresent": "Start date cannot be a future date",
+      "endDateGreater": "End date must be later than start date",
+      "dateConflict": "Dates conflicts with other lactation period(s)",
+      "cowConflict": "Date cannot be before cow's date of birth"
+    }
   }
 }

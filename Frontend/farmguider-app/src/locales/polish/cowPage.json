@@ -111,6 +111,26 @@
     "details": "Wykres Wydajności Mlecznej Krowy",
     "valueName": "Ilość",
     "axisY": "Ilość mleka (litry)",
-    "tooltipNullValue": "Nie wprowadzono"
+    "tooltipNullValue": "Nie wprowadzono",
+    "addLactationButton": "Dodaj Okres Laktacji"
+  },
+  "addLactationPeriodModal": {
+    "successSnackbar": "Okres laktacji dodany pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Dodawanie Okresu Laktacji",
+    "subHeader": "Okres laktacji zostanie dodany do aktualnie wybranej krowy",
+    "startDate": "Początek",
+    "endDate": "Koniec",
+    "requirements": "Aby dodać okres laktacji należy podać datę początkową (nie może być wcześniejsza niż data urodzenia). Data zakończenia jest opcjonalna i można ją dodać później.",
+    "endDateRequirements": "Jeśli data zakończenia nie zostanie wybrana, okres laktacji będzie traktowany jako trwający nieokreślony czas",
+    "confirmButton": "Dodaj Okres",
+    "cancelButton": "Anuluj",
+    "validation": {
+      "startDateRequired": "Data początku musi być podana",
+      "startDatePastOrPresent": "Data początku nie może być datą przyszłą",
+      "endDateGreater": "Data końca musi być późniejsza niż data początku",
+      "dateConflict": "Daty kolidują z innymi okresami laktacji",
+      "cowConflict": "Data nie może być przed datą urodzenia"
+    }
   }
 }
