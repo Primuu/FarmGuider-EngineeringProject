@@ -12,6 +12,7 @@ import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.WeightGainService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -22,6 +23,8 @@ import static pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainMapper.mapT
 @RequiredArgsConstructor
 public class WeightGainFacade {
 
+    private final static BigDecimal EMPTY_WEIGHT = null;
+    private final static LocalDate EMPTY_MEASUREMENT_DATE = null;
     private final WeightGainService weightGainService;
     private final CowService cowService;
 
@@ -81,8 +84,9 @@ public class WeightGainFacade {
         weightGainService.getWeightGainsByCowId(cow.getId())
                 .stream()
                 .max(Comparator.comparing(WeightGain::getMeasurementDate))
-                .ifPresent(currentWeight ->
-                        cowService.updateCurrentWeight(cow, currentWeight.getWeight(), currentWeight.getMeasurementDate())
+                .ifPresentOrElse(
+                        currentWeight -> cowService.updateCurrentWeight(cow, currentWeight.getWeight(), currentWeight.getMeasurementDate()),
+                        () -> cowService.updateCurrentWeight(cow, EMPTY_WEIGHT, EMPTY_MEASUREMENT_DATE)
                 );
     }
 

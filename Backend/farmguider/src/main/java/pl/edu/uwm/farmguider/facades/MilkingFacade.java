@@ -12,6 +12,7 @@ import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.MilkingService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -24,6 +25,8 @@ import static pl.edu.uwm.farmguider.utils.GenderUtils.verifyIsFemale;
 @RequiredArgsConstructor
 public class MilkingFacade {
 
+    private final static BigDecimal EMPTY_MILKING_QUANTITY = null;
+    private final static LocalDateTime EMPTY_MILKING_DATE = null;
     private final MilkingService milkingService;
     private final CowService cowService;
 
@@ -86,8 +89,9 @@ public class MilkingFacade {
         milkingService.getMilkingsByCowId(cow.getId())
                 .stream()
                 .max(Comparator.comparing(Milking::getDateOfMilking))
-                .ifPresent(latestMilking ->
-                        cowService.updateLatestMilkingQuantity(cow, latestMilking.getMilkQuantity(), latestMilking.getDateOfMilking())
+                .ifPresentOrElse(
+                        latestMilking -> cowService.updateLatestMilkingQuantity(cow, latestMilking.getMilkQuantity(), latestMilking.getDateOfMilking()),
+                        () -> cowService.updateLatestMilkingQuantity(cow, EMPTY_MILKING_QUANTITY, EMPTY_MILKING_DATE)
                 );
     }
 
