@@ -109,7 +109,7 @@
   },
   "milkingChart": {
     "details": "Wykres Wydajności Mlecznej Krowy",
-    "valueName": "Ilość",
+    "valueName": "Ilość mleka",
     "axisY": "Ilość mleka (litry)",
     "tooltipNullValue": "Nie wprowadzono",
     "addLactationButton": "Dodaj Okres Laktacji",
