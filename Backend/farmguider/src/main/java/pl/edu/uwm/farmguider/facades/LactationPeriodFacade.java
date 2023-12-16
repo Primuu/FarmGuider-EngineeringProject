@@ -12,6 +12,7 @@ import pl.edu.uwm.farmguider.services.CowService;
 import pl.edu.uwm.farmguider.services.LactationPeriodService;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.lactationPeriod.dtos.LactationPeriodMapper.mapToLactationPeriodResponseDTO;
@@ -40,7 +41,7 @@ public class LactationPeriodFacade {
 
     private void verifyLactationPeriodDate(LocalDate lactationPeriodStartDate, LocalDate dateOfBirt) {
         if (lactationPeriodStartDate.isBefore(dateOfBirt)) {
-            throw new InvalidDateException("LactationPeriod", "Lactation Period start date cannot be before cow's date of birth.");
+            throw new InvalidDateException("Cow", "Lactation Period start date cannot be before cow's date of birth.");
         }
     }
 
@@ -49,6 +50,7 @@ public class LactationPeriodFacade {
         return lactationPeriods
                 .stream()
                 .map(LactationPeriodMapper::mapToLactationPeriodResponseDTO)
+                .sorted(Comparator.comparing(LactationPeriodResponseDTO::startDate).reversed())
                 .toList();
     }
 
