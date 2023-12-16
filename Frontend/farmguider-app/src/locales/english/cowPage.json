@@ -113,6 +113,8 @@
     "axisY": "Milk quantity (liters)",
     "tooltipNullValue": "Not provided",
     "addLactationButton": "Add Lactation Period",
+    "editLactationButton": "Edit Lactation",
+    "deleteLactationButton": "Delete Lactation",
     "noResultsForGender": "Not available for this gender",
     "noResults": "To start monitoring milk yield, create a lactation period",
     "pickerLabel": "Select Period",
@@ -126,7 +128,7 @@
     "startDate": "Start Date",
     "endDate": "End Date",
     "requirements": "To add a lactation period, enter the start date (it cannot be earlier than the date of birth). The end date is optional and can be added later.",
-    "endDateRequirements": "If no end date is selected, the lactation period will be treated as continuing indefinitely",
+    "endDateRequirements": "If no end date is entered, the lactation period will be treated as continuing indefinitely",
     "confirmButton": "Add Period",
     "cancelButton": "Cancel",
     "validation": {
@@ -136,5 +138,16 @@
       "dateConflict": "Dates conflicts with other lactation period(s)",
       "cowConflict": "Date cannot be before cow's date of birth"
     }
+  },
+  "updateLactationPeriodModal": {
+    "successSnackbar": "Lactation period updated successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Editing Lactation Period",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "requirements": "To edit a lactation period, provide the start date (it cannot be earlier than the date of birth). The end date is optional and can be added later.",
+    "endDateRequirements": "If no end date is provided, the lactation period will be treated as continuing indefinitely",
+    "confirmButton": "Edit Period",
+    "cancelButton": "Cancel"
   }
 }

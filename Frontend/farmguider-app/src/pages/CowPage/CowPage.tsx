@@ -172,7 +172,7 @@ const CowPage = () => {
                         lactationPeriodList={lactationPeriodList}
                         cow={cow}
                         locale={locale}
-                        onLactationPeriodAdded={fetchAndSetLactationPeriodList}
+                        onLactationPeriodChanged={fetchAndSetLactationPeriodList}
                     />
 
                 </div>

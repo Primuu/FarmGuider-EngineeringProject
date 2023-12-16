@@ -1,6 +1,6 @@
 import {useTranslation} from "react-i18next";
 import {Box, Button, Fade, Modal, Slide, Typography} from "@mui/material";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useSnackbar} from "notistack";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -12,28 +12,43 @@ import {DatePicker} from "@mui/x-date-pickers";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import LactationPeriodCreateDTO from "@/entities/LactationPeriodCreateDTO.ts";
-import {createLactationPeriod} from "@/services/lactationPeriodService.ts";
+import {updateLactationPeriod} from "@/services/lactationPeriodService.ts";
 import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
 import {LactationPeriodValues, validateLactationPeriod} from "@/utils/lactationPeriodValidators.ts";
 import {MAX_DATE, normalizeDate} from "@/utils/dateUtils.ts";
 import {AxiosError} from "axios";
 import ErrorResponse from "@/entities/ErrorResponse.ts";
 
-type AddLactationPeriodModalProps = {
+type EditLactationPeriodModalProps = {
     open: boolean;
     onClose: () => void;
     cow: CowResponseDTO;
     onLactationPeriodChanged: () => void;
     locale: Locale;
     lactationPeriodList: LactationPeriodResponseDTO[];
+    selectedLactationPeriod: LactationPeriodResponseDTO;
 }
 
-const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, onClose, cow, onLactationPeriodChanged, locale, lactationPeriodList}) => {
-    const [startDate, setStartDate] = useState<Date | null>(null);
-    const [endDate, setEndDate] = useState<Date | null>(null);
+const EditLactationPeriodModal: React.FC<EditLactationPeriodModalProps> = (
+    {open, onClose, cow, onLactationPeriodChanged, locale, lactationPeriodList,
+        selectedLactationPeriod}
+) => {
+    const [startDate, setStartDate] = useState<Date | null>(new Date(selectedLactationPeriod.startDate));
+    const [endDate, setEndDate] = useState<Date | null>(
+        (selectedLactationPeriod.endDate ? new Date(selectedLactationPeriod.endDate) : null)
+    );
     const {t} = useTranslation('cowPage');
     const {enqueueSnackbar} = useSnackbar();
     const {errors, validate, setErrors} = useValidation<LactationPeriodValues>(validateLactationPeriod);
+
+    const lactationPeriodListWithoutCurrentLactation = lactationPeriodList.filter(
+        lp => lp.lactationPeriodId !== selectedLactationPeriod.lactationPeriodId
+    );
+
+    useEffect(() => {
+        setStartDate(new Date(selectedLactationPeriod.startDate));
+        setEndDate(selectedLactationPeriod.endDate ? new Date(selectedLactationPeriod.endDate) : null);
+    }, [selectedLactationPeriod]);
 
     const handleStartDateChange = (date: Date | null) => {
         setStartDate(normalizeDate(date));
@@ -44,8 +59,8 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
     };
 
     const cancel = () => {
-        setStartDate(null);
-        setEndDate(null);
+        setStartDate(new Date(selectedLactationPeriod.startDate));
+        setEndDate(selectedLactationPeriod.endDate ? new Date(selectedLactationPeriod.endDate) : null);
         setErrors({});
         onClose();
     }
@@ -59,12 +74,12 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
             endDate: endDate
         };
 
-        if (cow.cowId) {
-            createLactationPeriod(cow.cowId, lactationPeriodCreateDTO)
+        if (selectedLactationPeriod.lactationPeriodId) {
+            updateLactationPeriod(selectedLactationPeriod.lactationPeriodId, lactationPeriodCreateDTO)
                 .then(() => {
                     cancel();
                     onLactationPeriodChanged();
-                    enqueueSnackbar(t('addLactationPeriodModal.successSnackbar'), SnackbarSuccess);
+                    enqueueSnackbar(t('updateLactationPeriodModal.successSnackbar'), SnackbarSuccess);
                 })
                 .catch((error: AxiosError) => {
                     if (error.response) {
@@ -82,10 +97,10 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
                                 setErrors({startDate: t('addLactationPeriodModal.validation.cowConflict')});
                                 break;
                             default:
-                                enqueueSnackbar(t('addLactationPeriodModal.errorSnackbar'), SnackbarError);
+                                enqueueSnackbar(t('updateLactationPeriodModal.errorSnackbar'), SnackbarError);
                         }
                     } else {
-                        enqueueSnackbar(t('addLactationPeriodModal.errorSnackbar'), SnackbarError);
+                        enqueueSnackbar(t('updateLactationPeriodModal.errorSnackbar'), SnackbarError);
                     }
                 })
         }
@@ -117,11 +132,7 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
                     >
                         <Box component="form" onSubmit={handleSubmit} className="edit-cow-data-form">
                             <Typography className="edit-cow-data-header">
-                                {t('addLactationPeriodModal.header')}
-                            </Typography>
-
-                            <Typography className="edit-cow-data-sub-header">
-                                {t('addLactationPeriodModal.subHeader')}
+                                {t('updateLactationPeriodModal.header')}
                             </Typography>
 
                             <div className="edit-cow-data-form-container">
@@ -131,14 +142,14 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
                                         adapterLocale={locale}
                                     >
                                         <DatePicker
-                                            label={t('addLactationPeriodModal.startDate')}
+                                            label={t('updateLactationPeriodModal.startDate')}
                                             value={startDate}
                                             onChange={handleStartDateChange}
                                             minDate={new Date(cow.dateOfBirth)}
                                             maxDate={new Date()}
-                                            shouldDisableDate={(date) => isDateInLactationPeriods(date, lactationPeriodList)}
+                                            shouldDisableDate={(date) => isDateInLactationPeriods(date, lactationPeriodListWithoutCurrentLactation)}
                                             disableFuture
-                                            openTo="year"
+                                            openTo="day"
                                             views={['year', 'month', 'day']}
                                             desktopModeMediaQuery="@media (min-width:600px)"
                                             slotProps={{
@@ -157,12 +168,12 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
                                         adapterLocale={locale}
                                     >
                                         <DatePicker
-                                            label={t('addLactationPeriodModal.endDate')}
+                                            label={t('updateLactationPeriodModal.endDate')}
                                             value={endDate}
                                             onChange={handleEndDateChange}
                                             minDate={new Date(cow.dateOfBirth)}
-                                            shouldDisableDate={(date) => isDateInLactationPeriods(date, lactationPeriodList)}
-                                            openTo="year"
+                                            shouldDisableDate={(date) => isDateInLactationPeriods(date, lactationPeriodListWithoutCurrentLactation)}
+                                            openTo="day"
                                             views={['year', 'month', 'day']}
                                             desktopModeMediaQuery="@media (min-width:600px)"
                                             slotProps={{
@@ -177,11 +188,11 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
                             </div>
 
                             <Typography className="edit-cow-data-sub-header">
-                                {t('addLactationPeriodModal.endDateRequirements')}
+                                {t('updateLactationPeriodModal.endDateRequirements')}
                             </Typography>
 
                             <Typography className="edit-cow-data-req">
-                                {t('addLactationPeriodModal.requirements')}
+                                {t('updateLactationPeriodModal.requirements')}
                             </Typography>
 
                             <Box className="edit-cow-data-button-group">
@@ -191,7 +202,7 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
                                     className="confirm-edit-cow-data-button"
                                 >
                                     <DoneOutlinedIcon className="edit-cow-data-button-icon"/>
-                                    {t('addLactationPeriodModal.confirmButton')}
+                                    {t('updateLactationPeriodModal.confirmButton')}
                                 </Button>
 
                                 <Button
@@ -200,7 +211,7 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
                                     className="cancel-edit-cow-data-button"
                                 >
                                     <CloseOutlinedIcon className="edit-cow-data-button-icon"/>
-                                    {t('addLactationPeriodModal.cancelButton')}
+                                    {t('updateLactationPeriodModal.cancelButton')}
                                 </Button>
                             </Box>
                         </Box>
@@ -211,4 +222,4 @@ const AddLactationPeriodModal: React.FC<AddLactationPeriodModalProps> = ({open, 
     );
 }
 
-export default AddLactationPeriodModal;
+export default EditLactationPeriodModal;

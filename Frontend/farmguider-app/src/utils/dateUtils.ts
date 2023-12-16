@@ -1,3 +1,5 @@
+export const MAX_DATE = new Date(8640000000000000);
+
 export const removeTimezoneAndSeconds = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth();

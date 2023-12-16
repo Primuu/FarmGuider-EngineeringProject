@@ -11,9 +11,9 @@ type CowMilkingYieldProps = {
     lactationPeriodList: LactationPeriodResponseDTO[];
     cow: CowResponseDTO;
     locale: Locale;
-    onLactationPeriodAdded: () => void;
+    onLactationPeriodChanged: () => void;
 }
-const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, cow, locale, onLactationPeriodAdded}) => {
+const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, cow, locale, onLactationPeriodChanged}) => {
     const {t} = useTranslation('cowPage');
     const [selectedLactationPeriod, setSelectedLactationPeriod] = useState<LactationPeriodResponseDTO | null>(null);
 
@@ -59,7 +59,7 @@ const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, c
                 && <MilkingYieldTools
                     cow={cow}
                     locale={locale}
-                    onLactationPeriodAdded={onLactationPeriodAdded}
+                    onLactationPeriodChanged={onLactationPeriodChanged}
                     lactationPeriodList={lactationPeriodList}
                     selectedLactationPeriod={selectedLactationPeriod}
                     handleChangeLactationPeriod={handleChangeLactationPeriod}

@@ -113,6 +113,8 @@
     "axisY": "Ilość mleka (litry)",
     "tooltipNullValue": "Nie wprowadzono",
     "addLactationButton": "Dodaj Okres Laktacji",
+    "editLactationButton": "Edytuj Laktację",
+    "deleteLactationButton": "Usuń Laktację",
     "noResultsForGender": "Niedostępne dla tej płci",
     "noResults": "Aby zacząć monitorować wydajność mleczną, utwórz okres laktacji",
     "pickerLabel": "Wybierz okres",
@@ -126,7 +128,7 @@
     "startDate": "Początek",
     "endDate": "Koniec",
     "requirements": "Aby dodać okres laktacji należy podać datę początkową (nie może być wcześniejsza niż data urodzenia). Data zakończenia jest opcjonalna i można ją dodać później.",
-    "endDateRequirements": "Jeśli data zakończenia nie zostanie wybrana, okres laktacji będzie traktowany jako trwający nieokreślony czas",
+    "endDateRequirements": "Jeśli data zakończenia nie zostanie podana, okres laktacji będzie traktowany jako trwający nieokreślony czas",
     "confirmButton": "Dodaj Okres",
     "cancelButton": "Anuluj",
     "validation": {
@@ -136,5 +138,16 @@
       "dateConflict": "Daty kolidują z innymi okresami laktacji",
       "cowConflict": "Data nie może być przed datą urodzenia"
     }
+  },
+  "updateLactationPeriodModal": {
+    "successSnackbar": "Okres laktacji zaktualizowano pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Edycja Okresu Laktacji",
+    "startDate": "Początek",
+    "endDate": "Koniec",
+    "requirements": "Aby edytować okres laktacji należy podać datę początkową (nie może być wcześniejsza niż data urodzenia). Data zakończenia jest opcjonalna i można ją dodać później.",
+    "endDateRequirements": "Jeśli data zakończenia nie zostanie podana, okres laktacji będzie traktowany jako trwający nieokreślony czas",
+    "confirmButton": "Edytuj Okres",
+    "cancelButton": "Anuluj"
   }
 }

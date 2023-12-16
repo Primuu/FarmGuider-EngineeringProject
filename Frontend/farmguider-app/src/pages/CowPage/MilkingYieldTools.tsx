@@ -7,25 +7,30 @@ import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import MenuItem from "@mui/material/MenuItem";
 import {formatDate} from "@/utils/dateUtils.ts";
+import EditLactationPeriodModal from "@/pages/CowPage/modals/EditLactationPeriodModal.tsx";
 
 type MilkingYieldToolsProps = {
     cow: CowResponseDTO;
     locale: Locale;
-    onLactationPeriodAdded: () => void;
+    onLactationPeriodChanged: () => void;
     lactationPeriodList: LactationPeriodResponseDTO[];
     selectedLactationPeriod: LactationPeriodResponseDTO | null;
     handleChangeLactationPeriod: (lactationPeriodId: number) => void;
 }
 
 const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
-    {cow, locale, onLactationPeriodAdded, lactationPeriodList,
+    {cow, locale, onLactationPeriodChanged, lactationPeriodList,
         selectedLactationPeriod, handleChangeLactationPeriod}
 ) => {
     const {t} = useTranslation('cowPage');
     const [openAddLactationPeriodModal, setOpenAddLactationPeriodModal] = useState(false);
+    const [openEditLactationPeriodModal, setOpenEditLactationPeriodModal] = useState(false);
 
     const handleOpenAddLactationPeriodModal = () => setOpenAddLactationPeriodModal(true);
     const handleCloseAddLactationPeriodModal = () => setOpenAddLactationPeriodModal(false);
+
+    const handleOpenEditLactationPeriodModal = () => setOpenEditLactationPeriodModal(true);
+    const handleCloseEditLactationPeriodModal = () => setOpenEditLactationPeriodModal(false);
 
     const handleSelectLactationPeriod = (event: SelectChangeEvent) => {
         const lactationPeriodIdNum = Number(event.target.value);
@@ -85,15 +90,37 @@ const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
                     <EventNoteIcon className="add-lactation-icon"/>
                     {t('milkingChart.addLactationButton')}
                 </Button>
+
+                <Button
+                    className="add-lactation-button"
+                    variant="contained"
+                    color="primary"
+                    onClick={handleOpenEditLactationPeriodModal}
+                >
+                    <EventNoteIcon className="add-lactation-icon"/>
+                    {t('milkingChart.editLactationButton')}
+                </Button>
             </div>
             <AddLactationPeriodModal
                 open={openAddLactationPeriodModal}
                 onClose={handleCloseAddLactationPeriodModal}
                 cow={cow}
-                onLactationPeriodAdded={onLactationPeriodAdded}
+                onLactationPeriodChanged={onLactationPeriodChanged}
                 locale={locale}
                 lactationPeriodList={lactationPeriodList}
             />
+
+            {selectedLactationPeriod &&
+                <EditLactationPeriodModal
+                    open={openEditLactationPeriodModal}
+                    onClose={handleCloseEditLactationPeriodModal}
+                    cow={cow}
+                    onLactationPeriodChanged={onLactationPeriodChanged}
+                    locale={locale}
+                    lactationPeriodList={lactationPeriodList}
+                    selectedLactationPeriod={selectedLactationPeriod}
+                />
+            }
         </div>
     )
 }
