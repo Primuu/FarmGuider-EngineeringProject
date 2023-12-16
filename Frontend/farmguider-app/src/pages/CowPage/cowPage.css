@@ -43,7 +43,7 @@
     .cows-data-container,
     .cows-charts-data-container {
         width: 100%;
-        padding: 10px 2px;
+        padding: 10px 20px;
     }
 
     .cow-button-container {
@@ -55,5 +55,12 @@
         width: 100%;
         padding-right: 2px;
         padding-left: 2px;
+    }
+}
+
+@media (max-width: 599px) {
+    .cows-data-container,
+    .cows-charts-data-container {
+        padding: 10px 2px;
     }
 }
