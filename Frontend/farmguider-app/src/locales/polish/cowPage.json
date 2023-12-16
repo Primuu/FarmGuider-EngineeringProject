@@ -114,7 +114,9 @@
     "tooltipNullValue": "Nie wprowadzono",
     "addLactationButton": "Dodaj Okres Laktacji",
     "noResultsForGender": "Niedostępne dla tej płci",
-    "noResults": "Aby zacząć monitorować wydajność mleczną, utwórz okres laktacji"
+    "noResults": "Aby zacząć monitorować wydajność mleczną, utwórz okres laktacji",
+    "pickerLabel": "Wybierz okres",
+    "onGoing": "nadal trwa"
   },
   "addLactationPeriodModal": {
     "successSnackbar": "Okres laktacji dodany pomyślnie",

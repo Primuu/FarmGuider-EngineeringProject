@@ -1,5 +1,5 @@
 import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import MilkingYieldTools from "@/pages/CowPage/MilkingYieldTools.tsx";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import '@/pages/CowPage/charts.css';
@@ -15,6 +15,21 @@ type CowMilkingYieldProps = {
 }
 const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, cow, locale, onLactationPeriodAdded}) => {
     const {t} = useTranslation('cowPage');
+    const [selectedLactationPeriod, setSelectedLactationPeriod] = useState<LactationPeriodResponseDTO | null>(null);
+
+    useEffect(() => {
+        if (lactationPeriodList.length > 0) {
+            setSelectedLactationPeriod(lactationPeriodList[0]);
+        }
+    }, [lactationPeriodList]);
+
+    const handleChangeLactationPeriod = (newLactationPeriodId: number) => {
+        const selectedLactationPeriod = lactationPeriodList.find(
+            lp => lp.lactationPeriodId === newLactationPeriodId);
+        if (selectedLactationPeriod) {
+            setSelectedLactationPeriod(selectedLactationPeriod);
+        }
+    }
 
     return (
         <div>
@@ -46,6 +61,8 @@ const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, c
                     locale={locale}
                     onLactationPeriodAdded={onLactationPeriodAdded}
                     lactationPeriodList={lactationPeriodList}
+                    selectedLactationPeriod={selectedLactationPeriod}
+                    handleChangeLactationPeriod={handleChangeLactationPeriod}
                 />}
         </div>
     )

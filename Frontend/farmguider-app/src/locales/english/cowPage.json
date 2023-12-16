@@ -114,7 +114,9 @@
     "tooltipNullValue": "Not provided",
     "addLactationButton": "Add Lactation Period",
     "noResultsForGender": "Not available for this gender",
-    "noResults": "To start monitoring milk yield, create a lactation period"
+    "noResults": "To start monitoring milk yield, create a lactation period",
+    "pickerLabel": "Select Period",
+    "onGoing": "still ongoing"
   },
   "addLactationPeriodModal": {
     "successSnackbar": "Lactation period added successfully",

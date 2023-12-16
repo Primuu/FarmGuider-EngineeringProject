@@ -31,16 +31,34 @@
     font-size: 14px;
 }
 
+.lactation-period-single {
+    padding: 5px;
+    color: #406064;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .milking-chart-buttons {
     display: flex;
     flex-direction: row;
-    padding: 10px;
+    justify-content: center;
+    padding-top: 15px;
+    gap: 20px;
+}
+
+.lactation-period-selector-container {
+    width: 250px;
+}
+
+.lactation-period-selector {
+    width: 100%;
 }
 
 .milking-chart-buttons .add-lactation-button {
     font-size: 12px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .add-lactation-button .add-lactation-icon{
