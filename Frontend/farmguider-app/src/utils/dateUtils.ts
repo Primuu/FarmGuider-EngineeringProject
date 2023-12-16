@@ -8,6 +8,10 @@ export const removeTimezoneAndSeconds = (date: Date) => {
     return new Date(Date.UTC(year, month, day, hours, minutes));
 };
 
+export const normalizeDate = (date: Date | null) => {
+    return date ? new Date(date.setHours(12, 0, 0, 0)) : null;
+}
+
 export const formatDateTime = (givenDate: Date): string => {
     const date = new Date(givenDate);
     const formattedDate = date.toLocaleDateString('en-GB', {
