@@ -118,7 +118,11 @@
     "noResultsForGender": "Niedostępne dla tej płci",
     "noResults": "Aby zacząć monitorować wydajność mleczną, utwórz okres laktacji",
     "pickerLabel": "Wybierz okres",
-    "onGoing": "nadal trwa"
+    "onGoing": "nadal trwa",
+    "deleteDialogTitle": "Usuwanie Okresu Laktacji",
+    "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć ten okres laktacji?",
+    "deleteSuccessSnackbar": "Okres laktacji usunięty pomyślnie",
+    "deleteErrorSnackbar": "Coś poszło nie tak"
   },
   "addLactationPeriodModal": {
     "successSnackbar": "Okres laktacji dodany pomyślnie",

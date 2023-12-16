@@ -20,6 +20,8 @@ const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, c
     useEffect(() => {
         if (lactationPeriodList.length > 0) {
             setSelectedLactationPeriod(lactationPeriodList[0]);
+        } else {
+            setSelectedLactationPeriod(null);
         }
     }, [lactationPeriodList]);
 

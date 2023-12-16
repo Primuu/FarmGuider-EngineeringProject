@@ -118,7 +118,11 @@
     "noResultsForGender": "Not available for this gender",
     "noResults": "To start monitoring milk yield, create a lactation period",
     "pickerLabel": "Select Period",
-    "onGoing": "still ongoing"
+    "onGoing": "still ongoing",
+    "deleteDialogTitle": "Deleting Lactation Period",
+    "deleteDialogMessage": "Are you sure you want to delete this lactation period?",
+    "deleteSuccessSnackbar": "Lactation period deleted successfully",
+    "deleteErrorSnackbar": "Something went wrong"
   },
   "addLactationPeriodModal": {
     "successSnackbar": "Lactation period added successfully",

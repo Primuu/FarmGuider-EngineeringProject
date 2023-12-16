@@ -8,6 +8,11 @@ import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import MenuItem from "@mui/material/MenuItem";
 import {formatDate} from "@/utils/dateUtils.ts";
 import EditLactationPeriodModal from "@/pages/CowPage/modals/EditLactationPeriodModal.tsx";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ConfirmationDialog from "@/components/ConfirmationDialog/ConfirmationDialog.tsx";
+import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
+import {useSnackbar} from "notistack";
+import {deleteLactationPeriod} from "@/services/lactationPeriodService.ts";
 
 type MilkingYieldToolsProps = {
     cow: CowResponseDTO;
@@ -19,12 +24,16 @@ type MilkingYieldToolsProps = {
 }
 
 const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
-    {cow, locale, onLactationPeriodChanged, lactationPeriodList,
-        selectedLactationPeriod, handleChangeLactationPeriod}
+    {
+        cow, locale, onLactationPeriodChanged, lactationPeriodList,
+        selectedLactationPeriod, handleChangeLactationPeriod
+    }
 ) => {
     const {t} = useTranslation('cowPage');
     const [openAddLactationPeriodModal, setOpenAddLactationPeriodModal] = useState(false);
     const [openEditLactationPeriodModal, setOpenEditLactationPeriodModal] = useState(false);
+    const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
+    const {enqueueSnackbar} = useSnackbar();
 
     const handleOpenAddLactationPeriodModal = () => setOpenAddLactationPeriodModal(true);
     const handleCloseAddLactationPeriodModal = () => setOpenAddLactationPeriodModal(false);
@@ -32,9 +41,25 @@ const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
     const handleOpenEditLactationPeriodModal = () => setOpenEditLactationPeriodModal(true);
     const handleCloseEditLactationPeriodModal = () => setOpenEditLactationPeriodModal(false);
 
+    const handleOpenConfirmationDialog = () => setOpenConfirmationDialog(true);
+    const handleCloseConfirmationDialog = () => setOpenConfirmationDialog(false);
+
     const handleSelectLactationPeriod = (event: SelectChangeEvent) => {
         const lactationPeriodIdNum = Number(event.target.value);
         handleChangeLactationPeriod(lactationPeriodIdNum);
+    };
+
+    const handleDeleteLactationPeriod = () => {
+        if (selectedLactationPeriod && selectedLactationPeriod.lactationPeriodId) {
+            deleteLactationPeriod(selectedLactationPeriod.lactationPeriodId)
+                .then(() => {
+                    enqueueSnackbar(t('milkingChart.deleteSuccessSnackbar'), SnackbarSuccess);
+                    onLactationPeriodChanged();
+                })
+                .catch(() => {
+                    enqueueSnackbar(t('milkingChart.deleteErrorSnackbar'), SnackbarError);
+                });
+        }
     };
 
     return (
@@ -61,8 +86,8 @@ const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
                                     >
                                         {formatDate(lactationPeriod.startDate)
                                             + " - " + (lactationPeriod.endDate ?
-                                                formatDate(lactationPeriod.endDate)
-                                                : t('milkingChart.onGoing')
+                                                    formatDate(lactationPeriod.endDate)
+                                                    : t('milkingChart.onGoing')
                                             )
                                         }
                                     </MenuItem>
@@ -91,16 +116,31 @@ const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
                     {t('milkingChart.addLactationButton')}
                 </Button>
 
-                <Button
-                    className="add-lactation-button"
-                    variant="contained"
-                    color="primary"
-                    onClick={handleOpenEditLactationPeriodModal}
-                >
-                    <EventNoteIcon className="add-lactation-icon"/>
-                    {t('milkingChart.editLactationButton')}
-                </Button>
+                {selectedLactationPeriod &&
+                    <Button
+                        className="add-lactation-button"
+                        variant="contained"
+                        color="primary"
+                        onClick={handleOpenEditLactationPeriodModal}
+                    >
+                        <EventNoteIcon className="add-lactation-icon"/>
+                        {t('milkingChart.editLactationButton')}
+                    </Button>
+                }
+
+                {selectedLactationPeriod &&
+                    <Button
+                        className="add-lactation-button"
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleOpenConfirmationDialog}
+                    >
+                        <DeleteIcon className="add-lactation-icon"/>
+                        {t('milkingChart.deleteLactationButton')}
+                    </Button>
+                }
             </div>
+
             <AddLactationPeriodModal
                 open={openAddLactationPeriodModal}
                 onClose={handleCloseAddLactationPeriodModal}
@@ -121,6 +161,14 @@ const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
                     selectedLactationPeriod={selectedLactationPeriod}
                 />
             }
+
+            <ConfirmationDialog
+                open={openConfirmationDialog}
+                onClose={handleCloseConfirmationDialog}
+                onConfirm={handleDeleteLactationPeriod}
+                title={t('milkingChart.deleteDialogTitle')}
+                message={t('milkingChart.deleteDialogMessage')}
+            />
         </div>
     )
 }
