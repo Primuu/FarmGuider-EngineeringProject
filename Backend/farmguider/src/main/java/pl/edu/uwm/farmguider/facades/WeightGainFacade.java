@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
+import pl.edu.uwm.farmguider.models.ChartValueDTO;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.weightGain.WeightGain;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainCreateDTO;
@@ -14,8 +15,12 @@ import pl.edu.uwm.farmguider.services.WeightGainService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainMapper.mapToWeightGainResponseDTO;
 
@@ -97,6 +102,62 @@ public class WeightGainFacade {
         weightGainService.deleteWeightGainById(weightGainId);
 
         updateCowCurrentWeightIfNecessary(cow);
+    }
+
+    public List<ChartValueDTO> getWeightGainChart(Long cowId) {
+        Cow cow = cowService.getCowById(cowId);
+
+        LocalDate startDate = cow.getDateOfBirth();
+        LocalDate endDate = LocalDate.now();
+
+        List<WeightGain> weightGains = weightGainService.getWeightGainsByCowId(cowId);
+
+        return getChartValueDTOS(weightGains, startDate, endDate);
+    }
+
+    private List<ChartValueDTO> getChartValueDTOS(List<WeightGain> weightGains, LocalDate startDate, LocalDate endDate) {
+        Map<LocalDate, BigDecimal> dailyWeightGain = aggregateDailyWeightGain(weightGains);
+
+        ChartValueDTO startDTO = ChartValueDTO.builder()
+                .date(startDate)
+                .value(dailyWeightGain.getOrDefault(startDate, null))
+                .build();
+
+        ChartValueDTO endDTO = ChartValueDTO.builder()
+                .date(endDate)
+                .value(dailyWeightGain.getOrDefault(endDate, null))
+                .build();
+
+        List<ChartValueDTO> chartValuesBetween = dailyWeightGain.entrySet().stream()
+                .filter(entry -> !entry.getKey().isEqual(startDate) && !entry.getKey().isEqual(endDate))
+                .map(entry -> ChartValueDTO.builder()
+                        .date(entry.getKey())
+                        .value(entry.getValue())
+                        .build())
+                .toList();
+
+        List<ChartValueDTO> chartValues = new ArrayList<>();
+        chartValues.add(startDTO);
+        chartValues.addAll(chartValuesBetween);
+        if (!endDate.isEqual(startDate)) {
+            chartValues.add(endDTO);
+        }
+
+        return chartValues;
+    }
+
+    private Map<LocalDate, BigDecimal> aggregateDailyWeightGain(List<WeightGain> weightGains) {
+        return weightGains.stream()
+                .collect(Collectors.toMap(
+                        WeightGain::getMeasurementDate,
+                        Function.identity(),
+                        (wg1, wg2) -> wg1.getId().compareTo(wg2.getId()) > 0 ? wg1 : wg2
+                ))
+                .entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().getWeight()
+                ));
     }
 
 }

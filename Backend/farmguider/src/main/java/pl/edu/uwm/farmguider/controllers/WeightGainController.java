@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.WeightGainFacade;
+import pl.edu.uwm.farmguider.models.ChartValueDTO;
 import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainCreateDTO;
 import pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainResponseDTO;
@@ -84,6 +85,35 @@ public class WeightGainController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(weightGains);
+    }
+
+    @Operation(summary = "Get weight gain chart data by cow id",
+            description = "Returns a list of cow weight gains (used to create a weight gain chart) by cow id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Weight gains list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = ChartValueDTO.class)
+                            )
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Cow not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @GetMapping("/get-weight-gain-chart/{cowId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCowIdWithContext(#cowId)")
+    public ResponseEntity<List<ChartValueDTO>> getWeightGainChart(@PathVariable Long cowId) {
+        List<ChartValueDTO> weightGainData = weightGainFacade.getWeightGainChart(cowId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(weightGainData);
     }
 
     @Operation(summary = "Update weight gain by id", description = "Updates weight gain data based on the provided payload")
