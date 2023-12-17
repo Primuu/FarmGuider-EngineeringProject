@@ -18,25 +18,15 @@ const WeightGainChart: React.FC<WeightGainChartProps> = ({weightGainChartValues,
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
     const valueName = t('weightGainChart.valueName');
-    const NULL_VALUE_MARKER: string = "X";
     const responsiveMinTickGap: number = isDesktop ? 40 : 20;
 
-    const processedData = weightGainChartValues.map(item => ({
-        ...item,
-        value: item.value === null ? NULL_VALUE_MARKER : item.value
-    }));
-
     const tooltipFormatter = (value: number | string, name: string) => {
-        const displayValue = value === NULL_VALUE_MARKER
-            ? t('weightGainChart.tooltipNullValue')
-            : `${value} kg`;
-
-        const displayName = value === NULL_VALUE_MARKER ? '' : name;
-
-        return [displayValue, displayName];
+        const displayValue = `${value} kg`;
+        return [displayValue, name];
     };
 
     const isEveryValueNull = (chartValues: ChartValueDTO[]) => {
+        if (chartValues.length === 0) return true;
         return chartValues.every(chartValue => chartValue.value === null);
     };
 
@@ -57,7 +47,7 @@ const WeightGainChart: React.FC<WeightGainChartProps> = ({weightGainChartValues,
                 ) : (
                     <ResponsiveContainer width="100%" height={280}>
                         <AreaChart
-                            data={processedData}
+                            data={weightGainChartValues}
                             margin={{top: 0, right: 20, left: 20, bottom: 0}}
                         >
                             <defs>
@@ -87,7 +77,7 @@ const WeightGainChart: React.FC<WeightGainChartProps> = ({weightGainChartValues,
                             />
                             <CartesianGrid strokeDasharray="3 3" className="chartGrid"/>
                             <Tooltip
-                                filterNull={false}
+                                filterNull={true}
                                 formatter={tooltipFormatter}
                                 separator=" "
                             />
@@ -97,6 +87,7 @@ const WeightGainChart: React.FC<WeightGainChartProps> = ({weightGainChartValues,
                                 iconType="plainline"
                             />
                             <Area
+                                connectNulls
                                 type="monotone"
                                 dataKey="value"
                                 activeDot={{stroke: '#406064', strokeWidth: 2, r: 4}}
@@ -105,6 +96,7 @@ const WeightGainChart: React.FC<WeightGainChartProps> = ({weightGainChartValues,
                                 strokeWidth={3}
                                 fillOpacity={1}
                                 fill="url(#value)"
+                                dot={{ stroke: '#2CB178', strokeWidth: 2, r: 3}}
                             />
                         </AreaChart>
                     </ResponsiveContainer>
