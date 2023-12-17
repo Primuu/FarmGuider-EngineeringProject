@@ -16,7 +16,7 @@ import MilkingResponseDTO from "@/entities/MilkingResponseDTO.ts";
 import {getMilkingChart, getMilkings} from "@/services/milkingService.ts";
 import WeightGainTable from "@/pages/CowPage/WeightGainTable.tsx";
 import WeightGainResponseDTO from "@/entities/WeightGainResponseDTO.ts";
-import {getWeightGains} from "@/services/weightGainService.ts";
+import {getWeightGainChart, getWeightGains} from "@/services/weightGainService.ts";
 import {Button} from "@mui/material";
 import ConfirmationDialog from "@/components/ConfirmationDialog/ConfirmationDialog.tsx";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -26,12 +26,14 @@ import CowMilkingYield from "@/pages/CowPage/CowMilkingYield.tsx";
 import {getLactationPeriods} from "@/services/lactationPeriodService.ts";
 import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
 import {ChartValueDTO} from "@/entities/ChartValueDTO.ts";
+import WeightGainChart from "@/pages/CowPage/WeightGainChart.tsx";
 
 const CowPage = () => {
     const {cowId} = useParams();
     const {t} = useTranslation('cowPage');
     const [loading, setLoading] = useState(true);
     const [milkingChartLoading, setMilkingChartLoading] = useState(true);
+    const [weightGainChartLoading, setWeightGainChartLoading] = useState(true);
     const navigate = useNavigate();
     const [locale, setLocale] = useState(enLocale);
     const [cow, setCow] = useState<CowResponseDTO>();
@@ -41,6 +43,7 @@ const CowPage = () => {
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
     const {enqueueSnackbar} = useSnackbar();
     const [milkingChartValues, setMilkingChartValues] = useState<ChartValueDTO[]>([]);
+    const [weightGainChartValues, setWeightGainChartValues] = useState<ChartValueDTO[]>([]);
     const [selectedLactationPeriod, setSelectedLactationPeriod] = useState<LactationPeriodResponseDTO | null>(null);
 
     useEffect(() => {
@@ -48,6 +51,7 @@ const CowPage = () => {
         fetchAndSetMilkingList();
         fetchAndSetWeightGainList();
         fetchAndSetLactationPeriodList();
+        fetchAndSetWeightGainChart();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cowId]);
 
@@ -150,6 +154,20 @@ const CowPage = () => {
         }
     }
 
+    const fetchAndSetWeightGainChart = () => {
+        if (cowId) {
+            getWeightGainChart(parseInt(cowId))
+                .then(data => {
+                    setWeightGainChartLoading(false);
+                    setWeightGainChartValues(data);
+                })
+                .catch(() => {
+                    setWeightGainChartLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+    }
+
     const handleChangeLactationPeriod = (newLactationPeriodId: number) => {
         const selectedLactationPeriod = lactationPeriodList.find(
             lp => lp.lactationPeriodId === newLactationPeriodId);
@@ -193,6 +211,7 @@ const CowPage = () => {
                         setWeightGainList={setWeightGainList}
                         locale={locale}
                         onWeightGainAdded={fetchAndSetWeightGainList}
+                        onWeightGainChanged={fetchAndSetWeightGainChart}
                     />
 
                     <div className="cow-button-container">
@@ -219,6 +238,10 @@ const CowPage = () => {
                         milkingChartLoading={milkingChartLoading}
                     />
 
+                    <WeightGainChart
+                        weightGainChartValues={weightGainChartValues}
+                        weightGainChartLoading={weightGainChartLoading}
+                    />
                 </div>
             </div>
 

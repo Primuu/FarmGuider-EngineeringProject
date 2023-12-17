@@ -10,7 +10,7 @@
     border: 2px solid #2CB178;
     border-radius: 16px;
     padding: 15px 15px 10px;
-    min-height: 35vh;
+    min-height: 34vh;
 }
 
 .chartGrid {
@@ -29,6 +29,7 @@
     color: #9B9B9B;
     font-style: italic;
     font-size: 14px;
+    text-align: center;
 }
 
 .lactation-period-single {
@@ -39,6 +40,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 100%;
 }
 
 .milking-chart-buttons {
@@ -65,4 +67,47 @@
     font-size: 18px;
     vertical-align: middle;
     margin-right: 6px;
+}
+
+@media (max-width: 1399px) {
+    .milking-chart-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-top: 15px;
+        gap: 20px;
+    }
+
+    .lactation-period-single {
+        width: 100%;
+    }
+
+    .milking-chart-buttons .add-lactation-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1100px) {
+    .milking-chart-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .lactation-period-single {
+        text-align: center;
+    }
+
+    .lactation-period-selector-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 599px) {
+    .cows-charts-data-container .chart-details {
+        font-size: 12px;
+    }
+
+    .chart-no-results {
+        font-size: 12px;
+    }
 }

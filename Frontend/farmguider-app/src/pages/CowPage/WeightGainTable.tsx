@@ -14,9 +14,13 @@ type WeightGainTableProps = {
     setWeightGainList: (weightGainList: WeightGainResponseDTO[]) => void;
     locale: Locale;
     onWeightGainAdded: () => void;
+    onWeightGainChanged: () => void;
 }
 
-const WeightGainTable: React.FC<WeightGainTableProps> = ({cow, weightGainList, setWeightGainList, locale, onWeightGainAdded}) => {
+const WeightGainTable: React.FC<WeightGainTableProps> = (
+    {cow, weightGainList, setWeightGainList, locale,
+        onWeightGainAdded, onWeightGainChanged}
+) => {
     const {t} = useTranslation('cowPage');
     const [openAddWeightGainModal, setOpenAddWeightGainModal] = useState(false);
 
@@ -25,13 +29,20 @@ const WeightGainTable: React.FC<WeightGainTableProps> = ({cow, weightGainList, s
 
     const handleWeightGainDeleted = (deletedWeightGainId: number) => {
         setWeightGainList(weightGainList.filter(weightGain => weightGain.weightGainId !== deletedWeightGainId));
+        onWeightGainChanged();
     };
 
     const handleWeightGainUpdated = (updatedWeightGain: WeightGainResponseDTO) => {
         setWeightGainList(weightGainList.map(weightGain =>
             weightGain.weightGainId === updatedWeightGain.weightGainId ? updatedWeightGain : weightGain
         ));
+        onWeightGainChanged();
     };
+
+    const onWeightGainAddedExtended = () => {
+        onWeightGainAdded()
+        onWeightGainChanged();
+    }
 
     return (
         <div>
@@ -94,7 +105,7 @@ const WeightGainTable: React.FC<WeightGainTableProps> = ({cow, weightGainList, s
                 open={openAddWeightGainModal}
                 onClose={handleCloseAddWeightGainModal}
                 cow={cow}
-                onWeightGainAdded={onWeightGainAdded}
+                onWeightGainAdded={onWeightGainAddedExtended}
             />
         </div>
     )

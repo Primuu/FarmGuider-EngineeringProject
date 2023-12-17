@@ -155,5 +155,12 @@
     "endDateRequirements": "Jeśli data zakończenia nie zostanie podana, okres laktacji będzie traktowany jako trwający nieokreślony czas",
     "confirmButton": "Edytuj Okres",
     "cancelButton": "Anuluj"
+  },
+  "weightGainChart": {
+    "details": "Wykres Przyrostów Wagi",
+    "valueName": "Waga",
+    "tooltipNullValue": "Nie wprowadzono",
+    "noChartValues": "Ta krowa nie ma jeszcze wprowadzonych pomiarów wagi. Dodaj pomiar, aby rozpocząć monitorowanie przyrostów wagi.",
+    "axisY": "Waga (kilogramy)"
   }
 }

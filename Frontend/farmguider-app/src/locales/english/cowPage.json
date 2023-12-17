@@ -155,5 +155,12 @@
     "endDateRequirements": "If no end date is provided, the lactation period will be treated as continuing indefinitely",
     "confirmButton": "Edit Period",
     "cancelButton": "Cancel"
+  },
+  "weightGainChart": {
+    "details": "Weight Gain Chart",
+    "valueName": "Weight",
+    "tooltipNullValue": "Not provided",
+    "noChartValues": "This cow has no weight measurements entered yet. Add a measurement to start monitoring weight gains.",
+    "axisY": "Weight (kilograms)"
   }
 }
