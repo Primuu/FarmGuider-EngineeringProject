@@ -53,7 +53,9 @@ const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, c
                             </Typography>
                         </div>
                     ) : (
-                        <MilkingChart/>
+                        <MilkingChart
+                            lactationPeriodId={selectedLactationPeriod?.lactationPeriodId}
+                        />
                     )
                 )}
             </div>
