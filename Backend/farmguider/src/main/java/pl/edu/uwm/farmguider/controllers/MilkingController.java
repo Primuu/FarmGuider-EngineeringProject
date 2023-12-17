@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.MilkingFacade;
+import pl.edu.uwm.farmguider.models.ChartValueDTO;
 import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingCreateDTO;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
@@ -84,6 +85,35 @@ public class MilkingController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(milkings);
+    }
+
+    @Operation(summary = "Get milking chart data by lactation period id",
+            description = "Returns a list of cow milkings (used to create a yield chart) by lactation period id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Milking list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = ChartValueDTO.class)
+                            )
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Lactation Period not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @GetMapping("/get-milking-chart/{lactationPeriodId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenLactationPeriodIdWithContext(#lactationPeriodId)")
+    public ResponseEntity<List<ChartValueDTO>> getMilkingChart(@PathVariable Long lactationPeriodId) {
+        List<ChartValueDTO> milkingData = milkingFacade.getMilkingChart(lactationPeriodId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(milkingData);
     }
 
     @Operation(summary = "Update milking by id", description = "Updates milking data based on the provided payload")

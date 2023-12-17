@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
+import pl.edu.uwm.farmguider.models.ChartValueDTO;
 import pl.edu.uwm.farmguider.models.cow.Cow;
+import pl.edu.uwm.farmguider.models.lactationPeriod.LactationPeriod;
 import pl.edu.uwm.farmguider.models.milking.Milking;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingCreateDTO;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingMapper;
 import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
 import pl.edu.uwm.farmguider.services.CowService;
+import pl.edu.uwm.farmguider.services.LactationPeriodService;
 import pl.edu.uwm.farmguider.services.MilkingService;
 
 import java.math.BigDecimal;
@@ -17,6 +20,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static pl.edu.uwm.farmguider.models.milking.dtos.MilkingMapper.mapToMilkingResponseDTO;
 import static pl.edu.uwm.farmguider.utils.GenderUtils.verifyIsFemale;
@@ -29,6 +35,7 @@ public class MilkingFacade {
     private final static LocalDateTime EMPTY_MILKING_DATE = null;
     private final MilkingService milkingService;
     private final CowService cowService;
+    private final LactationPeriodService lactationPeriodService;
 
     @Transactional
     public MilkingResponseDTO createMilking(Long cowId, MilkingCreateDTO milkingCreateDTO) {
@@ -102,6 +109,41 @@ public class MilkingFacade {
         milkingService.deleteMilkingById(milkingId);
 
         updateCowLatestMilkingIfNecessary(cow);
+    }
+
+    public List<ChartValueDTO> getMilkingChart(Long lactationPeriodId) {
+        LactationPeriod lactationPeriod = lactationPeriodService.getLactationPeriodById(lactationPeriodId);
+        Cow cow = lactationPeriodService.getCowByLactationPeriodId(lactationPeriodId);
+
+        LocalDate startDate = lactationPeriod.getStartDate();
+        LocalDate endDate = lactationPeriod.getEndDate() == null ? LocalDate.now() : lactationPeriod.getEndDate();
+
+        List<Milking> milkings = milkingService.getMilkingsByCowIdAndDatesBetween(cow.getId(), startDate, endDate);
+
+        return getChartValueDTOS(milkings, startDate, endDate);
+    }
+
+    private List<ChartValueDTO> getChartValueDTOS(List<Milking> milkings, LocalDate startDate, LocalDate endDate) {
+        Map<LocalDate, BigDecimal> dailyMilkSum = aggregateDailyMilkSum(milkings);
+
+        return Stream.iterate(startDate, date -> !date.isAfter(endDate), date -> date.plusDays(1))
+                .map(date -> ChartValueDTO.builder()
+                        .date(date)
+                        .value(dailyMilkSum.getOrDefault(date, null))
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private Map<LocalDate, BigDecimal> aggregateDailyMilkSum(List<Milking> milkings) {
+        return milkings.stream()
+                .collect(Collectors.groupingBy(
+                        milking -> milking.getDateOfMilking().toLocalDate(),
+                        Collectors.reducing(
+                                BigDecimal.ZERO,
+                                Milking::getMilkQuantity,
+                                BigDecimal::add
+                        )
+                ));
     }
 
 }
