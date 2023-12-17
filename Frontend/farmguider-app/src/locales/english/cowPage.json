@@ -122,7 +122,9 @@
     "deleteDialogTitle": "Deleting Lactation Period",
     "deleteDialogMessage": "Are you sure you want to delete this lactation period?",
     "deleteSuccessSnackbar": "Lactation period deleted successfully",
-    "deleteErrorSnackbar": "Something went wrong"
+    "deleteErrorSnackbar": "Something went wrong",
+    "noChartValues": "This lactation period does not include any milking. Add milking to start monitoring milk yield.",
+    "numberOfDays": "Number of days: "
   },
   "addLactationPeriodModal": {
     "successSnackbar": "Lactation period added successfully",

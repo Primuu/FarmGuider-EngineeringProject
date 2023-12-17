@@ -122,7 +122,9 @@
     "deleteDialogTitle": "Usuwanie Okresu Laktacji",
     "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć ten okres laktacji?",
     "deleteSuccessSnackbar": "Okres laktacji usunięty pomyślnie",
-    "deleteErrorSnackbar": "Coś poszło nie tak"
+    "deleteErrorSnackbar": "Coś poszło nie tak",
+    "noChartValues": "Ten okres laktacji nie zawiera żadnych udojów. Dodaj udój by zacząć monitorować wydajność mleczną.",
+    "numberOfDays": "Liczba dni: "
   },
   "addLactationPeriodModal": {
     "successSnackbar": "Okres laktacji dodany pomyślnie",

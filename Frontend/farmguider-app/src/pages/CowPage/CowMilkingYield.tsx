@@ -54,13 +54,13 @@ const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, c
                         </div>
                     ) : (
                         <MilkingChart
-                            lactationPeriodId={selectedLactationPeriod?.lactationPeriodId}
+                            lactationPeriod={selectedLactationPeriod}
                         />
                     )
                 )}
             </div>
-            {cow.gender === 'FEMALE'
-                && <MilkingYieldTools
+            {cow.gender === 'FEMALE' && selectedLactationPeriod &&
+                <MilkingYieldTools
                     cow={cow}
                     locale={locale}
                     onLactationPeriodChanged={onLactationPeriodChanged}
