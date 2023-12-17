@@ -35,6 +35,7 @@ export const DELETE_MILKING_URL: string = "/milking/delete/{milkingId}";
 // WeightGain
 export const CREATE_WEIGHT_GAIN_URL: string = "/weight-gain/create-weight-gain/{cowId}";
 export const GET_WEIGHT_GAINS_URL: string = "/weight-gain/get-weight-gains/{cowId}";
+export const GET_WEIGHT_GAIN_CHART_URL: string = "/weight-gain/get-weight-gain-chart/{cowId}";
 export const UPDATE_WEIGHT_GAIN_URL: string = "/weight-gain/update/{weightGainId}";
 export const DELETE_WEIGHT_GAIN_URL: string = "/weight-gain/delete/{weightGainId}";
 
