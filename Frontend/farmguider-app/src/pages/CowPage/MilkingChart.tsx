@@ -19,7 +19,6 @@ const MilkingChart: React.FC<MilkingChartProps> = ({milkingChartValues, milkingC
 
     const valueName = t('milkingChart.valueName');
     const NULL_VALUE_MARKER: string = "X";
-    const responsiveHeight: number = isDesktop ? 300 : 200;
     const responsiveMinTickGap: number = isDesktop ? 40 : 20;
 
     const processedData = milkingChartValues.map(item => ({
@@ -53,7 +52,7 @@ const MilkingChart: React.FC<MilkingChartProps> = ({milkingChartValues, milkingC
                     </Typography>
                 </div>
             ) : (
-                <ResponsiveContainer width="100%" height={responsiveHeight}>
+                <ResponsiveContainer width="100%" height={280}>
                     <AreaChart
                         data={processedData}
                         margin={{top: 0, right: 20, left: 0, bottom: 0}}
