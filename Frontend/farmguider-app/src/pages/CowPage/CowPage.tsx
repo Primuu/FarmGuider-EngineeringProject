@@ -13,7 +13,7 @@ import i18n from "i18next";
 import plLocale from "date-fns/locale/pl";
 import MilkingTable from "@/pages/CowPage/MilkingTable.tsx";
 import MilkingResponseDTO from "@/entities/MilkingResponseDTO.ts";
-import {getMilkings} from "@/services/milkingService.ts";
+import {getMilkingChart, getMilkings} from "@/services/milkingService.ts";
 import WeightGainTable from "@/pages/CowPage/WeightGainTable.tsx";
 import WeightGainResponseDTO from "@/entities/WeightGainResponseDTO.ts";
 import {getWeightGains} from "@/services/weightGainService.ts";
@@ -25,11 +25,13 @@ import {useSnackbar} from "notistack";
 import CowMilkingYield from "@/pages/CowPage/CowMilkingYield.tsx";
 import {getLactationPeriods} from "@/services/lactationPeriodService.ts";
 import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
+import {ChartValueDTO} from "@/entities/ChartValueDTO.ts";
 
 const CowPage = () => {
     const {cowId} = useParams();
     const {t} = useTranslation('cowPage');
     const [loading, setLoading] = useState(true);
+    const [milkingChartLoading, setMilkingChartLoading] = useState(true);
     const navigate = useNavigate();
     const [locale, setLocale] = useState(enLocale);
     const [cow, setCow] = useState<CowResponseDTO>();
@@ -38,6 +40,8 @@ const CowPage = () => {
     const [lactationPeriodList, setLactationPeriodList] = useState<LactationPeriodResponseDTO[]>([]);
     const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
     const {enqueueSnackbar} = useSnackbar();
+    const [milkingChartValues, setMilkingChartValues] = useState<ChartValueDTO[]>([]);
+    const [selectedLactationPeriod, setSelectedLactationPeriod] = useState<LactationPeriodResponseDTO | null>(null);
 
     useEffect(() => {
         fetchAndSetCow();
@@ -46,6 +50,19 @@ const CowPage = () => {
         fetchAndSetLactationPeriodList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cowId]);
+
+    useEffect(() => {
+        if (lactationPeriodList.length > 0) {
+            setSelectedLactationPeriod(lactationPeriodList[0]);
+        } else {
+            setSelectedLactationPeriod(null);
+        }
+    }, [lactationPeriodList]);
+
+    useEffect(() => {
+        fetchAndSetMilkingChart()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedLactationPeriod]);
 
     useEffect(() => {
         if (i18n.language === 'pl') setLocale(plLocale);
@@ -119,6 +136,28 @@ const CowPage = () => {
         }
     };
 
+    const fetchAndSetMilkingChart = () => {
+        if (selectedLactationPeriod && selectedLactationPeriod.lactationPeriodId) {
+            getMilkingChart(selectedLactationPeriod.lactationPeriodId)
+                .then(data => {
+                    setMilkingChartLoading(false);
+                    setMilkingChartValues(data);
+                })
+                .catch(() => {
+                    setMilkingChartLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+    }
+
+    const handleChangeLactationPeriod = (newLactationPeriodId: number) => {
+        const selectedLactationPeriod = lactationPeriodList.find(
+            lp => lp.lactationPeriodId === newLactationPeriodId);
+        if (selectedLactationPeriod) {
+            setSelectedLactationPeriod(selectedLactationPeriod);
+        }
+    }
+
     const handleOpenConfirmationDialog = () => setOpenConfirmationDialog(true);
 
     const handleCloseConfirmationDialog = () => setOpenConfirmationDialog(false);
@@ -145,6 +184,7 @@ const CowPage = () => {
                         setMilkingList={setMilkingList}
                         locale={locale}
                         onMilkingAdded={fetchAndSetMilkingList}
+                        onMilkingChanged={fetchAndSetMilkingChart}
                     />
 
                     <WeightGainTable
@@ -173,6 +213,10 @@ const CowPage = () => {
                         cow={cow}
                         locale={locale}
                         onLactationPeriodChanged={fetchAndSetLactationPeriodList}
+                        selectedLactationPeriod={selectedLactationPeriod}
+                        handleChangeLactationPeriod={handleChangeLactationPeriod}
+                        milkingChartValues={milkingChartValues}
+                        milkingChartLoading={milkingChartLoading}
                     />
 
                 </div>

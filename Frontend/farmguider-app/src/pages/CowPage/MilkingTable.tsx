@@ -14,9 +14,13 @@ type MilkingTableProps = {
     setMilkingList: (milkingList: MilkingResponseDTO[]) => void;
     locale: Locale;
     onMilkingAdded: () => void;
+    onMilkingChanged: () => void;
 }
 
-const MilkingTable: React.FC<MilkingTableProps> = ({cow, milkingList, setMilkingList, locale, onMilkingAdded}) => {
+const MilkingTable: React.FC<MilkingTableProps> = (
+    {cow, milkingList, setMilkingList, locale,
+        onMilkingAdded, onMilkingChanged}
+) => {
     const {t} = useTranslation('cowPage');
     const [openAddMilkingModal, setOpenAddMilkingModal] = useState(false);
 
@@ -25,12 +29,19 @@ const MilkingTable: React.FC<MilkingTableProps> = ({cow, milkingList, setMilking
 
     const handleMilkingDeleted = (deletedMilkingId: number) => {
         setMilkingList(milkingList.filter(milking => milking.milkingId !== deletedMilkingId));
+        onMilkingChanged();
     };
+
+    const onMilkingAddedExtended = () => {
+        onMilkingAdded();
+        onMilkingChanged();
+    }
 
     const handleMilkingUpdated = (updatedMilking: MilkingResponseDTO) => {
         setMilkingList(milkingList.map(milking =>
             milking.milkingId === updatedMilking.milkingId ? updatedMilking : milking
         ));
+        onMilkingChanged();
     };
 
     return (
@@ -96,7 +107,7 @@ const MilkingTable: React.FC<MilkingTableProps> = ({cow, milkingList, setMilking
                 open={openAddMilkingModal}
                 onClose={handleCloseAddMilkingModal}
                 cow={cow}
-                onMilkingAdded={onMilkingAdded}
+                onMilkingAdded={onMilkingAddedExtended}
             />
         </div>
     )

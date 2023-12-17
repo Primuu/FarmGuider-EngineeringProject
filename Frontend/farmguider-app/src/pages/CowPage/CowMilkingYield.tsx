@@ -1,37 +1,28 @@
 import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import MilkingYieldTools from "@/pages/CowPage/MilkingYieldTools.tsx";
 import CowResponseDTO from "@/entities/CowResponseDTO.ts";
 import '@/pages/CowPage/charts.css';
 import {Typography} from "@mui/material";
 import MilkingChart from "@/pages/CowPage/MilkingChart.tsx";
 import {useTranslation} from "react-i18next";
+import {ChartValueDTO} from "@/entities/ChartValueDTO.ts";
 
 type CowMilkingYieldProps = {
     lactationPeriodList: LactationPeriodResponseDTO[];
     cow: CowResponseDTO;
     locale: Locale;
     onLactationPeriodChanged: () => void;
+    selectedLactationPeriod: LactationPeriodResponseDTO | null;
+    handleChangeLactationPeriod: (lactationPeriodId: number) => void;
+    milkingChartValues: ChartValueDTO[];
+    milkingChartLoading: boolean;
 }
-const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, cow, locale, onLactationPeriodChanged}) => {
+const CowMilkingYield: React.FC<CowMilkingYieldProps> = (
+    {lactationPeriodList, cow, locale, onLactationPeriodChanged,
+        selectedLactationPeriod, handleChangeLactationPeriod, milkingChartValues, milkingChartLoading}
+) => {
     const {t} = useTranslation('cowPage');
-    const [selectedLactationPeriod, setSelectedLactationPeriod] = useState<LactationPeriodResponseDTO | null>(null);
-
-    useEffect(() => {
-        if (lactationPeriodList.length > 0) {
-            setSelectedLactationPeriod(lactationPeriodList[0]);
-        } else {
-            setSelectedLactationPeriod(null);
-        }
-    }, [lactationPeriodList]);
-
-    const handleChangeLactationPeriod = (newLactationPeriodId: number) => {
-        const selectedLactationPeriod = lactationPeriodList.find(
-            lp => lp.lactationPeriodId === newLactationPeriodId);
-        if (selectedLactationPeriod) {
-            setSelectedLactationPeriod(selectedLactationPeriod);
-        }
-    }
 
     return (
         <div>
@@ -54,12 +45,13 @@ const CowMilkingYield: React.FC<CowMilkingYieldProps> = ({lactationPeriodList, c
                         </div>
                     ) : (
                         <MilkingChart
-                            lactationPeriod={selectedLactationPeriod}
+                            milkingChartValues={milkingChartValues}
+                            milkingChartLoading={milkingChartLoading}
                         />
                     )
                 )}
             </div>
-            {cow.gender === 'FEMALE' && selectedLactationPeriod &&
+            {cow.gender === 'FEMALE' &&
                 <MilkingYieldTools
                     cow={cow}
                     locale={locale}

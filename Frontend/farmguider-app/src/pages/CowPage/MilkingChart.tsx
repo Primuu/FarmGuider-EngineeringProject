@@ -3,49 +3,24 @@ import '@/pages/CowPage/charts.css';
 import {useTranslation} from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import theme from "@/styles/theme.ts";
-import {NOT_FOUND_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
-import React, {useEffect, useState} from "react";
-import {getMilkingChart} from "@/services/milkingService.ts";
+import React from "react";
 import {ChartValueDTO} from "@/entities/ChartValueDTO.ts";
-import {useNavigate} from "react-router-dom";
 import {Typography} from "@mui/material";
-import LactationPeriodResponseDTO from "@/entities/LactationPeriodResponseDTO.ts";
 import LoadingComponent from "@/components/LoadingComponent/LoadingComponent.tsx";
 
 type MilkingChartProps = {
-    lactationPeriod: LactationPeriodResponseDTO | null;
+    milkingChartValues: ChartValueDTO[];
+    milkingChartLoading: boolean;
 }
 
-const MilkingChart: React.FC<MilkingChartProps> = ({lactationPeriod}) => {
+const MilkingChart: React.FC<MilkingChartProps> = ({milkingChartValues, milkingChartLoading}) => {
     const {t} = useTranslation('cowPage');
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
-    const [milkingChartValues, setMilkingChartValues] = useState<ChartValueDTO[]>([]);
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetchAndSetMilkingChart()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [lactationPeriod]);
 
     const valueName = t('milkingChart.valueName');
     const NULL_VALUE_MARKER: string = "X";
     const responsiveHeight: number = isDesktop ? 300 : 200;
     const responsiveMinTickGap: number = isDesktop ? 40 : 20;
-
-    const fetchAndSetMilkingChart = () => {
-        if (lactationPeriod && lactationPeriod.lactationPeriodId) {
-            getMilkingChart(lactationPeriod.lactationPeriodId)
-                .then(data => {
-                    setLoading(false);
-                    setMilkingChartValues(data);
-                })
-                .catch(() => {
-                    setLoading(false);
-                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
-                })
-        }
-    }
 
     const processedData = milkingChartValues.map(item => ({
         ...item,
@@ -67,7 +42,7 @@ const MilkingChart: React.FC<MilkingChartProps> = ({lactationPeriod}) => {
         return chartValues.every(chartValue => chartValue.value === null);
     };
 
-    if (loading) return <LoadingComponent/>;
+    if (milkingChartLoading) return <LoadingComponent/>;
 
     return (
         <div>
