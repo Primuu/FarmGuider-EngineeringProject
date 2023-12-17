@@ -28,6 +28,7 @@ export const DELETE_COW_URL: string = "/cow/delete/{cowId}";
 // Milking
 export const CREATE_MILKING_URL: string = "/milking/create-milking/{cowId}";
 export const GET_MILKINGS_URL: string = "/milking/get-milkings/{cowId}";
+export const GET_MILKING_CHART_URL: string = "/milking/get-milking-chart/{lactationPeriodId}";
 export const UPDATE_MILKING_URL: string = "/milking/update/{milkingId}";
 export const DELETE_MILKING_URL: string = "/milking/delete/{milkingId}";
 
