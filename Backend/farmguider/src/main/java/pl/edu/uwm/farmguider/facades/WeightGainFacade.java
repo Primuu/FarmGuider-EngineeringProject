@@ -130,6 +130,7 @@ public class WeightGainFacade {
 
         List<ChartValueDTO> chartValuesBetween = dailyWeightGain.entrySet().stream()
                 .filter(entry -> !entry.getKey().isEqual(startDate) && !entry.getKey().isEqual(endDate))
+                .sorted(Map.Entry.comparingByKey())
                 .map(entry -> ChartValueDTO.builder()
                         .date(entry.getKey())
                         .value(entry.getValue())
