@@ -6,11 +6,14 @@ import org.springframework.data.repository.query.Param;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.milking.Milking;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MilkingRepository extends JpaRepository<Milking, Long> {
 
     List<Milking> findAllByCowId(Long cowId);
+
+    List<Milking> findAllByDateOfMilkingBetweenAndCowId(LocalDateTime startDateTime, LocalDateTime endDateTime, Long cowId);
 
     @Query("""
             SELECT f.owner.id

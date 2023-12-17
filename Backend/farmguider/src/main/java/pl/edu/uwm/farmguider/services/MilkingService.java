@@ -8,7 +8,9 @@ import pl.edu.uwm.farmguider.models.milking.Milking;
 import pl.edu.uwm.farmguider.repositories.MilkingRepository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -20,6 +22,13 @@ public class MilkingService {
     public Milking getMilkingById(Long milkingId) {
         return milkingRepository.findById(milkingId)
                 .orElseThrow(() -> new EntityNotFoundException("Milking", "Milking with id: " + milkingId + " not found."));
+    }
+
+    public List<Milking> getMilkingsByCowIdAndDatesBetween(Long cowId, LocalDate startDate, LocalDate endDate) {
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(LocalTime.MAX);
+
+        return milkingRepository.findAllByDateOfMilkingBetweenAndCowId(startDateTime, endDateTime, cowId);
     }
 
     public Long getUserIdByMilkingId(Long milkingId) {
