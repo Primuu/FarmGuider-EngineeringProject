@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static pl.edu.uwm.farmguider.models.weightGain.dtos.WeightGainMapper.mapToWeightGainResponseDTO;
 
@@ -118,33 +119,16 @@ public class WeightGainFacade {
     private List<ChartValueDTO> getChartValueDTOS(List<WeightGain> weightGains, LocalDate startDate, LocalDate endDate) {
         Map<LocalDate, BigDecimal> dailyWeightGain = aggregateDailyWeightGain(weightGains);
 
-        ChartValueDTO startDTO = ChartValueDTO.builder()
-                .date(startDate)
-                .value(dailyWeightGain.getOrDefault(startDate, null))
-                .build();
-
-        ChartValueDTO endDTO = ChartValueDTO.builder()
-                .date(endDate)
-                .value(dailyWeightGain.getOrDefault(endDate, null))
-                .build();
-
-        List<ChartValueDTO> chartValuesBetween = dailyWeightGain.entrySet().stream()
-                .filter(entry -> !entry.getKey().isEqual(startDate) && !entry.getKey().isEqual(endDate))
-                .sorted(Map.Entry.comparingByKey())
-                .map(entry -> ChartValueDTO.builder()
-                        .date(entry.getKey())
-                        .value(entry.getValue())
+        return Stream.iterate(startDate, date -> !date.isAfter(endDate), date -> date.plusDays(1))
+                .filter(date -> date.isEqual(startDate) ||
+                        date.isEqual(endDate) ||
+                        date.getDayOfMonth() == 1 && date.getMonthValue() % 3 == 0 ||
+                        dailyWeightGain.containsKey(date))
+                .map(date -> ChartValueDTO.builder()
+                        .date(date)
+                        .value(dailyWeightGain.getOrDefault(date, null))
                         .build())
-                .toList();
-
-        List<ChartValueDTO> chartValues = new ArrayList<>();
-        chartValues.add(startDTO);
-        chartValues.addAll(chartValuesBetween);
-        if (!endDate.isEqual(startDate)) {
-            chartValues.add(endDTO);
-        }
-
-        return chartValues;
+                .collect(Collectors.toList());
     }
 
     private Map<LocalDate, BigDecimal> aggregateDailyWeightGain(List<WeightGain> weightGains) {
