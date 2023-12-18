@@ -66,6 +66,7 @@ const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
         <div>
             <div className="milking-chart-buttons">
                 {lactationPeriodList.length > 1 ? (
+                    selectedLactationPeriod &&
                     <div className="lactation-period-selector-container">
                         <FormControl
                             size={"small"}
@@ -75,7 +76,7 @@ const MilkingYieldTools: React.FC<MilkingYieldToolsProps> = (
                                 {t('milkingChart.pickerLabel')}
                             </InputLabel>
                             <Select
-                                value={selectedLactationPeriod!.lactationPeriodId.toString()}
+                                value={selectedLactationPeriod.lactationPeriodId.toString()}
                                 onChange={handleSelectLactationPeriod}
                                 label={t('milkingChart.pickerLabel')}
                             >
