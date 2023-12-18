@@ -31,14 +31,16 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
 
-    const handleLogout = async () => {
-        try {
-            await revoke();
-            removeSessionCookie();
-            enqueueSnackbar(t('logoutSuccess'), SnackbarSuccess);
-        } catch (error) {
-            enqueueSnackbar(t('logoutFail'), SnackbarError);
-        }
+    const handleLogout = () => {
+        revoke()
+            .then(() => {
+                enqueueSnackbar(t('logoutSuccess'), SnackbarSuccess);
+                localStorage.removeItem('lastPath');
+                removeSessionCookie();
+            })
+            .catch(() => {
+                enqueueSnackbar(t('logoutFail'), SnackbarError);
+            })
     };
 
     const handleClick = (url: string) => {
