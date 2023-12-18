@@ -13,7 +13,7 @@ export const removeTimezoneAndSeconds = (date: Date) => {
 };
 
 export const normalizeDate = (date: Date | null) => {
-    return date ? new Date(date.setHours(12, 0, 0, 0)) : null;
+    return date ? new Date(date.setHours(1, 0, 0, 0)) : null;
 }
 
 export const formatDateTime = (givenDate: Date): string => {
