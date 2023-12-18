@@ -188,7 +188,7 @@ const CowPage = () => {
             <Typography className="layout-header">
                 {t('header')}
             </Typography>
-            <div className="layout-container">
+            <div className="layout-container-cow">
                 <div className="cows-data-container">
                     <CowDetails
                         cow={cow}

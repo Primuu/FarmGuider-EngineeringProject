@@ -1,4 +1,9 @@
-.content .layout-container {
+.layout-container-cow {
+    min-height: 83vh;
+    width: calc(100% - 10%);
+    border-radius: 16px;
+    margin: 3vh 5%;
+    background: #FFFFFF;
     display: flex;
     flex-direction: row;
 }
@@ -36,7 +41,7 @@
 }
 
 @media (max-width: 1399px) {
-    .content .layout-container {
+    .layout-container-cow  {
         flex-direction: column;
     }
 
