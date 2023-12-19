@@ -5,9 +5,13 @@ import org.springframework.stereotype.Component;
 import pl.edu.uwm.farmguider.models.farm.Farm;
 import pl.edu.uwm.farmguider.models.field.Field;
 import pl.edu.uwm.farmguider.models.field.dtos.FieldCreateDTO;
+import pl.edu.uwm.farmguider.models.field.dtos.FieldMapper;
 import pl.edu.uwm.farmguider.models.field.dtos.FieldResponseDTO;
+import pl.edu.uwm.farmguider.models.field.dtos.FieldSearchParams;
 import pl.edu.uwm.farmguider.services.FarmService;
 import pl.edu.uwm.farmguider.services.FieldService;
+
+import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.field.dtos.FieldMapper.mapToFieldResponseDTO;
 
@@ -27,6 +31,13 @@ public class FieldFacade {
                 fieldCreateDTO.soilClass()
         );
         return mapToFieldResponseDTO(field);
+    }
+
+    public List<FieldResponseDTO> getFieldsByFarmId(Long farmId, FieldSearchParams fieldSearchParams) {
+        List<Field> fields = fieldService.getFieldsByFarmId(farmId, fieldSearchParams);
+        return fields.stream()
+                .map(FieldMapper::mapToFieldResponseDTO)
+                .toList();
     }
 
 }

@@ -1,6 +1,7 @@
 package pl.edu.uwm.farmguider.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +17,9 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.FieldFacade;
 import pl.edu.uwm.farmguider.models.field.dtos.FieldCreateDTO;
 import pl.edu.uwm.farmguider.models.field.dtos.FieldResponseDTO;
+import pl.edu.uwm.farmguider.models.field.dtos.FieldSearchParams;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -58,6 +62,35 @@ public class FieldController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(fieldResponseDTO);
+    }
+
+        @Operation(summary = "Get field's data by farm id",
+            description = """
+                    Complex rest for searching fields with the option of filtering.
+                    Can filter by fields:
+                    - fieldName: searches for matching field names, case-insensitive (no need to enter the entire name)
+                    - soilClass: enter "I", "II", "IIIa", "IIIb", "IVa", "IVb", "V" or do not enter this field at all
+                    - fieldAreaFrom and fieldAreaTo: provide a range of field areas (do not need to provide both values)
+                    """)
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Field list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = FieldResponseDTO.class)
+                            )
+                    ))
+    })
+    @GetMapping("/get-fields/{farmId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFarmIdWithContext(#farmId)")
+    public ResponseEntity<List<FieldResponseDTO>> getFieldsByFarmId(@PathVariable Long farmId,
+                                                                    @ModelAttribute @Valid FieldSearchParams fieldSearchParams) {
+        List<FieldResponseDTO> fields = fieldFacade.getFieldsByFarmId(farmId, fieldSearchParams);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(fields);
     }
 
 }

@@ -1,15 +1,20 @@
 package pl.edu.uwm.farmguider.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import pl.edu.uwm.farmguider.exceptions.global.InvalidEnumException;
 import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
+import pl.edu.uwm.farmguider.exceptions.global.InvalidEnumException;
 import pl.edu.uwm.farmguider.models.farm.Farm;
 import pl.edu.uwm.farmguider.models.field.Field;
+import pl.edu.uwm.farmguider.models.field.dtos.FieldSearchParams;
 import pl.edu.uwm.farmguider.models.field.enums.SoilClass;
 import pl.edu.uwm.farmguider.repositories.FieldRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import static pl.edu.uwm.farmguider.utils.FieldSpecification.bySearchParams;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +35,11 @@ public class FieldService {
         SoilClass enumSoilClass = SoilClass.valueOf(soilClass);
         Field field = new Field(farm, fieldName, fieldArea, enumSoilClass);
         return fieldRepository.saveAndFlush(field);
+    }
+
+    public List<Field> getFieldsByFarmId(Long farmId, FieldSearchParams fieldSearchParams) {
+        Specification<Field> spec = bySearchParams(farmId, fieldSearchParams);
+        return fieldRepository.findAll(spec);
     }
 
 }
