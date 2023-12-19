@@ -11,6 +11,7 @@ import pl.edu.uwm.farmguider.models.field.dtos.FieldSearchParams;
 import pl.edu.uwm.farmguider.services.FarmService;
 import pl.edu.uwm.farmguider.services.FieldService;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.field.dtos.FieldMapper.mapToFieldResponseDTO;
@@ -37,6 +38,7 @@ public class FieldFacade {
         List<Field> fields = fieldService.getFieldsByFarmId(farmId, fieldSearchParams);
         return fields.stream()
                 .map(FieldMapper::mapToFieldResponseDTO)
+                .sorted(Comparator.comparing(FieldResponseDTO::fieldName))
                 .toList();
     }
 

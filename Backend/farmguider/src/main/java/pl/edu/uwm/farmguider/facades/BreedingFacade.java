@@ -10,6 +10,7 @@ import pl.edu.uwm.farmguider.models.farm.Farm;
 import pl.edu.uwm.farmguider.services.BreedingService;
 import pl.edu.uwm.farmguider.services.FarmService;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.breeding.dtos.BreedingMapper.mapToBreedingResponseDTO;
@@ -32,6 +33,7 @@ public class BreedingFacade {
         return breedings
                 .stream()
                 .map(BreedingMapper::mapToBreedingResponseDTO)
+                .sorted(Comparator.comparing(BreedingResponseDTO::breedingName))
                 .toList();
     }
 
@@ -42,10 +44,6 @@ public class BreedingFacade {
 
     public void deleteBreedingById(Long breedingId) {
         breedingService.deleteBreedingById(breedingId);
-    }
-
-    public Long x(Long breedingId) {
-        return breedingService.getUserIdByBreedingId(breedingId);
     }
 
 }
