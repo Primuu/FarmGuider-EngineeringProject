@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.edu.uwm.farmguider.models.basic.BasicEntity;
 import pl.edu.uwm.farmguider.models.breeding.Breeding;
+import pl.edu.uwm.farmguider.models.field.Field;
 import pl.edu.uwm.farmguider.models.user.User;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public class Farm extends BasicEntity {
 
     @OneToMany(mappedBy = "farm", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Breeding> breedings;
+
+    @OneToMany(mappedBy = "farm", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Field> fields;
 
     public Farm(User user, String farmName) {
         this.owner = user;
