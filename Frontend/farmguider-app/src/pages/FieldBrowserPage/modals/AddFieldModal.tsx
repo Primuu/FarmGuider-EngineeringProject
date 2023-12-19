@@ -18,9 +18,10 @@ type AddFieldModalProps = {
     onClose: () => void;
     farmId: number | undefined;
     onFieldAdded: () => void;
+    setInitialLength: (length: number) => void;
 }
 
-const AddFieldModal: React.FC<AddFieldModalProps> = ({open, onClose, farmId, onFieldAdded}) => {
+const AddFieldModal: React.FC<AddFieldModalProps> = ({open, onClose, farmId, onFieldAdded, setInitialLength}) => {
     const [fieldName, setFieldName] = useState<string | null>(null);
     const [fieldArea, setFieldArea] = useState<number | null>(null);
     const [soilClass, setSoilClass] = useState<string>("");
@@ -63,6 +64,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({open, onClose, farmId, onF
                 .then(() => {
                     cancel();
                     onFieldAdded();
+                    setInitialLength(1);
                     enqueueSnackbar(t('addFieldModal.successSnackbar'), SnackbarSuccess);
                 })
                 .catch(() => {
@@ -111,7 +113,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({open, onClose, farmId, onF
                                         label={t('addFieldModal.fieldArea')}
                                         type="number"
                                         inputProps={{
-                                            step: "0.001",
+                                            step: "0.01",
                                             min: "0.00",
                                             max: "999.99"
                                         }}

@@ -10,6 +10,7 @@ import {useNavigate} from "react-router-dom";
 import NoFieldsContent from "@/pages/FieldBrowserPage/NoFieldsContent.tsx";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen.tsx";
 import AddFieldModal from "@/pages/FieldBrowserPage/modals/AddFieldModal.tsx";
+import FieldsContent from "@/pages/FieldBrowserPage/FieldsContent.tsx";
 
 const FieldBrowserPage = () => {
     const {t} = useTranslation('fieldBrowserPage');
@@ -19,6 +20,8 @@ const FieldBrowserPage = () => {
     const [fieldSearchParams, setFieldSearchParams] = useState<FieldSearchParams>({});
     const navigate = useNavigate();
     const [openAddFieldModal, setOpenAddFieldModal] = useState(false);
+    const [searchMade, setSearchMade] = useState<boolean>(false);
+    const [initialListLength, setInitialListLength] = useState<number>(0);
 
     useEffect(() => {
         fetchAndSetFields();
@@ -31,6 +34,10 @@ const FieldBrowserPage = () => {
                 .then(data => {
                     setFieldList(data);
                     setLoading(false);
+                    if (!searchMade) {
+                        setInitialListLength(data.length);
+                        setSearchMade(true);
+                    }
                 })
                 .catch(() => {
                     setLoading(false);
@@ -38,6 +45,10 @@ const FieldBrowserPage = () => {
                 })
         }
     }
+
+    const updateSearchParams = (key: keyof FieldSearchParams, value: string | number | undefined) => {
+        setFieldSearchParams(prevState => ({...prevState, [key]: value}));
+    };
 
     const handleOpenAddFieldModal = () => setOpenAddFieldModal(true);
     const handleCloseAddFieldModal = () => setOpenAddFieldModal(false);
@@ -50,20 +61,19 @@ const FieldBrowserPage = () => {
                 {t('header')}
             </Typography>
             <div className="layout-container">
-                {fieldList.length == 0 &&
+                {initialListLength === 0 ? (
                     <NoFieldsContent
                         handleOpenAddFieldModal={handleOpenAddFieldModal}
-                    />}
-                {/*{breedingList.length > 0 &&*/}
-                {/*    <BreedingContent*/}
-                {/*        breedingList={breedingList}*/}
-                {/*        handleOpenAddHerdModal={handleOpenAddHerdModal}*/}
-                {/*        refreshBreedings={fetchAndSetBreedings}*/}
-                {/*        breeding={breeding}*/}
-                {/*        handleChangeHerd={handleChangeHerd}*/}
-                {/*        cowSearchParams={fieldSearchParams}*/}
-                {/*        updateSearchParams={updateSearchParams}*/}
-                {/*    />}*/}
+                    />
+                ) : (
+                    <FieldsContent
+                        fieldList={fieldList}
+                        onOpenAddFieldModal={handleOpenAddFieldModal}
+                        fieldSearchParams={fieldSearchParams}
+                        updateSearchParams={updateSearchParams}
+                        onSearch={fetchAndSetFields}
+                    />
+                )}
             </div>
 
             <AddFieldModal
@@ -71,6 +81,7 @@ const FieldBrowserPage = () => {
                 onClose={handleCloseAddFieldModal}
                 farmId={farmId}
                 onFieldAdded={fetchAndSetFields}
+                setInitialLength={setInitialListLength}
             />
         </div>
     );

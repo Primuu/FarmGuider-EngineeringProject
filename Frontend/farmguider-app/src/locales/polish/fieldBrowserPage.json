@@ -23,5 +23,18 @@
       "fieldAreaNonNegative": "Powierzchnia nie może być ujemna",
       "fieldAreaRange": "Powierzchnia musi znajdować się w zakresie od 0.00 do 999.99"
     }
+  },
+  "fieldBrowser": {
+    "fieldName": "Nazwa Pola",
+    "fieldAreaFrom": "Powierzchnia Od (ha)",
+    "fieldAreaTo": "Powierzchnia Do (ha)",
+    "search": "Szukaj",
+    "selectSoilClass": "Wybierz Klasę Ziemi",
+    "notSelected": "Nie Wybrano",
+    "unknownSoilClass": "Nie Podano",
+    "addButton": "Dodaj Pole"
+  },
+  "fieldResults": {
+    "noResults": "Brak wyników wyszukiwania"
   }
 }
