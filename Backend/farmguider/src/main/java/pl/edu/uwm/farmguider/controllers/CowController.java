@@ -61,6 +61,7 @@ public class CowController {
                     ))
     })
     @GetMapping("/get-cows/{breedingId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenBreedingIdWithContext(#breedingId)")
     public ResponseEntity<Page<CowResponseDTO>> getCowsByBreedingId(@PathVariable Long breedingId,
                                                                     @ModelAttribute @Valid CowSearchParams cowSearchParams) {
         Page<CowResponseDTO> cows = cowFacade.getCowsByBreedingId(breedingId, cowSearchParams);
