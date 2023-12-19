@@ -12,7 +12,7 @@ import {SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 
-import '@/pages/ProfilePage/changePassword.css';
+import '@/pages/ProfilePage/modals/changePassword.css';
 
 type ChangePasswordModalProps = {
     open: boolean;

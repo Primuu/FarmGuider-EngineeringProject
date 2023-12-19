@@ -16,8 +16,8 @@ import UserUpdateDTO from "@/entities/UserUpdateDTO.ts";
 import {SnackbarError, SnackbarSuccess} from "@/utils/snackbarVariants.ts";
 import {useSnackbar} from "notistack";
 import ProfileButtons from "@/pages/ProfilePage/ProfileButtons.tsx";
-import ChangePasswordModal from "@/pages/ProfilePage/ChangePasswordModal.tsx";
-import DeleteAccountModal from "@/pages/ProfilePage/DeleteAccountModal.tsx";
+import ChangePasswordModal from "@/pages/ProfilePage/modals/ChangePasswordModal.tsx";
+import DeleteAccountModal from "@/pages/ProfilePage/modals/DeleteAccountModal.tsx";
 
 const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);

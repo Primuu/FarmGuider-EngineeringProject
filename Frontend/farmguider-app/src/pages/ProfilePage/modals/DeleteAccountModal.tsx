@@ -12,7 +12,7 @@ import UserPasswordDTO from "@/entities/UserPasswordDTO.ts";
 import {useAuth} from "@/contexts/AuthContext/AuthContext.tsx";
 import {useSnackbar} from "notistack";
 
-import '@/pages/ProfilePage/deleteAccount.css';
+import '@/pages/ProfilePage/modals/deleteAccount.css';
 
 type DeleteAccountModalProps = {
     open: boolean;
