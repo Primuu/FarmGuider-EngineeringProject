@@ -6,7 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.edu.uwm.farmguider.exceptions.cow.InvalidGenderException;
+import pl.edu.uwm.farmguider.exceptions.global.InvalidEnumException;
 import pl.edu.uwm.farmguider.exceptions.global.EntityAlreadyExistsException;
 import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
 import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
@@ -52,9 +52,9 @@ public class GlobalExceptionHandler {
         return new ErrorResponse("UnauthorizedException", errors);
     }
 
-    @ExceptionHandler(value = InvalidGenderException.class)
+    @ExceptionHandler(value = InvalidEnumException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse invalidGenderException(InvalidGenderException exception) {
+    public ErrorResponse invalidGenderException(InvalidEnumException exception) {
         Map<String, String> errors = Map.of(exception.getEnumName(), exception.getMessage());
         return new ErrorResponse("InvalidGenderException", errors);
     }

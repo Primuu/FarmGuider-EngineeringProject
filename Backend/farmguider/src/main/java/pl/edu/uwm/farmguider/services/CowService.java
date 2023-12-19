@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import pl.edu.uwm.farmguider.exceptions.cow.InvalidGenderException;
+import pl.edu.uwm.farmguider.exceptions.global.InvalidEnumException;
 import pl.edu.uwm.farmguider.exceptions.global.EntityNotFoundException;
 import pl.edu.uwm.farmguider.exceptions.global.InvalidDateException;
 import pl.edu.uwm.farmguider.models.breeding.Breeding;
@@ -45,7 +45,7 @@ public class CowService {
 
     public Cow createCow(Breeding breeding, String cowName, String earTagNumber, LocalDate dateOfBirth, String gender) {
         if (!Gender.isValid(gender)) {
-            throw new InvalidGenderException("Gender", "Invalid gender: " + gender);
+            throw new InvalidEnumException("Gender", "Invalid gender: " + gender);
         }
 
         Gender enumGender = Gender.valueOf(gender);
@@ -67,7 +67,7 @@ public class CowService {
 
     public Cow updateCowById(Long cowId, String cowName, String earTagNumber, LocalDate dateOfBirth, String gender) {
         if (!Gender.isValid(gender)) {
-            throw new InvalidGenderException("Gender", "Invalid gender: " + gender);
+            throw new InvalidEnumException("Gender", "Invalid gender: " + gender);
         }
 
         Cow cow = getCowById(cowId);
@@ -94,7 +94,7 @@ public class CowService {
 
     private void validateGenderUpdate(Cow cow) {
         if (!cow.getLactationPeriods().isEmpty() || !cow.getMilkings().isEmpty()) {
-            throw new InvalidGenderException("Gender", "Gender of this animal cannot be updated " +
+            throw new InvalidEnumException("Gender", "Gender of this animal cannot be updated " +
                     "as it has associated lactation periods or milking data which are gender-specific.");
         }
     }
