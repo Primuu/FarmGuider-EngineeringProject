@@ -1,8 +1,8 @@
-import LoginForm from "@/pages/NotLoggedPage/LoginForm.tsx";
-import RegisterForm from "@/pages/NotLoggedPage/RegisterForm.tsx";
+import LoginForm from "@/pages/NotLoggedPage/modals/LoginForm.tsx";
+import RegisterForm from "@/pages/NotLoggedPage/modals/RegisterForm.tsx";
 import { Box, Modal, Fade, Button, Slide } from '@mui/material';
 import React, {useState} from "react";
-import '@/pages/NotLoggedPage/authFormsModal.css';
+import '@/pages/NotLoggedPage/modals/authFormsModal.css';
 import {useTranslation} from "react-i18next";
 
 type AuthFormsModalProps = {

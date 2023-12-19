@@ -8,7 +8,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import {useTranslation} from 'react-i18next';
 import Navbar from "@/components/Navbar/Navbar.tsx";
-import AuthFormsModal from "@/pages/NotLoggedPage/AuthFormsModal.tsx";
+import AuthFormsModal from "@/pages/NotLoggedPage/modals/AuthFormsModal.tsx";
 import tractorImage from '@/assets/tractor-image.jpg';
 import cowsImage from '@/assets/cows-image.jpg';
 import cropsImage from '@/assets/crops-image.jpg';

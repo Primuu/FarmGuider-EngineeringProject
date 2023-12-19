@@ -6,7 +6,7 @@ import {register} from "@/services/authenticationService.ts";
 import UserCreateDTO from "@/entities/UserCreateDTO.ts";
 import useValidation from "@/hooks/useValidation.ts";
 import {NAME_REGEX, RegisterValues, validateRegister} from "@/utils/profileValidators.ts";
-import '@/pages/NotLoggedPage/forms.css';
+import '@/pages/NotLoggedPage/modals/forms.css';
 import LockIcon from '@mui/icons-material/Lock';
 import {useTranslation} from "react-i18next";
 import {useSnackbar} from "notistack";

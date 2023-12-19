@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Box, Button, Container, TextField, Typography} from '@mui/material';
 import AuthenticationRequestDTO from "@/entities/AuthenticationRequestDTO.ts";
 import {authenticate} from "@/services/authenticationService.ts";
-import '@/pages/NotLoggedPage/forms.css';
+import '@/pages/NotLoggedPage/modals/forms.css';
 import LoginIcon from '@mui/icons-material/Login';
 import {useTranslation} from "react-i18next";
 import {useSnackbar} from "notistack";
