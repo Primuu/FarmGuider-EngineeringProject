@@ -94,7 +94,7 @@
     "header": "Edycja Pomiaru Wagi",
     "measurementDate": "Data Pomiaru",
     "weight": "Waga (kilogramy)",
-    "requirements": "Aby edytować pomiar wagi, podaj datę ważenia (nie może być wcześniejsza niż data urodzenia) i wagę",
+    "requirements": "Aby edytować pomiar wagi, podaj datę ważenia (nie może być wcześniejsza niż data urodzenia) i wagę.",
     "confirmButton": "Edytuj",
     "cancelButton": "Anuluj"
   },

@@ -4,5 +4,24 @@
     "information": "Wygląda na to, że nie dodałeś jeszcze żadnego pola",
     "addButton": "Dodaj Pole",
     "imageAlt": "Obrazek stracha na wróble"
+  },
+  "addFieldModal": {
+    "successSnackbar": "Pole dodane pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Dodawanie Pola",
+    "fieldName": "Nazwa Pola",
+    "fieldArea": "Powierzchnia (hektary)",
+    "soilClass": "Wybierz Klasę Ziemi",
+    "unknownSoilClass": "Nie Podawaj",
+    "requirements": "Aby dodać pole należy podać nazwę pola, jego powierzchnię i wybrać klasę gruntu.",
+    "confirmButton": "Dodaj Pole",
+    "cancelButton": "Anuluj",
+    "validation": {
+      "fieldNameRequired": "Nazwa pola musi być podana",
+      "fieldNameLength": "Nazwa pola może zawierać maksymalnie 45 znaków",
+      "fieldAreaRequired": "Powierzchnia musi być podana",
+      "fieldAreaNonNegative": "Powierzchnia nie może być ujemna",
+      "fieldAreaRange": "Powierzchnia musi znajdować się w zakresie od 0.00 do 999.99"
+    }
   }
 }

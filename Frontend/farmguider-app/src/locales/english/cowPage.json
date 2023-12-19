@@ -94,7 +94,7 @@
     "header": "Editing Weight Measurement",
     "measurementDate": "Measurement Date",
     "weight": "Weight (kilograms)",
-    "requirements": "To edit a weight measurement, provide the measurement date (it cannot be earlier than the date of birth) and weight",
+    "requirements": "To edit a weight measurement, provide the measurement date (it cannot be earlier than the date of birth) and weight.",
     "confirmButton": "Edit",
     "cancelButton": "Cancel"
   },

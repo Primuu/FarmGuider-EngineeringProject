@@ -4,5 +4,24 @@
     "information": "It looks like you haven't added any fields yet",
     "addButton": "Add Field",
     "imageAlt": "Scarecrow Image"
+  },
+  "addFieldModal": {
+    "successSnackbar": "Field added successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Adding a Field",
+    "fieldName": "Field Name",
+    "fieldArea": "Field Area (hectares)",
+    "soilClass": "Select Soil Class",
+    "unknownSoilClass": "Don't Provide",
+    "requirements": "To add a field, provide the field name, it's area and select the soil class.",
+    "confirmButton": "Add Field",
+    "cancelButton": "Cancel",
+    "validation": {
+      "fieldNameRequired": "Field name must be filled in",
+      "fieldNameLength": "Field name can contain a maximum of 45 characters",
+      "fieldAreaRequired": "Field area must be filled in",
+      "fieldAreaNonNegative": "Field area cannot be negative",
+      "fieldAreaRange": "Field area must be within the range of 0.00 to 999.99"
+    }
   }
 }
