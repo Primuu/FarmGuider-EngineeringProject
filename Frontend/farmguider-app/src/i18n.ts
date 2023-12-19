@@ -13,6 +13,7 @@ import enProfilePage from '@/locales/english/profilePage.json';
 import enBreedingPage from '@/locales/english/breedingPage.json';
 import enConfirmationDialog from '@/locales/english/confirmationDialog.json';
 import enCowPage from '@/locales/english/cowPage.json';
+import enFieldBrowserPage from '@/locales/english/fieldBrowserPage.json';
 
 import plNotLoggedPage from '@/locales/polish/notLoggedPage.json';
 import plLanguageSwitcher from '@/locales/polish/languageSwitcher.json';
@@ -24,6 +25,7 @@ import plProfilePage from '@/locales/polish/profilePage.json';
 import plBreedingPage from '@/locales/polish/breedingPage.json';
 import plConfirmationDialog from '@/locales/polish/confirmationDialog.json';
 import plCowPage from '@/locales/polish/cowPage.json';
+import plFieldBrowserPage from '@/locales/polish/fieldBrowserPage.json';
 
 const savedLanguage = localStorage.getItem(LANGUAGE_ITEM) || 'en';
 
@@ -42,6 +44,7 @@ void i18n
                 breedingPage: enBreedingPage,
                 confirmationDialog: enConfirmationDialog,
                 cowPage: enCowPage,
+                fieldBrowserPage: enFieldBrowserPage,
             },
             pl: {
                 notLoggedPage: plNotLoggedPage,
@@ -54,6 +57,7 @@ void i18n
                 breedingPage: plBreedingPage,
                 confirmationDialog: plConfirmationDialog,
                 cowPage: plCowPage,
+                fieldBrowserPage: plFieldBrowserPage,
             },
         },
         lng: savedLanguage,
