@@ -13,7 +13,13 @@ import {GiCow, GiHighGrass} from 'react-icons/gi';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import {useNavigate} from 'react-router-dom';
-import {BREEDING_PAGE_URL, HOME_PAGE_URL, NOT_LOGGED_PAGE_URL, PROFILE_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
+import {
+    BREEDING_PAGE_URL,
+    FIELD_BROWSER_PAGE_URL,
+    HOME_PAGE_URL,
+    NOT_LOGGED_PAGE_URL,
+    PROFILE_PAGE_URL
+} from "@/constants/ROUTER_URLS.ts";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
 import {IconType} from "react-icons/lib";
@@ -53,7 +59,7 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
         {icon: HomeOutlinedIcon, text: t('home'), onClick: () => handleClick(HOME_PAGE_URL)},
         {icon: PersonOutlineIcon, text: t('profile'), onClick: () => handleClick(PROFILE_PAGE_URL)},
         {icon: GiCow as IconType, text: t('breeding'), onClick: () => handleClick(BREEDING_PAGE_URL)},
-        {icon: GiHighGrass as IconType, text: t('crops'), onClick: () => handleClick("/")},
+        {icon: GiHighGrass as IconType, text: t('fields'), onClick: () => handleClick(FIELD_BROWSER_PAGE_URL)},
     ];
 
     return (
