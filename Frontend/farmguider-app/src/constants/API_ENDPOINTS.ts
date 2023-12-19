@@ -44,3 +44,7 @@ export const CREATE_LACTATION_PERIOD_URL: string = "/lactation-period/create-lac
 export const GET_LACTATION_PERIODS_URL: string = "/lactation-period/get-lactation-periods/{cowId}";
 export const UPDATE_LACTATION_PERIOD_URL: string = "/lactation-period/update/{lactationPeriodId}";
 export const DELETE_LACTATION_PERIOD_URL: string = "/lactation-period/delete/{lactationPeriodId}";
+
+// Field
+export const CREATE_FIELD_URL: string = "/field/create-field/{farmId}";
+export const GET_FIELDS_URL: string = "/field/get-fields/{farmId}";
