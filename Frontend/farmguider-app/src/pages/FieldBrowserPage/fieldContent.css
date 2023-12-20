@@ -13,6 +13,7 @@
     min-width: 100%;
     overflow-x: auto;
     align-items: center;
+    border-bottom: 1px solid #CCCCCC;;
 }
 
 .field-browser-input-1,
@@ -30,6 +31,11 @@
     gap: 10px;
 }
 
+.field-results-container {
+    max-height: 68vh;
+    overflow-y: auto;
+}
+
 .field-no-results {
     display: flex;
     align-items: center;
@@ -37,6 +43,51 @@
     color: #9B9B9B;
     font-style: italic;
     height: 40vh;
+}
+
+.field-card-container {
+    padding: 20px;
+    margin: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow-x: auto;
+}
+
+.field-basic-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+.field-basic-info .field-name {
+    color: #406064;
+    font-size: 18px;
+}
+
+.field-basic-info .field-area {
+    font-size: 16px;
+}
+
+.field-soil-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+.field-soil-info .soil-class {
+    font-size: 18px;
+}
+
+.field-soil-info .soil-class-value {
+    font-size: 16px;
+}
+
+.field-soil-info .soil-class-value-unknown {
+    color: #9B9B9B;
+    font-style: italic;
 }
 
 @media (max-width: 1599px) {
@@ -86,5 +137,26 @@
     .field-browser-inputs-5 {
         order: 5;
         gap: 15px;
+    }
+
+    .field-card-container {
+        padding: 15px;
+        margin: 6px;
+    }
+
+    .field-basic-info .field-name {
+        font-size: 16px;
+    }
+
+    .field-basic-info .field-area {
+        font-size: 14px;
+    }
+
+    .field-soil-info .soil-class {
+        font-size: 16px;
+    }
+
+    .field-soil-info .soil-class-value {
+        font-size: 14px;
     }
 }

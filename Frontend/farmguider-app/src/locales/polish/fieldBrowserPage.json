@@ -31,10 +31,14 @@
     "search": "Szukaj",
     "selectSoilClass": "Wybierz Klasę Ziemi",
     "notSelected": "Nie Wybrano",
-    "unknownSoilClass": "Nie Podano",
+    "unknownSoilClass": "Nie Podana",
     "addButton": "Dodaj Pole"
   },
   "fieldResults": {
-    "noResults": "Brak wyników wyszukiwania"
+    "noResults": "Brak wyników wyszukiwania",
+    "fieldName": "Nazwa Pola:",
+    "fieldArea": "Powierzchnia:",
+    "soilClass": "Klasa Ziemi",
+    "unknownSoilClass": "Nie Podana"
   }
 }

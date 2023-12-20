@@ -35,6 +35,10 @@
     "addButton": "Add Field"
   },
   "fieldResults": {
-    "noResults": "No search results"
+    "noResults": "No search results",
+    "fieldName": "Field Name:",
+    "fieldArea": "Area:",
+    "soilClass": "Soil Class",
+    "unknownSoilClass": "Not Provided"
   }
 }

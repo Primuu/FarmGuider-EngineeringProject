@@ -10,3 +10,7 @@ enum SoilClass {
 }
 
 export default SoilClass;
+
+export const getSoilClassValue = (key: string): SoilClass => {
+    return SoilClass[key as keyof typeof SoilClass] || key;
+}

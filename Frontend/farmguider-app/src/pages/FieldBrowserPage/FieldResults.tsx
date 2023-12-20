@@ -12,7 +12,7 @@ const FieldResults: React.FC<FieldResultsProps> = ({fieldList}) => {
     const {t} = useTranslation('fieldBrowserPage');
 
     return (
-        <div>
+        <div className="field-results-container">
             {
                 fieldList.length > 0 ? (
                     fieldList.map(field => (
