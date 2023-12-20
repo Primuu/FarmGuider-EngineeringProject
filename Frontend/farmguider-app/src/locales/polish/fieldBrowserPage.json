@@ -39,6 +39,7 @@
     "fieldName": "Nazwa Pola:",
     "fieldArea": "Powierzchnia:",
     "soilClass": "Klasa Ziemi",
-    "unknownSoilClass": "Nie Podana"
+    "unknownSoilClass": "Nie Podana",
+    "tooltip": "Kliknij w pole, aby przejść do zarządzania uprawami"
   }
 }

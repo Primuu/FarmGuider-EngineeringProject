@@ -45,6 +45,10 @@
     height: 40vh;
 }
 
+.field-link-style {
+    text-decoration: none;
+}
+
 .field-card-container {
     padding: 20px;
     margin: 8px;
@@ -54,6 +58,11 @@
     overflow-x: auto;
 }
 
+.field-card-container:hover {
+    filter: brightness(100%);
+    background-color: #F5F5F5;
+}
+
 .field-basic-info {
     display: flex;
     flex-direction: column;
@@ -61,7 +70,7 @@
 }
 
 .field-basic-info .field-name {
-    color: #406064;
+    color: #2CB178;
     font-size: 18px;
 }
 

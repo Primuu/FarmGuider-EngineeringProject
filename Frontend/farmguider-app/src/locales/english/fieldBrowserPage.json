@@ -39,6 +39,7 @@
     "fieldName": "Field Name:",
     "fieldArea": "Area:",
     "soilClass": "Soil Class",
-    "unknownSoilClass": "Not Provided"
+    "unknownSoilClass": "Not Provided",
+    "tooltip": "Click on the filed to go to crop management"
   }
 }
