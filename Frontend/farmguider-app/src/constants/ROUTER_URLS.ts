@@ -6,3 +6,5 @@ export const BREEDING_PAGE_URL: string = "/breeding";
 export const COW_PAGE_URL: string = "/cow/:cowId";
 export const COW_PAGE_WITH_ID = (cowId: number): string => COW_PAGE_URL.replace(":cowId", cowId.toString());
 export const FIELD_BROWSER_PAGE_URL: string = "/fields";
+export const FIELD_PAGE_URL: string = "/field/:fieldId";
+export const FIELD_PAGE_WITH_ID = (fieldId: number): string => FIELD_PAGE_URL.replace(":fieldId", fieldId.toString());
