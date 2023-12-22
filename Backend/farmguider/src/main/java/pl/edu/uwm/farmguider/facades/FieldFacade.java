@@ -46,4 +46,14 @@ public class FieldFacade {
         return mapToFieldResponseDTO(fieldService.getFieldById(fieldId));
     }
 
+    public FieldResponseDTO updateFieldById(Long fieldId, FieldCreateDTO fieldCreateDTO) {
+        Field field = fieldService.updateFieldById(
+                fieldId,
+                fieldCreateDTO.fieldName(),
+                fieldCreateDTO.fieldArea(),
+                fieldCreateDTO.soilClass()
+        );
+        return mapToFieldResponseDTO(field);
+    }
+
 }

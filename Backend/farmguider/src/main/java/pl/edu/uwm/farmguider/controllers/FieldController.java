@@ -118,4 +118,38 @@ public class FieldController {
                 .body(fieldFacade.getFieldById(fieldId));
     }
 
+    @Operation(summary = "Update field by id", description = "Updates field data")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Field data updated successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = FieldResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Field not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @PutMapping("/update/{fieldId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFieldIdWithContext(#fieldId)")
+    public ResponseEntity<FieldResponseDTO> updateFieldById(@PathVariable Long fieldId,
+                                                            @RequestBody @Valid FieldCreateDTO fieldCreateDTO) {
+        FieldResponseDTO fieldResponseDTO = fieldFacade.updateFieldById(fieldId, fieldCreateDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(fieldResponseDTO);
+    }
+
 }

@@ -46,4 +46,18 @@ public class FieldService {
         return fieldRepository.findUserIdByFieldId(fieldId);
     }
 
+    public Field updateFieldById(Long fieldId, String fieldName, BigDecimal fieldArea, String soilClass) {
+        if (!SoilClass.isValid(soilClass)) {
+            throw new InvalidEnumException("SoilClass", "Invalid soil class: " + soilClass);
+        }
+
+        Field field = getFieldById(fieldId);
+        SoilClass enumSoilClass = SoilClass.valueOf(soilClass);
+
+        field.setFieldName(fieldName);
+        field.setFieldArea(fieldArea);
+        field.setSoilClass(enumSoilClass);
+        return fieldRepository.saveAndFlush(field);
+    }
+
 }
