@@ -47,6 +47,9 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
             })
             .catch(() => {
                 enqueueSnackbar(t('logoutFail'), SnackbarError);
+                localStorage.removeItem('lastPath');
+                navigate(NOT_LOGGED_PAGE_URL, {replace: true});
+                removeSessionCookie();
             })
     };
 
