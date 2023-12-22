@@ -1,0 +1,75 @@
+.field-data-container .edit-field-details {
+    font-style: italic;
+    margin-left: 10px;
+    color: #5b5b5b;
+    font-size: 14px;
+}
+
+.edit-field-container {
+    background-color: #F8F8F8;
+    border: 2px solid #2CB178;
+    border-radius: 16px;
+    padding: 15px 15px 10px;
+    width: 400px;
+}
+
+.edit-field-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-field-input {
+    width: 100%;
+}
+
+.edit-field-input-area {
+    width: 50%;
+}
+
+.edit-field-selector {
+    width: 50%;
+}
+
+.edit-field-inputs-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.field-details-button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.field-details-button-group .field-edit-button {
+    width: 120px;
+    font-size: 12px;
+}
+
+.field-edit-button .field-edit-button-icon {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+@media (max-width: 699px) {
+    .field-data-container .edit-field-details {
+        font-size: 12px;
+    }
+
+    .edit-field-container {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .field-details-button-group {
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .field-details-button-group .field-edit-button {
+        width: 100%;
+    }
+}

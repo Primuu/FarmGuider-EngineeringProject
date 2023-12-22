@@ -1,3 +1,24 @@
 {
-  "header": "Pole"
+  "header": "Pole",
+  "editField": {
+    "details": "Informacje Podstawowe",
+    "successSnackbar": "Pole zaktualizowano pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "fieldName": "Nazwa Pola",
+    "fieldArea": "Powierzchnia (hektary)",
+    "soilClass": "Klasa Ziemi",
+    "unknownSoilClass": "Nie Podawaj",
+    "saveButton": "Zapisz",
+    "cancelButton": "Anuluj",
+    "editButton": "Edytuj"
+  },
+  "addFieldModal": {
+    "validation": {
+      "fieldNameRequired": "Nazwa pola musi być podana",
+      "fieldNameLength": "Nazwa pola może zawierać maksymalnie 45 znaków",
+      "fieldAreaRequired": "Powierzchnia musi być podana",
+      "fieldAreaNonNegative": "Powierzchnia nie może być ujemna",
+      "fieldAreaRange": "Powierzchnia musi znajdować się w zakresie od 0.00 do 999.99"
+    }
+  }
 }

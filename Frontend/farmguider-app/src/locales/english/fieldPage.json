@@ -1,3 +1,24 @@
 {
-  "header": "Field"
+  "header": "Field",
+  "editField": {
+    "details": "Basic Information",
+    "successSnackbar": "Field updated successfully",
+    "errorSnackbar": "Something went wrong",
+    "fieldName": "Field Name",
+    "fieldArea": "Field Area",
+    "soilClass": "Soil Class",
+    "unknownSoilClass": "Don't Provide",
+    "saveButton": "Save",
+    "cancelButton": "Cancel",
+    "editButton": "Edit"
+  },
+  "addFieldModal": {
+    "validation": {
+      "fieldNameRequired": "Field name must be filled in",
+      "fieldNameLength": "Field name can contain a maximum of 45 characters",
+      "fieldAreaRequired": "Field area must be filled in",
+      "fieldAreaNonNegative": "Field area cannot be negative",
+      "fieldAreaRange": "Field area must be within the range of 0.00 to 999.99"
+    }
+  }
 }

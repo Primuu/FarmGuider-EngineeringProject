@@ -1,0 +1,23 @@
+.field-data-container,
+.field-chart-container {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 30px 5px;
+    gap: 10px;
+}
+
+.field-data-container {
+    height: 50%;
+}
+
+.field-chart-container {
+    height: 50%;
+}
+
+@media (max-width: 599px) {
+    .field-data-container,
+    .field-chart-container {
+        padding: 10px 2px;
+        flex-direction: column;
+    }
+}
