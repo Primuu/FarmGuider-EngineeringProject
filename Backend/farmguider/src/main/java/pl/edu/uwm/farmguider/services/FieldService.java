@@ -42,4 +42,8 @@ public class FieldService {
         return fieldRepository.findAll(spec);
     }
 
+    public Long getUserIdByFieldId(Long fieldId) {
+        return fieldRepository.findUserIdByFieldId(fieldId);
+    }
+
 }
