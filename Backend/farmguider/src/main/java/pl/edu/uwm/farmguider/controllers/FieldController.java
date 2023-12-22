@@ -64,7 +64,7 @@ public class FieldController {
                 .body(fieldResponseDTO);
     }
 
-        @Operation(summary = "Get field's data by farm id",
+    @Operation(summary = "Get field's data by farm id",
             description = """
                     Complex rest for searching fields with the option of filtering.
                     Can filter by fields:
@@ -91,6 +91,31 @@ public class FieldController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(fields);
+    }
+
+    @Operation(summary = "Get field data by id", description = "Retrieves a field data by id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Field data retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = FieldResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Field not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @GetMapping("/{fieldId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFieldIdWithContext(#fieldId)")
+    public ResponseEntity<FieldResponseDTO> getFieldById(@PathVariable Long fieldId) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(fieldFacade.getFieldById(fieldId));
     }
 
 }

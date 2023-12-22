@@ -42,4 +42,8 @@ public class FieldFacade {
                 .toList();
     }
 
+    public FieldResponseDTO getFieldById(Long fieldId) {
+        return mapToFieldResponseDTO(fieldService.getFieldById(fieldId));
+    }
+
 }
