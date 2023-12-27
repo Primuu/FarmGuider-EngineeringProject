@@ -30,12 +30,23 @@ public class Crop extends BasicEntity {
 
     LocalDate sowingDate;
     LocalDate harvestDate;
+    LocalDate expectedHarvestStartDate;
+    LocalDate expectedHarvestEndDate;
     BigDecimal yield;
+    BigDecimal expectedYield;
 
-    public Crop (Field field, CropTypeEnum cropType, LocalDate sowingDate) {
+    public Crop (Field field,
+                 CropTypeEnum cropType,
+                 LocalDate sowingDate,
+                 LocalDate expectedHarvestStartDate,
+                 LocalDate expectedHarvestEndDate,
+                 BigDecimal expectedYield) {
         this.field = field;
         this.cropType = cropType;
         this.sowingDate = sowingDate;
+        this.expectedHarvestStartDate = expectedHarvestStartDate;
+        this.expectedHarvestEndDate = expectedHarvestEndDate;
+        this.expectedYield = expectedYield;
     }
 
 }
