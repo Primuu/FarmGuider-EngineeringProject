@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.edu.uwm.farmguider.exceptions.global.InvalidEnumException;
 import pl.edu.uwm.farmguider.models.crop.Crop;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropCreateDTO;
+import pl.edu.uwm.farmguider.models.crop.dtos.CropMapper;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropResponseDTO;
 import pl.edu.uwm.farmguider.models.cropType.CropType;
 import pl.edu.uwm.farmguider.models.cropType.enums.CropTypeEnum;
@@ -15,6 +16,8 @@ import pl.edu.uwm.farmguider.services.FieldService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
 
 import static pl.edu.uwm.farmguider.models.crop.dtos.CropMapper.mapToCropResponseDTO;
 import static pl.edu.uwm.farmguider.utils.DateUtils.convertMonthDayToDate;
@@ -51,6 +54,17 @@ public class CropFacade {
 
     private BigDecimal calculateExpectedYield(BigDecimal averageYield, BigDecimal fieldArea) {
         return averageYield.multiply(fieldArea);
+    }
+
+    public List<CropResponseDTO> getCropsByFieldId(Long fieldId) {
+        List<Crop> crops = cropService.getCropsByFieldId(fieldId);
+        return crops
+                .stream()
+                .map(CropMapper::mapToCropResponseDTO)
+                .sorted(Comparator.comparing(CropResponseDTO::sowingDate).reversed())
+                .toList();
+
+
     }
 
 }

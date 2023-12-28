@@ -9,6 +9,7 @@ import pl.edu.uwm.farmguider.repositories.CropRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,10 @@ public class CropService {
                            BigDecimal expectedYield) {
         Crop crop = new Crop(field, cropTypeEnum, sowingDate, expectedHarvestStartDate, expectedHarvestEndDate, expectedYield);
         return cropRepository.saveAndFlush(crop);
+    }
+
+    public List<Crop> getCropsByFieldId(Long fieldId) {
+        return cropRepository.findAllByFieldId(fieldId);
     }
 
 }

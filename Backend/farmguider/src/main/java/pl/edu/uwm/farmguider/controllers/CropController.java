@@ -1,6 +1,7 @@
 package pl.edu.uwm.farmguider.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +17,8 @@ import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.CropFacade;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropCreateDTO;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropResponseDTO;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -58,6 +61,27 @@ public class CropController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(cropResponseDTO);
+    }
+
+    @Operation(summary = "Get crops data by id", description = "Retrieves a field crops list by field id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Crops list retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = CropResponseDTO.class)
+                            )
+                    ))
+    })
+    @GetMapping("/get-crops/{fieldId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFieldIdWithContext(#fieldId)")
+    public ResponseEntity<List<CropResponseDTO>> getCropsByFieldId(@PathVariable Long fieldId) {
+        List<CropResponseDTO> crops = cropFacade.getCropsByFieldId(fieldId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(crops);
     }
 
 }
