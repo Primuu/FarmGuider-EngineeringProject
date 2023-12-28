@@ -10,7 +10,13 @@
     "unknownSoilClass": "Don't Provide",
     "saveButton": "Save",
     "cancelButton": "Cancel",
-    "editButton": "Edit"
+    "editButton": "Edit",
+    "deleteFieldButton": "Delete Field",
+    "deleteFieldSuccessSnackbar": "Field deleted successfully",
+    "deleteFieldErrorSnackbar": "Something went wrong",
+    "deleteFieldDialogTitle": "Deleting Field",
+    "deleteFieldDialogMessage1": "Are you sure you want to delete field named: ",
+    "deleteFieldDialogMessage2": " and all information related to it?"
   },
   "addFieldModal": {
     "validation": {

@@ -10,7 +10,13 @@
     "unknownSoilClass": "Nie Podawaj",
     "saveButton": "Zapisz",
     "cancelButton": "Anuluj",
-    "editButton": "Edytuj"
+    "editButton": "Edytuj",
+    "deleteFieldButton": "Usuń Pole",
+    "deleteFieldSuccessSnackbar": "Pole usunięto pomyślnie",
+    "deleteFieldErrorSnackbar": "Coś poszło nie tak",
+    "deleteFieldDialogTitle": "Usuwanie Pola",
+    "deleteFieldDialogMessage1": "Czy jesteś pewny, że chcesz usunąć pole nazwane: ",
+    "deleteFieldDialogMessage2": " i wszystkie informacje z nim związane?"
   },
   "addFieldModal": {
     "validation": {

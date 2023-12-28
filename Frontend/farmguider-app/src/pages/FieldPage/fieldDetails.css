@@ -54,6 +54,22 @@
     margin-right: 6px;
 }
 
+.field-button-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.field-button-container .delete-field-button {
+    font-size: 12px;
+}
+
+.delete-field-button .delete-field-button-icon {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
 @media (max-width: 699px) {
     .field-data-container .edit-field-details {
         font-size: 12px;
