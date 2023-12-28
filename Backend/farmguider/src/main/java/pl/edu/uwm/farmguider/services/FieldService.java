@@ -60,4 +60,9 @@ public class FieldService {
         return fieldRepository.saveAndFlush(field);
     }
 
+    public void deleteFieldById(Long fieldId) {
+        Field field = getFieldById(fieldId);
+        fieldRepository.delete(field);
+    }
+
 }

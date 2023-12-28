@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.FieldFacade;
+import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.field.dtos.FieldCreateDTO;
 import pl.edu.uwm.farmguider.models.field.dtos.FieldResponseDTO;
 import pl.edu.uwm.farmguider.models.field.dtos.FieldSearchParams;
@@ -150,6 +151,35 @@ public class FieldController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(fieldResponseDTO);
+    }
+
+    @Operation(summary = "Delete field",
+            description = "Deletes field and all information associated with it")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful deleted field",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - entity to delete not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @DeleteMapping("/delete/{fieldId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFieldIdWithContext(#fieldId)")
+    public ResponseEntity<ResponseMessage> deleteFieldById(@PathVariable Long fieldId) {
+        fieldFacade.deleteFieldById(fieldId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseMessage.builder()
+                        .message("Successfully deleted field")
+                        .build());
     }
 
 }

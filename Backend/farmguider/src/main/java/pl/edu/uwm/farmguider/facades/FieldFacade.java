@@ -56,4 +56,8 @@ public class FieldFacade {
         return mapToFieldResponseDTO(field);
     }
 
+    public void deleteFieldById(Long fieldId) {
+        fieldService.deleteFieldById(fieldId);
+    }
+
 }
