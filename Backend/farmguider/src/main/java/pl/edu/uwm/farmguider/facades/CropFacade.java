@@ -37,8 +37,10 @@ public class CropFacade {
 
         CropTypeEnum cropTypeEnum = CropTypeEnum.valueOf(cropCreateDTO.cropType());
         CropType cropType = cropTypeService.getCropTypeByCropTypeEnum(cropTypeEnum);
-        LocalDate expectedHarvestStartDate = convertMonthDayToDate(cropType.getOptimalHarvestStartDate());
-        LocalDate expectedHarvestEndDate = convertMonthDayToDate(cropType.getOptimalHarvestEndDate());
+        LocalDate sowingDate = cropCreateDTO.sowingDate();
+
+        LocalDate expectedHarvestStartDate = calculateExpectedHarvestStartDate(sowingDate, cropType);
+        LocalDate expectedHarvestEndDate = calculateExpectedHarvestEndDate(sowingDate, cropType);
         Field field = fieldService.getFieldById(fieldId);
 
         Crop crop = cropService.createCrop(
@@ -52,10 +54,6 @@ public class CropFacade {
         return mapToCropResponseDTO(crop);
     }
 
-    private BigDecimal calculateExpectedYield(BigDecimal averageYield, BigDecimal fieldArea) {
-        return averageYield.multiply(fieldArea);
-    }
-
     public List<CropResponseDTO> getCropsByFieldId(Long fieldId) {
         List<Crop> crops = cropService.getCropsByFieldId(fieldId);
         return crops
@@ -65,6 +63,25 @@ public class CropFacade {
                 .toList();
 
 
+    }
+
+    private BigDecimal calculateExpectedYield(BigDecimal averageYield, BigDecimal fieldArea) {
+        return averageYield.multiply(fieldArea);
+    }
+
+    private LocalDate calculateExpectedHarvestStartDate(LocalDate sowingDate, CropType cropType) {
+        int year = calculateHarvestYear(sowingDate, cropType.getOptimalHarvestEndDate());
+        return convertMonthDayToDate(cropType.getOptimalHarvestStartDate(), String.valueOf(year));
+    }
+
+    private LocalDate calculateExpectedHarvestEndDate(LocalDate sowingDate, CropType cropType) {
+        int year = calculateHarvestYear(sowingDate, cropType.getOptimalHarvestEndDate());
+        return convertMonthDayToDate(cropType.getOptimalHarvestEndDate(), String.valueOf(year));
+    }
+
+    private int calculateHarvestYear(LocalDate sowingDate, String optimalHarvestEndDate) {
+        LocalDate harvestEndDate = convertMonthDayToDate(optimalHarvestEndDate, String.valueOf(sowingDate.getYear()));
+        return sowingDate.isAfter(harvestEndDate) ? sowingDate.getYear() + 1 : sowingDate.getYear();
     }
 
 }

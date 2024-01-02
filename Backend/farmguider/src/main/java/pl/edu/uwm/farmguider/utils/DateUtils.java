@@ -6,10 +6,8 @@ import java.time.format.DateTimeParseException;
 
 public class DateUtils {
 
-    public static LocalDate convertMonthDayToDate(String monthDay) throws DateTimeParseException {
-        String currentYear = String.valueOf(LocalDate.now().getYear());
-        String dateString = currentYear + "-" + monthDay;
-
+    public static LocalDate convertMonthDayToDate(String monthDay, String year) throws DateTimeParseException {
+        String dateString = year + "-" + monthDay;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(dateString, formatter);
     }
