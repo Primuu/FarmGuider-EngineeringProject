@@ -26,5 +26,35 @@
       "fieldAreaNonNegative": "Powierzchnia nie może być ujemna",
       "fieldAreaRange": "Powierzchnia musi znajdować się w zakresie od 0.00 do 999.99"
     }
+  },
+  "cropDetails": {
+    "details": "Informacje o Uprawach",
+    "addCrop": "Dodaj Uprawę",
+    "noResults": "Nie dodano jeszcze żadnej uprawy",
+    "crop": "Uprawa"
+  },
+  "addCropModal": {
+    "successSnackbar": "Uprawa dodana pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Dodawanie Uprawy",
+    "calendarLabel": "Data Siewu",
+    "cropType": "Typ Uprawy",
+    "wheat": "Pszenica",
+    "triticale": "Pszenżyto",
+    "barley": "Jęczmień",
+    "rapeseed": "Rzepak",
+    "rye": "Żyto",
+    "oats": "Owies",
+    "corn": "Kukurydza",
+    "potato": "Ziemniaki",
+    "sugarBeet": "Buraki Cukrowe",
+    "requirements": "Aby dodać uprawę należy wybrać rodzaj uprawy i podać datę siewu.",
+    "subHeader": "Uprawa zostanie dodana do aktualnie wybranego pola",
+    "confirmButton": "Dodaj Uprawę",
+    "cancelButton": "Anuluj",
+    "validation": {
+      "sowingDateRequired": "Data siewu musi być podana",
+      "sowingDatePastOrPresent": "Data siewu nie może być datą przyszłą"
+    }
   }
 }
