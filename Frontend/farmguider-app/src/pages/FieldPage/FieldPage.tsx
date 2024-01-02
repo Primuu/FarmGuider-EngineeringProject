@@ -7,6 +7,9 @@ import FieldResponseDTO from "@/entities/FieldResponseDTO.ts";
 import {getField} from "@/services/fieldService.ts";
 import FieldDetails from "@/pages/FieldPage/FieldDetails.tsx";
 import '@/pages/FieldPage/fieldPage.css';
+import {getCrops} from "@/services/cropService.ts";
+import CropResponseDTO from "@/entities/CropResponseDTO.ts";
+import CropDetails from "@/pages/FieldPage/CropDetails.tsx";
 
 const FieldPage = () => {
     const {fieldId} = useParams();
@@ -14,9 +17,13 @@ const FieldPage = () => {
     const navigate = useNavigate();
     const [field, setField] = useState<FieldResponseDTO | null>(null);
     const [fieldLoading, setFieldLoading] = useState<boolean>(true);
+    const [cropList, setCropList] = useState<CropResponseDTO[]>([]);
+    const [cropsLoading, setCropsLoading] = useState<boolean>(true);
+    const [selectedCropId, setSelectedCropId] = useState<number | null>(null);
 
     useEffect(() => {
         fetchAndSetField();
+        fetchAndSetCrops();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fieldId]);
 
@@ -34,6 +41,20 @@ const FieldPage = () => {
         }
     }
 
+    const fetchAndSetCrops = () => {
+        if (fieldId) {
+            getCrops(parseInt(fieldId))
+                .then(data => {
+                    setCropList(data);
+                    setCropsLoading(false);
+                })
+                .catch(() => {
+                    setCropsLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+    }
+
     return (
         <div>
             <Typography className="layout-header">
@@ -45,6 +66,15 @@ const FieldPage = () => {
                         field={field}
                         loading={fieldLoading}
                         setField={setField}
+                    />
+
+                    <CropDetails
+                        loading={cropsLoading}
+                        cropList={cropList}
+                        fieldId={fieldId}
+                        onSelectCrop={setSelectedCropId}
+                        selectedCropId={selectedCropId}
+                        onCropAdded={fetchAndSetCrops}
                     />
 
                 </div>
