@@ -51,3 +51,7 @@ export const GET_FIELDS_URL: string = "/field/get-fields/{farmId}";
 export const GET_FIELD_URL: string = "/field/{fieldId}";
 export const UPDATE_FIELD_URL: string = "/field/update/{fieldId}";
 export const DELETE_FIELD_URL: string = "/field/delete/{fieldId}";
+
+// Crop
+export const CREATE_CROP_URL: string = "/crop/create-crop/{fieldId}";
+export const GET_CROPS_URL: string = "/crop/get-crops/{fieldId}";
