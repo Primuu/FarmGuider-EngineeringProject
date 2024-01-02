@@ -1,0 +1,117 @@
+.field-data-container .crop-details {
+    font-style: italic;
+    margin-left: 10px;
+    color: #5b5b5b;
+    font-size: 14px;
+}
+
+.crop-container {
+    background-color: #F8F8F8;
+    border: 2px solid #2CB178;
+    border-radius: 16px;
+    width: 500px;
+    overflow: hidden;
+}
+
+/*.edit-field-form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.edit-field-input {*/
+/*    width: 100%;*/
+/*}*/
+
+/*.edit-field-input-area {*/
+/*    width: 50%;*/
+/*}*/
+
+/*.edit-field-selector {*/
+/*    width: 50%;*/
+/*}*/
+
+/*.edit-field-inputs-row {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    gap: 10px;*/
+/*}*/
+
+/*.field-details-button-group {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: flex-end;*/
+/*    gap: 15px;*/
+/*}*/
+
+/*.field-details-button-group .field-edit-button {*/
+/*    width: 120px;*/
+/*    font-size: 12px;*/
+/*}*/
+
+/*.field-edit-button .field-edit-button-icon {*/
+/*    font-size: 16px;*/
+/*    vertical-align: middle;*/
+/*    margin-right: 6px;*/
+/*}*/
+
+.crop-button-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.crop-button-container .add-crop-button {
+    font-size: 12px;
+}
+
+.add-crop-button .add-crop-button-icon {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.crop-table-container {
+    overflow-y: auto;
+    height: 23.5vh;
+}
+
+.crop-table-container .c-th {
+    background-color: #F5F5F5;
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+}
+
+.crop-table-container .crop-no-results-cell {
+    border: none;
+}
+
+.crop-no-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9B9B9B;
+    font-style: italic;
+    font-size: 14px;
+    height: 10vh;
+}
+
+@media (max-width: 699px) {
+    .field-data-container .crop-details {
+        font-size: 12px;
+    }
+
+    .crop-container {
+        padding: 15px;
+        width: 100%;
+    }
+
+    /*.field-details-button-group {*/
+    /*    justify-content: space-between;*/
+    /*    gap: 10px;*/
+    /*}*/
+
+    /*.field-details-button-group .field-edit-button {*/
+    /*    width: 100%;*/
+    /*}*/
+}
