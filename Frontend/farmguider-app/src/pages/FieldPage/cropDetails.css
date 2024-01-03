@@ -9,50 +9,9 @@
     background-color: #F8F8F8;
     border: 2px solid #2CB178;
     border-radius: 16px;
-    width: 500px;
+    width: 600px;
     overflow: hidden;
 }
-
-/*.edit-field-form {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
-
-/*.edit-field-input {*/
-/*    width: 100%;*/
-/*}*/
-
-/*.edit-field-input-area {*/
-/*    width: 50%;*/
-/*}*/
-
-/*.edit-field-selector {*/
-/*    width: 50%;*/
-/*}*/
-
-/*.edit-field-inputs-row {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    gap: 10px;*/
-/*}*/
-
-/*.field-details-button-group {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: flex-end;*/
-/*    gap: 15px;*/
-/*}*/
-
-/*.field-details-button-group .field-edit-button {*/
-/*    width: 120px;*/
-/*    font-size: 12px;*/
-/*}*/
-
-/*.field-edit-button .field-edit-button-icon {*/
-/*    font-size: 16px;*/
-/*    vertical-align: middle;*/
-/*    margin-right: 6px;*/
-/*}*/
 
 .crop-button-container {
     display: flex;
@@ -96,22 +55,67 @@
     height: 10vh;
 }
 
+.crop-table-container .crop-cell {
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+}
+
+.crop-table-container .crop-cell-icon {
+    font-size: 14px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.crop-cell .red {
+    color: red;
+}
+
+.crop-cell .green {
+    color: green;
+}
+
+.crop-table-container .trending-down-icon {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-left: 4px;
+    color: red;
+}
+
+.crop-table-container .trending-up-icon {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-left: 4px;
+    color: green;
+}
+
+.crop-table-container .actions {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.crop-table-button {
+    min-width: 30px !important;
+}
+
+.crop-table-button .crop-table-icon {
+    font-size: 14px;
+}
+
+.crop-table-container .harvest-time {
+    color: #5b5b5b;
+    font-style: italic;
+}
+
 @media (max-width: 699px) {
     .field-data-container .crop-details {
         font-size: 12px;
     }
 
     .crop-container {
-        padding: 15px;
         width: 100%;
     }
-
-    /*.field-details-button-group {*/
-    /*    justify-content: space-between;*/
-    /*    gap: 10px;*/
-    /*}*/
-
-    /*.field-details-button-group .field-edit-button {*/
-    /*    width: 100%;*/
-    /*}*/
 }

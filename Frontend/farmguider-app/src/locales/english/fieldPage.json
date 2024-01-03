@@ -31,7 +31,20 @@
     "details": "Crop Information",
     "addCrop": "Add Crop",
     "noResults": "No crops have been added yet",
-    "crop": "Crop"
+    "crop": "Crop",
+    "sowingDate": "Sowing Date",
+    "harvestDate": "Harvest Date",
+    "expectedHarvestTime": "Expected Harvest Time",
+    "yield": "Yield",
+    "expectedYield": "Expected Yield",
+    "actions": "Actions",
+    "harvestButton": "Add Harvest",
+    "harvestButtonDisabled": "Harvest already added",
+    "deleteButton": "Delete Crop",
+    "deleteSuccessSnackbar": "Crop deleted successfully",
+    "deleteErrorSnackbar": "Something went wrong",
+    "deleteDialogTitle": "Deleting Crop",
+    "deleteDialogMessage": "Are you sure you want to delete this crop?"
   },
   "addCropModal": {
     "successSnackbar": "Crop added successfully",
@@ -55,6 +68,25 @@
     "validation": {
       "sowingDateRequired": "Sowing date field must be filled in",
       "sowingDatePastOrPresent": "Sowing date cannot be a future date"
+    }
+  },
+  "addHarvestModal": {
+    "successSnackbar": "Harvest added successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Adding Harvest",
+    "subHeader": "Harvest will be added to the currently selected crop",
+    "calendarLabel": "Harvest Date",
+    "yield": "Yield",
+    "requirements": "To add a harvest, provide yield and enter harvest date.",
+    "confirmButton": "Add Harvest",
+    "cancelButton": "Cancel",
+    "validation": {
+      "harvestDateRequired": "Harvest date field must be filled in",
+      "harvestDatePastOrPresent": "Harvest date cannot be a future date",
+      "harvestAfterSowing": "Harvest date cannot be before sowing date",
+      "yieldRequired": "Yield field must be filled in",
+      "yieldRange": "Yield must be within the range of 0.000 to 999.999",
+      "yieldNonNegative": "Yield cannot be negative"
     }
   }
 }

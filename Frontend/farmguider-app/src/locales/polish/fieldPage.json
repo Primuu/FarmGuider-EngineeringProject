@@ -31,7 +31,20 @@
     "details": "Informacje o Uprawach",
     "addCrop": "Dodaj Uprawę",
     "noResults": "Nie dodano jeszcze żadnej uprawy",
-    "crop": "Uprawa"
+    "crop": "Uprawa",
+    "sowingDate": "Data Siewu",
+    "harvestDate": "Data Zbioru",
+    "expectedHarvestTime": "Przewidywany Czas Zbioru",
+    "yield": "Plon",
+    "expectedYield": "Przewidywany Plon",
+    "actions": "Akcje",
+    "harvestButton": "Dodaj Zbiór",
+    "harvestButtonDisabled": "Zbiór już został dodany",
+    "deleteButton": "Usuń Uprawę",
+    "deleteSuccessSnackbar": "Uprawa usunięta pomyślnie",
+    "deleteErrorSnackbar": "Coś poszło nie tak",
+    "deleteDialogTitle": "Usuwanie Uprawy",
+    "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć tę uprawę?"
   },
   "addCropModal": {
     "successSnackbar": "Uprawa dodana pomyślnie",
@@ -55,6 +68,25 @@
     "validation": {
       "sowingDateRequired": "Data siewu musi być podana",
       "sowingDatePastOrPresent": "Data siewu nie może być datą przyszłą"
+    }
+  },
+  "addHarvestModal": {
+    "successSnackbar": "Zbiór dodany pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Dodawanie Zbioru",
+    "subHeader": "Zbiór zostanie dodany do aktualnie wybranej uprawy",
+    "calendarLabel": "Data Zbioru",
+    "yield": "Plon",
+    "requirements": "Aby dodać zbiór należy podać plon i podać datę zbioru.",
+    "confirmButton": "Dodaj Zbiór",
+    "cancelButton": "Anuluj",
+    "validation": {
+      "harvestDateRequired": "Data zbioru musi być podana",
+      "harvestDatePastOrPresent": "Data zbioru nie może być datą przyszłą",
+      "harvestAfterSowing": "Data zbioru nie może być przed datą siewu",
+      "yieldRequired": "Plon musi być podany",
+      "yieldRange": "Plon musi znajdować się w zakresie od 0.000 do 999.999",
+      "yieldNonNegative": "Plon nie może być ujemny"
     }
   }
 }

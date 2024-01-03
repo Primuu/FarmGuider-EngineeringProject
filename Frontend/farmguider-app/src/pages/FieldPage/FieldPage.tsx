@@ -55,6 +55,10 @@ const FieldPage = () => {
         }
     }
 
+    const fetchAndSetCropChart = () => {
+        return;
+    }
+
     return (
         <div>
             <Typography className="layout-header">
@@ -75,6 +79,8 @@ const FieldPage = () => {
                         onSelectCrop={setSelectedCropId}
                         selectedCropId={selectedCropId}
                         onCropAdded={fetchAndSetCrops}
+                        setCropList={setCropList}
+                        onCropChanged={fetchAndSetCropChart}
                     />
 
                 </div>

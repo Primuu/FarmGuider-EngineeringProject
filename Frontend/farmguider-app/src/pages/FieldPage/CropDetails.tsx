@@ -15,10 +15,13 @@ type CropDetailsProps = {
     onSelectCrop: (cropId: number | null) => void;
     selectedCropId: number | null;
     onCropAdded: () => void;
+    setCropList: (cropList: CropResponseDTO[]) => void;
+    onCropChanged: () => void;
 }
 
 const CropDetails: React.FC<CropDetailsProps> = (
-    {loading, cropList, fieldId, onSelectCrop, selectedCropId, onCropAdded}
+    {loading, cropList, fieldId, onSelectCrop, selectedCropId,
+        onCropAdded, setCropList, onCropChanged}
 ) => {
     const {t} = useTranslation('fieldPage');
     const [openAddCropModal, setOpenAddCropModal] = useState(false);
@@ -39,6 +42,8 @@ const CropDetails: React.FC<CropDetailsProps> = (
                         cropList={cropList}
                         onSelectCrop={onSelectCrop}
                         selectedCropId={selectedCropId}
+                        setCropList={setCropList}
+                        onCropChanged={onCropChanged}
                     />)
                 }
             </div>
