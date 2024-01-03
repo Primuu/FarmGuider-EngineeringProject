@@ -57,3 +57,9 @@ export const CREATE_CROP_URL: string = "/crop/create-crop/{fieldId}";
 export const GET_CROPS_URL: string = "/crop/get-crops/{fieldId}";
 export const ADD_HARVEST_URL: string = "/crop/add-harvest/{cropId}";
 export const DELETE_CROP_URL: string = "/crop/delete/{cropId}";
+
+// Treatment
+export const CREATE_TREATMENT_URL: string = "/treatment/create-treatment/{cropId}";
+export const GET_TREATMENTS_URL: string = "/treatment/get-treatments/{cropId}";
+export const UPDATE_TREATMENT_URL: string = "/treatment/update/{treatmentId}";
+export const DELETE_TREATMENT_URL: string = "/treatment/delete/{treatmentId}";
