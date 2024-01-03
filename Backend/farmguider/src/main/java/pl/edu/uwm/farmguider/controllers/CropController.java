@@ -15,8 +15,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.CropFacade;
+import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropCreateDTO;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropResponseDTO;
+import pl.edu.uwm.farmguider.models.crop.dtos.HarvestCreateDTO;
+import pl.edu.uwm.farmguider.models.milking.dtos.MilkingCreateDTO;
+import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
 
 import java.util.List;
 
@@ -82,6 +86,69 @@ public class CropController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(crops);
+    }
+
+    @Operation(summary = "Update crop with harvest data",
+            description = "Adds crop harvest data based on the provided payload")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Crop data added successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = CropResponseDTO.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Crop not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad Request - returns map of errors",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @PatchMapping("/add-harvest/{cropId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCropIdWithContext(#cropId)")
+    public ResponseEntity<CropResponseDTO> addHarvestByCropId(@PathVariable Long cropId,
+                                                              @RequestBody @Valid HarvestCreateDTO harvestCreateDTO) {
+        CropResponseDTO cropResponseDTO = cropFacade.addHarvestByCropId(cropId, harvestCreateDTO);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(cropResponseDTO);
+    }
+
+    @Operation(summary = "Delete crop", description = "Deletes crop by id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful deleted crop",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - entity to delete not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    ))
+    })
+    @DeleteMapping("/delete/{cropId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenCropIdWithContext(#cropId)")
+    public ResponseEntity<ResponseMessage> deleteCropById(@PathVariable Long cropId) {
+        cropFacade.deleteCropById(cropId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ResponseMessage.builder()
+                        .message("Successfully deleted crop")
+                        .build());
     }
 
 }

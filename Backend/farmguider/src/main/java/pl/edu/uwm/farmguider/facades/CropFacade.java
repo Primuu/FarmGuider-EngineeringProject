@@ -7,6 +7,7 @@ import pl.edu.uwm.farmguider.models.crop.Crop;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropCreateDTO;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropMapper;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropResponseDTO;
+import pl.edu.uwm.farmguider.models.crop.dtos.HarvestCreateDTO;
 import pl.edu.uwm.farmguider.models.cropType.CropType;
 import pl.edu.uwm.farmguider.models.cropType.enums.CropTypeEnum;
 import pl.edu.uwm.farmguider.models.field.Field;
@@ -15,6 +16,7 @@ import pl.edu.uwm.farmguider.services.CropTypeService;
 import pl.edu.uwm.farmguider.services.FieldService;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -65,8 +67,21 @@ public class CropFacade {
 
     }
 
+    public CropResponseDTO addHarvestByCropId(Long cropId, HarvestCreateDTO harvestCreateDTO) {
+        Crop crop = cropService.addHarvestByCropId(
+                cropId,
+                harvestCreateDTO.harvestDate(),
+                harvestCreateDTO.yield()
+        );
+        return mapToCropResponseDTO(crop);
+    }
+
+    public void deleteCropById(Long cropId) {
+        cropService.deleteCropById(cropId);
+    }
+
     private BigDecimal calculateExpectedYield(BigDecimal averageYield, BigDecimal fieldArea) {
-        return averageYield.multiply(fieldArea);
+        return averageYield.multiply(fieldArea).setScale(3, RoundingMode.HALF_UP);
     }
 
     private LocalDate calculateExpectedHarvestStartDate(LocalDate sowingDate, CropType cropType) {
