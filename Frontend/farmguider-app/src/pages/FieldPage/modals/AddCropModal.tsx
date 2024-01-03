@@ -15,13 +15,7 @@ import i18n from "i18next";
 import {CropCreateDTO} from "@/entities/CropCreateDTO.ts";
 import {createCrop} from "@/services/cropService.ts";
 import MenuItem from "@mui/material/MenuItem";
-import {FaWheatAwn} from "react-icons/fa6";
-import {LuWheat} from "react-icons/lu";
-import {GiFruitTree} from "react-icons/gi";
-import {GiPlantWatering} from "react-icons/gi";
-import {GiCorn} from "react-icons/gi";
-import {GiPotato} from "react-icons/gi";
-import {GiBeet} from "react-icons/gi";
+import {crops, getCropIcon} from "@/utils/cropUtils.ts";
 
 type AddCropModalProps = {
     open: boolean;
@@ -154,51 +148,12 @@ const AddCropModal: React.FC<AddCropModalProps> = ({open, onClose, fieldId, onCr
                                             <MenuItem value="" disabled>
                                             </MenuItem>
 
-                                            <MenuItem value="WHEAT">
-                                                <LuWheat className="crop-icon"/>
-                                                {t('addCropModal.wheat')}
-                                            </MenuItem>
-
-                                            <MenuItem value="TRITICALE">
-                                                <FaWheatAwn className="crop-icon"/>
-                                                {t('addCropModal.triticale')}
-                                            </MenuItem>
-
-                                            <MenuItem value="BARLEY">
-                                                <FaWheatAwn className="crop-icon"/>
-                                                {t('addCropModal.barley')}
-                                            </MenuItem>
-
-                                            <MenuItem value="RAPESEED">
-                                                <GiFruitTree className="crop-icon"/>
-                                                {t('addCropModal.rapeseed')}
-                                            </MenuItem>
-
-                                            <MenuItem value="RYE">
-                                                <FaWheatAwn className="crop-icon"/>
-                                                {t('addCropModal.rye')}
-                                            </MenuItem>
-
-                                            <MenuItem value="OATS">
-                                                <GiPlantWatering className="crop-icon"/>
-                                                {t('addCropModal.oats')}
-                                            </MenuItem>
-
-                                            <MenuItem value="CORN">
-                                                <GiCorn className="crop-icon"/>
-                                                {t('addCropModal.corn')}
-                                            </MenuItem>
-
-                                            <MenuItem value="POTATO">
-                                                <GiPotato className="crop-icon"/>
-                                                {t('addCropModal.potato')}
-                                            </MenuItem>
-
-                                            <MenuItem value="SUGAR_BEET">
-                                                <GiBeet className="crop-icon"/>
-                                                {t('addCropModal.sugarBeet')}
-                                            </MenuItem>
-
+                                            {crops.map((crop) => (
+                                                <MenuItem value={crop.value} key={crop.value}>
+                                                    {React.createElement(getCropIcon(crop.value), { className: 'crop-icon' })}
+                                                    {t(crop.labelKey)}
+                                                </MenuItem>
+                                            ))}
                                         </Select>
                                     </FormControl>
                                 </div>
