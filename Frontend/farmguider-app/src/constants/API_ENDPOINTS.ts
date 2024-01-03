@@ -55,3 +55,5 @@ export const DELETE_FIELD_URL: string = "/field/delete/{fieldId}";
 // Crop
 export const CREATE_CROP_URL: string = "/crop/create-crop/{fieldId}";
 export const GET_CROPS_URL: string = "/crop/get-crops/{fieldId}";
+export const ADD_HARVEST_URL: string = "/crop/add-harvest/{cropId}";
+export const DELETE_CROP_URL: string = "/crop/delete/{cropId}";

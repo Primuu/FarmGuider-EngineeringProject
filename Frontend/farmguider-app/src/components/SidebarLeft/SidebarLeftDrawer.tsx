@@ -13,13 +13,7 @@ import {GiCow, GiHighGrass} from 'react-icons/gi';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import {useNavigate} from 'react-router-dom';
-import {
-    BREEDING_PAGE_URL,
-    FIELD_BROWSER_PAGE_URL,
-    HOME_PAGE_URL,
-    NOT_LOGGED_PAGE_URL,
-    PROFILE_PAGE_URL
-} from "@/constants/ROUTER_URLS.ts";
+import {BREEDING_PAGE_URL, FIELD_BROWSER_PAGE_URL, HOME_PAGE_URL, NOT_LOGGED_PAGE_URL, PROFILE_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
 import {IconType} from "react-icons/lib";
