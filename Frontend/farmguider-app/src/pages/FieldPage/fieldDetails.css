@@ -5,12 +5,16 @@
     font-size: 14px;
 }
 
+.field-container {
+    width: 100%;
+    min-width: 250px;
+}
+
 .edit-field-container {
     background-color: #F8F8F8;
     border: 2px solid #2CB178;
     border-radius: 16px;
     padding: 15px 15px 10px;
-    width: 400px;
 }
 
 .edit-field-form {
@@ -40,7 +44,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    gap: 15px;
+    gap: 10px;
 }
 
 .field-details-button-group .field-edit-button {
@@ -86,6 +90,10 @@
     }
 
     .field-details-button-group .field-edit-button {
+        width: 100%;
+    }
+
+    .field-button-container .delete-field-button {
         width: 100%;
     }
 }

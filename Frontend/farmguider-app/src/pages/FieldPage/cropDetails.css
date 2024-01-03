@@ -5,11 +5,14 @@
     font-size: 14px;
 }
 
+.crop-main-container{
+    width: 100%;
+}
+
 .crop-container {
     background-color: #F8F8F8;
     border: 2px solid #2CB178;
     border-radius: 16px;
-    width: 600px;
     overflow: hidden;
 }
 
@@ -115,7 +118,47 @@
         font-size: 12px;
     }
 
-    .crop-container {
+    .crop-button-container .add-crop-button {
         width: 100%;
+    }
+
+    .crop-table-container {
+        height: 35vh;
+    }
+
+    .crop-table-container .c-th {
+        padding: 5px;
+    }
+
+    .crop-no-results {
+        height: 20vh;
+    }
+
+    .crop-table-container .crop-cell {
+        padding: 8px;
+    }
+
+    .crop-table-container .crop-cell-icon {
+        font-size: 14px;
+        vertical-align: middle;
+        margin-right: 6px;
+    }
+
+
+    .crop-table-container .trending-down-icon,
+    .crop-table-container .trending-up-icon {
+        font-size: 16px;
+    }
+
+    .crop-table-container .actions {
+        gap: 10px;
+    }
+
+    .crop-table-button {
+        min-width: 30px !important;
+    }
+
+    .crop-table-button .crop-table-icon {
+        font-size: 14px;
     }
 }

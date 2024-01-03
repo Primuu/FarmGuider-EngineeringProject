@@ -93,7 +93,8 @@ const CropCard: React.FC<CropCardProps> = ({crop, onSelectCrop, selected, onCrop
                 ) : (
                     <Tooltip title={t('cropDetails.expectedHarvestTime')}>
                         <div className="harvest-time">
-                            {crop.expectedHarvestStartDate.toString()} -<br/>
+                            {crop.expectedHarvestStartDate.toString()}
+                            {`- `}
                             {crop.expectedHarvestEndDate.toString()}
                         </div>
                     </Tooltip>

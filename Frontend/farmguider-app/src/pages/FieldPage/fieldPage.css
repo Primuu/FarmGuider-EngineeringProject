@@ -6,18 +6,28 @@
     gap: 20px;
 }
 
-.field-data-container {
-    height: 50%;
+.row-data-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
 }
 
-.field-chart-container {
-    height: 50%;
+@media (max-width: 1829px) {
+    .field-data-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1629px) {
+    .row-data-container {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 599px) {
     .field-data-container,
     .field-chart-container {
         padding: 10px 2px;
-        flex-direction: column;
     }
 }

@@ -42,7 +42,7 @@ const FieldDetails: React.FC<FieldDetailsProps> = ({field, loading, setField}) =
     };
 
     return (
-        <div>
+        <div className="field-container">
             <Typography className="edit-field-details">
                 {t('editField.details')}
             </Typography>

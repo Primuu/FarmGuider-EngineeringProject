@@ -66,23 +66,26 @@ const FieldPage = () => {
             </Typography>
             <div className="layout-container">
                 <div className="field-data-container">
-                    <FieldDetails
-                        field={field}
-                        loading={fieldLoading}
-                        setField={setField}
-                    />
+                    <div className="row-data-container">
+                        <FieldDetails
+                            field={field}
+                            loading={fieldLoading}
+                            setField={setField}
+                        />
 
-                    <CropDetails
-                        loading={cropsLoading}
-                        cropList={cropList}
-                        fieldId={fieldId}
-                        onSelectCrop={setSelectedCropId}
-                        selectedCropId={selectedCropId}
-                        onCropAdded={fetchAndSetCrops}
-                        setCropList={setCropList}
-                        onCropChanged={fetchAndSetCropChart}
-                    />
+                        <CropDetails
+                            loading={cropsLoading}
+                            cropList={cropList}
+                            fieldId={fieldId}
+                            onSelectCrop={setSelectedCropId}
+                            selectedCropId={selectedCropId}
+                            onCropAdded={fetchAndSetCrops}
+                            setCropList={setCropList}
+                            onCropChanged={fetchAndSetCropChart}
+                        />
+                    </div>
 
+                {/* TODO: TREATMENTS*/}
                 </div>
                 <div className="field-chart-container">
 

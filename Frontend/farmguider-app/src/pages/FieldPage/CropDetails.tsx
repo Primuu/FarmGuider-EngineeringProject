@@ -30,7 +30,7 @@ const CropDetails: React.FC<CropDetailsProps> = (
     const handleCloseAddCropModal = () => setOpenAddCropModal(false);
 
     return (
-        <div>
+        <div className="crop-main-container">
             <Typography className="crop-details">
                 {t('cropDetails.details')}
             </Typography>
