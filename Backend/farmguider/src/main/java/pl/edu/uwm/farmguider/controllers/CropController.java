@@ -19,8 +19,6 @@ import pl.edu.uwm.farmguider.models.ResponseMessage;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropCreateDTO;
 import pl.edu.uwm.farmguider.models.crop.dtos.CropResponseDTO;
 import pl.edu.uwm.farmguider.models.crop.dtos.HarvestCreateDTO;
-import pl.edu.uwm.farmguider.models.milking.dtos.MilkingCreateDTO;
-import pl.edu.uwm.farmguider.models.milking.dtos.MilkingResponseDTO;
 
 import java.util.List;
 

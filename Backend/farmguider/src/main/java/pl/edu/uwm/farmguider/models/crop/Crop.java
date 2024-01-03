@@ -9,9 +9,11 @@ import lombok.experimental.FieldDefaults;
 import pl.edu.uwm.farmguider.models.basic.BasicEntity;
 import pl.edu.uwm.farmguider.models.cropType.enums.CropTypeEnum;
 import pl.edu.uwm.farmguider.models.field.Field;
+import pl.edu.uwm.farmguider.models.treatment.Treatment;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "crops")
@@ -34,6 +36,9 @@ public class Crop extends BasicEntity {
     LocalDate expectedHarvestEndDate;
     BigDecimal yield;
     BigDecimal expectedYield;
+
+    @OneToMany(mappedBy = "crop", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Treatment> treatments;
 
     public Crop (Field field,
                  CropTypeEnum cropType,

@@ -63,8 +63,6 @@ public class CropFacade {
                 .map(CropMapper::mapToCropResponseDTO)
                 .sorted(Comparator.comparing(CropResponseDTO::sowingDate).reversed())
                 .toList();
-
-
     }
 
     public CropResponseDTO addHarvestByCropId(Long cropId, HarvestCreateDTO harvestCreateDTO) {
