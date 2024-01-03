@@ -56,6 +56,11 @@
     margin-bottom: 10px;
 }
 
+.add-crop-form-container .crop-text-field {
+    width: 55%;
+    margin-top: 10px;
+}
+
 .crop-icon {
     vertical-align: middle;
     margin-right: 6px;
@@ -110,7 +115,6 @@
 
     .add-crop-form-container {
         flex-direction: column;
-        /*gap: 20px;*/
     }
 
     .add-crop-form-container .crop-calendar {
@@ -124,6 +128,13 @@
         width: 80%;
         margin-top: 0;
         align-self: center;
+    }
+
+    .add-crop-form-container .crop-text-field {
+        width: 60%;
+        margin-top: 0;
+        align-self: center;
+        margin-left: 10px;
     }
 
     .add-crop-button-group {
