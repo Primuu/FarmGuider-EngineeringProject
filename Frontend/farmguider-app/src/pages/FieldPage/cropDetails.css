@@ -14,6 +14,21 @@
     border: 2px solid #2CB178;
     border-radius: 16px;
     overflow: hidden;
+    height: 24vh;
+}
+
+.crop-container .loading-box {
+    height: 23vh;
+}
+
+.treatment-not-selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9B9B9B;
+    font-style: italic;
+    font-size: 14px;
+    height: 20vh;
 }
 
 .crop-button-container {
@@ -48,7 +63,7 @@
     border: none;
 }
 
-.crop-no-results {
+.crop-table-container .crop-no-results {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,6 +77,25 @@
     font-size: 12px;
     text-align: center;
     padding: 5px;
+}
+
+.crop-table-container .crop-cell-text-container {
+    max-width: 50px;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+}
+
+.crop-table-container .crop-cell-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    margin-left: 5px;
+}
+
+.crop-cell .crop-cell-details-icon {
+    font-size: 18px;
 }
 
 .crop-table-container .crop-cell-icon {
@@ -122,6 +156,18 @@
         width: 100%;
     }
 
+    .crop-container {
+        height: 35.5vh;
+    }
+
+    .crop-container .loading-box {
+        height: 34.5vh;
+    }
+
+    .treatment-not-selected {
+        height: 30vh;
+    }
+
     .crop-table-container {
         height: 35vh;
     }
@@ -130,7 +176,7 @@
         padding: 5px;
     }
 
-    .crop-no-results {
+    .crop-table-container .crop-no-results {
         height: 20vh;
     }
 
