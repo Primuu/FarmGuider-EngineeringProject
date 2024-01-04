@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import java.math.BigDecimal;
 
 public record FieldCreateDTO(@NotBlank(message = "Field name must be filled in.")
-                             @Length(min = 1, max = 45, message = "Field name can contain a maximum of 45 characters.")
+                             @Length(min = 3, max = 45, message = "Field name must be between 3 and 45 characters.")
                              String fieldName,
                              @NotNull(message = "Field area field must be filled in.")
                              @DecimalMin(value = "0.00", message = "Field area cannot be negative.")
