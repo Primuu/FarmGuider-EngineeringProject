@@ -121,7 +121,7 @@
     "confirmButton": "Dodaj Pomiar",
     "cancelButton": "Anuluj",
     "measurementDate": "Data Pomiaru",
-    "weight": "Waga (kilogramy)",
+    "weight": "Waga (kg)",
     "validation": {
       "weightRange": "Waga musi znajdować się w zakresie od 0.000 do 9999.999",
       "weightNonNegative" : "Waga nie może być ujemna",

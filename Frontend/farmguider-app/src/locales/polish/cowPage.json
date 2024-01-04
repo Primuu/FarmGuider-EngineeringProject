@@ -93,7 +93,7 @@
     "errorSnackbar": "Coś poszło nie tak",
     "header": "Edycja Pomiaru Wagi",
     "measurementDate": "Data Pomiaru",
-    "weight": "Waga (kilogramy)",
+    "weight": "Waga (kg)",
     "requirements": "Aby edytować pomiar wagi, podaj datę ważenia (nie może być wcześniejsza niż data urodzenia) i wagę.",
     "confirmButton": "Edytuj",
     "cancelButton": "Anuluj"
@@ -161,6 +161,6 @@
     "valueName": "Waga",
     "tooltipNullValue": "Nie wprowadzono",
     "noChartValues": "Ta krowa nie ma jeszcze wprowadzonych pomiarów wagi. Dodaj pomiar, aby rozpocząć monitorowanie przyrostów wagi.",
-    "axisY": "Waga (kilogramy)"
+    "axisY": "Waga (kg)"
   }
 }

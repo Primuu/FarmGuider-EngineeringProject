@@ -21,7 +21,7 @@
   "addFieldModal": {
     "validation": {
       "fieldNameRequired": "Field name must be filled in",
-      "fieldNameLength": "Field name can contain a maximum of 45 characters",
+      "fieldNameLength": "Field name must be between 3 and 45 characters",
       "fieldAreaRequired": "Field area must be filled in",
       "fieldAreaNonNegative": "Field area cannot be negative",
       "fieldAreaRange": "Field area must be within the range of 0.00 to 999.99"
@@ -88,5 +88,58 @@
       "yieldRange": "Yield must be within the range of 0.000 to 999.999",
       "yieldNonNegative": "Yield cannot be negative"
     }
+  },
+  "treatmentDetails": {
+    "details": "Treatment Information",
+    "addTreatment": "Add Treatment",
+    "treatmentNotSelected": "Select a crop to check the treatment history",
+    "actions": "Actions",
+    "treatmentName": "Treatment Name",
+    "treatmentDate": "Date",
+    "quantity": "Quantity",
+    "treatmentDetails": "Details",
+    "noDetails": "There is no additional information",
+    "noResults": "No treatments have been added yet",
+    "deleteSuccessSnackbar": "Treatment deleted successfully",
+    "deleteErrorSnackbar": "Something went wrong",
+    "editButton": "Edit Treatment",
+    "deleteButton": "Delete Treatment",
+    "deleteDialogTitle": "Deleting Treatment",
+    "deleteDialogMessage": "Are you sure you want to delete this treatment?"
+  },
+  "addTreatmentModal": {
+    "successSnackbar": "Treatment added successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Adding a Treatment",
+    "subHeader": "Treatment will be added to the currently selected crop",
+    "requirements": "To add a treatment, enter it's name, date and quantity of agent used. Details are optional.",
+    "confirmButton": "Add Treatment",
+    "cancelButton": "Cancel",
+    "treatmentName": "Treatment Name",
+    "calendarLabel": "Treatment Date",
+    "quantity": "Quantity (kg)",
+    "details": "Additional Information",
+    "validation": {
+      "treatmentNameRequired": "Treatment name must be filled in",
+      "treatmentNameLength": "Treatment name must be between 3 and 45 characters",
+      "treatmentDateRequired": "Treatment date field must be filled in",
+      "treatmentDatePastOrPresent": "Treatment date cannot be a future date",
+      "quantityRequired": "Quantity must be filled in",
+      "quantityNonNegative": "Quantity cannot be negative",
+      "quantityRange": "Quantity must be within the range of 0.00 to 99999999.99",
+      "detailsLength": "Details can contain a maximum of 255 characters"
+    }
+  },
+  "editTreatmentModal": {
+    "successSnackbar": "Treatment updated successfully",
+    "errorSnackbar": "Something went wrong",
+    "header": "Editing a Treatment",
+    "requirements": "To edit a treatment, enter it's name, date and quantity of agent used. Details are optional.",
+    "confirmButton": "Edit Treatment",
+    "cancelButton": "Cancel",
+    "treatmentName": "Treatment Name",
+    "calendarLabel": "Treatment Date",
+    "quantity": "Quantity (kg)",
+    "details": "Additional Information"
   }
 }

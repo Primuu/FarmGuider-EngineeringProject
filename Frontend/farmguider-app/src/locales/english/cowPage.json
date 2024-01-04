@@ -93,7 +93,7 @@
     "errorSnackbar": "Something went wrong",
     "header": "Editing Weight Measurement",
     "measurementDate": "Measurement Date",
-    "weight": "Weight (kilograms)",
+    "weight": "Weight (kg)",
     "requirements": "To edit a weight measurement, provide the measurement date (it cannot be earlier than the date of birth) and weight.",
     "confirmButton": "Edit",
     "cancelButton": "Cancel"
@@ -161,6 +161,6 @@
     "valueName": "Weight",
     "tooltipNullValue": "Not provided",
     "noChartValues": "This cow has no weight measurements entered yet. Add a measurement to start monitoring weight gains.",
-    "axisY": "Weight (kilograms)"
+    "axisY": "Weight (kg)"
   }
 }

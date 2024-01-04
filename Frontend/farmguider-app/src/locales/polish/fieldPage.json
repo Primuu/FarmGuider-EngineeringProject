@@ -21,7 +21,7 @@
   "addFieldModal": {
     "validation": {
       "fieldNameRequired": "Nazwa pola musi być podana",
-      "fieldNameLength": "Nazwa pola może zawierać maksymalnie 45 znaków",
+      "fieldNameLength": "Nazwa pola musi zawierać od 3 do 45 znaków",
       "fieldAreaRequired": "Powierzchnia musi być podana",
       "fieldAreaNonNegative": "Powierzchnia nie może być ujemna",
       "fieldAreaRange": "Powierzchnia musi znajdować się w zakresie od 0.00 do 999.99"
@@ -88,5 +88,58 @@
       "yieldRange": "Plon musi znajdować się w zakresie od 0.000 do 999.999",
       "yieldNonNegative": "Plon nie może być ujemny"
     }
+  },
+  "treatmentDetails": {
+    "details": "Informacje o Zabiegach",
+    "addTreatment": "Dodaj Zabieg",
+    "treatmentNotSelected": "Wybierz uprawę, aby sprawdzić historię zabiegów",
+    "actions": "Akcje",
+    "treatmentName": "Nazwa Zabiegu",
+    "treatmentDate": "Data",
+    "quantity": "Ilość",
+    "treatmentDetails": "Szczegóły",
+    "noDetails": "Nie ma żadnych dodatkowych informacji",
+    "noResults": "Nie dodano jeszcze żadnych zabiegów",
+    "deleteSuccessSnackbar": "Zabieg usunięty pomyślnie",
+    "deleteErrorSnackbar": "Coś poszło nie tak",
+    "editButton": "Edytuj Zabieg",
+    "deleteButton": "Usuń Zabieg",
+    "deleteDialogTitle": "Usuwanie Zabiegu",
+    "deleteDialogMessage": "Czy jesteś pewny, że chcesz usunąć ten zabieg?"
+  },
+  "addTreatmentModal": {
+    "successSnackbar": "Zabieg dodany pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Dodawanie Zabiegu",
+    "subHeader": "Zabieg zostanie dodany do aktualnie wybranej uprawy",
+    "requirements": "Aby dodać zabieg należy wpisać jego nazwę, podać datę oraz ilość użytego środka. Szczegóły są opcjonalne.",
+    "confirmButton": "Dodaj Zabieg",
+    "cancelButton": "Anuluj",
+    "treatmentName": "Nazwa Zabiegu",
+    "calendarLabel": "Data Zabiegu",
+    "quantity": "Ilość (kg)",
+    "details": "Dodatkowe Informacje",
+    "validation": {
+      "treatmentNameRequired": "Nazwa zabiegu musi być podana",
+      "treatmentNameLength": "Nazwa zabiegu musi mieć od 3 do 45 znaków",
+      "treatmentDateRequired": "Data zabiegu musi być podana",
+      "treatmentDatePastOrPresent": "Data zabiegu nie może być datą przyszłą",
+      "quantityRequired": "Ilość musi być podana",
+      "quantityNonNegative": "Ilość nie może być ujemna",
+      "quantityRange": "Ilość musi znajdować się w zakresie od 0.00 do 99999999.99",
+      "detailsLength": "Szczegóły mogą zawierać maksymalnie 255 znaków"
+    }
+  },
+  "editTreatmentModal": {
+    "successSnackbar": "Zabieg zaktualizowany pomyślnie",
+    "errorSnackbar": "Coś poszło nie tak",
+    "header": "Edytowanie Zabiegu",
+    "requirements": "Aby edytować zabieg należy wpisać jego nazwę, podać datę oraz ilość użytego środka. Szczegóły są opcjonalne.",
+    "confirmButton": "Edytuj Zabieg",
+    "cancelButton": "Anuluj",
+    "treatmentName": "Nazwa Zabiegu",
+    "calendarLabel": "Data Zabiegu",
+    "quantity": "Ilość (kg)",
+    "details": "Dodatkowe Informacje"
   }
 }
