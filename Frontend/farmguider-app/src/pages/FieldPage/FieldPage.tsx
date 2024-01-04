@@ -10,6 +10,9 @@ import '@/pages/FieldPage/fieldPage.css';
 import {getCrops} from "@/services/cropService.ts";
 import CropResponseDTO from "@/entities/CropResponseDTO.ts";
 import CropDetails from "@/pages/FieldPage/CropDetails.tsx";
+import TreatmentDetails from "@/pages/FieldPage/TreatmentDetails.tsx";
+import {getTreatments} from "@/services/treatmentService.ts";
+import {TreatmentResponseDTO} from "@/entities/TreatmentResponseDTO.ts";
 
 const FieldPage = () => {
     const {fieldId} = useParams();
@@ -20,12 +23,19 @@ const FieldPage = () => {
     const [cropList, setCropList] = useState<CropResponseDTO[]>([]);
     const [cropsLoading, setCropsLoading] = useState<boolean>(true);
     const [selectedCropId, setSelectedCropId] = useState<number | null>(null);
+    const [treatmentsLoading, setTreatmentsLoading] = useState<boolean>(true);
+    const [treatmentList, setTreatmentList] = useState<TreatmentResponseDTO[]>([]);
 
     useEffect(() => {
         fetchAndSetField();
         fetchAndSetCrops();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fieldId]);
+
+    useEffect(() => {
+        fetchAndSetTreatments();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fieldId, selectedCropId]);
 
     const fetchAndSetField = () => {
         if (fieldId) {
@@ -43,6 +53,7 @@ const FieldPage = () => {
 
     const fetchAndSetCrops = () => {
         if (fieldId) {
+            setCropsLoading(true);
             getCrops(parseInt(fieldId))
                 .then(data => {
                     setCropList(data);
@@ -53,6 +64,22 @@ const FieldPage = () => {
                     navigate(NOT_FOUND_PAGE_URL, {replace: true});
                 })
         }
+    }
+
+    const fetchAndSetTreatments = () => {
+        if (selectedCropId) {
+            setTreatmentsLoading(true);
+            getTreatments(selectedCropId)
+                .then(data => {
+                    setTreatmentList(data);
+                    setTreatmentsLoading(false);
+                })
+                .catch(() => {
+                    setTreatmentsLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+        console.log("FETCHER:" + treatmentsLoading);
     }
 
     const fetchAndSetCropChart = () => {
@@ -85,7 +112,13 @@ const FieldPage = () => {
                         />
                     </div>
 
-                {/* TODO: TREATMENTS*/}
+                    <TreatmentDetails
+                        selectedCropId={selectedCropId}
+                        loading={treatmentsLoading}
+                        treatmentList={treatmentList}
+                        setTreatmentList={setTreatmentList}
+                        onTreatmentAdded={fetchAndSetTreatments}
+                    />
                 </div>
                 <div className="field-chart-container">
 

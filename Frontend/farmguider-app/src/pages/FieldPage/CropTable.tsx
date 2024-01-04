@@ -17,6 +17,7 @@ const CropTable: React.FC<CropTableProps> = ({cropList, onSelectCrop, selectedCr
 
     const handleCropDeleted = (deletedCropId: number) => {
         setCropList(cropList.filter(crop => crop.cropId !== deletedCropId));
+        onSelectCrop(null);
         onCropChanged();
     };
 
