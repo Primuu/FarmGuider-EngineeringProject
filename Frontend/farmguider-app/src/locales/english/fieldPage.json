@@ -76,7 +76,7 @@
     "header": "Adding Harvest",
     "subHeader": "Harvest will be added to the currently selected crop",
     "calendarLabel": "Harvest Date",
-    "yield": "Yield",
+    "yield": "Yield (t)",
     "requirements": "To add a harvest, provide yield and enter harvest date.",
     "confirmButton": "Add Harvest",
     "cancelButton": "Cancel",
@@ -141,5 +141,17 @@
     "calendarLabel": "Treatment Date",
     "quantity": "Quantity (kg)",
     "details": "Additional Information"
+  },
+  "cropChart": {
+    "details": "Crop Efficiency Chart",
+    "noChartValues": "This field does not contain any harvested crops. Add crops and harvests to start monitoring crop efficiency.",
+    "axisY": "Yield (t)",
+    "expectedYield": "Expected Yield",
+    "yield": "Yield",
+    "yieldNotHarvested": "Not harvested",
+    "legend": {
+      "expectedYield": "Expected Yield",
+      "yield": "Yield"
+    }
   }
 }

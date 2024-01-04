@@ -41,6 +41,10 @@ export const formatDate = (givenDate: Date): string => {
     });
 }
 
+export const formatYear = (date: Date) => {
+    return date ? new Date(date).getFullYear().toString() : '';
+};
+
 export const formatTimeInSeconds = (seconds: number | null): string => {
     if (seconds == null) return '-';
 

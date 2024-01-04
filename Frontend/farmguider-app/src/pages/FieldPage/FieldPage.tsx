@@ -13,6 +13,7 @@ import CropDetails from "@/pages/FieldPage/CropDetails.tsx";
 import TreatmentDetails from "@/pages/FieldPage/TreatmentDetails.tsx";
 import {getTreatments} from "@/services/treatmentService.ts";
 import {TreatmentResponseDTO} from "@/entities/TreatmentResponseDTO.ts";
+import CropChart from "@/pages/FieldPage/CropChart.tsx";
 
 const FieldPage = () => {
     const {fieldId} = useParams();
@@ -79,11 +80,6 @@ const FieldPage = () => {
                     navigate(NOT_FOUND_PAGE_URL, {replace: true});
                 })
         }
-        console.log("FETCHER:" + treatmentsLoading);
-    }
-
-    const fetchAndSetCropChart = () => {
-        return;
     }
 
     return (
@@ -108,7 +104,7 @@ const FieldPage = () => {
                             selectedCropId={selectedCropId}
                             onCropAdded={fetchAndSetCrops}
                             setCropList={setCropList}
-                            onCropChanged={fetchAndSetCropChart}
+                            onCropChanged={fetchAndSetCrops}
                         />
                     </div>
 
@@ -121,7 +117,10 @@ const FieldPage = () => {
                     />
                 </div>
                 <div className="field-chart-container">
-
+                    <CropChart
+                        cropList={cropList}
+                        loading={cropsLoading}
+                    />
                 </div>
             </div>
         </div>

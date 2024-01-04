@@ -76,7 +76,7 @@
     "header": "Dodawanie Zbioru",
     "subHeader": "Zbiór zostanie dodany do aktualnie wybranej uprawy",
     "calendarLabel": "Data Zbioru",
-    "yield": "Plon",
+    "yield": "Plon (t)",
     "requirements": "Aby dodać zbiór należy podać plon i podać datę zbioru.",
     "confirmButton": "Dodaj Zbiór",
     "cancelButton": "Anuluj",
@@ -141,5 +141,17 @@
     "calendarLabel": "Data Zabiegu",
     "quantity": "Ilość (kg)",
     "details": "Dodatkowe Informacje"
+  },
+  "cropChart": {
+    "details": "Wykres Efektywności Upraw",
+    "noChartValues": "Te pole nie zawiera żadnych zebranych upraw. Dodaj uprawy i zbiory by zacząć monitorować efektywność upraw.",
+    "axisY": "Plon (t)",
+    "expectedYield": "Przewidywany Plon",
+    "yield": "Plon",
+    "yieldNotHarvested": "Nie zebrano",
+    "legend": {
+      "expectedYield": "Przewidywany Plon",
+      "yield": "Plon"
+    }
   }
 }

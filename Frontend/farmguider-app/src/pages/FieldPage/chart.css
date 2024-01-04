@@ -1,0 +1,57 @@
+.field-chart-container .crop-chart-details {
+    font-style: italic;
+    margin-left: 10px;
+    color: #5b5b5b;
+    font-size: 14px;
+}
+
+.crop-chart-main-container {
+    width: 100%;
+}
+
+.crop-chart-container {
+    background-color: #F8F8F8;
+    border: 2px solid #2CB178;
+    border-radius: 16px;
+    padding: 15px 15px 10px;
+    min-height: 42vh;
+}
+
+.crop-no-results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36vh;
+    width: 100%;
+}
+
+.crop-chart-no-results {
+    color: #9B9B9B;
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+}
+
+.chartGrid {
+    stroke: rgb(228, 225, 225);
+}
+
+
+
+.custom-tooltip {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    pointer-events: none;
+}
+
+.custom-tooltip .label {
+    color: #2CB178;
+    margin: 0 0 5px;
+    font-weight: bold;
+}
+
+.custom-tooltip .data {
+    margin: 0;
+    color: #333333;
+}
