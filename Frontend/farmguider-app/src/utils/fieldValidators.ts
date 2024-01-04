@@ -23,7 +23,7 @@ export const validateAddField = (values: FieldValues, t: TFunction): FieldErrors
 
 export const validateFieldName = (fieldName: string | null, t: TFunction): string => {
     if (!fieldName) return t('addFieldModal.validation.fieldNameRequired');
-    if (fieldName && fieldName.length > 45) return t('addFieldModal.validation.fieldNameLength');
+    if (fieldName.length > 45 || fieldName.length < 3) return t('addFieldModal.validation.fieldNameLength');
     return '';
 };
 
