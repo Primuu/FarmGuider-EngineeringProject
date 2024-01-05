@@ -63,3 +63,6 @@ export const CREATE_TREATMENT_URL: string = "/treatment/create-treatment/{cropId
 export const GET_TREATMENTS_URL: string = "/treatment/get-treatments/{cropId}";
 export const UPDATE_TREATMENT_URL: string = "/treatment/update/{treatmentId}";
 export const DELETE_TREATMENT_URL: string = "/treatment/delete/{treatmentId}";
+
+// CropType
+export const GET_CROP_TYPES_URL: string = "/crop-type/get-crop-types";
