@@ -13,10 +13,18 @@ import {GiCow, GiHighGrass} from 'react-icons/gi';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import {useNavigate} from 'react-router-dom';
-import {BREEDING_PAGE_URL, FIELD_BROWSER_PAGE_URL, HOME_PAGE_URL, NOT_LOGGED_PAGE_URL, PROFILE_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
+import {
+    BREEDING_PAGE_URL,
+    CALENDAR_PAGE_URL,
+    FIELD_BROWSER_PAGE_URL,
+    HOME_PAGE_URL,
+    NOT_LOGGED_PAGE_URL,
+    PROFILE_PAGE_URL
+} from "@/constants/ROUTER_URLS.ts";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
 import {IconType} from "react-icons/lib";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 import logo from "@/assets/farmguider-logo.svg";
 
@@ -57,6 +65,7 @@ const SidebarLeftDrawer: React.FC<SidebarLeftDrawerProps> = ({onClose, isDesktop
         {icon: PersonOutlineIcon, text: t('profile'), onClick: () => handleClick(PROFILE_PAGE_URL)},
         {icon: GiCow as IconType, text: t('breeding'), onClick: () => handleClick(BREEDING_PAGE_URL)},
         {icon: GiHighGrass as IconType, text: t('fields'), onClick: () => handleClick(FIELD_BROWSER_PAGE_URL)},
+        {icon: CalendarMonthIcon as IconType, text: t('calendar'), onClick: () => handleClick(CALENDAR_PAGE_URL)},
     ];
 
     return (
