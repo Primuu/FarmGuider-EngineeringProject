@@ -8,3 +8,4 @@ export const COW_PAGE_WITH_ID = (cowId: number): string => COW_PAGE_URL.replace(
 export const FIELD_BROWSER_PAGE_URL: string = "/fields";
 export const FIELD_PAGE_URL: string = "/field/:fieldId";
 export const FIELD_PAGE_WITH_ID = (fieldId: number): string => FIELD_PAGE_URL.replace(":fieldId", fieldId.toString());
+export const CALENDAR_PAGE_URL: string = "/calendar";
