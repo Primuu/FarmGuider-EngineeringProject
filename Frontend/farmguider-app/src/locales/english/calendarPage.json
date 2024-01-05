@@ -1,3 +1,28 @@
 {
-  "header": "Crop Calendar"
+  "header": "Crop Calendar",
+  "january": "Jan",
+  "february": "Feb",
+  "march": "Mar",
+  "april": "Apr",
+  "may": "May",
+  "june": "Jun",
+  "july": "Jul",
+  "august": "Aug",
+  "september": "Sep",
+  "october": "Oct",
+  "november": "Nov",
+  "december": "Dec",
+  "plantingSeason": "Planting Season",
+  "harvestSeason": "Harvest Season",
+  "addCropModal": {
+    "wheat": "Wheat",
+    "triticale": "Triticale",
+    "barley": "Barley",
+    "rapeseed": "Rapeseed",
+    "rye": "Rye",
+    "oats": "Oats",
+    "corn": "Corn",
+    "potato": "Potato",
+    "sugarBeet": "Sugar Beet"
+  }
 }

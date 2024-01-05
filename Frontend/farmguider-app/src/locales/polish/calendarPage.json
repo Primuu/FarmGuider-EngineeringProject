@@ -1,3 +1,28 @@
 {
-  "header": "Kalendarz Upraw"
+  "header": "Kalendarz Upraw",
+  "january": "Sty",
+  "february": "Lut",
+  "march": "Mar",
+  "april": "Kwi",
+  "may": "Maj",
+  "june": "Cze",
+  "july": "Lip",
+  "august": "Sie",
+  "september": "Wrz",
+  "october": "Paź",
+  "november": "Lis",
+  "december": "Gru",
+  "plantingSeason": "Sezon Siewny",
+  "harvestSeason": "Sezon Żniwny",
+  "addCropModal": {
+    "wheat": "Pszenica",
+    "triticale": "Pszenżyto",
+    "barley": "Jęczmień",
+    "rapeseed": "Rzepak",
+    "rye": "Żyto",
+    "oats": "Owies",
+    "corn": "Kukurydza",
+    "potato": "Ziemniaki",
+    "sugarBeet": "Buraki Cukrowe"
+  }
 }

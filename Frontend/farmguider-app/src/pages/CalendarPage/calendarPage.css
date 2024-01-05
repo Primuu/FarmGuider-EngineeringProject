@@ -1,9 +1,125 @@
-.calendar-container {
+.crop-layout {
+    overflow-x: scroll;
+}
+
+
+.seasons {
+    margin-left: 220px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    min-width: 1230px;
+}
+
+.season-icon {
+    font-size: 36px;
+    color: #406064;
+    margin-left: calc(100% / 9);
+    margin-right: calc(100% / 9);
+}
+
+.months {
+    margin-left: 220px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    min-width: 1230px;
+}
+
+.month {
+    font-size: 16px;
+    color: #406064;
+    margin-left: calc(100% / 32);
+    margin-right: calc(100% / 32);
+}
+
+.crop-types {
+    max-height: 65vh;
+}
+
+.legend {
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    gap: 15px;
+    justify-content: end;
+}
+
+.legend-text {
+    font-size: 18px;
+}
+
+.legend-text .planting-legend {
+    font-size: 40px;
+    color: #2CB178;
+    vertical-align: middle;
+}
+
+.legend-text .harvest-legend {
+    font-size: 40px;
+    color: #ECC731;
+    vertical-align: middle;
+}
+
+.crop-row {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    min-width: 1450px;
+}
+
+.even-row {
+    background-color: rgba(44, 177, 120, 0.14);
+}
+
+.odd-row {
+    background-color: #FFF;
+}
+
+.crop-data-container {
+    min-width: 220px;
+    display: flex;
+    flex-direction: row;
+}
+
+.crop-icon {
+    align-self: center;
+    padding: 10px;
+    font-size: 22px;
+    color: #2CB178;
+    margin-left: 10px;
+}
+
+.crop-name {
+    align-self: center;
+    font-size: 18px;
+    color: #406064;
+    font-weight: bold;
+}
+
+.crop-calendar-bars {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-size: 48px;
+}
+
+.planting-bar {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+}
+
+.harvest-bar {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+}
+
+.month-component {
+    width: calc(100% / 12);
+    height: 100%;
+    border-left: 1px solid rgba(64, 96, 100, 0.14);
+    min-width: 100px;
 }
