@@ -15,6 +15,7 @@ import enConfirmationDialog from '@/locales/english/confirmationDialog.json';
 import enCowPage from '@/locales/english/cowPage.json';
 import enFieldBrowserPage from '@/locales/english/fieldBrowserPage.json';
 import enFieldPage from '@/locales/english/fieldPage.json';
+import enCalendarPage from '@/locales/english/calendarPage.json';
 
 import plNotLoggedPage from '@/locales/polish/notLoggedPage.json';
 import plLanguageSwitcher from '@/locales/polish/languageSwitcher.json';
@@ -28,6 +29,7 @@ import plConfirmationDialog from '@/locales/polish/confirmationDialog.json';
 import plCowPage from '@/locales/polish/cowPage.json';
 import plFieldBrowserPage from '@/locales/polish/fieldBrowserPage.json';
 import plFieldPage from '@/locales/polish/fieldPage.json';
+import plCalendarPage from '@/locales/polish/calendarPage.json';
 
 const savedLanguage = localStorage.getItem(LANGUAGE_ITEM) || 'en';
 
@@ -48,6 +50,7 @@ void i18n
                 cowPage: enCowPage,
                 fieldBrowserPage: enFieldBrowserPage,
                 fieldPage: enFieldPage,
+                calendarPage: enCalendarPage,
             },
             pl: {
                 notLoggedPage: plNotLoggedPage,
@@ -62,6 +65,7 @@ void i18n
                 cowPage: plCowPage,
                 fieldBrowserPage: plFieldBrowserPage,
                 fieldPage: plFieldPage,
+                calendarPage: plCalendarPage,
             },
         },
         lng: savedLanguage,
