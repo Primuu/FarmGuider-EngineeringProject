@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.FarmFacade;
-import pl.edu.uwm.farmguider.models.CowSummaryDTO;
-import pl.edu.uwm.farmguider.models.MilkingSummaryDTO;
+import pl.edu.uwm.farmguider.models.farm.dtos.CowSummaryDTO;
+import pl.edu.uwm.farmguider.models.farm.dtos.MilkingSummaryDTO;
 
 @RestController
 @RequiredArgsConstructor

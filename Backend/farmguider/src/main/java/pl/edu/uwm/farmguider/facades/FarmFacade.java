@@ -2,8 +2,8 @@ package pl.edu.uwm.farmguider.facades;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.edu.uwm.farmguider.models.CowSummaryDTO;
-import pl.edu.uwm.farmguider.models.MilkingSummaryDTO;
+import pl.edu.uwm.farmguider.models.farm.dtos.CowSummaryDTO;
+import pl.edu.uwm.farmguider.models.farm.dtos.MilkingSummaryDTO;
 import pl.edu.uwm.farmguider.models.breeding.Breeding;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.services.*;

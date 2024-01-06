@@ -1,4 +1,4 @@
-package pl.edu.uwm.farmguider.models;
+package pl.edu.uwm.farmguider.models.farm.dtos;
 
 import lombok.Builder;
 
