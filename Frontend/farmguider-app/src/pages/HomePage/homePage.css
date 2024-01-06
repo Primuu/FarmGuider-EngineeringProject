@@ -1,5 +1,10 @@
-.home-page-container {
+.main-layout .home-page-container {
     overflow-x: scroll;
+    background-image: url('@/assets/sunflowers-opacity0.5.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 .greeting-container {
