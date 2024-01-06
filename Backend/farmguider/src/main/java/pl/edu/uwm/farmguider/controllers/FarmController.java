@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.FarmFacade;
 import pl.edu.uwm.farmguider.models.CowSummaryDTO;
+import pl.edu.uwm.farmguider.models.MilkingSummaryDTO;
 
 @RestController
 @RequiredArgsConstructor
@@ -53,6 +54,34 @@ public class FarmController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(cowSummaryDTO);
+    }
+
+    @Operation(summary = "Get milking summary", description = "Retrieves the daily milking summary by farm id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Summary retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = MilkingSummaryDTO.class)
+                            )
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Farm not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+    })
+    @GetMapping("/get-milking-summary/{farmId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFarmIdWithContext(#farmId)")
+    public ResponseEntity<MilkingSummaryDTO> getMilkingSummary(@PathVariable Long farmId) {
+        MilkingSummaryDTO milkingSummaryDTO = farmFacade.getMilkingSummary(farmId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(milkingSummaryDTO);
     }
 
 }
