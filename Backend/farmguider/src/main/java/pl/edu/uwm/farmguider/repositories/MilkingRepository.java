@@ -6,7 +6,10 @@ import org.springframework.data.repository.query.Param;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.milking.Milking;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 public interface MilkingRepository extends JpaRepository<Milking, Long> {
@@ -31,5 +34,13 @@ public interface MilkingRepository extends JpaRepository<Milking, Long> {
             WHERE m.id = :milkingId
             """)
     Cow findCowByMilkingId(@Param("milkingId") Long milkingId);
+
+    @Query("""
+            SELECT SUM(m.milkQuantity)
+            FROM Milking m
+            WHERE m.cow IN :cows
+            AND CAST(m.dateOfMilking AS LOCALDATE ) = :date
+            """)
+    BigDecimal sumMilkQuantityByCowInAndDate(@Param("cows") Collection<Cow> cows, @Param("date")LocalDate date);
 
 }

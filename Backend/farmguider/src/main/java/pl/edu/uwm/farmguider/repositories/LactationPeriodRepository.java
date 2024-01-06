@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import pl.edu.uwm.farmguider.models.cow.Cow;
 import pl.edu.uwm.farmguider.models.lactationPeriod.LactationPeriod;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface LactationPeriodRepository extends JpaRepository<LactationPeriod, Long> {
@@ -28,5 +29,20 @@ public interface LactationPeriodRepository extends JpaRepository<LactationPeriod
             WHERE lp.id = :lactationPeriodId
             """)
     Cow findCowByLactationPeriodId(@Param("lactationPeriodId") Long lactationPeriodId);
+
+    @Query("""
+            SELECT COUNT(DISTINCT lp.cow)
+            FROM LactationPeriod lp
+            WHERE lp.cow IN :cows
+            """)
+    Integer countCowsWithLactationPeriodsByCowIn(@Param("cows") Collection<Cow> cows);
+
+    @Query("""
+            SELECT COUNT(DISTINCT lp.cow)
+            FROM LactationPeriod lp
+            WHERE lp.cow IN :cows
+            AND (lp.endDate IS NULL OR lp.endDate = CURRENT DATE)
+            """)
+    Integer countCowsCurrentlyInCLactationPeriodByCowIn(@Param("cows") Collection<Cow> cows);
 
 }
