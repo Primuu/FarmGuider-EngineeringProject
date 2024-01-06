@@ -5,14 +5,18 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import pl.edu.uwm.farmguider.models.field.Field;
 
+import java.util.List;
+
 public interface FieldRepository extends JpaRepository<Field, Long>, JpaSpecificationExecutor<Field> {
 
     @Query("""
-        SELECT f.farm.owner.id
-        FROM Field f
-        JOIN f.farm.owner
-        WHERE f.id = :fieldId
-        """)
+            SELECT f.farm.owner.id
+            FROM Field f
+            JOIN f.farm.owner
+            WHERE f.id = :fieldId
+            """)
     Long findUserIdByFieldId(Long fieldId);
+
+    List<Field> findAllByFarmId(Long farmId);
 
 }

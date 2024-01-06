@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.edu.uwm.farmguider.models.crop.Crop;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CropRepository extends JpaRepository<Crop, Long> {
@@ -19,5 +20,15 @@ public interface CropRepository extends JpaRepository<Crop, Long> {
             WHERE c.id = :cropId
             """)
     Long findUserIdByCropId(@Param("cropId") Long cropId);
+
+    @Query("""
+            SELECT c
+            FROM Crop c
+            JOIN c.field f
+            JOIN f.farm fa
+            WHERE fa.id = :farmId
+            AND c.sowingDate >= :date
+            """)
+    List<Crop> findCropsSownAfterDate(@Param("farmId") Long farmId, @Param("date") LocalDate date);
 
 }
