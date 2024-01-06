@@ -69,3 +69,4 @@ export const GET_CROP_TYPES_URL: string = "/crop-type/get-crop-types";
 
 // Farm
 export const GET_COW_SUMMARY_URL: string = "/farm/get-cows-summary/{farmId}"
+export const GET_MILKING_SUMMARY_URL: string = "/farm/get-milking-summary/{farmId}"
