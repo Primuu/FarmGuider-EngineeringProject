@@ -66,3 +66,6 @@ export const DELETE_TREATMENT_URL: string = "/treatment/delete/{treatmentId}";
 
 // CropType
 export const GET_CROP_TYPES_URL: string = "/crop-type/get-crop-types";
+
+// Farm
+export const GET_COW_SUMMARY_URL: string = "/farm/get-cows-summary/{farmId}"
