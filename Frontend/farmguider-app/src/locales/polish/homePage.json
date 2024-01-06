@@ -1,3 +1,9 @@
 {
-  "header": "Strona Główna"
+  "header": "Strona Główna",
+  "profile": {
+    "profile": "Profil",
+    "logout": "Wyloguj",
+    "logoutFail": "Wystąpił błąd podczas wylogowywania",
+    "logoutSuccess": "Wylogowano pomyślnie"
+  }
 }

@@ -1,0 +1,25 @@
+.profile-component-container {
+    width: 200px;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: auto;
+    padding: 10px;
+}
+
+.profile-component-container .home-profile-icon {
+    font-size: 45px;
+    color: #406064;
+    cursor: pointer;
+}
+
+.profile-component-container .home-menu-icon {
+    font-size: 35px;
+    color: #406064;
+}
+
+.logout-button {
+    color: #D85954;
+}
