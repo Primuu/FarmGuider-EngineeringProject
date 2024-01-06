@@ -7,5 +7,17 @@
     "logout": "Log out",
     "logoutFail": "Error occurred while logging out",
     "logoutSuccess": "Logged out successfully"
+  },
+  "animals": {
+    "header": "Animals on the farm",
+    "noCows": "It looks like you haven't added any animals to your farm yet",
+    "breedingButton": "Add Now",
+    "count": "Count of animals",
+    "bulls": "Bulls",
+    "cows": "Cows",
+    "milkingCows": "Milking Cows (all)",
+    "currentMilkingCows": "Milking Cows (currently)",
+    "yesterdaySummary": "Yesterday's Milking",
+    "todaySummary": "Today's Milking"
   }
 }

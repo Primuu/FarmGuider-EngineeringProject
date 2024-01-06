@@ -7,5 +7,17 @@
     "logout": "Wyloguj",
     "logoutFail": "Wystąpił błąd podczas wylogowywania",
     "logoutSuccess": "Wylogowano pomyślnie"
+  },
+  "animals": {
+    "header": "Zwierzęta w gospodarstwie",
+    "noCows": "Wygląda na to, że nie dodałeś jeszcze żadnego zwierzęcia do swojego gospodarstwa",
+    "breedingButton": "Dodaj Teraz",
+    "count": "Liczba zwierząt",
+    "bulls": "Byki",
+    "cows": "Krowy",
+    "milkingCows": "Krowy Dojne (wszystkie)",
+    "currentMilkingCows": "Krowy Dojne (aktualnie)",
+    "yesterdaySummary": "Wczorajszy Udój",
+    "todaySummary": "Dzisiejszy Udój"
   }
 }

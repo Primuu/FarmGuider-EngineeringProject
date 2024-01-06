@@ -1,3 +1,7 @@
+.home-page-container {
+    overflow-x: scroll;
+}
+
 .greeting-container {
     padding: 50px;
     color: #406064;
@@ -12,9 +16,30 @@
     font-size: 18px;
 }
 
+.row-charts {
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    gap: 50px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media (max-width: 1840px) {
+    .row-charts {
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 599px) {
+    .row-charts {
+        padding: 2px;
+        gap: 30px;
+    }
+
     .greeting-container {
-        padding: 20px;
+        padding: 10px;
+        margin-bottom: 20px;
     }
 
     .greeting-header {
