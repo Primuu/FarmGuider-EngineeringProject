@@ -61,6 +61,7 @@
     "corn": "Kukurydza",
     "potato": "Ziemniaki",
     "sugarBeet": "Buraki Cukrowe",
+    "notPlanted": "Brak Uprawy",
     "requirements": "Aby dodać uprawę należy wybrać rodzaj uprawy i podać datę siewu.",
     "subHeader": "Uprawa zostanie dodana do aktualnie wybranego pola",
     "confirmButton": "Dodaj Uprawę",

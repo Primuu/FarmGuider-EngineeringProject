@@ -61,6 +61,7 @@
     "corn": "Corn",
     "potato": "Potato",
     "sugarBeet": "Sugar Beet",
+    "notPlanted": "No Cultivation",
     "requirements": "To add a crop, select the type of crop and enter sowing date.",
     "subHeader": "Crop will be added to the currently selected field",
     "confirmButton": "Add Crop",

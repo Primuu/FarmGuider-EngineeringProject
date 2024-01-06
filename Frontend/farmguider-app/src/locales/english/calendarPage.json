@@ -23,6 +23,7 @@
     "oats": "Oats",
     "corn": "Corn",
     "potato": "Potato",
-    "sugarBeet": "Sugar Beet"
+    "sugarBeet": "Sugar Beet",
+    "notPlanted": "No Cultivation"
   }
 }
