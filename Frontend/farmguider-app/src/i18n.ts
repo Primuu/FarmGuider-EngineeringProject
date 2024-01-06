@@ -16,6 +16,7 @@ import enCowPage from '@/locales/english/cowPage.json';
 import enFieldBrowserPage from '@/locales/english/fieldBrowserPage.json';
 import enFieldPage from '@/locales/english/fieldPage.json';
 import enCalendarPage from '@/locales/english/calendarPage.json';
+import enHomePage from '@/locales/english/homePage.json';
 
 import plNotLoggedPage from '@/locales/polish/notLoggedPage.json';
 import plLanguageSwitcher from '@/locales/polish/languageSwitcher.json';
@@ -30,6 +31,7 @@ import plCowPage from '@/locales/polish/cowPage.json';
 import plFieldBrowserPage from '@/locales/polish/fieldBrowserPage.json';
 import plFieldPage from '@/locales/polish/fieldPage.json';
 import plCalendarPage from '@/locales/polish/calendarPage.json';
+import plHomePage from '@/locales/polish/homePage.json';
 
 const savedLanguage = localStorage.getItem(LANGUAGE_ITEM) || 'en';
 
@@ -51,6 +53,7 @@ void i18n
                 fieldBrowserPage: enFieldBrowserPage,
                 fieldPage: enFieldPage,
                 calendarPage: enCalendarPage,
+                homePage: enHomePage,
             },
             pl: {
                 notLoggedPage: plNotLoggedPage,
@@ -66,6 +69,7 @@ void i18n
                 fieldBrowserPage: plFieldBrowserPage,
                 fieldPage: plFieldPage,
                 calendarPage: plCalendarPage,
+                homePage: plHomePage,
             },
         },
         lng: savedLanguage,
