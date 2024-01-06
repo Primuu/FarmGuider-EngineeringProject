@@ -45,4 +45,12 @@ public interface LactationPeriodRepository extends JpaRepository<LactationPeriod
             """)
     Integer countCowsCurrentlyInCLactationPeriodByCowIn(@Param("cows") Collection<Cow> cows);
 
+    @Query("""
+            SELECT DISTINCT lp.cow
+            FROM LactationPeriod lp
+            WHERE lp.cow IN :cows
+            AND (lp.endDate IS NULL OR lp.endDate = CURRENT DATE)
+            """)
+    List<Cow> findCowsCurrentlyInCLactationPeriodByCowIn(@Param("cows") Collection<Cow> cows);
+
 }
