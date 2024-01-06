@@ -26,5 +26,22 @@
     "noCows": "Dane dostępne tylko gdy co najmniej jedna krowa jest w okresie laktacyjnym",
     "cowsMilked": "Krowy Wydojone",
     "cowsNotMilked": "Krowy Niewydojone"
+  },
+  "addCropModal": {
+    "wheat": "Pszenica",
+    "triticale": "Pszenżyto",
+    "barley": "Jęczmień",
+    "rapeseed": "Rzepak",
+    "rye": "Żyto",
+    "oats": "Owies",
+    "corn": "Kukurydza",
+    "potato": "Ziemniaki",
+    "sugarBeet": "Buraki Cukrowe",
+    "notPlanted": "Brak Uprawy"
+  },
+  "field": {
+    "header": "Aktualne Uprawy",
+    "noFields": "Wygląda na to, że nie dodałeś jeszcze żadnego pola do swojego gospodarstwa",
+    "fieldButton": "Dodaj Teraz"
   }
 }

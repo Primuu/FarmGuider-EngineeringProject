@@ -26,5 +26,22 @@
     "noCows": "Data only available when at least one cow is lactating",
     "cowsMilked": "Cows Milked",
     "cowsNotMilked": "Cows Not Milked"
+  },
+  "addCropModal": {
+    "wheat": "Wheat",
+    "triticale": "Triticale",
+    "barley": "Barley",
+    "rapeseed": "Rapeseed",
+    "rye": "Rye",
+    "oats": "Oats",
+    "corn": "Corn",
+    "potato": "Potato",
+    "sugarBeet": "Sugar Beet",
+    "notPlanted": "No Cultivation"
+  },
+  "field": {
+    "header": "Current Crops",
+    "noFields": "It looks like you haven't added any fields to your farm yet",
+    "fieldButton": "Add Now"
   }
 }

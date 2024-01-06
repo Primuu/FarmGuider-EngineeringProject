@@ -11,10 +11,12 @@ import {getUserData} from "@/services/userService.ts";
 import {NOT_FOUND_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 import LoadingComponent from "@/components/LoadingComponent/LoadingComponent.tsx";
 import AnimalsComponent from "@/pages/HomePage/AnimalsComponent.tsx";
-import {getCowSummary, getMilkingSummary} from "@/services/farmService.ts";
+import {getCowSummary, getFieldSummary, getMilkingSummary} from "@/services/farmService.ts";
 import {CowSummaryDTO} from "@/entities/CowSummaryDTO.ts";
 import MilkingComponent from "@/pages/HomePage/MilkingComponent.tsx";
 import {MilkingSummaryDTO} from "@/entities/MilkingSummaryDTO.ts";
+import {FieldSummaryDTO} from "@/entities/FieldSummaryDTO.ts";
+import FieldComponent from "@/pages/HomePage/FieldComponent.tsx";
 
 const HomePage = () => {
     const {t} = useTranslation('homePage');
@@ -26,11 +28,14 @@ const HomePage = () => {
     const navigate = useNavigate();
     const [milkingSummaryLoading, setMilkingSummaryLoading] = useState(true);
     const [milkingSummaryDTO, setMilkingSummaryDTO] = useState<MilkingSummaryDTO | null>(null);
+    const [fieldSummaryLoading, setFieldSummaryLoading] = useState(true);
+    const [fieldSummaryList, setFieldSummaryList] = useState<FieldSummaryDTO[]>([]);
 
     useEffect(() => {
         fetchAndSetUserData();
         fetchAndSetCowSummary();
         fetchAndSetMilkingSummary();
+        fetchAndSetFieldSummary();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId, farmId]);
 
@@ -79,6 +84,21 @@ const HomePage = () => {
         }
     }
 
+    const fetchAndSetFieldSummary = () => {
+        setFieldSummaryLoading(true);
+        if (farmId) {
+            getFieldSummary(farmId)
+                .then(data => {
+                    setFieldSummaryList(data);
+                    setFieldSummaryLoading(false);
+                })
+                .catch(() => {
+                    setFieldSummaryLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+    }
+
     return (
         <div>
             <Typography className="layout-header">
@@ -107,12 +127,15 @@ const HomePage = () => {
                                 cowSummaryDTO={cowSummaryDTO}
                             />
 
+                            <FieldComponent
+                                loading={fieldSummaryLoading}
+                                fieldSummaryList={fieldSummaryList}
+                            />
+
                             <MilkingComponent
                                 loading={milkingSummaryLoading}
                                 milkingSummaryDTO={milkingSummaryDTO}
                             />
-
-
                         </div>
                     </div>
                 )}
