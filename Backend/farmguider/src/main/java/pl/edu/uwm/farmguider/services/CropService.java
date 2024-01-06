@@ -38,6 +38,10 @@ public class CropService {
         return cropRepository.findAllByFieldId(fieldId);
     }
 
+    public List<Crop> getCropsSownAfterDate(Long farmId, LocalDate date) {
+        return cropRepository.findCropsSownAfterDate(farmId, date);
+    }
+
     public Long getUserIdByCropId(Long cropId) {
         return cropRepository.findUserIdByCropId(cropId);
     }

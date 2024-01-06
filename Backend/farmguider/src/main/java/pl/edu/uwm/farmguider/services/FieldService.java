@@ -37,6 +37,10 @@ public class FieldService {
         return fieldRepository.saveAndFlush(field);
     }
 
+    public List<Field> getAllFieldsByFarmId(Long farmId) {
+        return fieldRepository.findAllByFarmId(farmId);
+    }
+
     public List<Field> getFieldsByFarmId(Long farmId, FieldSearchParams fieldSearchParams) {
         Specification<Field> spec = bySearchParams(farmId, fieldSearchParams);
         return fieldRepository.findAll(spec);
