@@ -1,5 +1,7 @@
 {
   "header": "Strona Główna",
+  "welcome": "Witaj",
+  "greeting": "Sprawdźmy, co możemy dzisiaj razem osiągnąć.",
   "profile": {
     "profile": "Profil",
     "logout": "Wyloguj",

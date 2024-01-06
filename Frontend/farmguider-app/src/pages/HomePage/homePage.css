@@ -1,0 +1,27 @@
+.greeting-container {
+    padding: 50px;
+    color: #406064;
+}
+
+.greeting-header {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.greeting {
+    font-size: 18px;
+}
+
+@media (max-width: 599px) {
+    .greeting-container {
+        padding: 20px;
+    }
+
+    .greeting-header {
+        font-size: 24px;
+    }
+
+    .greeting {
+        font-size: 16px;
+    }
+}

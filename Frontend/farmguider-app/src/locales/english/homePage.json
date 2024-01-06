@@ -1,5 +1,7 @@
 {
   "header": "Home Page",
+  "welcome": "Welcome",
+  "greeting": "Let's see what we can achieve together today.",
   "profile": {
     "profile": "Profile",
     "logout": "Log out",
