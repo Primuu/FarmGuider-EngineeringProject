@@ -19,5 +19,12 @@
     "currentMilkingCows": "Milking Cows (currently)",
     "yesterdaySummary": "Yesterday's Milking",
     "todaySummary": "Today's Milking"
+  },
+  "milking": {
+    "headerMorning": "Morning Milking",
+    "headerEvening": "Evening Milking",
+    "noCows": "Data only available when at least one cow is lactating",
+    "cowsMilked": "Cows Milked",
+    "cowsNotMilked": "Cows Not Milked"
   }
 }

@@ -11,8 +11,10 @@ import {getUserData} from "@/services/userService.ts";
 import {NOT_FOUND_PAGE_URL} from "@/constants/ROUTER_URLS.ts";
 import LoadingComponent from "@/components/LoadingComponent/LoadingComponent.tsx";
 import AnimalsComponent from "@/pages/HomePage/AnimalsComponent.tsx";
-import {getCowSummary} from "@/services/farmService.ts";
+import {getCowSummary, getMilkingSummary} from "@/services/farmService.ts";
 import {CowSummaryDTO} from "@/entities/CowSummaryDTO.ts";
+import MilkingComponent from "@/pages/HomePage/MilkingComponent.tsx";
+import {MilkingSummaryDTO} from "@/entities/MilkingSummaryDTO.ts";
 
 const HomePage = () => {
     const {t} = useTranslation('homePage');
@@ -22,10 +24,13 @@ const HomePage = () => {
     const [loading, setLoading] = useState(true);
     const [cowSummaryLoading, setCowSummaryLoading] = useState(true);
     const navigate = useNavigate();
+    const [milkingSummaryLoading, setMilkingSummaryLoading] = useState(true);
+    const [milkingSummaryDTO, setMilkingSummaryDTO] = useState<MilkingSummaryDTO | null>(null);
 
     useEffect(() => {
         fetchAndSetUserData();
         fetchAndSetCowSummary();
+        fetchAndSetMilkingSummary();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId, farmId]);
 
@@ -59,6 +64,21 @@ const HomePage = () => {
         }
     }
 
+    const fetchAndSetMilkingSummary = () => {
+        setMilkingSummaryLoading(true);
+        if (farmId) {
+            getMilkingSummary(farmId)
+                .then(data => {
+                    setMilkingSummaryDTO(data);
+                    setMilkingSummaryLoading(false);
+                })
+                .catch(() => {
+                    setMilkingSummaryLoading(false);
+                    navigate(NOT_FOUND_PAGE_URL, {replace: true});
+                })
+        }
+    }
+
     return (
         <div>
             <Typography className="layout-header">
@@ -86,6 +106,13 @@ const HomePage = () => {
                                 loading={cowSummaryLoading}
                                 cowSummaryDTO={cowSummaryDTO}
                             />
+
+                            <MilkingComponent
+                                loading={milkingSummaryLoading}
+                                milkingSummaryDTO={milkingSummaryDTO}
+                            />
+
+
                         </div>
                     </div>
                 )}

@@ -19,5 +19,12 @@
     "currentMilkingCows": "Krowy Dojne (aktualnie)",
     "yesterdaySummary": "Wczorajszy Udój",
     "todaySummary": "Dzisiejszy Udój"
+  },
+  "milking": {
+    "headerMorning": "Udój Poranny",
+    "headerEvening": "Udój Wieczorny",
+    "noCows": "Dane dostępne tylko gdy co najmniej jedna krowa jest w okresie laktacyjnym",
+    "cowsMilked": "Krowy Wydojone",
+    "cowsNotMilked": "Krowy Niewydojone"
   }
 }
