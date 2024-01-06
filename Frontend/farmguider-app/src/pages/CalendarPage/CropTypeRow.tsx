@@ -64,7 +64,7 @@ const CropTypeRow: React.FC<CropRowProps> = ({cropType, isEven}) => {
         <div className={rowClassName}>
             {cropData && (
                 <div className="crop-data-container">
-                    <div className="crop-icon">
+                    <div className="crop-type-icon">
                         <cropData.icon/>
                     </div>
                     <div className="crop-name">
