@@ -73,7 +73,7 @@ const FieldComponent: React.FC<FieldComponentProps> = ({loading, fieldSummaryLis
                                 cx="50%"
                                 cy="50%"
                                 outerRadius={100}
-                                label
+                                label={({value}) => `${value} ha`}
                                 labelLine={false}
                             />
                             <Tooltip/>
