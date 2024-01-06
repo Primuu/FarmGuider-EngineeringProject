@@ -44,6 +44,10 @@ public class MilkingService {
         return milkingRepository.sumMilkQuantityByCowInAndDate(cows, date);
     }
 
+    public Integer getCowsMilkedSumInPeriod(Collection<Cow> cows, LocalDateTime startTime, LocalDateTime endTime) {
+        return milkingRepository.countCowsMilkedInPeriod(cows, startTime, endTime);
+    }
+
     public Milking createMilking(Cow cow, LocalDateTime dateOfMilking, BigDecimal milkQuantity, Integer milkingDuration) {
         Milking milking = new Milking(cow, dateOfMilking, milkQuantity, milkingDuration);
         return milkingRepository.saveAndFlush(milking);

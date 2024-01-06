@@ -47,6 +47,10 @@ public class LactationPeriodService {
         return lactationPeriodRepository.countCowsCurrentlyInCLactationPeriodByCowIn(cows);
     }
 
+    public List<Cow> getCowsCurrentlyInLactationPeriodByCowCollection(Collection<Cow> cows) {
+        return lactationPeriodRepository.findCowsCurrentlyInCLactationPeriodByCowIn(cows);
+    }
+
     public LactationPeriod createLactationPeriod(Cow cow, LocalDate startDate, LocalDate endDate) {
         verifyLactationPeriodDates(startDate, endDate);
         validateLactationPeriodOverlaps(startDate, endDate, cow.getId(), NOT_EXCLUDE_ANY_LACTATION_PERIOD);
