@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.uwm.farmguider.exceptions.ErrorResponse;
 import pl.edu.uwm.farmguider.facades.FarmFacade;
 import pl.edu.uwm.farmguider.models.farm.dtos.CowSummaryDTO;
+import pl.edu.uwm.farmguider.models.farm.dtos.FieldSummaryDTO;
 import pl.edu.uwm.farmguider.models.farm.dtos.MilkingSummaryDTO;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,9 +38,7 @@ public class FarmController {
                     description = "Summary retrieved successfully",
                     content = @Content(
                             mediaType = "application/json",
-                            array = @ArraySchema(
-                                    schema = @Schema(implementation = CowSummaryDTO.class)
-                            )
+                            schema = @Schema(implementation = CowSummaryDTO.class)
                     )),
             @ApiResponse(
                     responseCode = "404",
@@ -63,9 +64,7 @@ public class FarmController {
                     description = "Summary retrieved successfully",
                     content = @Content(
                             mediaType = "application/json",
-                            array = @ArraySchema(
-                                    schema = @Schema(implementation = MilkingSummaryDTO.class)
-                            )
+                            schema = @Schema(implementation = MilkingSummaryDTO.class)
                     )),
             @ApiResponse(
                     responseCode = "404",
@@ -82,6 +81,34 @@ public class FarmController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(milkingSummaryDTO);
+    }
+
+    @Operation(summary = "Get field summary", description = "Retrieves the field summary by farm id")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Summary retrieved successfully",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    schema = @Schema(implementation = FieldSummaryDTO.class)
+                            )
+                    )),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Not Found - Farm not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )),
+    })
+    @GetMapping("/get-fields-summary/{farmId}")
+    @PreAuthorize("@fineGrainedAccessControl.compareGivenFarmIdWithContext(#farmId)")
+    public ResponseEntity<List<FieldSummaryDTO>> getFieldSummary(@PathVariable Long farmId) {
+        List<FieldSummaryDTO> fieldSummaries = farmFacade.getFieldSummary(farmId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(fieldSummaries);
     }
 
 }
