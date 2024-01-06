@@ -19,6 +19,7 @@ import pl.edu.uwm.farmguider.repositories.CowRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 import static pl.edu.uwm.farmguider.utils.CowSpecification.bySearchParams;
@@ -37,6 +38,14 @@ public class CowService {
     public Page<Cow> getCowsByBreedingId(Long breedingId, CowSearchParams searchParams) {
         Specification<Cow> spec = bySearchParams(breedingId, searchParams);
         return cowRepository.findAll(spec, searchParams.toPageable());
+    }
+
+    public List<Cow> getFemaleCowsByBreedingCollection(Collection<Breeding> breedings) {
+        return cowRepository.findByGenderAndBreedingIn(Gender.FEMALE, breedings);
+    }
+
+    public List<Cow> getMaleCowsByBreedingCollection(Collection<Breeding> breedings) {
+        return cowRepository.findByGenderAndBreedingIn(Gender.MALE, breedings);
     }
 
     public Long getUserIdByCowId(Long cowId) {

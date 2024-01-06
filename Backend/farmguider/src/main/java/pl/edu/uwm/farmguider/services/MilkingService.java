@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -37,6 +38,10 @@ public class MilkingService {
 
     public Cow getCowByMilkingId(Long milkingId) {
         return milkingRepository.findCowByMilkingId(milkingId);
+    }
+
+    public BigDecimal getMilkingSumByCowCollectionAndDate(Collection<Cow> cows, LocalDate date) {
+        return milkingRepository.sumMilkQuantityByCowInAndDate(cows, date);
     }
 
     public Milking createMilking(Cow cow, LocalDateTime dateOfMilking, BigDecimal milkQuantity, Integer milkingDuration) {

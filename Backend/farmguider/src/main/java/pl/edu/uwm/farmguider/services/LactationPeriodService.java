@@ -10,6 +10,7 @@ import pl.edu.uwm.farmguider.models.lactationPeriod.LactationPeriod;
 import pl.edu.uwm.farmguider.repositories.LactationPeriodRepository;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -36,6 +37,14 @@ public class LactationPeriodService {
 
     public Cow getCowByLactationPeriodId(Long lactationPeriodId) {
         return lactationPeriodRepository.findCowByLactationPeriodId(lactationPeriodId);
+    }
+
+    public Integer getCowsNumberWithLactationPeriodsByCowCollection(Collection<Cow> cows) {
+        return lactationPeriodRepository.countCowsWithLactationPeriodsByCowIn(cows);
+    }
+
+    public Integer getCowsNumberCurrentlyInCLactationPeriodByCowCollection(Collection<Cow> cows) {
+        return lactationPeriodRepository.countCowsCurrentlyInCLactationPeriodByCowIn(cows);
     }
 
     public LactationPeriod createLactationPeriod(Cow cow, LocalDate startDate, LocalDate endDate) {
