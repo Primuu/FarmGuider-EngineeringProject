@@ -7,7 +7,7 @@
   "crops": {
     "bgImageAlt": "Zdjęcie upraw",
     "typography": "UPRAWY",
-    "text": "Część aplikacji odpowiadająca za monitorowanie danych o uprawach, umożliwia gromadzenie danych na temat pól i upraw prowadzonych w gospodarstwie. Osoby zarządzające gospodarstwem mogą rejestrować dane dotyczące zasiewów, zbiorów, stosowanych nawozów i środków ochrony roślin, bądź innych zabiegów. Aplikacja umożliwia również generowanie raportów i wykresów, które wspomagają ocenę efektywności upraw i identyfikację obszarów wymagających optymalizacji. Aplikacja oferuje również opcję generowania kalendarzy zasiewów, które ułatwią planowanie sezonowych prac związanych z uprawami. Na podstawie danych o typach upraw i warunkach glebowych, aplikacja wygeneruje optymalne harmonogramy zasiewów, uwzględniające optymalne daty siewu oraz rotację upraw."
+    "text": "Część aplikacji odpowiadająca za monitorowanie danych o uprawach, umożliwia gromadzenie danych na temat pól i upraw prowadzonych w gospodarstwie. Osoby zarządzające gospodarstwem mogą rejestrować dane dotyczące zasiewów, zbiorów, stosowanych nawozów i środków ochrony roślin, bądź innych zabiegów. Aplikacja umożliwia również generowanie raportów, które wspomagają ocenę efektywności upraw i identyfikację obszarów wymagających optymalizacji. Aplikacja oferuje również kalendarz zasiewów, który ułatwia planowanie sezonowych prac związanych z uprawami."
   },
   "animals": {
     "bgImageAlt": "Zdjęcie krów",

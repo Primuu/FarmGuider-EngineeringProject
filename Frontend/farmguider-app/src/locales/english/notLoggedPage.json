@@ -7,7 +7,7 @@
   "crops": {
     "bgImageAlt": "Crops image",
     "typography": "CROPS",
-    "text": "The part of the application responsible for monitoring crop data, enables the accumulation of data regarding the fields and crops managed on the farm. People managing the farm can record data related to seeding, harvesting, fertilizers used and plant protection products, or other treatments. The application also allows for the generation of reports and charts that aid in evaluating crop efficiency and identifying areas requiring optimization. The application also offers the option of generating sowing calendars that facilitate planning of seasonal work related to crops. Based on the data about crop types and soil conditions, the application will generate optimal sowing schedules, considering optimal sowing dates and crop rotation."
+    "text": "The part of the application responsible for monitoring crop data, enables the accumulation of data regarding the fields and crops managed on the farm. People managing the farm can record data related to seeding, harvesting, fertilizers used and plant protection products, or other treatments. The application also allows for the generation of reports that aid in evaluating crop efficiency and identifying areas requiring optimization. The application also offers a sowing calendar that facilitate planning of seasonal work related to crops."
   },
   "animals": {
     "bgImageAlt": "Cows image",
