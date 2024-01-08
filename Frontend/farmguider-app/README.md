@@ -1,27 +1,34 @@
-# React + TypeScript + Vite
+# FarmGuider
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Engineering thesis - (frontend) application for farm management
 
-Currently, two official plugins are available:
+# Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prerequisites:
 
-## Expanding the ESLint configuration
+* <b>FarmGuider (backend)</b>: Configure and run the server based on: [FarmGuider](https://github.com/Primuu/EngineeringProject/tree/main/Backend/farmguider)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+* <b>Node.js</b>: Ensure you have Node.js installed (and NPM). If not, download and install it from the official Node Js website.
 
-- Configure the top-level `parserOptions` property like this:
+* <b>Typescript</b>: The project is written in TypeScript. Install it globally (npm install -g typescript) or install it locally in your project.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+### Setup
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Clone the Repository:
+* <b>git clone https://github.com/Primuu/EngineeringProject </b>
+* <b>cd Frontend/farmguider-app</b>
+
+### Dependency Installation:
+Run the following command to download and install the required dependencies:
+* <b>npm install</b>
+
+### Run the Application:
+Run the following command to run the application:
+* <b>npm run dev</b>
+
+## Features
+* Responsiveness
+* Multilanguage
+* Cookie based session
+* JWT for secure data transmission
