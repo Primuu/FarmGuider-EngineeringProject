@@ -29,6 +29,6 @@ Run the following command to run the application:
 
 ## Features
 * Responsiveness
-* Multilanguage
+* Multilingual
 * Cookie based session
 * JWT for secure data transmission
