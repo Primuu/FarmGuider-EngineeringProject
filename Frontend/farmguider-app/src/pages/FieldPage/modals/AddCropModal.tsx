@@ -148,7 +148,8 @@ const AddCropModal: React.FC<AddCropModalProps> = ({open, onClose, fieldId, onCr
                                             <MenuItem value="" disabled>
                                             </MenuItem>
 
-                                            {crops.map((crop) => (
+                                            {crops.filter(crop => crop.value !== 'NOT_PLANTED')
+                                                .map((crop) => (
                                                 <MenuItem value={crop.value} key={crop.value}>
                                                     {React.createElement(getCropIcon(crop.value), { className: 'crop-icon' })}
                                                     {t(crop.labelKey)}
