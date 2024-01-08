@@ -43,6 +43,8 @@
 @media (max-width: 1399px) {
     .layout-container-cow  {
         flex-direction: column;
+        width: calc(100% - 4%);
+        margin: 1vh 2%;
     }
 
     .cows-data-container,
