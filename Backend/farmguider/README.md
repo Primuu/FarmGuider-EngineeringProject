@@ -31,17 +31,11 @@ Clone the Repository:
 
 ### Illustrative database schema
 
-PLACEHOLDER
-
-[//]: # (<div align="center">)
-
-[//]: # (  <p>)
-
-[//]: # (    <img align="center" src="" alt="database schema" />)
-
-[//]: # (  </p>)
-
-[//]: # (</div>)
+<div align="center">
+  <p>
+    <img align="center" src="https://github.com/Primuu/EngineeringProject/blob/main/Documentation/db_schema/db_schema_v17_remove_cords.png?raw=true" alt="database schema" />
+  </p>
+</div>
 
 ### Dependency Installation:
 Run the following command to download and install the required dependencies:
