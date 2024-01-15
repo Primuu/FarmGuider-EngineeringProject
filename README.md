@@ -9,48 +9,48 @@ FarmGuider is a farm management application designed for owners and workers agri
 ## Quick view
 ### Desktop
 <p align="center">
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/menu.png?raw=true" width="1000"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/home-not-logged.png?raw=true" width="1000"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/register.png?raw=true" width="1000"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/register-form.png?raw=true" width="1000"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/home.png?raw=true" width="1000"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/home.png?raw=true" width="1000"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/cow-search.png?raw=true" width="1000"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/herd.png?raw=true" width="1000"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/cow.png?raw=true" width="1000"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/cow-details.png?raw=true" width="1000"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/field.png?raw=true" width="1000"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/field-details.png?raw=true" width="1000"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/calendar.png?raw=true" width="1000"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/crop-calendar.png?raw=true" width="1000"/>
 </p>
 
 ### Mobile
 <p align="center">
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/menu-mobile.png?raw=true"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/home-not-logged-mobile.png?raw=true"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/register-mobile.png?raw=true"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/register-form-mobile.png?raw=true"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/home-mobile.png?raw=true"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/home-mobile.png?raw=true"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/cow-search-mobile.png?raw=true"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/herd-mobile.png?raw=true"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/cow-mobile.png?raw=true"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/cow-details-mobile.png?raw=true"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/field-mobile.png?raw=true"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/field-details-mobile.png?raw=true"/>
   <br>
   <br>
-  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/calendar-mobile.png?raw=true"/>
+  <img src="https://github.com/Primuu/FarmGuider-EngineeringProject/blob/main/Documentation/screens/eng/crop-calendar-mobile.png?raw=true"/>
 </p>
 
 
