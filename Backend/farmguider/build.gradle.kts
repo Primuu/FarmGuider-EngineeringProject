@@ -38,6 +38,11 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+	testImplementation("org.mockito:mockito-core:5.8.0")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+	testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+	testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
+	testImplementation("org.mockito:mockito-junit-jupiter:3.6.0")
 }
 
 tasks.withType<Test> {
